@@ -1,0 +1,4 @@
+gwthighcharts
+=============
+
+GWT highcharts wrapper
