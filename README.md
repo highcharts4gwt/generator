@@ -5,7 +5,7 @@ The goal of this project is to create an "auto-generated" GWT highcharts wrapper
 
 To know more about Highcharts please have a look to [the official web page](http://www.highcharts.com/products/highcharts)
 
-This project has been created as an alternative to [Moxiegroup](http://www.moxiegroup.com/) highcharts wrapper [http://www.moxiegroup.com/moxieapps/gwt-highcharts/](http://www.moxiegroup.com/moxieapps/gwt-highcharts/), sources of the project [Sourceforge sources](http://sourceforge.net/projects/gwt-highcharts/) 
+This project has been created as an alternative to [Moxiegroup](http://www.moxiegroup.com/) highcharts wrapper [http://www.moxiegroup.com/moxieapps/gwt-highcharts/](http://www.moxiegroup.com/moxieapps/gwt-highcharts/), sources of the project can be found on [sourceforge](http://sourceforge.net/projects/gwt-highcharts/) 
 
 #Why this wrapper ?
 
