@@ -22,4 +22,4 @@ To know more about this project please go to the [project website](https://gwthi
 * As much as possible @JsInterface and @JsProperty ready [blog post](http://ronanquillevere.github.io/2014/02/02/GWT-futur-javascript-interop.html#.U_7f6zK1Z5I)
 * Model (Options etc...) separated from Widget (The panel displaying the chart in GWT)
 * Junit testable
-** Being able to use DI to choose between real JSO or Mock for tests.
+  * Being able to use DI to choose between real JSO or Mock for tests.
