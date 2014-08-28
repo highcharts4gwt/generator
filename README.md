@@ -15,3 +15,9 @@ This project has been created as an alternative to [Moxiegroup](http://www.moxie
 * I would like to have a wrapper that can be generated automatically from highcharts [options dump](http://api.highcharts.com/highcharts/option/dump.json)
 
 To know more about this project please go to the [project website](https://gwthighcharts.github.io/)
+
+#What should the generated code look like.
+
+* Fluent api
+* As close as possible to the Javascript syntax
+* As much as possible @JsInterface and @JsProperty ready [blog post](http://ronanquillevere.github.io/2014/02/02/GWT-futur-javascript-interop.html#.U_7f6zK1Z5I)
