@@ -16,7 +16,7 @@ This project has been created as an alternative to [Moxiegroup](http://www.moxie
 
 To know more about this project please go to the [project website](https://gwthighcharts.github.io/)
 
-#What should the generated code look like.
+#What should the generated code look like ?
 
 * Fluent api
 * As close as possible to the Javascript syntax
