@@ -1,4 +1,4 @@
-package com.usesoft.gwthighcharts.model.api;
+package com.usesoft.highcharts4gwt.model.api;
 
 public interface Title {
 	String getText();

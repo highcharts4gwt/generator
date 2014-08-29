@@ -1,4 +1,4 @@
-package com.usesoft.gwthighcharts.client.widget;
+package com.usesoft.highcharts4gwt.client.view.widget;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.user.client.ui.HTMLPanel;
