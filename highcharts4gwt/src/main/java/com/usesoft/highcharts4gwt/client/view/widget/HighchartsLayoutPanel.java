@@ -3,6 +3,7 @@ package com.usesoft.highcharts4gwt.client.view.widget;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.SimpleLayoutPanel;
+import com.usesoft.highcharts4gwt.model.api.Options;
 
 public class HighchartsLayoutPanel extends SimpleLayoutPanel {
 
@@ -19,11 +20,11 @@ public class HighchartsLayoutPanel extends SimpleLayoutPanel {
 
 	private String id;
 
-	public void setChart(JavaScriptObject options) {
-		drawChart(id, options);
+	public JavaScriptObject renderChart(Options options) {
+		return drawChart(id, options);
 	}
 
-	private native JavaScriptObject drawChart(String containerId,JavaScriptObject options) 
+	private native JavaScriptObject drawChart(String containerId, Options options) 
 	/*-{
 		return $wnd.jQuery('#'+containerId).highcharts(options);
 	}-*/;

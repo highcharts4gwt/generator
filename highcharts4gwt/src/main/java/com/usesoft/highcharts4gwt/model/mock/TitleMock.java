@@ -4,14 +4,18 @@ import com.usesoft.highcharts4gwt.model.api.Title;
 
 public class TitleMock implements Title {
 
-	private final String text;
+	private String text;
 
-	public TitleMock(String text) {
-		this.text = text;
+	public TitleMock() {
 	}
 
-	public String getText() {
+	public String text() {
 		return text;
+	}
+
+	public Title text(String text) {
+		this.text = text;
+		return this;
 	}
 
 }
