@@ -1,4 +1,4 @@
-GwtHighcharts
+highcharts4gwt
 =============
 
 The goal of this project is to create an "auto-generated" GWT highcharts wrapper.
