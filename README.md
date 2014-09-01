@@ -1,6 +1,12 @@
 highcharts4gwt
 =============
 
+[![Build Status](https://travis-ci.org/highcharts4gwt/highcharts4gwt.svg?branch=master)](https://travis-ci.org/highcharts4gwt/highcharts4gwt)
+
+## Status
+v0 still in development
+
+## Description
 The goal of this project is to create an "auto-generated" GWT highcharts wrapper.
 
 To know more about Highcharts please have a look to [the official web page](http://www.highcharts.com/products/highcharts)
