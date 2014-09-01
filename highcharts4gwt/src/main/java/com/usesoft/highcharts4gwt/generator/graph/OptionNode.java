@@ -1,200 +1,238 @@
 package com.usesoft.highcharts4gwt.generator.graph;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.annotation.CheckForNull;
 
-public class OptionNode {
-	
-//	{
-//	values: null,
-//	fullname: "global.VMLRadialGradientURL",
-//	defaults: "http://code.highcharts.com/{version}/gfx/vml-radial-gradient.png",
-//	title: "VMLRadialGradientURL",
-//	extending: "",
-//	excluding: "",
-//	isParent: false,
-//	since: "2.3.0",
-//	demo: "",
-//	deprecated: false,
-//	seeAlso: "",
-//	name: "global--VMLRadialGradientURL",
-//	parent: "global",
-//	returnType: "String",
-//	description: "Path to the pattern image required by VML browsers in order to draw radial gradients."
-//	}
-	
-	@CheckForNull
-	private OptionNode parent;
+public class OptionNode
+{
+    // {
+    // values: null,
+    // fullname: "global.VMLRadialGradientURL",
+    // defaults:
+    // "http://code.highcharts.com/{version}/gfx/vml-radial-gradient.png",
+    // title: "VMLRadialGradientURL",
+    // extending: "",
+    // excluding: "",
+    // isParent: false,
+    // since: "2.3.0",
+    // demo: "",
+    // deprecated: false,
+    // seeAlso: "",
+    // name: "global--VMLRadialGradientURL",
+    // parent: "global",
+    // returnType: "String",
+    // description:
+    // "Path to the pattern image required by VML browsers in order to draw radial gradients."
+    // }
 
-	@CheckForNull
-	private List<OptionNode> children = new ArrayList<OptionNode>();
+    @CheckForNull
+    private String[] values;
 
-	@CheckForNull
-	private String[] values;
-	
-	private String fullname;
+    private String fullname;
 
-	@CheckForNull
-	private String defaults;
+    @CheckForNull
+    private String defaults;
 
-	private String title;
+    private String title;
 
-	@CheckForNull
-	private String extending;
+    @CheckForNull
+    private String extending;
 
-	@CheckForNull
-	private String excluding;
+    @CheckForNull
+    private String excluding;
 
-	private boolean isParent;
+    private boolean isParent;
 
-	@CheckForNull
-	private String since;
+    @CheckForNull
+    private String since;
 
-	@CheckForNull
-	private String demo;
+    @CheckForNull
+    private String demo;
 
-	@CheckForNull
-	private boolean deprecated;
+    @CheckForNull
+    private boolean deprecated;
 
-	@CheckForNull
-	private String seeAlso;
+    @CheckForNull
+    private String seeAlso;
 
-	private String name;
+    private String name;
 
-	@CheckForNull
-	private String returnType;
+    // {
+    // values: null,
+    // fullname: "global.VMLRadialGradientURL",
+    // defaults:
+    // "http://code.highcharts.com/{version}/gfx/vml-radial-gradient.png",
+    // title: "VMLRadialGradientURL",
+    // extending: "",
+    // excluding: "",
+    // isParent: false,
+    // since: "2.3.0",
+    // demo: "",
+    // deprecated: false,
+    // seeAlso: "",
+    // name: "global--VMLRadialGradientURL",
+    // parent: "global",
+    // returnType: "String",
+    // description:
+    // "Path to the pattern image required by VML browsers in order to draw radial gradients."
+    // }
 
-	@CheckForNull
-	private String description;
+    @CheckForNull
+    private String parent;
 
-	public OptionNode getParent() {
-		return parent;
-	}
+    @CheckForNull
+    private String returnType;
 
-	public void setParent(OptionNode parent) {
-		this.parent = parent;
-	}
+    @CheckForNull
+    private String description;
 
-	public List<OptionNode> getChildren() {
-		return children;
-	}
+    public String[] getValues()
+    {
+        return values;
+    }
 
-	public void setChildren(List<OptionNode> children) {
-		this.children = children;
-	}
+    public void setValues(String[] values)
+    {
+        this.values = values;
+    }
 
-	public String[] getValues() {
-		return values;
-	}
+    public String getFullname()
+    {
+        return fullname;
+    }
 
-	public void setValues(String[] values) {
-		this.values = values;
-	}
+    public void setFullname(String fullname)
+    {
+        this.fullname = fullname;
+    }
 
-	public String getFullname() {
-		return fullname;
-	}
+    public String getDefaults()
+    {
+        return defaults;
+    }
 
-	public void setFullname(String fullname) {
-		this.fullname = fullname;
-	}
+    public void setDefaults(String defaults)
+    {
+        this.defaults = defaults;
+    }
 
-	public String getDefaults() {
-		return defaults;
-	}
+    public String getTitle()
+    {
+        return title;
+    }
 
-	public void setDefaults(String defaults) {
-		this.defaults = defaults;
-	}
+    public void setTitle(String title)
+    {
+        this.title = title;
+    }
 
-	public String getTitle() {
-		return title;
-	}
+    public String getExtending()
+    {
+        return extending;
+    }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    public void setExtending(String extending)
+    {
+        this.extending = extending;
+    }
 
-	public String getExtending() {
-		return extending;
-	}
+    public String getExcluding()
+    {
+        return excluding;
+    }
 
-	public void setExtending(String extending) {
-		this.extending = extending;
-	}
+    public void setExcluding(String excluding)
+    {
+        this.excluding = excluding;
+    }
 
-	public String getExcluding() {
-		return excluding;
-	}
+    public boolean isParent()
+    {
+        return isParent;
+    }
 
-	public void setExcluding(String excluding) {
-		this.excluding = excluding;
-	}
+    public void setIsParent(boolean isParent)
+    {
+        this.isParent = isParent;
+    }
 
-	public boolean isParent() {
-		return isParent;
-	}
+    public String getSince()
+    {
+        return since;
+    }
 
-	public void setIsParent(boolean isParent) {
-		this.isParent = isParent;
-	}
+    public void setSince(String since)
+    {
+        this.since = since;
+    }
 
-	public String getSince() {
-		return since;
-	}
+    public String getDemo()
+    {
+        return demo;
+    }
 
-	public void setSince(String since) {
-		this.since = since;
-	}
+    public void setDemo(String demo)
+    {
+        this.demo = demo;
+    }
 
-	public String getDemo() {
-		return demo;
-	}
+    public boolean isDeprecated()
+    {
+        return deprecated;
+    }
 
-	public void setDemo(String demo) {
-		this.demo = demo;
-	}
+    public void setDeprecated(boolean deprecated)
+    {
+        this.deprecated = deprecated;
+    }
 
-	public boolean isDeprecated() {
-		return deprecated;
-	}
+    public String getSeeAlso()
+    {
+        return seeAlso;
+    }
 
-	public void setDeprecated(boolean deprecated) {
-		this.deprecated = deprecated;
-	}
+    public void setSeeAlso(String seeAlso)
+    {
+        this.seeAlso = seeAlso;
+    }
 
-	public String getSeeAlso() {
-		return seeAlso;
-	}
+    public String getName()
+    {
+        return name;
+    }
 
-	public void setSeeAlso(String seeAlso) {
-		this.seeAlso = seeAlso;
-	}
+    public void setName(String name)
+    {
+        this.name = name;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getParent()
+    {
+        return parent;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setParent(String parent)
+    {
+        this.parent = parent;
+    }
 
-	public String getReturnType() {
-		return returnType;
-	}
+    public String getReturnType()
+    {
+        return returnType;
+    }
 
-	public void setReturnType(String returnType) {
-		this.returnType = returnType;
-	}
+    public void setReturnType(String returnType)
+    {
+        this.returnType = returnType;
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    public String getDescription()
+    {
+        return description;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
-	
+    public void setDescription(String description)
+    {
+        this.description = description;
+    }
+
 }
