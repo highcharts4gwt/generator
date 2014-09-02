@@ -7,25 +7,6 @@ import javax.annotation.CheckForNull;
 
 public class OptionSpec
 {
-    // {
-    // values: null,
-    // fullname: "global.VMLRadialGradientURL",
-    // defaults:
-    // "http://code.highcharts.com/{version}/gfx/vml-radial-gradient.png",
-    // title: "VMLRadialGradientURL",
-    // extending: "",
-    // excluding: "",
-    // isParent: false,
-    // since: "2.3.0",
-    // demo: "",
-    // deprecated: false,
-    // seeAlso: "",
-    // name: "global--VMLRadialGradientURL",
-    // parent: "global",
-    // returnType: "String",
-    // description:
-    // "Path to the pattern image required by VML browsers in order to draw radial gradients."
-    // }
 
     // Constructor with non null values
     public OptionSpec(String fullname, String name, String title)
@@ -34,6 +15,7 @@ public class OptionSpec
         this.name = name;
         this.title = title;
         this.values = new ArrayList<String>();
+        this.excluding = new ArrayList<String>();
     }
 
     public String getFullname()
@@ -80,36 +62,39 @@ public class OptionSpec
         return this;
     }
 
+    public List<String> getExcluding()
+    {
+        return excluding;
+    }
+
+    public OptionSpec setExcluding(List<String> excluding)
+    {
+        this.excluding = excluding;
+        return this;
+    }
+
+    @CheckForNull
     public String getDefaults()
     {
         return defaults;
     }
 
-    public OptionSpec setDefaults(String defaults)
+    public OptionSpec setDefaults(@CheckForNull String defaults)
     {
         this.defaults = defaults;
         return this;
     }
 
+    @CheckForNull
     public String getExtending()
     {
         return extending;
     }
 
-    public OptionSpec setExtending(String extending)
+    @CheckForNull
+    public OptionSpec setExtending(@CheckForNull String extending)
     {
         this.extending = extending;
-        return this;
-    }
-
-    public String getExcluding()
-    {
-        return excluding;
-    }
-
-    public OptionSpec setExcluding(String excluding)
-    {
-        this.excluding = excluding;
         return this;
     }
 
@@ -124,23 +109,27 @@ public class OptionSpec
         return this;
     }
 
+    @CheckForNull
     public String getSince()
     {
         return since;
     }
 
-    public OptionSpec setSince(String since)
+    @CheckForNull
+    public OptionSpec setSince(@CheckForNull String since)
     {
         this.since = since;
         return this;
     }
 
+    @CheckForNull
     public String getDemo()
     {
         return demo;
     }
 
-    public OptionSpec setDemo(String demo)
+    @CheckForNull
+    public OptionSpec setDemo(@CheckForNull String demo)
     {
         this.demo = demo;
         return this;
@@ -157,45 +146,49 @@ public class OptionSpec
         return this;
     }
 
+    @CheckForNull
     public String getSeeAlso()
     {
         return seeAlso;
     }
 
-    public OptionSpec setSeeAlso(String seeAlso)
+    public OptionSpec setSeeAlso(@CheckForNull String seeAlso)
     {
         this.seeAlso = seeAlso;
         return this;
     }
 
+    @CheckForNull
     public String getParent()
     {
         return parent;
     }
 
-    public OptionSpec setParent(String parent)
+    public OptionSpec setParent(@CheckForNull String parent)
     {
         this.parent = parent;
         return this;
     }
 
+    @CheckForNull
     public String getReturnType()
     {
         return returnType;
     }
 
-    public OptionSpec setReturnType(String returnType)
+    public OptionSpec setReturnType(@CheckForNull String returnType)
     {
         this.returnType = returnType;
         return this;
     }
 
+    @CheckForNull
     public String getDescription()
     {
         return description;
     }
 
-    public OptionSpec setDescription(String description)
+    public OptionSpec setDescription(@CheckForNull String description)
     {
         this.description = description;
         return this;
@@ -209,14 +202,13 @@ public class OptionSpec
 
     private List<String> values;
 
+    private List<String> excluding;
+
     @CheckForNull
     private String defaults;
 
     @CheckForNull
     private String extending;
-
-    @CheckForNull
-    private String excluding;
 
     private boolean isParent;
 

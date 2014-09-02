@@ -36,7 +36,7 @@ public class Generator
         createClasses(packageName);
     }
 
-    private void createGraph(Properties properties) throws IOException, FileNotFoundException
+    private void createGraph(Properties properties) throws IOException
     {
         String optionsAsString = GeneratorUtils.getOptionsAsString(getHighchartOptionsUrl(properties));
 
@@ -60,17 +60,17 @@ public class Generator
         FileUtils.cleanDirectory(new File(path));
     }
 
-    private String getPackageName(Properties properties) throws IOException, FileNotFoundException
+    private String getPackageName(Properties properties) throws IOException
     {
         return properties.getProperty(GENERATOR_OUTPUT_PACKAGENAME);
     }
 
-    private String getHighchartOptionsUrl(Properties properties) throws IOException, FileNotFoundException
+    private String getHighchartOptionsUrl(Properties properties) throws IOException
     {
         return properties.getProperty(GENERATOR_INPUT_FILENAME);
     }
 
-    private Properties loadProperties() throws FileNotFoundException, IOException
+    private Properties loadProperties() throws IOException
     {
         Properties properties = new Properties();
         InputStream inputStream = this.getClass().getResourceAsStream(CONFIGURATION_FILENAME);

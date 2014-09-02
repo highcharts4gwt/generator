@@ -1,0 +1,17 @@
+{
+    "values": null,
+    "fullname": "drilldown.activeAxisLabelStyle",
+    "defaults": null,
+    "title": "activeAxisLabelStyle",
+    "extending": null,
+    "excluding": null,
+    "isParent": true,
+    "since": null,
+    "demo": null,
+    "deprecated": null,
+    "seeAlso": null,
+    "name": "drilldown--activeAxisLabelStyle",
+    "parent": null,
+    "returnType": null,
+    "description": null
+}

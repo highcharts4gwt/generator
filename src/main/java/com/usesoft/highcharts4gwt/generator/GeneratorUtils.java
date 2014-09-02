@@ -1,10 +1,7 @@
 package com.usesoft.highcharts4gwt.generator;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 import javax.annotation.CheckForNull;
@@ -18,8 +15,7 @@ public class GeneratorUtils
     }
 
     @CheckForNull
-    public static String getOptionsAsString(String highchartOptionsUrl) throws IOException, FileNotFoundException, MalformedURLException,
-            UnsupportedEncodingException
+    public static String getOptionsAsString(String highchartOptionsUrl) throws IOException
     {
         InputStream optionsInputStream = null;
         String optionsAsString;
@@ -28,8 +24,8 @@ public class GeneratorUtils
         {
             optionsInputStream = new URL(highchartOptionsUrl).openStream();
             optionsAsString = IOUtils.toString(optionsInputStream);
-
-        } finally
+        }
+        finally
         {
             if (optionsInputStream != null)
                 optionsInputStream.close();

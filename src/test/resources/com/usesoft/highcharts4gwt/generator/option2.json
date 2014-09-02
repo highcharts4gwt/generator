@@ -1,17 +1,17 @@
 {
     "values": null,
     "fullname": "global.VMLRadialGradientURL",
-    "defaults": "http://code.highcharts.com/{version}/gfx/vml-radial-gradient.png",
+    "defaults": "",
     "title": "VMLRadialGradientURL",
     "extending": "",
     "excluding": "",
     "isParent": false,
-    "since": "2.3.0",
+    "since": "",
     "demo": "",
     "deprecated": false,
     "seeAlso": "",
     "name": "global--VMLRadialGradientURL",
-    "parent": "global",
-    "returnType": "String",
-    "description": "Path to the pattern image required by VML browsers in order to draw radial gradients."
+    "parent": null,
+    "returnType": "",
+    "description": ""
 }

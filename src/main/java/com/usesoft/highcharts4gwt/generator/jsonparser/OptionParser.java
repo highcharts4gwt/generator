@@ -11,6 +11,7 @@ import com.usesoft.highcharts4gwt.generator.graph.OptionSpec;
 
 public class OptionParser
 {
+    private static final String NULL = "null";
     private static final String FIELD_FULLNAME = "fullname";
     private static final String FIELD_VALUES = "values";
     private static final String FIELD_DEFAULTS = "defaults";
@@ -53,13 +54,19 @@ public class OptionParser
 
     public static OptionSpec parse(JSONObject jsonOption)
     {
-        String fullName = jsonOption.get(FIELD_FULLNAME).toString();
-        String name = jsonOption.get(FIELD_NAME).toString();
-        String title = jsonOption.get(FIELD_TITLE).toString();
+        String fullName = getOptionValue(jsonOption, FIELD_FULLNAME);
+        String name = getOptionValue(jsonOption, FIELD_NAME);
+        String title = getOptionValue(jsonOption, FIELD_TITLE);
 
         List<String> values = parseList(jsonOption, FIELD_VALUES);
+        List<String> excluding = parseList(jsonOption, FIELD_EXCLUDING);
 
-        OptionSpec option = new OptionSpec(fullName, name, title).setValues(values);
+        OptionSpec option = new OptionSpec(fullName, name, title).setValues(values).setDefaults(getOptionValue(jsonOption, FIELD_DEFAULTS))
+                        .setExtending(getOptionValue(jsonOption, FIELD_EXTENDING)).setExcluding(excluding)
+                        .setIsParent(Boolean.parseBoolean(getOptionValue(jsonOption, FIELD_ISPARENT))).setSince(getOptionValue(jsonOption, FIELD_SINCE))
+                        .setDemo(getOptionValue(jsonOption, FIELD_DEMO)).setDeprecated(Boolean.parseBoolean(getOptionValue(jsonOption, FIELD_DEPRECATED)))
+                        .setSeeAlso(getOptionValue(jsonOption, FIELD_SEEALSO)).setParent(getOptionValue(jsonOption, FIELD_PARENT))
+                        .setReturnType(getOptionValue(jsonOption, FIELD_RETURNTYPE)).setDescription(getOptionValue(jsonOption, FIELD_DESCRIPTION));
 
         // node.setDefaults(jsonOption.get("defaults").toString());
         // node.setDemo(jsonOption.get("defaults"));
@@ -77,11 +84,19 @@ public class OptionParser
         return option;
     }
 
+    private static String getOptionValue(JSONObject jsonOption, String fieldName)
+    {
+        String value = jsonOption.get(fieldName).toString();
+        if (value.equals(NULL))
+            return null;
+        return value;
+    }
+
     private static List<String> parseList(JSONObject jsonOption, String fieldName)
     {
         String valuesAsString = jsonOption.get(fieldName).toString();
 
-        if (Strings.isNullOrEmpty(valuesAsString) || valuesAsString.equals("null"))
+        if (Strings.isNullOrEmpty(valuesAsString) || valuesAsString.equals(NULL))
             return new ArrayList<String>();
 
         valuesAsString = valuesAsString.replace("[", "");

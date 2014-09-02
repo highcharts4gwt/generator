@@ -8,17 +8,17 @@ import com.usesoft.highcharts4gwt.model.api.Options;
 public class HighchartsLayoutPanel extends SimpleLayoutPanel
 {
 
-    // -- Rendering flow --
-    // onLoad
-    // onResized
-    // on attach or detach event
-    // onAttach
-
     public HighchartsLayoutPanel()
     {
         id = HTMLPanel.createUniqueId();
         this.getElement().setId(id);
     }
+
+    // -- Rendering flow --
+    // onLoad
+    // onResized
+    // on attach or detach event
+    // onAttach
 
     private final String id;
 
@@ -29,6 +29,6 @@ public class HighchartsLayoutPanel extends SimpleLayoutPanel
 
     private native JavaScriptObject drawChart(String containerId, Options options)
     /*-{
-    	return $wnd.jQuery('#'+containerId).highcharts(options);
+        return $wnd.jQuery('#'+containerId).highcharts(options);
     }-*/;
 }
