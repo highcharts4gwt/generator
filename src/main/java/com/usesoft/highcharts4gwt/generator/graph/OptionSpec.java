@@ -1,5 +1,8 @@
 package com.usesoft.highcharts4gwt.generator.graph;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.CheckForNull;
 
 public class OptionSpec
@@ -30,6 +33,7 @@ public class OptionSpec
         this.fullname = fullname;
         this.name = name;
         this.title = title;
+        this.values = new ArrayList<String>();
     }
 
     public String getFullname()
@@ -65,12 +69,12 @@ public class OptionSpec
     // return this;
     // }
 
-    public String[] getValues()
+    public List<String> getValues()
     {
         return values;
     }
 
-    public OptionSpec setValues(String[] values)
+    public OptionSpec setValues(List<String> values)
     {
         this.values = values;
         return this;
@@ -203,8 +207,7 @@ public class OptionSpec
 
     private final String title;
 
-    @CheckForNull
-    private String[] values;
+    private List<String> values;
 
     @CheckForNull
     private String defaults;

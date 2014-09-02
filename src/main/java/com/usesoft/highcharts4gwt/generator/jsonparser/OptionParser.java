@@ -1,7 +1,12 @@
 package com.usesoft.highcharts4gwt.generator.jsonparser;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.json.JSONObject;
 
+import com.google.common.base.Splitter;
+import com.google.common.base.Strings;
 import com.usesoft.highcharts4gwt.generator.graph.OptionSpec;
 
 public class OptionParser
@@ -51,7 +56,10 @@ public class OptionParser
         String fullName = jsonOption.get(FIELD_FULLNAME).toString();
         String name = jsonOption.get(FIELD_NAME).toString();
         String title = jsonOption.get(FIELD_TITLE).toString();
-        OptionSpec option = new OptionSpec(fullName, name, title);
+
+        List<String> values = parseList(jsonOption, FIELD_VALUES);
+
+        OptionSpec option = new OptionSpec(fullName, name, title).setValues(values);
 
         // node.setDefaults(jsonOption.get("defaults").toString());
         // node.setDemo(jsonOption.get("defaults"));
@@ -67,5 +75,18 @@ public class OptionParser
         // node.setTitle(jsonOption.get("defaults"));
         // node.setValues(jsonOption.get("defaults"));
         return option;
+    }
+
+    private static List<String> parseList(JSONObject jsonOption, String fieldName)
+    {
+        String valuesAsString = jsonOption.get(fieldName).toString();
+
+        if (Strings.isNullOrEmpty(valuesAsString) || valuesAsString.equals("null"))
+            return new ArrayList<String>();
+
+        valuesAsString = valuesAsString.replace("[", "");
+        valuesAsString = valuesAsString.replace("]", "");
+        valuesAsString = valuesAsString.replace("\"", "");
+        return Splitter.on(",").trimResults().splitToList(valuesAsString);
     }
 }
