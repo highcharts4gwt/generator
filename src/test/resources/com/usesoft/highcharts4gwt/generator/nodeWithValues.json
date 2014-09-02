@@ -1,0 +1,17 @@
+{
+    "values": "[\"left\", \"center\", \"right\"]",
+    "fullname": "legend.align",
+    "defaults": "center",
+    "title": "align",
+    "extending": null,
+    "excluding": null,
+    "isParent": false,
+    "since": "2.0",
+    "demo": "<a href=\"http://jsfiddle.net/gh/get/jquery/1.7.2/highslide-software/highcharts.com/tree/master/samples/highcharts/legend/align/\" target=\"_blank\">Legend at the right of the chart</a>",
+    "deprecated": false,
+    "seeAlso": null,
+    "name": "legend--align",
+    "parent": "legend",
+    "returnType": "String",
+    "description": "The horizontal alignment of the legend box within the chart area. Valid values are <code>\"left\"</code>, <code>\"center\"</code> and <code>\"right\"</code>."
+}

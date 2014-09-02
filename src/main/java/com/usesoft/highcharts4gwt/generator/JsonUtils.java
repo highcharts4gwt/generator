@@ -7,8 +7,8 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.usesoft.highcharts4gwt.generator.graph.GraphMultiRoot;
-import com.usesoft.highcharts4gwt.generator.graph.OptionNode;
-import com.usesoft.highcharts4gwt.generator.jsonparser.Nodeparser;
+import com.usesoft.highcharts4gwt.generator.graph.OptionSpec;
+import com.usesoft.highcharts4gwt.generator.jsonparser.OptionParser;
 
 public class JsonUtils
 {
@@ -31,13 +31,14 @@ public class JsonUtils
         return graph;
     }
 
-    public static List<OptionNode> createNodes(JSONArray jsonArray)
+    public static List<OptionSpec> createNodes(JSONArray jsonArray)
     {
-        List<OptionNode> nodes = new ArrayList<OptionNode>();
+        List<OptionSpec> nodes = new ArrayList<OptionSpec>();
 
         for (int i = 0; i < jsonArray.length(); i++)
         {
-            nodes.add(Nodeparser.parse((JSONObject) jsonArray.get(i)));
+            JSONObject jsonOption = (JSONObject) jsonArray.get(i);
+            nodes.add(OptionParser.parse(jsonOption));
         }
 
         return nodes;

@@ -1,0 +1,17 @@
+{
+    "values": null,
+    "fullname": "drilldown.activeAxisLabelStyle",
+    "defaults": null,
+    "title": "activeAxisLabelStyle",
+    "extending": null,
+    "excluding": null,
+    "isParent": false,
+    "since": "3.0.8",
+    "demo": "<a href=\"http://jsfiddle.net/gh/get/jquery/1.7.2/highslide-software/highcharts.com/tree/master/samples/highcharts/drilldown/labels/\" target=\"_blank\">Label styles</a>",
+    "deprecated": false,
+    "seeAlso": null,
+    "name": "drilldown--activeAxisLabelStyle",
+    "parent": "drilldown",
+    "returnType": "CSSObject",
+    "description": "Additional styles to apply to the X axis label for a point that has drilldown data. By default it is underlined and blue to invite to interaction. Defaults to:\r\n<pre>activeAxisLabelStyle: {\r\n\tcursor: 'pointer',\r\n\tcolor: '#0d233a',\r\n\tfontWeight: 'bold',\r\n\ttextDecoration: 'underline'\t\t\t\r\n}</pre>"
+}
