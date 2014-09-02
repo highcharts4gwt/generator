@@ -28,26 +28,6 @@ public class OptionParser
     private static final String FIELD_RETURNTYPE = "returnType";
     private static final String FIELD_DESCRIPTION = "description";
 
-    // {
-    // values: null,
-    // fullname: "global.VMLRadialGradientURL",
-    // defaults:
-    // "http://code.highcharts.com/{version}/gfx/vml-radial-gradient.png",
-    // title: "VMLRadialGradientURL",
-    // extending: "",
-    // excluding: "",
-    // isParent: false,
-    // since: "2.3.0",
-    // demo: "",
-    // deprecated: false,
-    // seeAlso: "",
-    // name: "global--VMLRadialGradientURL",
-    // parent: "global",
-    // returnType: "String",
-    // description:
-    // "Path to the pattern image required by VML browsers in order to draw radial gradients."
-    // }
-
     private OptionParser()
     {
     }
@@ -68,19 +48,6 @@ public class OptionParser
                         .setSeeAlso(getOptionValue(jsonOption, FIELD_SEEALSO)).setParent(getOptionValue(jsonOption, FIELD_PARENT))
                         .setReturnType(getOptionValue(jsonOption, FIELD_RETURNTYPE)).setDescription(getOptionValue(jsonOption, FIELD_DESCRIPTION));
 
-        // node.setDefaults(jsonOption.get("defaults").toString());
-        // node.setDemo(jsonOption.get("defaults"));
-        // node.setDeprecated(jsonOption.get("defaults"));
-        // node.setDescription(jsonOption.get("defaults"));
-        // node.setExcluding(jsonOption.get("defaults"));
-        // node.setExtending(jsonOption.get("defaults"));
-        // node.setFullname(jsonOption.get("defaults"));
-        // node.setIsParent(jsonOption.get("defaults"));
-        // node.setReturnType(jsonOption.get("defaults"));
-        // node.setSeeAlso(jsonOption.get("defaults"));
-        // node.setSince(jsonOption.get("defaults"));
-        // node.setTitle(jsonOption.get("defaults"));
-        // node.setValues(jsonOption.get("defaults"));
         return option;
     }
 

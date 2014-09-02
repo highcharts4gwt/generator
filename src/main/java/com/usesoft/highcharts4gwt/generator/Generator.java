@@ -12,6 +12,7 @@ import org.json.JSONArray;
 import com.sun.codemodel.JClassAlreadyExistsException;
 import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JDefinedClass;
+import com.usesoft.highcharts4gwt.generator.graph.Options;
 
 public class Generator
 {
@@ -31,18 +32,18 @@ public class Generator
         String packageName = getPackageName(properties);
         cleanPackage(packageName);
 
-        createGraph(properties);
+        createOptions(properties);
 
         createClasses(packageName);
     }
 
-    private void createGraph(Properties properties) throws IOException
+    private void createOptions(Properties properties) throws IOException
     {
         String optionsAsString = GeneratorUtils.getOptionsAsString(getHighchartOptionsUrl(properties));
 
         JSONArray jsonArray = JsonUtils.extractOptions(optionsAsString);
 
-        JsonUtils.createGraph(jsonArray);
+        Options options = JsonUtils.createOptions(jsonArray);
     }
 
     private void createClasses(String packageName) throws JClassAlreadyExistsException, IOException

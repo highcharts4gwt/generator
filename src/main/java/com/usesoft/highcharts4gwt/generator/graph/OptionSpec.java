@@ -5,6 +5,9 @@ import java.util.List;
 
 import javax.annotation.CheckForNull;
 
+import com.google.common.base.MoreObjects;
+import com.google.common.base.Objects;
+
 public class OptionSpec
 {
 
@@ -23,33 +26,15 @@ public class OptionSpec
         return fullname;
     }
 
-    // public OptionNode setFullname(String fullname)
-    // {
-    // this.fullname = fullname;
-    // return this;
-    // }
-
     public String getName()
     {
         return name;
     }
 
-    // public OptionNode setName(String name)
-    // {
-    // this.name = name;
-    // return this;
-    // }
-
     public String getTitle()
     {
         return title;
     }
-
-    // public OptionNode setTitle(String title)
-    // {
-    // this.title = title;
-    // return this;
-    // }
 
     public List<String> getValues()
     {
@@ -233,4 +218,25 @@ public class OptionSpec
     @CheckForNull
     private String description;
 
+    @Override
+    public String toString()
+    {
+        return MoreObjects.toStringHelper(this).add("fullName", getFullname()).toString();
+    }
+
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (obj == this)
+            return true;
+        if (obj instanceof OptionSpec)
+            return Objects.equal(getFullname(), ((OptionSpec) obj).getFullname());
+        return false;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return Objects.hashCode(getFullname());
+    }
 }

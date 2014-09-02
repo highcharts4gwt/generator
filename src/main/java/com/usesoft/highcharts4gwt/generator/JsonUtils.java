@@ -6,8 +6,8 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import com.usesoft.highcharts4gwt.generator.graph.GraphMultiRoot;
 import com.usesoft.highcharts4gwt.generator.graph.OptionSpec;
+import com.usesoft.highcharts4gwt.generator.graph.Options;
 import com.usesoft.highcharts4gwt.generator.jsonparser.OptionParser;
 
 public class JsonUtils
@@ -23,25 +23,31 @@ public class JsonUtils
         return root.getJSONArray("options");
     }
 
-    public static GraphMultiRoot createGraph(JSONArray jsonArray)
+    public static Options createOptions(JSONArray jsonArray)
     {
-        GraphMultiRoot graph = new GraphMultiRoot();
-        createNodes(jsonArray);
+        List<OptionSpec> specs = readSpecs(jsonArray);
 
-        return graph;
+        Options options = new Options();
+
+        for (OptionSpec optionSpec : specs)
+        {
+            options.add(optionSpec, specs);
+        }
+
+        return options;
     }
 
-    public static List<OptionSpec> createNodes(JSONArray jsonArray)
+    public static List<OptionSpec> readSpecs(JSONArray jsonArray)
     {
-        List<OptionSpec> nodes = new ArrayList<OptionSpec>();
+        List<OptionSpec> specs = new ArrayList<OptionSpec>();
 
         for (int i = 0; i < jsonArray.length(); i++)
         {
             JSONObject jsonOption = (JSONObject) jsonArray.get(i);
-            nodes.add(OptionParser.parse(jsonOption));
+            specs.add(OptionParser.parse(jsonOption));
         }
 
-        return nodes;
+        return specs;
     }
 
 }
