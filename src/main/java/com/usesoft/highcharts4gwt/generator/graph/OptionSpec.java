@@ -76,7 +76,6 @@ public class OptionSpec
         return extending;
     }
 
-    @CheckForNull
     public OptionSpec setExtending(@CheckForNull String extending)
     {
         this.extending = extending;
@@ -100,7 +99,6 @@ public class OptionSpec
         return since;
     }
 
-    @CheckForNull
     public OptionSpec setSince(@CheckForNull String since)
     {
         this.since = since;
@@ -113,7 +111,6 @@ public class OptionSpec
         return demo;
     }
 
-    @CheckForNull
     public OptionSpec setDemo(@CheckForNull String demo)
     {
         this.demo = demo;

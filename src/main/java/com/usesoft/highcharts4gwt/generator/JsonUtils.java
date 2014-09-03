@@ -44,7 +44,9 @@ public class JsonUtils
         for (int i = 0; i < jsonArray.length(); i++)
         {
             JSONObject jsonOption = (JSONObject) jsonArray.get(i);
-            specs.add(OptionParser.parse(jsonOption));
+            OptionSpec option = OptionParser.parse(jsonOption);
+            if (option != null)
+                specs.add(option);
         }
 
         return specs;

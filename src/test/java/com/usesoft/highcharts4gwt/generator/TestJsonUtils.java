@@ -18,7 +18,7 @@ public class TestJsonUtils
 {
     private static final String DUMP_JSON = "dump.json";
 
-    private static final int OPTIONS_NUMBER = 681;
+    private static final int OPTIONS_NUMBER = 685;
     private static final int ROOT_NUMBER = 20;
 
     @Test
@@ -63,6 +63,12 @@ public class TestJsonUtils
                         new OptionTree(new OptionSpec("series", "", "")), new OptionTree(new OptionSpec("subtitle", "", "")),
                         new OptionTree(new OptionSpec("title", "", "")), new OptionTree(new OptionSpec("tooltip", "", "")),
                         new OptionTree(new OptionSpec("xAxis", "", "")), new OptionTree(new OptionSpec("yAxis", "", "")));
+
+        assertThat(options.findTree("colors").getRelations().size()).isEqualTo(0);
+        assertThat(options.findTree("global").getRelations().size()).isEqualTo(1);
+        assertThat(options.findTree("chart").getRelations().size()).isEqualTo(8);
+        assertThat(options.findTree("xAxis").getRelations().size()).isEqualTo(8);
+        assertThat(options.findTree("yAxis").getRelations().size()).isEqualTo(5); // -> yAxis.plotLines extending xAxis-plotLines etc.
     }
 
     private JSONArray extractOptions() throws IOException
