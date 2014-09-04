@@ -14,9 +14,7 @@ import org.apache.commons.io.IOUtils;
 import org.json.JSONArray;
 
 import com.sun.codemodel.JClassAlreadyExistsException;
-import com.sun.codemodel.JCodeModel;
-import com.sun.codemodel.JDefinedClass;
-import com.sun.codemodel.JMod;
+import com.usesoft.highcharts4gwt.generator.graph.OptionSpec;
 import com.usesoft.highcharts4gwt.generator.graph.OptionTree;
 import com.usesoft.highcharts4gwt.generator.graph.Options;
 
@@ -81,15 +79,31 @@ public abstract class BaseGenerator implements Generator
 
     private void buildRootClass(Options options, String packageName) throws JClassAlreadyExistsException, IOException
     {
-        JCodeModel codeModel = new JCodeModel();
-        JDefinedClass optionsClass = codeModel._class(packageName + ".Options");
+        // JCodeModel codeModel = new JCodeModel();
+        // codeModel._class(packageName + ".Options");
 
         for (OptionTree tree : options.getTrees())
         {
-            optionsClass.field(JMod.PRIVATE, int.class, tree.getRoot().getName());
+            writeClasses(tree);
         }
-        codeModel.build(new File(getRootDirectory()));
+        // codeModel.build(new File(getRootDirectory()));
     }
+
+    private void writeClasses(OptionTree tree) throws JClassAlreadyExistsException, IOException
+    {
+        OptionSpec root = tree.getRoot();
+
+        ClassBuilder builder = new ClassBuilder(getRootDirectory(), packageName, root);
+        builder.build();
+
+    }
+
+    // private void writeLeafClass(OptionSpec leaf) throws JClassAlreadyExistsException, IOException
+    // {
+    // JCodeModel codeModel = new JCodeModel();
+    // JDefinedClass optionsClass = codeModel._class(packageName + "." + leaf.getFullname());
+    // codeModel.build(new File(getRootDirectory()));
+    // }
 
     private Properties loadProperties() throws IOException
     {

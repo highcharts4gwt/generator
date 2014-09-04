@@ -64,11 +64,11 @@ public class TestJsonUtils
                         new OptionTree(new OptionSpec("title", "", "")), new OptionTree(new OptionSpec("tooltip", "", "")),
                         new OptionTree(new OptionSpec("xAxis", "", "")), new OptionTree(new OptionSpec("yAxis", "", "")));
 
-        assertThat(options.findTree("colors").getRelations().size()).isEqualTo(0);
-        assertThat(options.findTree("global").getRelations().size()).isEqualTo(1);
-        assertThat(options.findTree("chart").getRelations().size()).isEqualTo(8);
-        assertThat(options.findTree("xAxis").getRelations().size()).isEqualTo(8);
-        assertThat(options.findTree("yAxis").getRelations().size()).isEqualTo(5); // -> yAxis.plotLines extending xAxis-plotLines etc.
+        assertThat(options.findTree("colors").getParentToChildrenRelations().size()).isEqualTo(0);
+        assertThat(options.findTree("global").getParentToChildrenRelations().size()).isEqualTo(1);
+        assertThat(options.findTree("chart").getParentToChildrenRelations().size()).isEqualTo(8);
+        assertThat(options.findTree("xAxis").getParentToChildrenRelations().size()).isEqualTo(8);
+        assertThat(options.findTree("yAxis").getParentToChildrenRelations().size()).isEqualTo(5); // -> yAxis.plotLines extending xAxis-plotLines etc.
     }
 
     private JSONArray extractOptions() throws IOException

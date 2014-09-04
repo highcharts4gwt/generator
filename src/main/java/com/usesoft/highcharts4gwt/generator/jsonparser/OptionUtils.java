@@ -64,4 +64,13 @@ public class OptionUtils
         return parent;
     }
 
+    public static String getFullyQualifiedName(OptionSpec optionSpec)
+    {
+        String fullyQualifiedName = optionSpec.getFullname();
+        int index = fullyQualifiedName.lastIndexOf(".");
+        fullyQualifiedName = fullyQualifiedName.substring(0, index + 1) + fullyQualifiedName.substring(index + 1, index + 2).toUpperCase()
+                        + fullyQualifiedName.substring(index + 2);
+        return fullyQualifiedName;
+    }
+
 }

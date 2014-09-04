@@ -10,7 +10,7 @@ import com.google.common.base.Objects;
 import com.usesoft.highcharts4gwt.generator.jsonparser.OptionUtils;
 
 /**
- * A tree of options. It contains a root and a map with all the relationship between children leaves.
+ * A tree of options. It contains a root and different maps and lists to be able to generate the classes (from leaves to root of the tree). Leaves are fields.
  * @author rquillevere
  */
 public class OptionTree
@@ -18,7 +18,9 @@ public class OptionTree
     public OptionTree(OptionSpec root)
     {
         this.root = root;
-        this.relations = new HashMap<OptionSpec, List<OptionSpec>>();
+        this.parentToChildrenRelations = new HashMap<OptionSpec, List<OptionSpec>>();
+        this.childToParentRelations = new HashMap<OptionSpec, OptionSpec>();
+        this.leaves = new ArrayList<OptionSpec>();
     }
 
     public OptionSpec getRoot()
@@ -26,9 +28,46 @@ public class OptionTree
         return root;
     }
 
-    public Map<OptionSpec, List<OptionSpec>> getRelations()
+    public Map<OptionSpec, List<OptionSpec>> getParentToChildrenRelations()
     {
-        return relations;
+        return parentToChildrenRelations;
+    }
+
+    public void computeAndAddRelation(OptionSpec option, List<OptionSpec> options)
+    {
+        if (!option.isParent())
+            leaves.add(option);
+
+        if (OptionUtils.isRoot(option))
+            return;
+
+        OptionSpec parent = OptionUtils.findParent(option, options);
+
+        if (parent == null)
+            return;
+
+        childToParentRelations.put(option, parent);
+
+        List<OptionSpec> children = parentToChildrenRelations.get(parent);
+
+        if (children == null)
+        {
+            List<OptionSpec> list = new ArrayList<OptionSpec>();
+            list.add(option);
+            parentToChildrenRelations.put(parent, list);
+        }
+        else
+            children.add(option);
+    }
+
+    public HashMap<OptionSpec, OptionSpec> getChildToParentRelations()
+    {
+        return childToParentRelations;
+    }
+
+    public ArrayList<OptionSpec> getLeaves()
+    {
+        return leaves;
     }
 
     @Override
@@ -55,30 +94,10 @@ public class OptionTree
 
     private final OptionSpec root;
 
-    private final Map<OptionSpec, List<OptionSpec>> relations;
+    private final ArrayList<OptionSpec> leaves;
 
-    public void computeAndAddRelation(OptionSpec option, List<OptionSpec> options)
-    {
-        if (OptionUtils.isRoot(option))
-            return;
+    private final Map<OptionSpec, List<OptionSpec>> parentToChildrenRelations;
 
-        OptionSpec parent = OptionUtils.findParent(option, options);
-
-        if (parent == null)
-            return;
-
-        List<OptionSpec> children = relations.get(parent);
-
-        if (children == null)
-        {
-            List<OptionSpec> list = new ArrayList<OptionSpec>();
-            list.add(option);
-            relations.put(parent, list);
-        }
-        else
-        {
-            children.add(option);
-        }
-    }
+    private final HashMap<OptionSpec, OptionSpec> childToParentRelations;
 
 }
