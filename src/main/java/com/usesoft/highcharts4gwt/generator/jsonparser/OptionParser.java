@@ -39,26 +39,26 @@ public class OptionParser
     @CheckForNull
     public static OptionSpec parse(JSONObject jsonOption)
     {
-        String fullName = getNonNullOptionValue(jsonOption, FIELD_FULLNAME);
+        String fullName = getNonNullFieldAsString(jsonOption, FIELD_FULLNAME);
 
-        String name = getNonNullOptionValue(jsonOption, FIELD_NAME);
+        String name = getNonNullFieldAsString(jsonOption, FIELD_NAME);
 
-        String title = getNonNullOptionValue(jsonOption, FIELD_TITLE);
+        String title = getNonNullFieldAsString(jsonOption, FIELD_TITLE);
 
-        List<String> values = parseList(jsonOption, FIELD_VALUES);
-        List<String> excluding = parseList(jsonOption, FIELD_EXCLUDING);
+        List<String> values = getFieldAsListString(jsonOption, FIELD_VALUES);
+        List<String> excluding = getFieldAsListString(jsonOption, FIELD_EXCLUDING);
 
-        return new OptionSpec(fullName, name, title).setValues(values).setDefaults(getOptionValue(jsonOption, FIELD_DEFAULTS))
-                        .setExtending(getOptionValue(jsonOption, FIELD_EXTENDING)).setExcluding(excluding)
-                        .setIsParent(Boolean.parseBoolean(getOptionValue(jsonOption, FIELD_ISPARENT))).setSince(getOptionValue(jsonOption, FIELD_SINCE))
-                        .setDemo(getOptionValue(jsonOption, FIELD_DEMO)).setSeeAlso(getOptionValue(jsonOption, FIELD_SEEALSO))
-                        .setParent(getOptionValue(jsonOption, FIELD_PARENT)).setReturnType(getOptionValue(jsonOption, FIELD_RETURNTYPE))
-                        .setDescription(getOptionValue(jsonOption, FIELD_DESCRIPTION))
-                        .setDeprecated(Boolean.parseBoolean(getOptionValue(jsonOption, FIELD_DEPRECATED)));
+        return new OptionSpec(fullName, name, title).setValues(values).setDefaults(getFieldAsString(jsonOption, FIELD_DEFAULTS))
+                        .setExtending(getFieldAsString(jsonOption, FIELD_EXTENDING)).setExcluding(excluding)
+                        .setIsParent(Boolean.parseBoolean(getFieldAsString(jsonOption, FIELD_ISPARENT))).setSince(getFieldAsString(jsonOption, FIELD_SINCE))
+                        .setDemo(getFieldAsString(jsonOption, FIELD_DEMO)).setSeeAlso(getFieldAsString(jsonOption, FIELD_SEEALSO))
+                        .setParent(getFieldAsString(jsonOption, FIELD_PARENT)).setReturnType(getFieldAsString(jsonOption, FIELD_RETURNTYPE))
+                        .setDescription(getFieldAsString(jsonOption, FIELD_DESCRIPTION))
+                        .setDeprecated(Boolean.parseBoolean(getFieldAsString(jsonOption, FIELD_DEPRECATED)));
     }
 
     @CheckForNull
-    private static String getOptionValue(JSONObject jsonOption, String fieldName)
+    private static String getFieldAsString(JSONObject jsonOption, String fieldName)
     {
         String value = jsonOption.get(fieldName).toString();
         if (value.equals(NULL))
@@ -66,7 +66,7 @@ public class OptionParser
         return value;
     }
 
-    private static String getNonNullOptionValue(JSONObject jsonOption, String fieldName)
+    private static String getNonNullFieldAsString(JSONObject jsonOption, String fieldName)
     {
         String value = jsonOption.get(fieldName).toString();
         if (value.equals(NULL))
@@ -74,7 +74,7 @@ public class OptionParser
         return value;
     }
 
-    private static List<String> parseList(JSONObject jsonOption, String fieldName)
+    private static List<String> getFieldAsListString(JSONObject jsonOption, String fieldName)
     {
         String valuesAsString = jsonOption.get(fieldName).toString();
 

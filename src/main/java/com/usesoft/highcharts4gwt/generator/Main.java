@@ -1,5 +1,7 @@
 package com.usesoft.highcharts4gwt.generator;
 
+import com.usesoft.highcharts4gwt.highsoft.Product;
+
 public class Main
 {
     private Main()
@@ -8,11 +10,12 @@ public class Main
 
     public static void main(String[] args)
     {
-
-        Generator generator = new Generator();
         try
         {
-            generator.generate();
+            HighsoftApiGenerator visitor = new HighsoftApiGenerator();
+
+            // Only generate for highcharts right now;
+            Product.Highcharts.accept(visitor, null);
         }
         catch (Exception e)
         {

@@ -9,9 +9,7 @@ public class ChartJso extends JavaScriptObject implements Chart
 
     public final native Options options()/*-
                                          {
-                                         if (typeof this["options"] == 'undefined')
-                                         this["options"] = {};
-                                         return this["options"];
+                                         return this["options"] = (this["options"] || {});
                                          }-*/;
 
 }
