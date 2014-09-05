@@ -14,9 +14,12 @@ import org.apache.commons.io.IOUtils;
 import org.json.JSONArray;
 
 import com.sun.codemodel.JClassAlreadyExistsException;
+import com.usesoft.highcharts4gwt.generator.codemodel.ClassBuilder;
+import com.usesoft.highcharts4gwt.generator.codemodel.OutputType;
 import com.usesoft.highcharts4gwt.generator.graph.OptionSpec;
 import com.usesoft.highcharts4gwt.generator.graph.OptionTree;
 import com.usesoft.highcharts4gwt.generator.graph.Options;
+import com.usesoft.highcharts4gwt.generator.jsonparser.OptionUtils;
 
 public abstract class BaseGenerator implements Generator
 {
@@ -27,6 +30,7 @@ public abstract class BaseGenerator implements Generator
         cleanDirectory(getRootDirectory() + "/" + packageToPath(packageName));
     }
 
+    @Override
     public void generate() throws IOException, JClassAlreadyExistsException
     {
         options = createOptions();
@@ -79,31 +83,28 @@ public abstract class BaseGenerator implements Generator
 
     private void buildRootClass(Options options, String packageName) throws JClassAlreadyExistsException, IOException
     {
-        // JCodeModel codeModel = new JCodeModel();
-        // codeModel._class(packageName + ".Options");
-
         for (OptionTree tree : options.getTrees())
         {
             writeClasses(tree);
         }
-        // codeModel.build(new File(getRootDirectory()));
     }
 
     private void writeClasses(OptionTree tree) throws JClassAlreadyExistsException, IOException
     {
         OptionSpec root = tree.getRoot();
 
-        ClassBuilder builder = new ClassBuilder(getRootDirectory(), packageName, root);
-        builder.build();
-
+        // only build Jso for now
+        for (OutputType outputType : OutputType.values())
+        {
+            ClassBuilder builder = outputType.accept(new ClassWritterVisitor(), getRootDirectory());
+            if (builder != null)
+            {
+                builder.setBasePackageName(packageName + "." + outputType.getRootPackageName());
+                builder.setFullyQualifiedName(OptionUtils.getFullyQualifiedName(root));
+                builder.build();
+            }
+        }
     }
-
-    // private void writeLeafClass(OptionSpec leaf) throws JClassAlreadyExistsException, IOException
-    // {
-    // JCodeModel codeModel = new JCodeModel();
-    // JDefinedClass optionsClass = codeModel._class(packageName + "." + leaf.getFullname());
-    // codeModel.build(new File(getRootDirectory()));
-    // }
 
     private Properties loadProperties() throws IOException
     {
