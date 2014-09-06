@@ -21,6 +21,7 @@ public class OptionTree
         this.parentToChildrenRelations = new HashMap<OptionSpec, List<OptionSpec>>();
         this.childToParentRelations = new HashMap<OptionSpec, OptionSpec>();
         this.leaves = new ArrayList<OptionSpec>();
+        this.all = new ArrayList<OptionSpec>();
     }
 
     public OptionSpec getRoot()
@@ -35,7 +36,9 @@ public class OptionTree
 
     public void computeAndAddRelation(OptionSpec option, List<OptionSpec> options)
     {
-        if (!option.isParent())
+    	all.add(option);
+    	
+    	if (!option.isParent())
             leaves.add(option);
 
         if (OptionUtils.isRoot(option))
@@ -70,7 +73,11 @@ public class OptionTree
         return leaves;
     }
 
-    @Override
+    public ArrayList<OptionSpec> getAll() {
+		return all;
+	}
+
+	@Override
     public String toString()
     {
         return MoreObjects.toStringHelper(this).add("root", getRoot()).toString();
@@ -95,6 +102,7 @@ public class OptionTree
     private final OptionSpec root;
 
     private final ArrayList<OptionSpec> leaves;
+    private final ArrayList<OptionSpec> all;
 
     private final Map<OptionSpec, List<OptionSpec>> parentToChildrenRelations;
 

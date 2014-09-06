@@ -91,19 +91,25 @@ public abstract class BaseGenerator implements Generator
 
     private void writeClasses(OptionTree tree) throws JClassAlreadyExistsException, IOException
     {
-        OptionSpec root = tree.getRoot();
-
-        // only build Jso for now
-        for (OutputType outputType : OutputType.values())
-        {
-            ClassBuilder builder = outputType.accept(new ClassWritterVisitor(), getRootDirectory());
-            if (builder != null)
+        for (OptionSpec option : tree.getAll()) {
+        	
+        	if (!option.isParent())
+        		continue;
+        	
+        	for (OutputType outputType : OutputType.values())
             {
-                builder.setBasePackageName(packageName + "." + outputType.getRootPackageName());
-                builder.setFullyQualifiedName(OptionUtils.getFullyQualifiedName(root));
-                builder.build();
+                ClassBuilder builder = outputType.accept(new ClassWritterVisitor(), getRootDirectory());
+                if (builder != null)
+                {
+                    builder.setBasePackageName(packageName + "." + outputType.getRootPackageName());
+                    builder.setOptionSpec(option);
+                    builder.setTree(tree);
+                    builder.build();
+                }
             }
-        }
+		}
+ 
+        
     }
 
     private Properties loadProperties() throws IOException

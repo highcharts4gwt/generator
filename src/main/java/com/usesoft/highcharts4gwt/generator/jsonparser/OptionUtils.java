@@ -42,7 +42,8 @@ public class OptionUtils
     }
 
     @CheckForNull
-    public static OptionSpec find(List<OptionSpec> options, String optionFullName)
+    public static OptionSpec find(List<OptionSpec> options,
+            String optionFullName)
     {
         int index = options.indexOf(new OptionSpec(optionFullName, "", ""));
 
@@ -53,7 +54,8 @@ public class OptionUtils
     }
 
     @CheckForNull
-    public static OptionSpec findParent(OptionSpec option, List<OptionSpec> options)
+    public static OptionSpec findParent(OptionSpec option,
+            List<OptionSpec> options)
     {
         String parentFullName = OptionUtils.extractParentFullName(option);
 
@@ -66,11 +68,22 @@ public class OptionUtils
 
     public static String getFullyQualifiedName(OptionSpec optionSpec)
     {
-        String fullyQualifiedName = optionSpec.getFullname();
-        int index = fullyQualifiedName.lastIndexOf(".");
-        fullyQualifiedName = fullyQualifiedName.substring(0, index + 1) + fullyQualifiedName.substring(index + 1, index + 2).toUpperCase()
-                        + fullyQualifiedName.substring(index + 2);
+        String fullName = optionSpec.getFullname();
+        int index = fullName.lastIndexOf(".");
+        String className = fullName.substring(index + 1, index + 2)
+                .toUpperCase() + fullName.substring(index + 2);
+        String fullyQualifiedName = fullName.substring(0, index + 1)
+                + className;
         return fullyQualifiedName;
+    }
+
+    public static String getClassName(OptionSpec optionSpec)
+    {
+        String fullName = optionSpec.getFullname();
+        int index = fullName.lastIndexOf(".");
+        String className = fullName.substring(index + 1, index + 2)
+                .toUpperCase() + fullName.substring(index + 2);
+        return className;
     }
 
 }

@@ -1,15 +1,10 @@
-package com.usesoft.highcharts4gwt.generator.codemodel;
+package com.usesoft.highcharts4gwt.generator.codemodel.jso;
 
-import com.sun.codemodel.JCodeModel;
+import com.usesoft.highcharts4gwt.generator.codemodel.BaseFieldBuilder;
+import com.usesoft.highcharts4gwt.generator.codemodel.FieldBuilder;
 
-public class MockFieldBuilder implements FieldBuilder
+public class JsoFieldBuilder extends BaseFieldBuilder implements FieldBuilder
 {
-    @Override
-    public void setCodeModel(JCodeModel codeModel)
-    {
-        // TODO Auto-generated method stub
-
-    }
 
     @Override
     public void addNumberField(String fieldName)
@@ -68,14 +63,7 @@ public class MockFieldBuilder implements FieldBuilder
     }
 
     @Override
-    public <T> void addArrayField(String fieldName, T type)
-    {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public <T> void addField(String fieldName, T type)
+    public void addClassField(String className, String fieldName)
     {
         // TODO Auto-generated method stub
 
