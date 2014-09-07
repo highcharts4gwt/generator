@@ -1,10 +1,8 @@
-package com.usesoft.highcharts4gwt.generator.jsonparser;
+package com.usesoft.highcharts4gwt.generator.graph;
 
 import java.util.List;
 
 import javax.annotation.CheckForNull;
-
-import com.usesoft.highcharts4gwt.generator.graph.OptionSpec;
 
 public class OptionUtils
 {
@@ -23,7 +21,7 @@ public class OptionUtils
         return extractRootFullName(optionFullName);
     }
 
-    public static String extractRootFullName(String optionFullName)
+    private static String extractRootFullName(String optionFullName)
     {
         return optionFullName.split("\\.")[0];
     }
@@ -62,15 +60,6 @@ public class OptionUtils
 
         OptionSpec parent = OptionUtils.find(options, parentFullName);
         return parent;
-    }
-
-    public static String getFullyQualifiedName(OptionSpec optionSpec)
-    {
-        String fullName = optionSpec.getFullname();
-        int index = fullName.lastIndexOf(".");
-        String className = fullName.substring(index + 1, index + 2).toUpperCase() + fullName.substring(index + 2);
-        String fullyQualifiedName = fullName.substring(0, index + 1) + className;
-        return fullyQualifiedName;
     }
 
     public static String getClassName(OptionSpec optionSpec)

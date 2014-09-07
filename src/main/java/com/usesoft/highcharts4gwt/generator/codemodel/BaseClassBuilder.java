@@ -12,7 +12,7 @@ import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JDefinedClass;
 import com.usesoft.highcharts4gwt.generator.graph.OptionSpec;
 import com.usesoft.highcharts4gwt.generator.graph.OptionTree;
-import com.usesoft.highcharts4gwt.generator.jsonparser.OptionUtils;
+import com.usesoft.highcharts4gwt.generator.graph.OptionUtils;
 
 public abstract class BaseClassBuilder implements ClassBuilder
 {

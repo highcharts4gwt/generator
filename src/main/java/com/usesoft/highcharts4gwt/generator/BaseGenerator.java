@@ -18,8 +18,8 @@ import com.usesoft.highcharts4gwt.generator.codemodel.ClassBuilder;
 import com.usesoft.highcharts4gwt.generator.codemodel.OutputType;
 import com.usesoft.highcharts4gwt.generator.graph.OptionSpec;
 import com.usesoft.highcharts4gwt.generator.graph.OptionTree;
+import com.usesoft.highcharts4gwt.generator.graph.OptionUtils;
 import com.usesoft.highcharts4gwt.generator.graph.Options;
-import com.usesoft.highcharts4gwt.generator.jsonparser.OptionUtils;
 
 public abstract class BaseGenerator implements Generator
 {

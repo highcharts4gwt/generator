@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.annotation.CheckForNull;
 
-import com.usesoft.highcharts4gwt.generator.jsonparser.OptionUtils;
 
 /**
  * Contains all the OptionTrees.

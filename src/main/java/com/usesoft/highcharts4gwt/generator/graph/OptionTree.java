@@ -7,7 +7,6 @@ import java.util.Map;
 
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
-import com.usesoft.highcharts4gwt.generator.jsonparser.OptionUtils;
 
 /**
  * A tree of options. It contains a root and different maps and lists to be able to generate the classes (from leaves to root of the tree). Leaves are fields.
