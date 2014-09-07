@@ -7,10 +7,9 @@ import com.usesoft.highcharts4gwt.generator.codemodel.FieldBuilder;
 public class JsoClassBuilder extends BaseClassBuilder
 {
     private static final String CLASS_PREFIX = "Jso";
-    private FieldBuilder fieldBuilder;
+    private final FieldBuilder fieldBuilder;
 
-    public JsoClassBuilder(String rootDirectory)
-            throws JClassAlreadyExistsException
+    public JsoClassBuilder(String rootDirectory) throws JClassAlreadyExistsException
     {
         super(rootDirectory);
         fieldBuilder = new JsoFieldBuilder();

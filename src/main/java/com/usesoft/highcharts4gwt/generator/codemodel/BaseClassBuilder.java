@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.annotation.CheckForNull;
 
+import com.sun.codemodel.ClassType;
 import com.sun.codemodel.JClassAlreadyExistsException;
 import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JDefinedClass;
@@ -21,18 +22,18 @@ public abstract class BaseClassBuilder implements ClassBuilder
     private final String rootDirectory;
 
     @CheckForNull
-    private String basePackageName;
+    private String packageName;
 
     @CheckForNull
     private JDefinedClass optionsClass;
 
-    private String fullyQualifiedName;
-    
+    private String className;
+
     @CheckForNull
-	private OptionSpec optionSpec;
-    
+    private OptionSpec optionSpec;
+
     @CheckForNull
-	private OptionTree tree;
+    private OptionTree tree;
 
     public BaseClassBuilder(String rootDirectory) throws JClassAlreadyExistsException
     {
@@ -43,14 +44,19 @@ public abstract class BaseClassBuilder implements ClassBuilder
     public void build() throws IOException, JClassAlreadyExistsException
     {
         codeModel = new JCodeModel();
-        optionsClass = codeModel._class(basePackageName + "." + getPrefix() + fullyQualifiedName);
-        
+
+        optionsClass = declareType(packageName, className);
+
         List<OptionSpec> children = tree.getParentToChildrenRelations().get(optionSpec);
-        
-        for (OptionSpec optionSpec : children) {
-			getFieldBuilder().addField(optionSpec);
-		}
-        
+
+        if (children != null)
+        {
+            for (OptionSpec optionSpec : children)
+            {
+                getFieldBuilder().addField(optionSpec);
+            }
+        }
+
         if (codeModel != null) // CS
             codeModel.build(new File(rootDirectory));
     }
@@ -58,19 +64,38 @@ public abstract class BaseClassBuilder implements ClassBuilder
     public abstract String getPrefix();
 
     @Override
-    public void setBasePackageName(String basePackageName)
+    public void setPackageName(String packageName)
     {
-        this.basePackageName = basePackageName;
+        this.packageName = packageName;
     }
-    
+
     @Override
-    public void setOptionSpec(OptionSpec optionSpec) {
-		this.optionSpec = optionSpec;
-		this.fullyQualifiedName = OptionUtils.getFullyQualifiedName(optionSpec);
+    public void setOptionSpec(OptionSpec optionSpec)
+    {
+        this.optionSpec = optionSpec;
+        this.className = OptionUtils.getClassName(optionSpec);
     }
-    
+
     @Override
-    public void setTree(OptionTree tree) {
-		this.tree = tree;
+    public void setTree(OptionTree tree)
+    {
+        this.tree = tree;
+    }
+
+    public JCodeModel getCodeModel()
+    {
+        return codeModel;
+    }
+
+    protected JDefinedClass declareType(String packageName, String className) throws JClassAlreadyExistsException
+    {
+        // JClass iface;
+        // ._implements(iface);
+        return getCodeModel()._class(packageName + "." + getPrefix() + className, getClassType());
+    }
+
+    protected ClassType getClassType()
+    {
+        return ClassType.CLASS;
     }
 }

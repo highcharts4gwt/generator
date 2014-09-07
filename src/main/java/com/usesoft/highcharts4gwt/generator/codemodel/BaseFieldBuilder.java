@@ -26,7 +26,9 @@ public abstract class BaseFieldBuilder implements FieldBuilder
         // if (optionSpec.isParent())
         // addClassField(optionSpec.getName(), optionSpec.getName());
 
-        if (optionSpec.getReturnType().equalsIgnoreCase("Number"))
+        String returnType = optionSpec.getReturnType();
+
+        if (returnType != null && returnType.equalsIgnoreCase("Number"))
             addNumberField(optionSpec.getName());
     }
 

@@ -42,8 +42,7 @@ public class OptionUtils
     }
 
     @CheckForNull
-    public static OptionSpec find(List<OptionSpec> options,
-            String optionFullName)
+    public static OptionSpec find(List<OptionSpec> options, String optionFullName)
     {
         int index = options.indexOf(new OptionSpec(optionFullName, "", ""));
 
@@ -54,8 +53,7 @@ public class OptionUtils
     }
 
     @CheckForNull
-    public static OptionSpec findParent(OptionSpec option,
-            List<OptionSpec> options)
+    public static OptionSpec findParent(OptionSpec option, List<OptionSpec> options)
     {
         String parentFullName = OptionUtils.extractParentFullName(option);
 
@@ -70,10 +68,8 @@ public class OptionUtils
     {
         String fullName = optionSpec.getFullname();
         int index = fullName.lastIndexOf(".");
-        String className = fullName.substring(index + 1, index + 2)
-                .toUpperCase() + fullName.substring(index + 2);
-        String fullyQualifiedName = fullName.substring(0, index + 1)
-                + className;
+        String className = fullName.substring(index + 1, index + 2).toUpperCase() + fullName.substring(index + 2);
+        String fullyQualifiedName = fullName.substring(0, index + 1) + className;
         return fullyQualifiedName;
     }
 
@@ -81,9 +77,17 @@ public class OptionUtils
     {
         String fullName = optionSpec.getFullname();
         int index = fullName.lastIndexOf(".");
-        String className = fullName.substring(index + 1, index + 2)
-                .toUpperCase() + fullName.substring(index + 2);
+        String className = fullName.substring(index + 1, index + 2).toUpperCase() + fullName.substring(index + 2);
         return className;
+    }
+
+    public static String getHighchartsPackageName(OptionSpec optionSpec)
+    {
+        String fullName = optionSpec.getFullname();
+        int index = fullName.lastIndexOf(".");
+        if (index != -1)
+            return fullName.substring(0, index).toLowerCase();
+        return "";
     }
 
 }
