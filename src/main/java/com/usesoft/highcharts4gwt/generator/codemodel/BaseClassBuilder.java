@@ -47,6 +47,11 @@ public abstract class BaseClassBuilder implements ClassBuilder
 
         optionsClass = declareType(packageName, className);
 
+        ClassRegistry.INSTANCE.put(optionSpec, getOutputType(), optionsClass);
+
+        if (tree == null)
+            throw new RuntimeException("Need to set the tree to build a class");
+
         List<OptionSpec> children = tree.getParentToChildrenRelations().get(optionSpec);
 
         if (children != null)
@@ -61,41 +66,46 @@ public abstract class BaseClassBuilder implements ClassBuilder
             codeModel.build(new File(rootDirectory));
     }
 
-    public abstract String getPrefix();
-
     @Override
-    public void setPackageName(String packageName)
+    public ClassBuilder setPackageName(String packageName)
     {
         this.packageName = packageName;
+        return this;
     }
 
     @Override
-    public void setOptionSpec(OptionSpec optionSpec)
+    public ClassBuilder setOptionSpec(OptionSpec optionSpec)
     {
         this.optionSpec = optionSpec;
         this.className = OptionUtils.getClassName(optionSpec);
+        return this;
     }
 
     @Override
-    public void setTree(OptionTree tree)
+    public ClassBuilder setTree(OptionTree tree)
     {
         this.tree = tree;
+        return this;
     }
 
-    public JCodeModel getCodeModel()
+    protected abstract FieldBuilder getFieldBuilder();
+
+    protected abstract String getPrefix();
+
+    protected abstract OutputType getOutputType();
+
+    protected abstract JDefinedClass declareType(String packageName, String className) throws JClassAlreadyExistsException;
+
+    protected abstract ClassType getClassType();
+
+    protected JCodeModel getCodeModel()
     {
         return codeModel;
     }
 
-    protected JDefinedClass declareType(String packageName, String className) throws JClassAlreadyExistsException
+    protected OptionSpec getOptionSpec()
     {
-        // JClass iface;
-        // ._implements(iface);
-        return getCodeModel()._class(packageName + "." + getPrefix() + className, getClassType());
+        return optionSpec;
     }
 
-    protected ClassType getClassType()
-    {
-        return ClassType.CLASS;
-    }
 }

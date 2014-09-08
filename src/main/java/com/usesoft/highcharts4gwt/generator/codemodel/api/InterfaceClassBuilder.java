@@ -5,6 +5,7 @@ import com.sun.codemodel.JClassAlreadyExistsException;
 import com.sun.codemodel.JDefinedClass;
 import com.usesoft.highcharts4gwt.generator.codemodel.BaseClassBuilder;
 import com.usesoft.highcharts4gwt.generator.codemodel.FieldBuilder;
+import com.usesoft.highcharts4gwt.generator.codemodel.OutputType;
 
 public class InterfaceClassBuilder extends BaseClassBuilder
 {
@@ -39,6 +40,12 @@ public class InterfaceClassBuilder extends BaseClassBuilder
     protected ClassType getClassType()
     {
         return ClassType.INTERFACE;
+    }
+
+    @Override
+    public OutputType getOutputType()
+    {
+        return OutputType.Interface;
     }
 
 }

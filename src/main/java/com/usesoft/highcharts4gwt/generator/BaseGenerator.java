@@ -47,7 +47,8 @@ public abstract class BaseGenerator implements Generator
         {
             optionsInputStream = new URL(highchartOptionsUrl).openStream();
             optionsAsString = IOUtils.toString(optionsInputStream);
-        } finally
+        }
+        finally
         {
             if (optionsInputStream != null)
                 optionsInputStream.close();
@@ -90,32 +91,37 @@ public abstract class BaseGenerator implements Generator
 
     private void writeClasses(OptionTree tree) throws JClassAlreadyExistsException, IOException
     {
-        for (OptionSpec option : tree.getAll())
+        for (int i = tree.getDepth(); i >= 0; i--)
         {
-
-            if (!option.isParent())
-                continue;
-
-            for (OutputType outputType : OutputType.values())
+            for (OptionSpec option : tree.getOptionsByDepth().get(i))
             {
-                ClassBuilder builder = outputType.accept(new ClassWritterVisitor(), getRootDirectory());
-                if (builder != null)
-                {
-                    String pckg = packageName + "." + outputType.getRootPackageName();
-                    String highchartsPackageName = OptionUtils.getHighchartsPackageName(option);
-                    if (!highchartsPackageName.equalsIgnoreCase(""))
-                    {
-                        pckg += "." + highchartsPackageName;
-                    }
+                if (!option.isParent())
+                    continue;
 
-                    builder.setPackageName(pckg);
-                    builder.setOptionSpec(option);
-                    builder.setTree(tree);
-                    builder.build();
+                for (OutputType outputType : OutputType.values())
+                {
+                    ClassBuilder builder = outputType.accept(new ClassWritterVisitor(), getRootDirectory());
+                    if (builder != null)
+                    {
+                        builder.setPackageName(computePackageName(option, outputType)).setOptionSpec(option);
+                        builder.setTree(tree);
+                        builder.build();
+                    }
                 }
             }
         }
 
+    }
+
+    private String computePackageName(OptionSpec option, OutputType outputType)
+    {
+        String pckg = packageName + "." + outputType.getRootPackageName();
+        String highchartsPackageName = OptionUtils.getHighchartsPackageName(option);
+        if (!highchartsPackageName.equalsIgnoreCase(""))
+        {
+            pckg += "." + highchartsPackageName;
+        }
+        return pckg;
     }
 
     private Properties loadProperties() throws IOException

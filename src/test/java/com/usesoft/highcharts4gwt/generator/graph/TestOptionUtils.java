@@ -100,4 +100,23 @@ public class TestOptionUtils
         assertThat(isRoot2).isFalse();
     }
 
+    @Test
+    public void testDepth()
+    {
+        // Given
+        OptionSpec optionSpec = new OptionSpec("chart", "chart", "chart");
+        OptionSpec optionSpec2 = new OptionSpec("global.Date", "global--Date", "Date");
+        OptionSpec optionSpec3 = new OptionSpec("plotOptions.series.events.afterAnimate", "plotOptions-series-events--afterAnimate", "afterAnimate");
+
+        // When
+        int depth1 = OptionUtils.depth(optionSpec);
+        int depth2 = OptionUtils.depth(optionSpec2);
+        int depth3 = OptionUtils.depth(optionSpec3);
+
+        // Then
+        assertThat(depth1).isEqualTo(0);
+        assertThat(depth2).isEqualTo(1);
+        assertThat(depth3).isEqualTo(3);
+    }
+
 }

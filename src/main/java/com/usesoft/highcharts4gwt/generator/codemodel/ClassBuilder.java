@@ -8,13 +8,12 @@ import com.usesoft.highcharts4gwt.generator.graph.OptionTree;
 
 public interface ClassBuilder
 {
-    void setPackageName(String packageName);
+    ClassBuilder setPackageName(String packageName);
 
     void build() throws IOException, JClassAlreadyExistsException;
-    
-    FieldBuilder getFieldBuilder();
 
-	void setOptionSpec(OptionSpec optionSpec);
+    ClassBuilder setOptionSpec(OptionSpec optionSpec);
 
-	void setTree(OptionTree tree);
+    ClassBuilder setTree(OptionTree tree);
+
 }

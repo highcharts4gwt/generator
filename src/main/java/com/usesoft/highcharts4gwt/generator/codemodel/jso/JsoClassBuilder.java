@@ -1,10 +1,13 @@
 package com.usesoft.highcharts4gwt.generator.codemodel.jso;
 
+import com.google.gwt.core.client.JavaScriptObject;
 import com.sun.codemodel.JClassAlreadyExistsException;
-import com.usesoft.highcharts4gwt.generator.codemodel.BaseClassBuilder;
+import com.sun.codemodel.JDefinedClass;
 import com.usesoft.highcharts4gwt.generator.codemodel.FieldBuilder;
+import com.usesoft.highcharts4gwt.generator.codemodel.OutputType;
+import com.usesoft.highcharts4gwt.generator.codemodel.RealClassBuilder;
 
-public class JsoClassBuilder extends BaseClassBuilder
+public class JsoClassBuilder extends RealClassBuilder
 {
     private static final String CLASS_PREFIX = "Jso";
     private final FieldBuilder fieldBuilder;
@@ -13,6 +16,12 @@ public class JsoClassBuilder extends BaseClassBuilder
     {
         super(rootDirectory);
         fieldBuilder = new JsoFieldBuilder();
+    }
+
+    @Override
+    protected JDefinedClass declareType(String packageName, String className) throws JClassAlreadyExistsException
+    {
+        return getCodeModel()._class(packageName + "." + getPrefix() + className, getClassType())._implements(getInterface())._extends(JavaScriptObject.class);
     }
 
     @Override
@@ -26,4 +35,11 @@ public class JsoClassBuilder extends BaseClassBuilder
     {
         return fieldBuilder;
     }
+
+    @Override
+    public OutputType getOutputType()
+    {
+        return OutputType.Jso;
+    }
+
 }

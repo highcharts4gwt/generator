@@ -15,6 +15,13 @@ public class OptionUtils
         return option.getFullname().equals(extractRootFullName(option));
     }
 
+    public static int depth(OptionSpec option)
+    {
+        String fullname = option.getFullname();
+        int length = fullname.split("\\.").length;
+        return length - 1;
+    }
+
     public static String extractRootFullName(OptionSpec option)
     {
         String optionFullName = option.getFullname();
