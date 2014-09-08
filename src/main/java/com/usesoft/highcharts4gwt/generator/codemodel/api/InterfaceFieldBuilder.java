@@ -1,30 +1,35 @@
 package com.usesoft.highcharts4gwt.generator.codemodel.api;
 
+import com.sun.codemodel.JMod;
 import com.usesoft.highcharts4gwt.generator.codemodel.BaseFieldBuilder;
 import com.usesoft.highcharts4gwt.generator.codemodel.FieldBuilder;
 
-public class InterfaceFieldBuilder extends BaseFieldBuilder implements
-        FieldBuilder
+public class InterfaceFieldBuilder extends BaseFieldBuilder implements FieldBuilder
 {
 
     @Override
     public void addNumberField(String fieldName)
     {
-        // TODO Auto-generated method stub
+        getJclass().method(JMod.PUBLIC, Number.class, fieldName);
+
+        getJclass().method(JMod.PUBLIC, void.class, fieldName).param(Number.class, fieldName);
     }
 
     @Override
     public void addStringField(String fieldName)
     {
-        // TODO Auto-generated method stub
+        getJclass().method(JMod.PUBLIC, String.class, fieldName);
+
+        getJclass().method(JMod.PUBLIC, void.class, fieldName).param(String.class, fieldName);
 
     }
 
     @Override
     public void addBooleanField(String fieldName)
     {
-        // TODO Auto-generated method stub
+        getJclass().method(JMod.PUBLIC, boolean.class, fieldName);
 
+        getJclass().method(JMod.PUBLIC, void.class, fieldName).param(boolean.class, fieldName);
     }
 
     @Override

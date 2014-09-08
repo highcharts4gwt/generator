@@ -25,7 +25,7 @@ public abstract class BaseClassBuilder implements ClassBuilder
     private String packageName;
 
     @CheckForNull
-    private JDefinedClass optionsClass;
+    private JDefinedClass jClass;
 
     private String className;
 
@@ -45,9 +45,11 @@ public abstract class BaseClassBuilder implements ClassBuilder
     {
         codeModel = new JCodeModel();
 
-        optionsClass = declareType(packageName, className);
+        jClass = declareType(packageName, className);
 
-        ClassRegistry.INSTANCE.put(optionSpec, getOutputType(), optionsClass);
+        getFieldBuilder().setJclass(jClass);
+
+        ClassRegistry.INSTANCE.put(optionSpec, getOutputType(), jClass);
 
         if (tree == null)
             throw new RuntimeException("Need to set the tree to build a class");

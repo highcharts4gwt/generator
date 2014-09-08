@@ -1,12 +1,14 @@
 package com.usesoft.highcharts4gwt.generator.codemodel;
 
 import com.sun.codemodel.JCodeModel;
+import com.sun.codemodel.JDefinedClass;
 import com.usesoft.highcharts4gwt.generator.graph.OptionSpec;
 
 public abstract class BaseFieldBuilder implements FieldBuilder
 {
 
     private JCodeModel codeModel;
+    private JDefinedClass jClass;
 
     public JCodeModel getCodeModel()
     {
@@ -29,7 +31,17 @@ public abstract class BaseFieldBuilder implements FieldBuilder
         String returnType = optionSpec.getReturnType();
 
         if (returnType != null && returnType.equalsIgnoreCase("Number"))
-            addNumberField(optionSpec.getName());
+            addNumberField(optionSpec.getTitle());
+        if (returnType != null && returnType.equalsIgnoreCase("String"))
+            addStringField(optionSpec.getTitle());
+        if (returnType != null && returnType.equalsIgnoreCase("Boolean"))
+            addBooleanField(optionSpec.getTitle());
+    }
+
+    @Override
+    public void setJclass(JDefinedClass jClass)
+    {
+        this.jClass = jClass;
     }
 
     protected abstract void addNumberField(String fieldName);
@@ -51,4 +63,10 @@ public abstract class BaseFieldBuilder implements FieldBuilder
     // <T> protected abstract void addArrayField(String fieldName, T type);
 
     protected abstract void addClassField(String className, String fieldName);
+
+    protected JDefinedClass getJclass()
+    {
+        return jClass;
+    }
+
 }
