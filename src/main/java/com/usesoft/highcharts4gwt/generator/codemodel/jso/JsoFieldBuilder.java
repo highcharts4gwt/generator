@@ -12,28 +12,31 @@ public class JsoFieldBuilder extends BaseFieldBuilder implements FieldBuilder
     @Override
     public void addNumberField(String fieldName)
     {
-        String methodOutput = "Number";
-        getJclass().direct(getGetterCode(fieldName, methodOutput, fieldName));
+        NativeContentHack getterContentHack = new NativeContentHack(getCodeModel(), getGetterContent(fieldName));
+        getJclass().method(JMod.NATIVE + JMod.FINAL + JMod.PUBLIC, Number.class, fieldName)._throws(getterContentHack);
 
-        getJclass().direct(getSetterCode(fieldName, methodOutput, fieldName, getClassName()));
+        NativeContentHack setterContentHack = new NativeContentHack(getCodeModel(), getSetterContent(fieldName));
+        getJclass().method(JMod.NATIVE + JMod.FINAL + JMod.PUBLIC, getJclass(), fieldName)._throws(setterContentHack).param(Number.class, fieldName);
     }
 
     @Override
     public void addStringField(String fieldName)
     {
-        String methodOutput = "String";
-        getJclass().direct(getGetterCode(fieldName, methodOutput, fieldName));
+        NativeContentHack getterContentHack = new NativeContentHack(getCodeModel(), getGetterContent(fieldName));
+        getJclass().method(JMod.NATIVE + JMod.FINAL + JMod.PUBLIC, String.class, fieldName)._throws(getterContentHack);
 
-        getJclass().direct(getSetterCode(fieldName, methodOutput, fieldName, getClassName()));
+        NativeContentHack setterContentHack = new NativeContentHack(getCodeModel(), getSetterContent(fieldName));
+        getJclass().method(JMod.NATIVE + JMod.FINAL + JMod.PUBLIC, getJclass(), fieldName)._throws(setterContentHack).param(String.class, fieldName);
     }
 
     @Override
     public void addBooleanField(String fieldName)
     {
-        String methodOutput = "boolean";
-        getJclass().direct(getGetterCode(fieldName, methodOutput, fieldName));
+        NativeContentHack getterContentHack = new NativeContentHack(getCodeModel(), getGetterContent(fieldName));
+        getJclass().method(JMod.NATIVE + JMod.FINAL + JMod.PUBLIC, boolean.class, fieldName)._throws(getterContentHack);
 
-        getJclass().direct(getSetterCode(fieldName, methodOutput, fieldName, getClassName()));
+        NativeContentHack setterContentHack = new NativeContentHack(getCodeModel(), getSetterContent(fieldName));
+        getJclass().method(JMod.NATIVE + JMod.FINAL + JMod.PUBLIC, getJclass(), fieldName)._throws(setterContentHack).param(boolean.class, fieldName);
     }
 
     @Override
@@ -74,43 +77,40 @@ public class JsoFieldBuilder extends BaseFieldBuilder implements FieldBuilder
     @Override
     public void addClassField(JClass jClass, String fieldName)
     {
-        getCodeModel().ref(jClass.getClass());
+        NativeContentHack getterContentHack = new NativeContentHack(getCodeModel(), getGetterContent(fieldName));
+        getJclass().method(JMod.NATIVE + JMod.FINAL + JMod.PUBLIC, jClass, fieldName)._throws(getterContentHack);
 
-        getJclass().field(JMod.PRIVATE, jClass, fieldName + "ForImport");
-
-        String methodOutput = jClass.name();
-        getJclass().direct(getGetterCode(fieldName, methodOutput, fieldName));
-
-        getJclass().direct(getSetterCode(fieldName, methodOutput, fieldName, getClassName()));
+        NativeContentHack setterContentHack = new NativeContentHack(getCodeModel(), getSetterContent(fieldName));
+        getJclass().method(JMod.NATIVE + JMod.FINAL + JMod.PUBLIC, getJclass(), fieldName)._throws(setterContentHack).param(jClass, fieldName);
 
     }
 
-    private static String getGetterCode(String fieldName, String methodOutput, String methodName)
+    private static String getGetterContent(String fieldName)
     {
-        return "\n    @Override\n" + "    public native final " + methodOutput + " " + methodName + "()/*-{\n" + "        return this[\"" + fieldName
-                        + "\"] = (this[\"" + fieldName + "\"] || {});\n" + "    }-*/;\n\n";
-
+        return "/*-{\n" + "        return this[\"" + fieldName + "\"] = (this[\"" + fieldName + "\"] || {});\n" + "    }-*/";
     }
 
-    private static String getSetterCode(String fieldName, String fieldType, String methodName, String className)
+    private static String getSetterContent(String fieldName)
     {
-        return "\n    @Override\n" + "    public native final " + className + " " + methodName + "(" + fieldType + " " + fieldName + ")/*-{\n"
-                        + "        this[\"" + fieldName + "\"] = " + fieldName + ";\n" + "        return this;\n" + "    }-*/;\n\n";
+        return "/*-{\n" + "        this[\"" + fieldName + "\"] = " + fieldName + ";\n" + "        return this;\n" + "    }-*/";
     }
 
     // Write by by hand -> import pb
-    // private static String getGetterCode(String fieldName, String methodOutput, String methodName)
+    // private static String getGetterCode(String fieldName, String
+    // methodOutput, String methodName)
     // {
-    // return "\n    @Override\n" + "    public native " + methodOutput + " " + methodName + "()/*{\n" + "        return this[\"" + fieldName
-    // + "\"] = (this[\"" + fieldName + "\"] || {});\n" + "    }*/;\n\n";
-    //
+    // return "\n    @Override\n" + "    public native final " + methodOutput +
+    // " " + methodName + "()" + getGetterContent(fieldName) + ";\n\n";
     // }
     //
-    // private static String getSetterCode(String fieldName, String fieldType, String methodName, String className)
+    // private static String getSetterCode(String fieldName, String fieldType,
+    // String methodName, String className)
     // {
-    // return "\n    @Override\n" + "    public native " + className + " " + methodName + "(" + fieldType + " " + fieldName + ")/*{\n" + "        this[\""
-    // + fieldName + "\"] = " + fieldName + ";\n" + "        return this;\n" + "    }*/;\n\n";
+    // return "\n    @Override\n" + "    public native final " + className + " "
+    // + methodName + "(" + fieldType + " " + fieldName + ")"
+    // + getSetterContent(fieldName) + ";\n\n";
     // }
+
     //
     // @Override
     // public void addNumberField(String fieldName)
@@ -118,7 +118,8 @@ public class JsoFieldBuilder extends BaseFieldBuilder implements FieldBuilder
     // String methodOutput = "Number";
     // getJclass().direct(getGetterCode(fieldName, methodOutput, fieldName));
     //
-    // getJclass().direct(getSetterCode(fieldName, methodOutput, fieldName, getClassName()));
+    // getJclass().direct(getSetterCode(fieldName, methodOutput, fieldName,
+    // getClassName()));
     // }
 
     @Override
