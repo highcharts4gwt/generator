@@ -4,7 +4,13 @@ highcharts4gwt
 [![Build Status](https://travis-ci.org/highcharts4gwt/highcharts4gwt.svg?branch=master)](https://travis-ci.org/highcharts4gwt/highcharts4gwt) [![Coverage Status](https://coveralls.io/repos/highcharts4gwt/highcharts4gwt/badge.png)](https://coveralls.io/r/highcharts4gwt/highcharts4gwt)
 
 ## Status
-v0 still in development
+v0 still in development.
+
+First alpha working, display a chart with a custom Title / subtitle.
+
+Simply run highcharts4gwt as a Java application it will generate the API code.
+
+For now only support String / Number / Boolean and Class fields. Will work on arrays ASAP to be able to display a first serie soon :)
 
 ## Description
 The goal of this project is to create an "auto-generated" GWT highcharts wrapper.
