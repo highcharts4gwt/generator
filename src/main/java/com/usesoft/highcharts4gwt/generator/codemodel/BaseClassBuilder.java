@@ -48,6 +48,8 @@ public abstract class BaseClassBuilder implements ClassBuilder
         jClass = declareType(packageName, className);
 
         getFieldBuilder().setJclass(jClass);
+        getFieldBuilder().setCodeModel(codeModel);
+        getFieldBuilder().setClassName(getPrefix() + className);
 
         ClassRegistry.INSTANCE.put(optionSpec, getOutputType(), jClass);
 

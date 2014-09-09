@@ -1,4 +1,4 @@
-package com.usesoft.highcharts4gwt.model.api;
+package com.usesoft.highcharts4gwt.test.model.api;
 
 public interface Title
 {

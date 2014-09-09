@@ -2,7 +2,7 @@ package com.usesoft.highcharts4gwt.generator;
 
 import java.io.IOException;
 
-import com.usesoft.highcharts4gwt.highsoft.Product;
+import com.usesoft.highcharts4gwt.generator.highsoft.Product;
 
 public class HighchartsGenerator extends BaseGenerator
 {

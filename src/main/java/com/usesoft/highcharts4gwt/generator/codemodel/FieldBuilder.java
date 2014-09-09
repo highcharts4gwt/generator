@@ -11,4 +11,6 @@ public interface FieldBuilder
     void setCodeModel(JCodeModel codeModel);
 
     void setJclass(JDefinedClass jClass);
+
+    void setClassName(String className);
 }

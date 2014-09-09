@@ -1,7 +1,7 @@
 @ParametersAreNonnullByDefault
 @MethodsAreNonnullByDefault
 @FieldsAreNonnullByDefault
-package com.usesoft.highcharts4gwt.model.jso;
+package com.usesoft.highcharts4gwt.test.model.jso;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 

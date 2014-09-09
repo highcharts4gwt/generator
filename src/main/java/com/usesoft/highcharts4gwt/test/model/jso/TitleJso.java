@@ -1,7 +1,7 @@
-package com.usesoft.highcharts4gwt.model.jso;
+package com.usesoft.highcharts4gwt.test.model.jso;
 
 import com.google.gwt.core.client.JavaScriptObject;
-import com.usesoft.highcharts4gwt.model.api.Title;
+import com.usesoft.highcharts4gwt.test.model.api.Title;
 
 /** The JSO implementation of Person. */
 public class TitleJso extends JavaScriptObject implements Title

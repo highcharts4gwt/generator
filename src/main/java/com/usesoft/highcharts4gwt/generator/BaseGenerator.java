@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import javax.annotation.CheckForNull;
@@ -34,7 +36,7 @@ public abstract class BaseGenerator implements Generator
     public void generate() throws IOException, JClassAlreadyExistsException
     {
         options = createOptions();
-        createClasses(options, packageName);
+        createClasses(options);
     }
 
     @CheckForNull
@@ -76,17 +78,37 @@ public abstract class BaseGenerator implements Generator
         return getPropertyValue(GENERATOR_OUTPUT_ROOTDIR);
     }
 
-    private void createClasses(Options options, String packageName) throws JClassAlreadyExistsException, IOException
-    {
-        buildRootClass(options, packageName);
-    }
-
-    private void buildRootClass(Options options, String packageName) throws JClassAlreadyExistsException, IOException
+    private void createClasses(Options options) throws JClassAlreadyExistsException, IOException
     {
         for (OptionTree tree : options.getTrees())
         {
             writeClasses(tree);
         }
+
+        writeTopClass(options);
+    }
+
+    private void writeTopClass(Options options) throws IOException, JClassAlreadyExistsException
+    {
+        for (OutputType outputType : OutputType.values())
+        {
+            ClassBuilder builder = outputType.accept(new ClassWritterVisitor(), getRootDirectory());
+            if (builder != null)
+            {
+                String fullname = "chartOptions";
+                OptionSpec topOptionSpec = new OptionSpec(fullname, fullname, fullname);
+                OptionTree topOptionTree = new OptionTree(topOptionSpec);
+                List<OptionSpec> children = new ArrayList<OptionSpec>();
+                for (OptionTree tree : options.getTrees())
+                {
+                    children.add(tree.getRoot());
+                }
+                topOptionTree.getParentToChildrenRelations().put(topOptionSpec, children);
+                builder.setPackageName(computePackageName(topOptionSpec, outputType)).setOptionSpec(topOptionSpec).setTree(topOptionTree);
+                builder.build();
+            }
+        }
+
     }
 
     private void writeClasses(OptionTree tree) throws JClassAlreadyExistsException, IOException

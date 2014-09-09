@@ -1,6 +1,6 @@
-package com.usesoft.highcharts4gwt.model.jso;
+package com.usesoft.highcharts4gwt.test.model.jso;
 
-import com.usesoft.highcharts4gwt.model.api.OptionsFactory;
+import com.usesoft.highcharts4gwt.test.model.api.OptionsFactory;
 
 public class OptionsFactoryJso implements OptionsFactory
 {

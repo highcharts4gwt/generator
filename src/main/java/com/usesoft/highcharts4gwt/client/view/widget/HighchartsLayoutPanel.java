@@ -3,7 +3,7 @@ package com.usesoft.highcharts4gwt.client.view.widget;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.SimpleLayoutPanel;
-import com.usesoft.highcharts4gwt.model.api.Options;
+import com.usesoft.highcharts4gwt.generator.graph.Options;
 
 public class HighchartsLayoutPanel extends SimpleLayoutPanel
 {

@@ -1,14 +1,15 @@
 package com.usesoft.highcharts4gwt.generator.codemodel;
 
+import com.sun.codemodel.JClass;
 import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JDefinedClass;
 import com.usesoft.highcharts4gwt.generator.graph.OptionSpec;
 
 public abstract class BaseFieldBuilder implements FieldBuilder
 {
-
     private JCodeModel codeModel;
     private JDefinedClass jClass;
+    private String className;
 
     public JCodeModel getCodeModel()
     {
@@ -19,6 +20,17 @@ public abstract class BaseFieldBuilder implements FieldBuilder
     public void setCodeModel(JCodeModel codeModel)
     {
         this.codeModel = codeModel;
+    }
+
+    @Override
+    public void setClassName(String className)
+    {
+        this.className = className;
+    }
+
+    public String getClassName()
+    {
+        return this.className;
     }
 
     @Override
@@ -36,7 +48,11 @@ public abstract class BaseFieldBuilder implements FieldBuilder
             addStringField(optionSpec.getTitle());
         if (returnType != null && returnType.equalsIgnoreCase("Boolean"))
             addBooleanField(optionSpec.getTitle());
+        if (returnType == null)
+            addClassField(ClassRegistry.INSTANCE.getRegistry().get(new ClassRegistry.RegistryKey(optionSpec, OutputType.Interface)), optionSpec.getTitle());
     }
+
+    protected abstract OutputType getOutputType();
 
     @Override
     public void setJclass(JDefinedClass jClass)
@@ -62,7 +78,7 @@ public abstract class BaseFieldBuilder implements FieldBuilder
 
     // <T> protected abstract void addArrayField(String fieldName, T type);
 
-    protected abstract void addClassField(String className, String fieldName);
+    protected abstract void addClassField(JClass jClass, String fieldName);
 
     protected JDefinedClass getJclass()
     {

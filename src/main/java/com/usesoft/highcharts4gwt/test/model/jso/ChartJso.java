@@ -1,8 +1,8 @@
-package com.usesoft.highcharts4gwt.model.jso;
+package com.usesoft.highcharts4gwt.test.model.jso;
 
 import com.google.gwt.core.client.JavaScriptObject;
-import com.usesoft.highcharts4gwt.model.api.Chart;
-import com.usesoft.highcharts4gwt.model.api.Options;
+import com.usesoft.highcharts4gwt.test.model.api.Chart;
+import com.usesoft.highcharts4gwt.test.model.api.Options;
 
 public class ChartJso extends JavaScriptObject implements Chart
 {

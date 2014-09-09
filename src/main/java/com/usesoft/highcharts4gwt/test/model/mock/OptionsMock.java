@@ -1,7 +1,7 @@
-package com.usesoft.highcharts4gwt.model.mock;
+package com.usesoft.highcharts4gwt.test.model.mock;
 
-import com.usesoft.highcharts4gwt.model.api.Options;
-import com.usesoft.highcharts4gwt.model.api.Title;
+import com.usesoft.highcharts4gwt.test.model.api.Options;
+import com.usesoft.highcharts4gwt.test.model.api.Title;
 
 public class OptionsMock implements Options
 {

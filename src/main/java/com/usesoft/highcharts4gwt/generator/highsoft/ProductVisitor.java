@@ -1,4 +1,4 @@
-package com.usesoft.highcharts4gwt.highsoft;
+package com.usesoft.highcharts4gwt.generator.highsoft;
 
 import javax.annotation.CheckForNull;
 

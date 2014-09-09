@@ -2,7 +2,7 @@ package com.usesoft.highcharts4gwt.generator;
 
 import javax.annotation.CheckForNull;
 
-import com.usesoft.highcharts4gwt.highsoft.ProductVisitor;
+import com.usesoft.highcharts4gwt.generator.highsoft.ProductVisitor;
 
 public class HighsoftApiGenerator implements ProductVisitor<Void, Void>
 {

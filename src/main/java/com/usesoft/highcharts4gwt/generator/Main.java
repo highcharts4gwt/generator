@@ -1,6 +1,6 @@
 package com.usesoft.highcharts4gwt.generator;
 
-import com.usesoft.highcharts4gwt.highsoft.Product;
+import com.usesoft.highcharts4gwt.generator.highsoft.Product;
 
 public class Main
 {

@@ -1,7 +1,9 @@
 package com.usesoft.highcharts4gwt.generator.codemodel.mock;
 
+import com.sun.codemodel.JClass;
 import com.usesoft.highcharts4gwt.generator.codemodel.BaseFieldBuilder;
 import com.usesoft.highcharts4gwt.generator.codemodel.FieldBuilder;
+import com.usesoft.highcharts4gwt.generator.codemodel.OutputType;
 
 public class MockFieldBuilder extends BaseFieldBuilder implements FieldBuilder
 {
@@ -63,10 +65,15 @@ public class MockFieldBuilder extends BaseFieldBuilder implements FieldBuilder
     }
 
     @Override
-    public void addClassField(String className, String fieldName)
+    public void addClassField(JClass jClass, String fieldName)
     {
         // TODO Auto-generated method stub
 
     }
 
+    @Override
+    protected OutputType getOutputType()
+    {
+        return OutputType.Mock;
+    }
 }
