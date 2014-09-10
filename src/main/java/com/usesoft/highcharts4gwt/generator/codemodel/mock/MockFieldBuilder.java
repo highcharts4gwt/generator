@@ -10,12 +10,14 @@ import com.sun.codemodel.JVar;
 import com.usesoft.highcharts4gwt.generator.codemodel.BaseFieldBuilder;
 import com.usesoft.highcharts4gwt.generator.codemodel.FieldBuilder;
 import com.usesoft.highcharts4gwt.generator.codemodel.OutputType;
+import com.usesoft.highcharts4gwt.model.array.api.ArrayNumber;
+import com.usesoft.highcharts4gwt.model.array.api.ArrayString;
 
 public class MockFieldBuilder extends BaseFieldBuilder implements FieldBuilder
 {
 
     @Override
-    public void addNumberField(String fieldName)
+    protected void addNumberField(String fieldName)
     {
         JFieldVar field = getJclass().field(JMod.PRIVATE, Number.class, fieldName);
 
@@ -30,7 +32,7 @@ public class MockFieldBuilder extends BaseFieldBuilder implements FieldBuilder
     }
 
     @Override
-    public void addStringField(String fieldName)
+    protected void addStringField(String fieldName)
     {
         JFieldVar field = getJclass().field(JMod.PRIVATE, String.class, fieldName);
 
@@ -46,7 +48,7 @@ public class MockFieldBuilder extends BaseFieldBuilder implements FieldBuilder
     }
 
     @Override
-    public void addBooleanField(String fieldName)
+    protected void addBooleanField(String fieldName)
     {
         JFieldVar field = getJclass().field(JMod.PRIVATE, boolean.class, fieldName);
 
@@ -61,42 +63,42 @@ public class MockFieldBuilder extends BaseFieldBuilder implements FieldBuilder
     }
 
     @Override
-    public void addObjectField(String fieldName)
+    protected void addObjectField(String fieldName)
     {
         // TODO Auto-generated method stub
 
     }
 
     @Override
-    public void addFunctionField(String fieldName)
+    protected void addFunctionField(String fieldName)
     {
         // TODO Auto-generated method stub
 
     }
 
     @Override
-    public void addColorField(String fieldName)
+    protected void addColorField(String fieldName)
     {
         // TODO Auto-generated method stub
 
     }
 
     @Override
-    public void addMixedField(String fieldName)
+    protected void addMixedField(String fieldName)
     {
         // TODO Auto-generated method stub
 
     }
 
     @Override
-    public void addCssObjectField(String fieldName)
+    protected void addCssObjectField(String fieldName)
     {
         // TODO Auto-generated method stub
 
     }
 
     @Override
-    public void addClassField(JClass jClass, String fieldName)
+    protected void addClassField(JClass jClass, String fieldName)
     {
         JFieldVar field = getJclass().field(JMod.PRIVATE, jClass, fieldName);
 
@@ -112,8 +114,58 @@ public class MockFieldBuilder extends BaseFieldBuilder implements FieldBuilder
     }
 
     @Override
+    protected void addStringArray(String fieldName)
+    {
+        JFieldVar field = getJclass().field(JMod.PRIVATE, ArrayString.class, fieldName);
+
+        JMethod getter = getJclass().method(JMod.PUBLIC, ArrayString.class, fieldName);
+        JBlock block = getter.body();
+        block._return(field);
+
+        JMethod setter = getJclass().method(JMod.PUBLIC, getJclass(), fieldName);
+        JVar setterParam = setter.param(ArrayString.class, fieldName);
+
+        setter.body().assign(JExpr._this().ref(field), setterParam)._return(JExpr._this());
+    }
+
+    @Override
+    protected void addNumberArray(String fieldName)
+    {
+        JFieldVar field = getJclass().field(JMod.PRIVATE, ArrayNumber.class, fieldName);
+
+        JMethod getter = getJclass().method(JMod.PUBLIC, ArrayNumber.class, fieldName);
+        JBlock block = getter.body();
+        block._return(field);
+
+        JMethod setter = getJclass().method(JMod.PUBLIC, getJclass(), fieldName);
+        JVar setterParam = setter.param(ArrayNumber.class, fieldName);
+
+        setter.body().assign(JExpr._this().ref(field), setterParam)._return(JExpr._this());
+    }
+
+    @Override
+    protected void addObjectArray(JClass jClass, String fieldName)
+    {
+        // JClass detailClass = jClass;
+        // JClass rawLLclazz = getCodeModel().ref(Array.class);
+        // JClass fieldClazz = rawLLclazz.narrow(detailClass);
+        //
+        // JFieldVar field = getJclass().field(JMod.PRIVATE, fieldClazz, fieldName);
+        //
+        // JMethod getter = getJclass().method(JMod.PUBLIC, fieldClazz, fieldName);
+        // JBlock block = getter.body();
+        // block._return(field);
+        //
+        // JMethod setter = getJclass().method(JMod.PUBLIC, getJclass(), fieldName);
+        // JVar setterParam = setter.param(fieldClazz, fieldName);
+        //
+        // setter.body().assign(JExpr._this().ref(field), setterParam)._return(JExpr._this());
+    }
+
+    @Override
     protected OutputType getOutputType()
     {
         return OutputType.Mock;
     }
+
 }

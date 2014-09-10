@@ -5,12 +5,14 @@ import com.sun.codemodel.JMod;
 import com.usesoft.highcharts4gwt.generator.codemodel.BaseFieldBuilder;
 import com.usesoft.highcharts4gwt.generator.codemodel.FieldBuilder;
 import com.usesoft.highcharts4gwt.generator.codemodel.OutputType;
+import com.usesoft.highcharts4gwt.model.array.api.ArrayNumber;
+import com.usesoft.highcharts4gwt.model.array.api.ArrayString;
 
 public class InterfaceFieldBuilder extends BaseFieldBuilder implements FieldBuilder
 {
 
     @Override
-    public void addNumberField(String fieldName)
+    protected void addNumberField(String fieldName)
     {
         getJclass().method(JMod.NONE, Number.class, fieldName);
 
@@ -18,7 +20,7 @@ public class InterfaceFieldBuilder extends BaseFieldBuilder implements FieldBuil
     }
 
     @Override
-    public void addStringField(String fieldName)
+    protected void addStringField(String fieldName)
     {
         getJclass().method(JMod.NONE, String.class, fieldName);
 
@@ -27,7 +29,7 @@ public class InterfaceFieldBuilder extends BaseFieldBuilder implements FieldBuil
     }
 
     @Override
-    public void addBooleanField(String fieldName)
+    protected void addBooleanField(String fieldName)
     {
         getJclass().method(JMod.NONE, boolean.class, fieldName);
 
@@ -35,46 +37,74 @@ public class InterfaceFieldBuilder extends BaseFieldBuilder implements FieldBuil
     }
 
     @Override
-    public void addObjectField(String fieldName)
+    protected void addObjectField(String fieldName)
     {
         // TODO Auto-generated method stub
 
     }
 
     @Override
-    public void addFunctionField(String fieldName)
+    protected void addFunctionField(String fieldName)
     {
         // TODO Auto-generated method stub
 
     }
 
     @Override
-    public void addColorField(String fieldName)
+    protected void addColorField(String fieldName)
     {
         // TODO Auto-generated method stub
 
     }
 
     @Override
-    public void addMixedField(String fieldName)
+    protected void addMixedField(String fieldName)
     {
         // TODO Auto-generated method stub
 
     }
 
     @Override
-    public void addCssObjectField(String fieldName)
+    protected void addCssObjectField(String fieldName)
     {
         // TODO Auto-generated method stub
 
     }
 
     @Override
-    public void addClassField(JClass jClass, String fieldName)
+    protected void addClassField(JClass jClass, String fieldName)
     {
         getJclass().method(JMod.NONE, jClass, fieldName);
 
         getJclass().method(JMod.NONE, getJclass(), fieldName).param(jClass, fieldName);
+    }
+
+    @Override
+    protected void addStringArray(String fieldName)
+    {
+        getJclass().method(JMod.NONE, ArrayString.class, fieldName);
+
+        getJclass().method(JMod.NONE, getJclass(), fieldName).param(ArrayString.class, fieldName);
+    }
+
+    @Override
+    protected void addNumberArray(String fieldName)
+    {
+        getJclass().method(JMod.NONE, ArrayNumber.class, fieldName);
+
+        getJclass().method(JMod.NONE, getJclass(), fieldName).param(ArrayNumber.class, fieldName);
+    }
+
+    @Override
+    protected void addObjectArray(JClass jClass, String fieldName)
+    {
+        // JClass detailClass = jClass;
+        // JClass rawLLclazz = getCodeModel().ref(Array.class);
+        // JClass fieldClazz = rawLLclazz.narrow(detailClass);
+        //
+        // getJclass().method(JMod.NONE, fieldClazz, fieldName);
+        //
+        // getJclass().method(JMod.NONE, getJclass(), fieldName).param(fieldClazz, fieldName);
     }
 
     @Override

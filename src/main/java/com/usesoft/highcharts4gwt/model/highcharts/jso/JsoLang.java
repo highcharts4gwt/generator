@@ -2,6 +2,7 @@
 package com.usesoft.highcharts4gwt.model.highcharts.jso;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.usesoft.highcharts4gwt.model.array.api.ArrayString;
 import com.usesoft.highcharts4gwt.model.highcharts.api.Lang;
 
 public class JsoLang
@@ -117,6 +118,19 @@ public class JsoLang
     }-*/
     ;
 
+    public final native ArrayString months()
+        throws RuntimeException /*-{
+        return this["months"] = (this["months"] || {});
+    }-*/
+    ;
+
+    public final native JsoLang months(ArrayString months)
+        throws RuntimeException /*-{
+        this["months"] = months;
+        return this;
+    }-*/
+    ;
+
     public final native String noData()
         throws RuntimeException /*-{
         return this["noData"] = (this["noData"] || {});
@@ -126,6 +140,19 @@ public class JsoLang
     public final native JsoLang noData(String noData)
         throws RuntimeException /*-{
         this["noData"] = noData;
+        return this;
+    }-*/
+    ;
+
+    public final native ArrayString numericSymbols()
+        throws RuntimeException /*-{
+        return this["numericSymbols"] = (this["numericSymbols"] || {});
+    }-*/
+    ;
+
+    public final native JsoLang numericSymbols(ArrayString numericSymbols)
+        throws RuntimeException /*-{
+        this["numericSymbols"] = numericSymbols;
         return this;
     }-*/
     ;
@@ -169,6 +196,19 @@ public class JsoLang
     }-*/
     ;
 
+    public final native ArrayString shortMonths()
+        throws RuntimeException /*-{
+        return this["shortMonths"] = (this["shortMonths"] || {});
+    }-*/
+    ;
+
+    public final native JsoLang shortMonths(ArrayString shortMonths)
+        throws RuntimeException /*-{
+        this["shortMonths"] = shortMonths;
+        return this;
+    }-*/
+    ;
+
     public final native String thousandsSep()
         throws RuntimeException /*-{
         return this["thousandsSep"] = (this["thousandsSep"] || {});
@@ -178,6 +218,19 @@ public class JsoLang
     public final native JsoLang thousandsSep(String thousandsSep)
         throws RuntimeException /*-{
         this["thousandsSep"] = thousandsSep;
+        return this;
+    }-*/
+    ;
+
+    public final native ArrayString weekdays()
+        throws RuntimeException /*-{
+        return this["weekdays"] = (this["weekdays"] || {});
+    }-*/
+    ;
+
+    public final native JsoLang weekdays(ArrayString weekdays)
+        throws RuntimeException /*-{
+        this["weekdays"] = weekdays;
         return this;
     }-*/
     ;

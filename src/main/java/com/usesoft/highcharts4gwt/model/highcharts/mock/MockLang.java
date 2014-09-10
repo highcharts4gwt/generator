@@ -1,6 +1,7 @@
 
 package com.usesoft.highcharts4gwt.model.highcharts.mock;
 
+import com.usesoft.highcharts4gwt.model.array.api.ArrayString;
 import com.usesoft.highcharts4gwt.model.highcharts.api.Lang;
 
 public class MockLang
@@ -15,11 +16,15 @@ public class MockLang
     private String downloadSVG;
     private String drillUpText;
     private String loading;
+    private ArrayString months;
     private String noData;
+    private ArrayString numericSymbols;
     private String printChart;
     private String resetZoom;
     private String resetZoomTitle;
+    private ArrayString shortMonths;
     private String thousandsSep;
+    private ArrayString weekdays;
 
     public String contextButtonTitle() {
         return contextButtonTitle;
@@ -93,12 +98,30 @@ public class MockLang
         return this;
     }
 
+    public ArrayString months() {
+        return months;
+    }
+
+    public MockLang months(ArrayString months) {
+        this.months = months;
+        return this;
+    }
+
     public String noData() {
         return noData;
     }
 
     public MockLang noData(String noData) {
         this.noData = noData;
+        return this;
+    }
+
+    public ArrayString numericSymbols() {
+        return numericSymbols;
+    }
+
+    public MockLang numericSymbols(ArrayString numericSymbols) {
+        this.numericSymbols = numericSymbols;
         return this;
     }
 
@@ -129,12 +152,30 @@ public class MockLang
         return this;
     }
 
+    public ArrayString shortMonths() {
+        return shortMonths;
+    }
+
+    public MockLang shortMonths(ArrayString shortMonths) {
+        this.shortMonths = shortMonths;
+        return this;
+    }
+
     public String thousandsSep() {
         return thousandsSep;
     }
 
     public MockLang thousandsSep(String thousandsSep) {
         this.thousandsSep = thousandsSep;
+        return this;
+    }
+
+    public ArrayString weekdays() {
+        return weekdays;
+    }
+
+    public MockLang weekdays(ArrayString weekdays) {
+        this.weekdays = weekdays;
         return this;
     }
 

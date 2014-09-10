@@ -1,6 +1,7 @@
 
 package com.usesoft.highcharts4gwt.model.highcharts.api.plotoptions;
 
+import com.usesoft.highcharts4gwt.model.array.api.ArrayString;
 import com.usesoft.highcharts4gwt.model.highcharts.api.plotoptions.pie.Events;
 
 public interface Pie {
@@ -9,6 +10,10 @@ public interface Pie {
     Number borderWidth();
 
     Pie borderWidth(Number borderWidth);
+
+    ArrayString center();
+
+    Pie center(ArrayString center);
 
     Number depth();
 

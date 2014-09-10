@@ -2,6 +2,7 @@
 package com.usesoft.highcharts4gwt.model.highcharts.jso.plotoptions;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.usesoft.highcharts4gwt.model.array.api.ArrayString;
 import com.usesoft.highcharts4gwt.model.highcharts.api.plotoptions.Pie;
 import com.usesoft.highcharts4gwt.model.highcharts.api.plotoptions.pie.Events;
 
@@ -23,6 +24,19 @@ public class JsoPie
     public final native JsoPie borderWidth(Number borderWidth)
         throws RuntimeException /*-{
         this["borderWidth"] = borderWidth;
+        return this;
+    }-*/
+    ;
+
+    public final native ArrayString center()
+        throws RuntimeException /*-{
+        return this["center"] = (this["center"] || {});
+    }-*/
+    ;
+
+    public final native JsoPie center(ArrayString center)
+        throws RuntimeException /*-{
+        this["center"] = center;
         return this;
     }-*/
     ;

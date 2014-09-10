@@ -17,13 +17,11 @@ public class NativeContentHack extends JClass
     {
         super(codeModel);
         this.nativeContent = nativeContent;
-
     }
 
     @Override
     public String name()
     {
-        // TODO Auto-generated method stub
         return "RuntimeException " + nativeContent;
     }
 
@@ -36,42 +34,36 @@ public class NativeContentHack extends JClass
     @Override
     public JClass _extends()
     {
-        // TODO Auto-generated method stub
         return null;
     }
 
     @Override
     public Iterator<JClass> _implements()
     {
-        // TODO Auto-generated method stub
         return null;
     }
 
     @Override
     public boolean isInterface()
     {
-        // TODO Auto-generated method stub
         return false;
     }
 
     @Override
     public boolean isAbstract()
     {
-        // TODO Auto-generated method stub
         return false;
     }
 
     @Override
     protected JClass substituteParams(JTypeVar[] variables, List<JClass> bindings)
     {
-        // TODO Auto-generated method stub
         return null;
     }
 
     @Override
     public String fullName()
     {
-        // TODO Auto-generated method stub
         return "";
     }
 

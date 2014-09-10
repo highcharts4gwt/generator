@@ -36,7 +36,6 @@ public abstract class BaseFieldBuilder implements FieldBuilder
     @Override
     public void addField(OptionSpec optionSpec)
     {
-
         // if (optionSpec.isParent())
         // addClassField(optionSpec.getName(), optionSpec.getName());
 
@@ -50,6 +49,16 @@ public abstract class BaseFieldBuilder implements FieldBuilder
             addBooleanField(optionSpec.getTitle());
         if (returnType == null)
             addClassField(ClassRegistry.INSTANCE.getRegistry().get(new ClassRegistry.RegistryKey(optionSpec, OutputType.Interface)), optionSpec.getTitle());
+        if (returnType != null && returnType.equals("Array<String>"))
+            addStringArray(optionSpec.getTitle());
+        if (returnType != null && returnType.equals("Array<Object|Array|Number>"))
+            addNumberArray(optionSpec.getTitle());
+        // if (returnType != null && returnType.equals("Array<Object>"))
+        // {
+        // JClass jClass2 = ClassRegistry.INSTANCE.getRegistry().get(new ClassRegistry.RegistryKey(optionSpec, OutputType.Interface));
+        // if (jClass2 != null) // TODO @rqu need to treat case of drilldown.series
+        // addObjectArray(jClass2, optionSpec.getTitle());
+        // }
     }
 
     protected abstract OutputType getOutputType();
@@ -76,9 +85,13 @@ public abstract class BaseFieldBuilder implements FieldBuilder
 
     protected abstract void addCssObjectField(String fieldName);
 
-    // <T> protected abstract void addArrayField(String fieldName, T type);
-
     protected abstract void addClassField(JClass jClass, String fieldName);
+
+    protected abstract void addStringArray(String fieldName);
+
+    protected abstract void addNumberArray(String fieldName);
+
+    protected abstract void addObjectArray(JClass jClass, String fieldName);
 
     protected JDefinedClass getJclass()
     {

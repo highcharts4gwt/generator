@@ -1,6 +1,7 @@
 
 package com.usesoft.highcharts4gwt.model.highcharts.api;
 
+import com.usesoft.highcharts4gwt.model.array.api.ArrayString;
 
 public interface Lang {
 
@@ -37,9 +38,17 @@ public interface Lang {
 
     Lang loading(String loading);
 
+    ArrayString months();
+
+    Lang months(ArrayString months);
+
     String noData();
 
     Lang noData(String noData);
+
+    ArrayString numericSymbols();
+
+    Lang numericSymbols(ArrayString numericSymbols);
 
     String printChart();
 
@@ -53,8 +62,16 @@ public interface Lang {
 
     Lang resetZoomTitle(String resetZoomTitle);
 
+    ArrayString shortMonths();
+
+    Lang shortMonths(ArrayString shortMonths);
+
     String thousandsSep();
 
     Lang thousandsSep(String thousandsSep);
+
+    ArrayString weekdays();
+
+    Lang weekdays(ArrayString weekdays);
 
 }

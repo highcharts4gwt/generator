@@ -1,6 +1,7 @@
 
 package com.usesoft.highcharts4gwt.model.highcharts.mock.plotoptions;
 
+import com.usesoft.highcharts4gwt.model.array.api.ArrayString;
 import com.usesoft.highcharts4gwt.model.highcharts.api.plotoptions.Pie;
 import com.usesoft.highcharts4gwt.model.highcharts.api.plotoptions.pie.Events;
 
@@ -9,6 +10,7 @@ public class MockPie
 {
 
     private Number borderWidth;
+    private ArrayString center;
     private Number depth;
     private Number endAngle;
     private Events events;
@@ -25,6 +27,15 @@ public class MockPie
 
     public MockPie borderWidth(Number borderWidth) {
         this.borderWidth = borderWidth;
+        return this;
+    }
+
+    public ArrayString center() {
+        return center;
+    }
+
+    public MockPie center(ArrayString center) {
+        this.center = center;
         return this;
     }
 
