@@ -5,6 +5,7 @@ import com.sun.codemodel.JMod;
 import com.usesoft.highcharts4gwt.generator.codemodel.BaseFieldBuilder;
 import com.usesoft.highcharts4gwt.generator.codemodel.FieldBuilder;
 import com.usesoft.highcharts4gwt.generator.codemodel.OutputType;
+import com.usesoft.highcharts4gwt.model.array.api.Array;
 import com.usesoft.highcharts4gwt.model.array.api.ArrayNumber;
 import com.usesoft.highcharts4gwt.model.array.api.ArrayString;
 
@@ -98,13 +99,13 @@ public class InterfaceFieldBuilder extends BaseFieldBuilder implements FieldBuil
     @Override
     protected void addObjectArray(JClass jClass, String fieldName)
     {
-        // JClass detailClass = jClass;
-        // JClass rawLLclazz = getCodeModel().ref(Array.class);
-        // JClass fieldClazz = rawLLclazz.narrow(detailClass);
-        //
-        // getJclass().method(JMod.NONE, fieldClazz, fieldName);
-        //
-        // getJclass().method(JMod.NONE, getJclass(), fieldName).param(fieldClazz, fieldName);
+        JClass detailClass = jClass;
+        JClass rawLLclazz = getCodeModel().ref(Array.class);
+        JClass fieldClazz = rawLLclazz.narrow(detailClass);
+
+        getJclass().method(JMod.NONE, fieldClazz, fieldName);
+
+        getJclass().method(JMod.NONE, getJclass(), fieldName).param(fieldClazz, fieldName);
     }
 
     @Override

@@ -21,7 +21,7 @@ public class MockArray<T> extends ArrayList<T> implements Array<T>
     }
 
     @Override
-    public void push(T value)
+    public void addToEnd(T value)
     {
         add(value);
     }

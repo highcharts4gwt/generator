@@ -1,9 +1,12 @@
 
 package com.usesoft.highcharts4gwt.model.highcharts.mock;
 
+import com.usesoft.highcharts4gwt.model.array.api.Array;
 import com.usesoft.highcharts4gwt.model.highcharts.api.XAxis;
 import com.usesoft.highcharts4gwt.model.highcharts.api.xaxis.Events;
 import com.usesoft.highcharts4gwt.model.highcharts.api.xaxis.Labels;
+import com.usesoft.highcharts4gwt.model.highcharts.api.xaxis.PlotBands;
+import com.usesoft.highcharts4gwt.model.highcharts.api.xaxis.PlotLines;
 import com.usesoft.highcharts4gwt.model.highcharts.api.xaxis.Title;
 
 public class MockXAxis
@@ -37,6 +40,8 @@ public class MockXAxis
     private Number minorTickWidth;
     private Number offset;
     private boolean opposite;
+    private Array<PlotBands> plotBands;
+    private Array<PlotLines> plotLines;
     private boolean reversed;
     private boolean showEmpty;
     private boolean showFirstLabel;
@@ -292,6 +297,24 @@ public class MockXAxis
 
     public MockXAxis opposite(boolean opposite) {
         this.opposite = opposite;
+        return this;
+    }
+
+    public Array<PlotBands> plotBands() {
+        return plotBands;
+    }
+
+    public MockXAxis plotBands(Array<PlotBands> plotBands) {
+        this.plotBands = plotBands;
+        return this;
+    }
+
+    public Array<PlotLines> plotLines() {
+        return plotLines;
+    }
+
+    public MockXAxis plotLines(Array<PlotLines> plotLines) {
+        this.plotLines = plotLines;
         return this;
     }
 

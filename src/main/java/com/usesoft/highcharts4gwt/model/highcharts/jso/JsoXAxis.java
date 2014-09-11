@@ -2,9 +2,12 @@
 package com.usesoft.highcharts4gwt.model.highcharts.jso;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.usesoft.highcharts4gwt.model.array.api.Array;
 import com.usesoft.highcharts4gwt.model.highcharts.api.XAxis;
 import com.usesoft.highcharts4gwt.model.highcharts.api.xaxis.Events;
 import com.usesoft.highcharts4gwt.model.highcharts.api.xaxis.Labels;
+import com.usesoft.highcharts4gwt.model.highcharts.api.xaxis.PlotBands;
+import com.usesoft.highcharts4gwt.model.highcharts.api.xaxis.PlotLines;
 import com.usesoft.highcharts4gwt.model.highcharts.api.xaxis.Title;
 
 public class JsoXAxis
@@ -363,6 +366,32 @@ public class JsoXAxis
     public final native JsoXAxis opposite(boolean opposite)
         throws RuntimeException /*-{
         this["opposite"] = opposite;
+        return this;
+    }-*/
+    ;
+
+    public final native Array<PlotBands> plotBands()
+        throws RuntimeException /*-{
+        return this["plotBands"] = (this["plotBands"] || []);
+    }-*/
+    ;
+
+    public final native JsoXAxis plotBands(Array<PlotBands> plotBands)
+        throws RuntimeException /*-{
+        this["plotBands"] = plotBands;
+        return this;
+    }-*/
+    ;
+
+    public final native Array<PlotLines> plotLines()
+        throws RuntimeException /*-{
+        return this["plotLines"] = (this["plotLines"] || []);
+    }-*/
+    ;
+
+    public final native JsoXAxis plotLines(Array<PlotLines> plotLines)
+        throws RuntimeException /*-{
+        this["plotLines"] = plotLines;
         return this;
     }-*/
     ;

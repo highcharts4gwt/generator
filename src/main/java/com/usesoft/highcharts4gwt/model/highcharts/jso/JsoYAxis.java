@@ -2,9 +2,12 @@
 package com.usesoft.highcharts4gwt.model.highcharts.jso;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.usesoft.highcharts4gwt.model.array.api.Array;
 import com.usesoft.highcharts4gwt.model.highcharts.api.YAxis;
 import com.usesoft.highcharts4gwt.model.highcharts.api.yaxis.Events;
 import com.usesoft.highcharts4gwt.model.highcharts.api.yaxis.Labels;
+import com.usesoft.highcharts4gwt.model.highcharts.api.yaxis.PlotBands;
+import com.usesoft.highcharts4gwt.model.highcharts.api.yaxis.PlotLines;
 import com.usesoft.highcharts4gwt.model.highcharts.api.yaxis.StackLabels;
 import com.usesoft.highcharts4gwt.model.highcharts.api.yaxis.Title;
 
@@ -117,6 +120,32 @@ public class JsoYAxis
     public final native JsoYAxis minPadding(Number minPadding)
         throws RuntimeException /*-{
         this["minPadding"] = minPadding;
+        return this;
+    }-*/
+    ;
+
+    public final native Array<PlotBands> plotBands()
+        throws RuntimeException /*-{
+        return this["plotBands"] = (this["plotBands"] || []);
+    }-*/
+    ;
+
+    public final native JsoYAxis plotBands(Array<PlotBands> plotBands)
+        throws RuntimeException /*-{
+        this["plotBands"] = plotBands;
+        return this;
+    }-*/
+    ;
+
+    public final native Array<PlotLines> plotLines()
+        throws RuntimeException /*-{
+        return this["plotLines"] = (this["plotLines"] || []);
+    }-*/
+    ;
+
+    public final native JsoYAxis plotLines(Array<PlotLines> plotLines)
+        throws RuntimeException /*-{
+        this["plotLines"] = plotLines;
         return this;
     }-*/
     ;

@@ -1,8 +1,11 @@
 
 package com.usesoft.highcharts4gwt.model.highcharts.api;
 
+import com.usesoft.highcharts4gwt.model.array.api.Array;
 import com.usesoft.highcharts4gwt.model.highcharts.api.xaxis.Events;
 import com.usesoft.highcharts4gwt.model.highcharts.api.xaxis.Labels;
+import com.usesoft.highcharts4gwt.model.highcharts.api.xaxis.PlotBands;
+import com.usesoft.highcharts4gwt.model.highcharts.api.xaxis.PlotLines;
 import com.usesoft.highcharts4gwt.model.highcharts.api.xaxis.Title;
 
 public interface XAxis {
@@ -115,6 +118,14 @@ public interface XAxis {
     boolean opposite();
 
     XAxis opposite(boolean opposite);
+
+    Array<PlotBands> plotBands();
+
+    XAxis plotBands(Array<PlotBands> plotBands);
+
+    Array<PlotLines> plotLines();
+
+    XAxis plotLines(Array<PlotLines> plotLines);
 
     boolean reversed();
 

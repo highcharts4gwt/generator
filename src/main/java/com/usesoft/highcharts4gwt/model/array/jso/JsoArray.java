@@ -16,4 +16,10 @@ public class JsoArray<T extends JavaScriptObject> extends JsArray<T> implements 
     {
         set(index, value);
     }
+
+    @Override
+    public void addToEnd(T value)
+    {
+        push(value);
+    }
 }

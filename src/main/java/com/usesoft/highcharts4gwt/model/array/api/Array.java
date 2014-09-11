@@ -6,7 +6,7 @@ public interface Array<T>
 
     int length();
 
-    void push(T value);
+    void addToEnd(T value); // Cannot use JsArray method name otherwise error overload using erasure
 
     void insert(int index, T value);
 }

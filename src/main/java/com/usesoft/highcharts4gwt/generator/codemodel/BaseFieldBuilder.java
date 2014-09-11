@@ -53,12 +53,12 @@ public abstract class BaseFieldBuilder implements FieldBuilder
             addStringArray(optionSpec.getTitle());
         if (returnType != null && returnType.equals("Array<Object|Array|Number>"))
             addNumberArray(optionSpec.getTitle());
-        // if (returnType != null && returnType.equals("Array<Object>"))
-        // {
-        // JClass jClass2 = ClassRegistry.INSTANCE.getRegistry().get(new ClassRegistry.RegistryKey(optionSpec, OutputType.Interface));
-        // if (jClass2 != null) // TODO @rqu need to treat case of drilldown.series
-        // addObjectArray(jClass2, optionSpec.getTitle());
-        // }
+        if (returnType != null && returnType.equals("Array<Object>"))
+        {
+            JClass jClass2 = ClassRegistry.INSTANCE.getRegistry().get(new ClassRegistry.RegistryKey(optionSpec, OutputType.Interface));
+            if (jClass2 != null) // TODO @rqu need to treat case of drilldown.series
+                addObjectArray(jClass2, optionSpec.getTitle());
+        }
     }
 
     protected abstract OutputType getOutputType();

@@ -16,7 +16,7 @@ public class JsoSeries
 
     public final native ArrayNumber data()
         throws RuntimeException /*-{
-        return this["data"] = (this["data"] || {});
+        return this["data"] = (this["data"] || []);
     }-*/
     ;
 

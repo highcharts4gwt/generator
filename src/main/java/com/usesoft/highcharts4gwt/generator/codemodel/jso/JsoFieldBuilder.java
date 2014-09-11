@@ -5,6 +5,7 @@ import com.sun.codemodel.JMod;
 import com.usesoft.highcharts4gwt.generator.codemodel.BaseFieldBuilder;
 import com.usesoft.highcharts4gwt.generator.codemodel.FieldBuilder;
 import com.usesoft.highcharts4gwt.generator.codemodel.OutputType;
+import com.usesoft.highcharts4gwt.model.array.api.Array;
 import com.usesoft.highcharts4gwt.model.array.api.ArrayNumber;
 import com.usesoft.highcharts4gwt.model.array.api.ArrayString;
 
@@ -14,7 +15,7 @@ public class JsoFieldBuilder extends BaseFieldBuilder implements FieldBuilder
     @Override
     protected void addNumberField(String fieldName)
     {
-        NativeContentHack getterContentHack = new NativeContentHack(getCodeModel(), getGetterContent(fieldName));
+        NativeContentHack getterContentHack = new NativeContentHack(getCodeModel(), getGetterForObjectContent(fieldName));
         getJclass().method(JMod.NATIVE + JMod.FINAL + JMod.PUBLIC, Number.class, fieldName)._throws(getterContentHack);
 
         NativeContentHack setterContentHack = new NativeContentHack(getCodeModel(), getSetterContent(fieldName));
@@ -24,7 +25,7 @@ public class JsoFieldBuilder extends BaseFieldBuilder implements FieldBuilder
     @Override
     protected void addStringField(String fieldName)
     {
-        NativeContentHack getterContentHack = new NativeContentHack(getCodeModel(), getGetterContent(fieldName));
+        NativeContentHack getterContentHack = new NativeContentHack(getCodeModel(), getGetterForObjectContent(fieldName));
         getJclass().method(JMod.NATIVE + JMod.FINAL + JMod.PUBLIC, String.class, fieldName)._throws(getterContentHack);
 
         NativeContentHack setterContentHack = new NativeContentHack(getCodeModel(), getSetterContent(fieldName));
@@ -34,7 +35,7 @@ public class JsoFieldBuilder extends BaseFieldBuilder implements FieldBuilder
     @Override
     protected void addBooleanField(String fieldName)
     {
-        NativeContentHack getterContentHack = new NativeContentHack(getCodeModel(), getGetterContent(fieldName));
+        NativeContentHack getterContentHack = new NativeContentHack(getCodeModel(), getGetterForObjectContent(fieldName));
         getJclass().method(JMod.NATIVE + JMod.FINAL + JMod.PUBLIC, boolean.class, fieldName)._throws(getterContentHack);
 
         NativeContentHack setterContentHack = new NativeContentHack(getCodeModel(), getSetterContent(fieldName));
@@ -79,7 +80,7 @@ public class JsoFieldBuilder extends BaseFieldBuilder implements FieldBuilder
     @Override
     protected void addClassField(JClass jClass, String fieldName)
     {
-        NativeContentHack getterContentHack = new NativeContentHack(getCodeModel(), getGetterContent(fieldName));
+        NativeContentHack getterContentHack = new NativeContentHack(getCodeModel(), getGetterForObjectContent(fieldName));
         getJclass().method(JMod.NATIVE + JMod.FINAL + JMod.PUBLIC, jClass, fieldName)._throws(getterContentHack);
 
         NativeContentHack setterContentHack = new NativeContentHack(getCodeModel(), getSetterContent(fieldName));
@@ -90,7 +91,7 @@ public class JsoFieldBuilder extends BaseFieldBuilder implements FieldBuilder
     @Override
     protected void addStringArray(String fieldName)
     {
-        NativeContentHack getterContentHack = new NativeContentHack(getCodeModel(), getGetterContent(fieldName));
+        NativeContentHack getterContentHack = new NativeContentHack(getCodeModel(), getGetterForArrayContent(fieldName));
         getJclass().method(JMod.NATIVE + JMod.FINAL + JMod.PUBLIC, ArrayString.class, fieldName)._throws(getterContentHack);
 
         NativeContentHack setterContentHack = new NativeContentHack(getCodeModel(), getSetterContent(fieldName));
@@ -100,7 +101,7 @@ public class JsoFieldBuilder extends BaseFieldBuilder implements FieldBuilder
     @Override
     protected void addNumberArray(String fieldName)
     {
-        NativeContentHack getterContentHack = new NativeContentHack(getCodeModel(), getGetterContent(fieldName));
+        NativeContentHack getterContentHack = new NativeContentHack(getCodeModel(), getGetterForArrayContent(fieldName));
         getJclass().method(JMod.NATIVE + JMod.FINAL + JMod.PUBLIC, ArrayNumber.class, fieldName)._throws(getterContentHack);
 
         NativeContentHack setterContentHack = new NativeContentHack(getCodeModel(), getSetterContent(fieldName));
@@ -110,15 +111,15 @@ public class JsoFieldBuilder extends BaseFieldBuilder implements FieldBuilder
     @Override
     protected void addObjectArray(JClass jClass, String fieldName)
     {
-        // JClass detailClass = jClass;
-        // JClass rawLLclazz = getCodeModel().ref(Array.class);
-        // JClass fieldClazz = rawLLclazz.narrow(detailClass);
-        //
-        // NativeContentHack getterContentHack = new NativeContentHack(getCodeModel(), getGetterContent(fieldName));
-        // getJclass().method(JMod.NATIVE + JMod.FINAL + JMod.PUBLIC, fieldClazz, fieldName)._throws(getterContentHack);
-        //
-        // NativeContentHack setterContentHack = new NativeContentHack(getCodeModel(), getSetterContent(fieldName));
-        // getJclass().method(JMod.NATIVE + JMod.FINAL + JMod.PUBLIC, getJclass(), fieldName)._throws(setterContentHack).param(fieldClazz, fieldName);
+        JClass detailClass = jClass;
+        JClass rawLLclazz = getCodeModel().ref(Array.class);
+        JClass fieldClazz = rawLLclazz.narrow(detailClass);
+
+        NativeContentHack getterContentHack = new NativeContentHack(getCodeModel(), getGetterForArrayContent(fieldName));
+        getJclass().method(JMod.NATIVE + JMod.FINAL + JMod.PUBLIC, fieldClazz, fieldName)._throws(getterContentHack);
+
+        NativeContentHack setterContentHack = new NativeContentHack(getCodeModel(), getSetterContent(fieldName));
+        getJclass().method(JMod.NATIVE + JMod.FINAL + JMod.PUBLIC, getJclass(), fieldName)._throws(setterContentHack).param(fieldClazz, fieldName);
     }
 
     @Override
@@ -127,9 +128,14 @@ public class JsoFieldBuilder extends BaseFieldBuilder implements FieldBuilder
         return OutputType.Jso;
     }
 
-    private static String getGetterContent(String fieldName)
+    private static String getGetterForObjectContent(String fieldName)
     {
         return "/*-{\n" + "        return this[\"" + fieldName + "\"] = (this[\"" + fieldName + "\"] || {});\n" + "    }-*/";
+    }
+
+    private static String getGetterForArrayContent(String fieldName)
+    {
+        return "/*-{\n" + "        return this[\"" + fieldName + "\"] = (this[\"" + fieldName + "\"] || []);\n" + "    }-*/";
     }
 
     private static String getSetterContent(String fieldName)

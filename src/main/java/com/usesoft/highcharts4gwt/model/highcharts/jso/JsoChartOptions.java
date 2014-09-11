@@ -2,6 +2,7 @@
 package com.usesoft.highcharts4gwt.model.highcharts.jso;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.usesoft.highcharts4gwt.model.array.api.Array;
 import com.usesoft.highcharts4gwt.model.highcharts.api.Chart;
 import com.usesoft.highcharts4gwt.model.highcharts.api.ChartOptions;
 import com.usesoft.highcharts4gwt.model.highcharts.api.Credits;
@@ -15,6 +16,7 @@ import com.usesoft.highcharts4gwt.model.highcharts.api.Loading;
 import com.usesoft.highcharts4gwt.model.highcharts.api.Navigation;
 import com.usesoft.highcharts4gwt.model.highcharts.api.NoData;
 import com.usesoft.highcharts4gwt.model.highcharts.api.PlotOptions;
+import com.usesoft.highcharts4gwt.model.highcharts.api.Series;
 import com.usesoft.highcharts4gwt.model.highcharts.api.Subtitle;
 import com.usesoft.highcharts4gwt.model.highcharts.api.Title;
 import com.usesoft.highcharts4gwt.model.highcharts.api.Tooltip;
@@ -195,6 +197,19 @@ public class JsoChartOptions
     public final native JsoChartOptions exporting(Exporting exporting)
         throws RuntimeException /*-{
         this["exporting"] = exporting;
+        return this;
+    }-*/
+    ;
+
+    public final native Array<Series> series()
+        throws RuntimeException /*-{
+        return this["series"] = (this["series"] || []);
+    }-*/
+    ;
+
+    public final native JsoChartOptions series(Array<Series> series)
+        throws RuntimeException /*-{
+        this["series"] = series;
         return this;
     }-*/
     ;
