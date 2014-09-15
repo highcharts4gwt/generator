@@ -12,35 +12,47 @@ import com.usesoft.highcharts4gwt.model.array.api.ArrayString;
 public class JsoFieldBuilder extends BaseFieldBuilder implements FieldBuilder
 {
 
-    @Override
-    protected void addNumberField(String fieldName)
-    {
-        NativeContentHack getterContentHack = new NativeContentHack(getCodeModel(), getGetterForObjectContent(fieldName));
-        getJclass().method(JMod.NATIVE + JMod.FINAL + JMod.PUBLIC, Number.class, fieldName)._throws(getterContentHack);
-
-        NativeContentHack setterContentHack = new NativeContentHack(getCodeModel(), getSetterContent(fieldName));
-        getJclass().method(JMod.NATIVE + JMod.FINAL + JMod.PUBLIC, getJclass(), fieldName)._throws(setterContentHack).param(Number.class, fieldName);
-    }
-
-    @Override
-    protected void addStringField(String fieldName)
-    {
-        NativeContentHack getterContentHack = new NativeContentHack(getCodeModel(), getGetterForObjectContent(fieldName));
-        getJclass().method(JMod.NATIVE + JMod.FINAL + JMod.PUBLIC, String.class, fieldName)._throws(getterContentHack);
-
-        NativeContentHack setterContentHack = new NativeContentHack(getCodeModel(), getSetterContent(fieldName));
-        getJclass().method(JMod.NATIVE + JMod.FINAL + JMod.PUBLIC, getJclass(), fieldName)._throws(setterContentHack).param(String.class, fieldName);
-    }
-
-    @Override
-    protected void addBooleanField(String fieldName)
-    {
-        NativeContentHack getterContentHack = new NativeContentHack(getCodeModel(), getGetterForObjectContent(fieldName));
-        getJclass().method(JMod.NATIVE + JMod.FINAL + JMod.PUBLIC, boolean.class, fieldName)._throws(getterContentHack);
-
-        NativeContentHack setterContentHack = new NativeContentHack(getCodeModel(), getSetterContent(fieldName));
-        getJclass().method(JMod.NATIVE + JMod.FINAL + JMod.PUBLIC, getJclass(), fieldName)._throws(setterContentHack).param(boolean.class, fieldName);
-    }
+    // @Override
+    // protected void addNumberField(String fieldName)
+    // {
+    // NativeContentHack getterContentHack = new
+    // NativeContentHack(getCodeModel(), getGetterForObjectContent(fieldName));
+    // getJclass().method(JMod.NATIVE + JMod.FINAL + JMod.PUBLIC, Number.class,
+    // fieldName)._throws(getterContentHack);
+    //
+    // NativeContentHack setterContentHack = new
+    // NativeContentHack(getCodeModel(), getSetterContent(fieldName));
+    // getJclass().method(JMod.NATIVE + JMod.FINAL + JMod.PUBLIC, getJclass(),
+    // fieldName)._throws(setterContentHack).param(Number.class, fieldName);
+    // }
+    //
+    // @Override
+    // protected void addStringField(String fieldName)
+    // {
+    // NativeContentHack getterContentHack = new
+    // NativeContentHack(getCodeModel(), getGetterForObjectContent(fieldName));
+    // getJclass().method(JMod.NATIVE + JMod.FINAL + JMod.PUBLIC, String.class,
+    // fieldName)._throws(getterContentHack);
+    //
+    // NativeContentHack setterContentHack = new
+    // NativeContentHack(getCodeModel(), getSetterContent(fieldName));
+    // getJclass().method(JMod.NATIVE + JMod.FINAL + JMod.PUBLIC, getJclass(),
+    // fieldName)._throws(setterContentHack).param(String.class, fieldName);
+    // }
+    //
+    // @Override
+    // protected void addBooleanField(String fieldName)
+    // {
+    // NativeContentHack getterContentHack = new
+    // NativeContentHack(getCodeModel(), getGetterForObjectContent(fieldName));
+    // getJclass().method(JMod.NATIVE + JMod.FINAL + JMod.PUBLIC, boolean.class,
+    // fieldName)._throws(getterContentHack);
+    //
+    // NativeContentHack setterContentHack = new
+    // NativeContentHack(getCodeModel(), getSetterContent(fieldName));
+    // getJclass().method(JMod.NATIVE + JMod.FINAL + JMod.PUBLIC, getJclass(),
+    // fieldName)._throws(setterContentHack).param(boolean.class, fieldName);
+    // }
 
     @Override
     protected void addObjectField(String fieldName)

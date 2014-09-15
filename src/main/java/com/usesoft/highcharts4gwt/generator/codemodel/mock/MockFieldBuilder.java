@@ -17,51 +17,60 @@ import com.usesoft.highcharts4gwt.model.array.api.ArrayString;
 public class MockFieldBuilder extends BaseFieldBuilder implements FieldBuilder
 {
 
-    @Override
-    protected void addNumberField(String fieldName)
-    {
-        JFieldVar field = getJclass().field(JMod.PRIVATE, Number.class, fieldName);
-
-        JMethod getter = getJclass().method(JMod.PUBLIC, Number.class, fieldName);
-        JBlock block = getter.body();
-        block._return(field);
-
-        JMethod setter = getJclass().method(JMod.PUBLIC, getJclass(), fieldName);
-        JVar setterParam = setter.param(Number.class, fieldName);
-
-        setter.body().assign(JExpr._this().ref(field), setterParam)._return(JExpr._this());
-    }
-
-    @Override
-    protected void addStringField(String fieldName)
-    {
-        JFieldVar field = getJclass().field(JMod.PRIVATE, String.class, fieldName);
-
-        JMethod getter = getJclass().method(JMod.PUBLIC, String.class, fieldName);
-        JBlock block = getter.body();
-        block._return(field);
-
-        JMethod setter = getJclass().method(JMod.PUBLIC, getJclass(), fieldName);
-        JVar setterParam = setter.param(String.class, fieldName);
-
-        setter.body().assign(JExpr._this().ref(field), setterParam)._return(JExpr._this());
-
-    }
-
-    @Override
-    protected void addBooleanField(String fieldName)
-    {
-        JFieldVar field = getJclass().field(JMod.PRIVATE, boolean.class, fieldName);
-
-        JMethod getter = getJclass().method(JMod.PUBLIC, boolean.class, fieldName);
-        JBlock block = getter.body();
-        block._return(field);
-
-        JMethod setter = getJclass().method(JMod.PUBLIC, getJclass(), fieldName);
-        JVar setterParam = setter.param(boolean.class, fieldName);
-
-        setter.body().assign(JExpr._this().ref(field), setterParam)._return(JExpr._this());
-    }
+    // @Override
+    // protected void addNumberField(String fieldName)
+    // {
+    // JFieldVar field = getJclass().field(JMod.PRIVATE, Number.class,
+    // fieldName);
+    //
+    // JMethod getter = getJclass().method(JMod.PUBLIC, Number.class,
+    // fieldName);
+    // JBlock block = getter.body();
+    // block._return(field);
+    //
+    // JMethod setter = getJclass().method(JMod.PUBLIC, getJclass(), fieldName);
+    // JVar setterParam = setter.param(Number.class, fieldName);
+    //
+    // setter.body().assign(JExpr._this().ref(field),
+    // setterParam)._return(JExpr._this());
+    // }
+    //
+    // @Override
+    // protected void addStringField(String fieldName)
+    // {
+    // JFieldVar field = getJclass().field(JMod.PRIVATE, String.class,
+    // fieldName);
+    //
+    // JMethod getter = getJclass().method(JMod.PUBLIC, String.class,
+    // fieldName);
+    // JBlock block = getter.body();
+    // block._return(field);
+    //
+    // JMethod setter = getJclass().method(JMod.PUBLIC, getJclass(), fieldName);
+    // JVar setterParam = setter.param(String.class, fieldName);
+    //
+    // setter.body().assign(JExpr._this().ref(field),
+    // setterParam)._return(JExpr._this());
+    //
+    // }
+    //
+    // @Override
+    // protected void addBooleanField(String fieldName)
+    // {
+    // JFieldVar field = getJclass().field(JMod.PRIVATE, boolean.class,
+    // fieldName);
+    //
+    // JMethod getter = getJclass().method(JMod.PUBLIC, boolean.class,
+    // fieldName);
+    // JBlock block = getter.body();
+    // block._return(field);
+    //
+    // JMethod setter = getJclass().method(JMod.PUBLIC, getJclass(), fieldName);
+    // JVar setterParam = setter.param(boolean.class, fieldName);
+    //
+    // setter.body().assign(JExpr._this().ref(field),
+    // setterParam)._return(JExpr._this());
+    // }
 
     @Override
     protected void addObjectField(String fieldName)

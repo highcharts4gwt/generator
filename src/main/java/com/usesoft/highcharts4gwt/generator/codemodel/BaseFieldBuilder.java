@@ -3,6 +3,7 @@ package com.usesoft.highcharts4gwt.generator.codemodel;
 import com.sun.codemodel.JClass;
 import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JDefinedClass;
+import com.usesoft.highcharts4gwt.generator.codemodel.field.FieldType;
 import com.usesoft.highcharts4gwt.generator.graph.OptionSpec;
 
 public abstract class BaseFieldBuilder implements FieldBuilder
@@ -41,12 +42,12 @@ public abstract class BaseFieldBuilder implements FieldBuilder
 
         String returnType = optionSpec.getReturnType();
 
-        if (returnType != null && returnType.equalsIgnoreCase("Number"))
-            addNumberField(optionSpec.getTitle());
-        if (returnType != null && returnType.equalsIgnoreCase("String"))
-            addStringField(optionSpec.getTitle());
-        if (returnType != null && returnType.equalsIgnoreCase("Boolean"))
-            addBooleanField(optionSpec.getTitle());
+        FieldType fieldType = findFieldType(optionSpec, returnType);
+
+        fieldType.accept(new FieldWriterVisitor(optionSpec.getTitle(), codeModel, jClass, className), getOutputType());
+
+        // TODO switch to visitor structure
+
         if (returnType == null)
             addClassField(ClassRegistry.INSTANCE.getRegistry().get(new ClassRegistry.RegistryKey(optionSpec, OutputType.Interface)), optionSpec.getTitle());
         if (returnType != null && returnType.equals("Array<String>"))
@@ -56,12 +57,23 @@ public abstract class BaseFieldBuilder implements FieldBuilder
         if (returnType != null && returnType.equals("Array<Object>"))
         {
             JClass jClass2 = ClassRegistry.INSTANCE.getRegistry().get(new ClassRegistry.RegistryKey(optionSpec, OutputType.Interface));
-            if (jClass2 != null) // TODO @rqu need to treat case of drilldown.series
+            if (jClass2 != null) // TODO @rqu need to treat case of
+                                 // drilldown.series
                 addObjectArray(jClass2, optionSpec.getTitle());
         }
     }
 
-    protected abstract OutputType getOutputType();
+    private FieldType findFieldType(OptionSpec optionSpec, String returnType)
+    {
+        if (returnType != null && returnType.equalsIgnoreCase("Number"))
+            return FieldType.Number;
+        if (returnType != null && returnType.equalsIgnoreCase("String"))
+            return FieldType.String;
+        if (returnType != null && returnType.equalsIgnoreCase("Boolean"))
+            return FieldType.Boolean;
+
+        return FieldType.Other;
+    }
 
     @Override
     public void setJclass(JDefinedClass jClass)
@@ -69,11 +81,13 @@ public abstract class BaseFieldBuilder implements FieldBuilder
         this.jClass = jClass;
     }
 
-    protected abstract void addNumberField(String fieldName);
+    protected abstract OutputType getOutputType();
 
-    protected abstract void addStringField(String fieldName);
-
-    protected abstract void addBooleanField(String fieldName);
+    // protected abstract void addNumberField(String fieldName);
+    //
+    // protected abstract void addStringField(String fieldName);
+    //
+    // protected abstract void addBooleanField(String fieldName);
 
     protected abstract void addObjectField(String fieldName);
 

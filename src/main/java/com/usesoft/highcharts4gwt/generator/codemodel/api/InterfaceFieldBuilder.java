@@ -12,30 +12,33 @@ import com.usesoft.highcharts4gwt.model.array.api.ArrayString;
 public class InterfaceFieldBuilder extends BaseFieldBuilder implements FieldBuilder
 {
 
-    @Override
-    protected void addNumberField(String fieldName)
-    {
-        getJclass().method(JMod.NONE, Number.class, fieldName);
-
-        getJclass().method(JMod.NONE, getJclass(), fieldName).param(Number.class, fieldName);
-    }
-
-    @Override
-    protected void addStringField(String fieldName)
-    {
-        getJclass().method(JMod.NONE, String.class, fieldName);
-
-        getJclass().method(JMod.NONE, getJclass(), fieldName).param(String.class, fieldName);
-
-    }
-
-    @Override
-    protected void addBooleanField(String fieldName)
-    {
-        getJclass().method(JMod.NONE, boolean.class, fieldName);
-
-        getJclass().method(JMod.NONE, getJclass(), fieldName).param(boolean.class, fieldName);
-    }
+    // @Override
+    // protected void addNumberField(String fieldName)
+    // {
+    // getJclass().method(JMod.NONE, Number.class, fieldName);
+    //
+    // getJclass().method(JMod.NONE, getJclass(), fieldName).param(Number.class,
+    // fieldName);
+    // }
+    //
+    // @Override
+    // protected void addStringField(String fieldName)
+    // {
+    // getJclass().method(JMod.NONE, String.class, fieldName);
+    //
+    // getJclass().method(JMod.NONE, getJclass(), fieldName).param(String.class,
+    // fieldName);
+    //
+    // }
+    //
+    // @Override
+    // protected void addBooleanField(String fieldName)
+    // {
+    // getJclass().method(JMod.NONE, boolean.class, fieldName);
+    //
+    // getJclass().method(JMod.NONE, getJclass(),
+    // fieldName).param(boolean.class, fieldName);
+    // }
 
     @Override
     protected void addObjectField(String fieldName)
