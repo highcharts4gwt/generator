@@ -15,7 +15,7 @@ public class JsoTooltip
 
     public final native boolean animation()
         throws RuntimeException /*-{
-        return this["animation"] = (this["animation"] || {});
+        return this["animation"] = (this["animation"] || true);
     }-*/
     ;
 
@@ -28,7 +28,7 @@ public class JsoTooltip
 
     public final native Number borderRadius()
         throws RuntimeException /*-{
-        return this["borderRadius"] = (this["borderRadius"] || {});
+        return this["borderRadius"] = (this["borderRadius"] || 3.0);
     }-*/
     ;
 
@@ -41,7 +41,7 @@ public class JsoTooltip
 
     public final native Number borderWidth()
         throws RuntimeException /*-{
-        return this["borderWidth"] = (this["borderWidth"] || {});
+        return this["borderWidth"] = (this["borderWidth"] || 1.0);
     }-*/
     ;
 
@@ -54,7 +54,7 @@ public class JsoTooltip
 
     public final native boolean enabled()
         throws RuntimeException /*-{
-        return this["enabled"] = (this["enabled"] || {});
+        return this["enabled"] = (this["enabled"] || true);
     }-*/
     ;
 
@@ -67,7 +67,7 @@ public class JsoTooltip
 
     public final native boolean followPointer()
         throws RuntimeException /*-{
-        return this["followPointer"] = (this["followPointer"] || {});
+        return this["followPointer"] = (this["followPointer"] || false);
     }-*/
     ;
 
@@ -80,7 +80,7 @@ public class JsoTooltip
 
     public final native boolean followTouchMove()
         throws RuntimeException /*-{
-        return this["followTouchMove"] = (this["followTouchMove"] || {});
+        return this["followTouchMove"] = (this["followTouchMove"] || false);
     }-*/
     ;
 
@@ -93,7 +93,7 @@ public class JsoTooltip
 
     public final native String footerFormat()
         throws RuntimeException /*-{
-        return this["footerFormat"] = (this["footerFormat"] || {});
+        return this["footerFormat"] = (this["footerFormat"] || "false");
     }-*/
     ;
 
@@ -106,7 +106,7 @@ public class JsoTooltip
 
     public final native String headerFormat()
         throws RuntimeException /*-{
-        return this["headerFormat"] = (this["headerFormat"] || {});
+        return this["headerFormat"] = (this["headerFormat"] || "");
     }-*/
     ;
 
@@ -119,7 +119,7 @@ public class JsoTooltip
 
     public final native Number hideDelay()
         throws RuntimeException /*-{
-        return this["hideDelay"] = (this["hideDelay"] || {});
+        return this["hideDelay"] = (this["hideDelay"] || 500.0);
     }-*/
     ;
 
@@ -132,7 +132,7 @@ public class JsoTooltip
 
     public final native String pointFormat()
         throws RuntimeException /*-{
-        return this["pointFormat"] = (this["pointFormat"] || {});
+        return this["pointFormat"] = (this["pointFormat"] || "&lt;span style="color:{series.color}"&gt;\u25CF&lt;/span&gt; {series.name}: &lt;b&gt;{point.y}&lt;/b&gt;&lt;br/&gt;");
     }-*/
     ;
 
@@ -145,7 +145,7 @@ public class JsoTooltip
 
     public final native boolean shadow()
         throws RuntimeException /*-{
-        return this["shadow"] = (this["shadow"] || {});
+        return this["shadow"] = (this["shadow"] || true);
     }-*/
     ;
 
@@ -158,7 +158,7 @@ public class JsoTooltip
 
     public final native String shape()
         throws RuntimeException /*-{
-        return this["shape"] = (this["shape"] || {});
+        return this["shape"] = (this["shape"] || "callout");
     }-*/
     ;
 
@@ -171,7 +171,7 @@ public class JsoTooltip
 
     public final native boolean shared()
         throws RuntimeException /*-{
-        return this["shared"] = (this["shared"] || {});
+        return this["shared"] = (this["shared"] || false);
     }-*/
     ;
 
@@ -184,7 +184,7 @@ public class JsoTooltip
 
     public final native Number snap()
         throws RuntimeException /*-{
-        return this["snap"] = (this["snap"] || {});
+        return this["snap"] = (this["snap"] || null);
     }-*/
     ;
 
@@ -197,7 +197,7 @@ public class JsoTooltip
 
     public final native boolean useHTML()
         throws RuntimeException /*-{
-        return this["useHTML"] = (this["useHTML"] || {});
+        return this["useHTML"] = (this["useHTML"] || false);
     }-*/
     ;
 
@@ -210,7 +210,7 @@ public class JsoTooltip
 
     public final native Number valueDecimals()
         throws RuntimeException /*-{
-        return this["valueDecimals"] = (this["valueDecimals"] || {});
+        return this["valueDecimals"] = (this["valueDecimals"] || null);
     }-*/
     ;
 
@@ -223,7 +223,7 @@ public class JsoTooltip
 
     public final native String valuePrefix()
         throws RuntimeException /*-{
-        return this["valuePrefix"] = (this["valuePrefix"] || {});
+        return this["valuePrefix"] = (this["valuePrefix"] || "null");
     }-*/
     ;
 
@@ -236,7 +236,7 @@ public class JsoTooltip
 
     public final native String valueSuffix()
         throws RuntimeException /*-{
-        return this["valueSuffix"] = (this["valueSuffix"] || {});
+        return this["valueSuffix"] = (this["valueSuffix"] || "null");
     }-*/
     ;
 
@@ -249,7 +249,7 @@ public class JsoTooltip
 
     public final native String xDateFormat()
         throws RuntimeException /*-{
-        return this["xDateFormat"] = (this["xDateFormat"] || {});
+        return this["xDateFormat"] = (this["xDateFormat"] || "null");
     }-*/
     ;
 

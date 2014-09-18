@@ -15,7 +15,7 @@ public class JsoPyramid
 
     public final native boolean reversed()
         throws RuntimeException /*-{
-        return this["reversed"] = (this["reversed"] || {});
+        return this["reversed"] = (this["reversed"] || true);
     }-*/
     ;
 

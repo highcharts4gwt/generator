@@ -15,7 +15,7 @@ public class JsoLine
 
     public final native String step()
         throws RuntimeException /*-{
-        return this["step"] = (this["step"] || {});
+        return this["step"] = (this["step"] || "false");
     }-*/
     ;
 

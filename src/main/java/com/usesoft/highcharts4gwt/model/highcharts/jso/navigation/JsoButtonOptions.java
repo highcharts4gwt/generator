@@ -15,7 +15,7 @@ public class JsoButtonOptions
 
     public final native String align()
         throws RuntimeException /*-{
-        return this["align"] = (this["align"] || {});
+        return this["align"] = (this["align"] || "right");
     }-*/
     ;
 
@@ -28,7 +28,7 @@ public class JsoButtonOptions
 
     public final native boolean enabled()
         throws RuntimeException /*-{
-        return this["enabled"] = (this["enabled"] || {});
+        return this["enabled"] = (this["enabled"] || true);
     }-*/
     ;
 
@@ -41,7 +41,7 @@ public class JsoButtonOptions
 
     public final native Number height()
         throws RuntimeException /*-{
-        return this["height"] = (this["height"] || {});
+        return this["height"] = (this["height"] || 20.0);
     }-*/
     ;
 
@@ -54,7 +54,7 @@ public class JsoButtonOptions
 
     public final native Number symbolSize()
         throws RuntimeException /*-{
-        return this["symbolSize"] = (this["symbolSize"] || {});
+        return this["symbolSize"] = (this["symbolSize"] || 14.0);
     }-*/
     ;
 
@@ -67,7 +67,7 @@ public class JsoButtonOptions
 
     public final native Number symbolStrokeWidth()
         throws RuntimeException /*-{
-        return this["symbolStrokeWidth"] = (this["symbolStrokeWidth"] || {});
+        return this["symbolStrokeWidth"] = (this["symbolStrokeWidth"] || 1.0);
     }-*/
     ;
 
@@ -80,7 +80,7 @@ public class JsoButtonOptions
 
     public final native Number symbolX()
         throws RuntimeException /*-{
-        return this["symbolX"] = (this["symbolX"] || {});
+        return this["symbolX"] = (this["symbolX"] || 12.5);
     }-*/
     ;
 
@@ -93,7 +93,7 @@ public class JsoButtonOptions
 
     public final native Number symbolY()
         throws RuntimeException /*-{
-        return this["symbolY"] = (this["symbolY"] || {});
+        return this["symbolY"] = (this["symbolY"] || 10.5);
     }-*/
     ;
 
@@ -106,7 +106,7 @@ public class JsoButtonOptions
 
     public final native String text()
         throws RuntimeException /*-{
-        return this["text"] = (this["text"] || {});
+        return this["text"] = (this["text"] || "null");
     }-*/
     ;
 
@@ -119,7 +119,7 @@ public class JsoButtonOptions
 
     public final native String verticalAlign()
         throws RuntimeException /*-{
-        return this["verticalAlign"] = (this["verticalAlign"] || {});
+        return this["verticalAlign"] = (this["verticalAlign"] || "top");
     }-*/
     ;
 
@@ -132,7 +132,7 @@ public class JsoButtonOptions
 
     public final native Number width()
         throws RuntimeException /*-{
-        return this["width"] = (this["width"] || {});
+        return this["width"] = (this["width"] || 24.0);
     }-*/
     ;
 
@@ -145,7 +145,7 @@ public class JsoButtonOptions
 
     public final native Number y()
         throws RuntimeException /*-{
-        return this["y"] = (this["y"] || {});
+        return this["y"] = (this["y"] || 0.0);
     }-*/
     ;
 

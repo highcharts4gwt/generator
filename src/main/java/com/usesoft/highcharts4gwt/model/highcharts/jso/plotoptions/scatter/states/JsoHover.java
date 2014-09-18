@@ -15,7 +15,7 @@ public class JsoHover
 
     public final native Number lineWidth()
         throws RuntimeException /*-{
-        return this["lineWidth"] = (this["lineWidth"] || {});
+        return this["lineWidth"] = (this["lineWidth"] || 0.0);
     }-*/
     ;
 

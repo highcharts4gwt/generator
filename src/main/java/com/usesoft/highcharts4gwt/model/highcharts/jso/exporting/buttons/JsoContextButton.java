@@ -15,7 +15,7 @@ public class JsoContextButton
 
     public final native String symbol()
         throws RuntimeException /*-{
-        return this["symbol"] = (this["symbol"] || {});
+        return this["symbol"] = (this["symbol"] || "menu");
     }-*/
     ;
 
@@ -28,7 +28,7 @@ public class JsoContextButton
 
     public final native Number x()
         throws RuntimeException /*-{
-        return this["x"] = (this["x"] || {});
+        return this["x"] = (this["x"] || -10.0);
     }-*/
     ;
 

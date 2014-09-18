@@ -16,7 +16,7 @@ public class JsoMarker
 
     public final native boolean enabled()
         throws RuntimeException /*-{
-        return this["enabled"] = (this["enabled"] || {});
+        return this["enabled"] = (this["enabled"] || true);
     }-*/
     ;
 
@@ -29,7 +29,7 @@ public class JsoMarker
 
     public final native Number height()
         throws RuntimeException /*-{
-        return this["height"] = (this["height"] || {});
+        return this["height"] = (this["height"] || null);
     }-*/
     ;
 
@@ -42,7 +42,7 @@ public class JsoMarker
 
     public final native Number lineWidth()
         throws RuntimeException /*-{
-        return this["lineWidth"] = (this["lineWidth"] || {});
+        return this["lineWidth"] = (this["lineWidth"] || 0.0);
     }-*/
     ;
 
@@ -55,7 +55,7 @@ public class JsoMarker
 
     public final native Number radius()
         throws RuntimeException /*-{
-        return this["radius"] = (this["radius"] || {});
+        return this["radius"] = (this["radius"] || 4.0);
     }-*/
     ;
 
@@ -81,7 +81,7 @@ public class JsoMarker
 
     public final native String symbol()
         throws RuntimeException /*-{
-        return this["symbol"] = (this["symbol"] || {});
+        return this["symbol"] = (this["symbol"] || "null");
     }-*/
     ;
 
@@ -94,7 +94,7 @@ public class JsoMarker
 
     public final native Number width()
         throws RuntimeException /*-{
-        return this["width"] = (this["width"] || {});
+        return this["width"] = (this["width"] || null);
     }-*/
     ;
 

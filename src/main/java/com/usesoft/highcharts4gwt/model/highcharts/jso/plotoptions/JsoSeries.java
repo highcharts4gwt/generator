@@ -19,7 +19,7 @@ public class JsoSeries
 
     public final native boolean allowPointSelect()
         throws RuntimeException /*-{
-        return this["allowPointSelect"] = (this["allowPointSelect"] || {});
+        return this["allowPointSelect"] = (this["allowPointSelect"] || false);
     }-*/
     ;
 
@@ -32,7 +32,7 @@ public class JsoSeries
 
     public final native boolean animation()
         throws RuntimeException /*-{
-        return this["animation"] = (this["animation"] || {});
+        return this["animation"] = (this["animation"] || true);
     }-*/
     ;
 
@@ -45,7 +45,7 @@ public class JsoSeries
 
     public final native boolean connectEnds()
         throws RuntimeException /*-{
-        return this["connectEnds"] = (this["connectEnds"] || {});
+        return this["connectEnds"] = (this["connectEnds"] || true);
     }-*/
     ;
 
@@ -58,7 +58,7 @@ public class JsoSeries
 
     public final native boolean connectNulls()
         throws RuntimeException /*-{
-        return this["connectNulls"] = (this["connectNulls"] || {});
+        return this["connectNulls"] = (this["connectNulls"] || false);
     }-*/
     ;
 
@@ -71,7 +71,7 @@ public class JsoSeries
 
     public final native Number cropThreshold()
         throws RuntimeException /*-{
-        return this["cropThreshold"] = (this["cropThreshold"] || {});
+        return this["cropThreshold"] = (this["cropThreshold"] || 300.0);
     }-*/
     ;
 
@@ -84,7 +84,7 @@ public class JsoSeries
 
     public final native String cursor()
         throws RuntimeException /*-{
-        return this["cursor"] = (this["cursor"] || {});
+        return this["cursor"] = (this["cursor"] || "null");
     }-*/
     ;
 
@@ -97,7 +97,7 @@ public class JsoSeries
 
     public final native String dashStyle()
         throws RuntimeException /*-{
-        return this["dashStyle"] = (this["dashStyle"] || {});
+        return this["dashStyle"] = (this["dashStyle"] || "Solid");
     }-*/
     ;
 
@@ -123,7 +123,7 @@ public class JsoSeries
 
     public final native boolean enableMouseTracking()
         throws RuntimeException /*-{
-        return this["enableMouseTracking"] = (this["enableMouseTracking"] || {});
+        return this["enableMouseTracking"] = (this["enableMouseTracking"] || true);
     }-*/
     ;
 
@@ -149,7 +149,7 @@ public class JsoSeries
 
     public final native Number lineWidth()
         throws RuntimeException /*-{
-        return this["lineWidth"] = (this["lineWidth"] || {});
+        return this["lineWidth"] = (this["lineWidth"] || 2.0);
     }-*/
     ;
 
@@ -162,7 +162,7 @@ public class JsoSeries
 
     public final native String linkedTo()
         throws RuntimeException /*-{
-        return this["linkedTo"] = (this["linkedTo"] || {});
+        return this["linkedTo"] = (this["linkedTo"] || "");
     }-*/
     ;
 
@@ -201,7 +201,7 @@ public class JsoSeries
 
     public final native Number pointInterval()
         throws RuntimeException /*-{
-        return this["pointInterval"] = (this["pointInterval"] || {});
+        return this["pointInterval"] = (this["pointInterval"] || 1.0);
     }-*/
     ;
 
@@ -214,7 +214,7 @@ public class JsoSeries
 
     public final native String pointPlacement()
         throws RuntimeException /*-{
-        return this["pointPlacement"] = (this["pointPlacement"] || {});
+        return this["pointPlacement"] = (this["pointPlacement"] || "null");
     }-*/
     ;
 
@@ -227,7 +227,7 @@ public class JsoSeries
 
     public final native Number pointStart()
         throws RuntimeException /*-{
-        return this["pointStart"] = (this["pointStart"] || {});
+        return this["pointStart"] = (this["pointStart"] || 0.0);
     }-*/
     ;
 
@@ -240,7 +240,7 @@ public class JsoSeries
 
     public final native boolean selected()
         throws RuntimeException /*-{
-        return this["selected"] = (this["selected"] || {});
+        return this["selected"] = (this["selected"] || false);
     }-*/
     ;
 
@@ -253,7 +253,7 @@ public class JsoSeries
 
     public final native boolean showCheckbox()
         throws RuntimeException /*-{
-        return this["showCheckbox"] = (this["showCheckbox"] || {});
+        return this["showCheckbox"] = (this["showCheckbox"] || false);
     }-*/
     ;
 
@@ -266,7 +266,7 @@ public class JsoSeries
 
     public final native boolean showInLegend()
         throws RuntimeException /*-{
-        return this["showInLegend"] = (this["showInLegend"] || {});
+        return this["showInLegend"] = (this["showInLegend"] || true);
     }-*/
     ;
 
@@ -279,7 +279,7 @@ public class JsoSeries
 
     public final native String stacking()
         throws RuntimeException /*-{
-        return this["stacking"] = (this["stacking"] || {});
+        return this["stacking"] = (this["stacking"] || "null");
     }-*/
     ;
 
@@ -292,7 +292,7 @@ public class JsoSeries
 
     public final native boolean stickyTracking()
         throws RuntimeException /*-{
-        return this["stickyTracking"] = (this["stickyTracking"] || {});
+        return this["stickyTracking"] = (this["stickyTracking"] || true);
     }-*/
     ;
 
@@ -305,7 +305,7 @@ public class JsoSeries
 
     public final native Number threshold()
         throws RuntimeException /*-{
-        return this["threshold"] = (this["threshold"] || {});
+        return this["threshold"] = (this["threshold"] || 0.0);
     }-*/
     ;
 
@@ -318,7 +318,7 @@ public class JsoSeries
 
     public final native Number turboThreshold()
         throws RuntimeException /*-{
-        return this["turboThreshold"] = (this["turboThreshold"] || {});
+        return this["turboThreshold"] = (this["turboThreshold"] || 1000.0);
     }-*/
     ;
 
@@ -331,7 +331,7 @@ public class JsoSeries
 
     public final native boolean visible()
         throws RuntimeException /*-{
-        return this["visible"] = (this["visible"] || {});
+        return this["visible"] = (this["visible"] || true);
     }-*/
     ;
 

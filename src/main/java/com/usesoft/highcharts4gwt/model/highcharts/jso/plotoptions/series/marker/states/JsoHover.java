@@ -15,7 +15,7 @@ public class JsoHover
 
     public final native boolean enabled()
         throws RuntimeException /*-{
-        return this["enabled"] = (this["enabled"] || {});
+        return this["enabled"] = (this["enabled"] || true);
     }-*/
     ;
 
@@ -28,7 +28,7 @@ public class JsoHover
 
     public final native Number lineWidth()
         throws RuntimeException /*-{
-        return this["lineWidth"] = (this["lineWidth"] || {});
+        return this["lineWidth"] = (this["lineWidth"] || 0.0);
     }-*/
     ;
 
@@ -41,7 +41,7 @@ public class JsoHover
 
     public final native Number lineWidthPlus()
         throws RuntimeException /*-{
-        return this["lineWidthPlus"] = (this["lineWidthPlus"] || {});
+        return this["lineWidthPlus"] = (this["lineWidthPlus"] || 1.0);
     }-*/
     ;
 
@@ -54,7 +54,7 @@ public class JsoHover
 
     public final native Number radius()
         throws RuntimeException /*-{
-        return this["radius"] = (this["radius"] || {});
+        return this["radius"] = (this["radius"] || null);
     }-*/
     ;
 
@@ -67,7 +67,7 @@ public class JsoHover
 
     public final native Number radiusPlus()
         throws RuntimeException /*-{
-        return this["radiusPlus"] = (this["radiusPlus"] || {});
+        return this["radiusPlus"] = (this["radiusPlus"] || 2.0);
     }-*/
     ;
 

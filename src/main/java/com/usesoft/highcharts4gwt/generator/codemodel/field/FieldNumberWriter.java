@@ -8,9 +8,12 @@ import com.usesoft.highcharts4gwt.generator.codemodel.OutputTypeVisitor;
 
 public class FieldNumberWriter extends FieldWriter implements OutputTypeVisitor<String, Void>
 {
-    public FieldNumberWriter(JCodeModel codeModel, JDefinedClass jClass, String className)
+    private final Double defaultValue;
+
+    public FieldNumberWriter(JCodeModel codeModel, JDefinedClass jClass, String className, Double defaultValue)
     {
         super(codeModel, className, jClass);
+        this.defaultValue = defaultValue;
     }
 
     @Override
@@ -25,7 +28,8 @@ public class FieldNumberWriter extends FieldWriter implements OutputTypeVisitor<
     @CheckForNull
     public Void visitJso(String fieldName)
     {
-        JsoFieldHelper.addGetterSetterDeclaration(fieldName, Number.class, getJclass(), getCodeModel());
+        JsoFieldHelper.writeGetterNativeCodeNumber(fieldName, Number.class, getJclass(), getCodeModel(), defaultValue);
+        JsoFieldHelper.writeSetterNativeCode(fieldName, Number.class, getJclass(), getCodeModel());
         return null;
     }
 

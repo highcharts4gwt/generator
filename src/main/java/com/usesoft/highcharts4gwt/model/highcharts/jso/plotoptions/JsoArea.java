@@ -15,7 +15,7 @@ public class JsoArea
 
     public final native Number fillOpacity()
         throws RuntimeException /*-{
-        return this["fillOpacity"] = (this["fillOpacity"] || {});
+        return this["fillOpacity"] = (this["fillOpacity"] || 0.75);
     }-*/
     ;
 
@@ -28,7 +28,7 @@ public class JsoArea
 
     public final native Number threshold()
         throws RuntimeException /*-{
-        return this["threshold"] = (this["threshold"] || {});
+        return this["threshold"] = (this["threshold"] || 0.0);
     }-*/
     ;
 
@@ -41,7 +41,7 @@ public class JsoArea
 
     public final native boolean trackByArea()
         throws RuntimeException /*-{
-        return this["trackByArea"] = (this["trackByArea"] || {});
+        return this["trackByArea"] = (this["trackByArea"] || false);
     }-*/
     ;
 

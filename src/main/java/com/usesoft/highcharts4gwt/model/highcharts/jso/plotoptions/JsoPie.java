@@ -17,7 +17,7 @@ public class JsoPie
 
     public final native Number borderWidth()
         throws RuntimeException /*-{
-        return this["borderWidth"] = (this["borderWidth"] || {});
+        return this["borderWidth"] = (this["borderWidth"] || 1.0);
     }-*/
     ;
 
@@ -43,7 +43,7 @@ public class JsoPie
 
     public final native Number depth()
         throws RuntimeException /*-{
-        return this["depth"] = (this["depth"] || {});
+        return this["depth"] = (this["depth"] || 0.0);
     }-*/
     ;
 
@@ -56,7 +56,7 @@ public class JsoPie
 
     public final native Number endAngle()
         throws RuntimeException /*-{
-        return this["endAngle"] = (this["endAngle"] || {});
+        return this["endAngle"] = (this["endAngle"] || null);
     }-*/
     ;
 
@@ -82,7 +82,7 @@ public class JsoPie
 
     public final native boolean ignoreHiddenPoint()
         throws RuntimeException /*-{
-        return this["ignoreHiddenPoint"] = (this["ignoreHiddenPoint"] || {});
+        return this["ignoreHiddenPoint"] = (this["ignoreHiddenPoint"] || true);
     }-*/
     ;
 
@@ -95,7 +95,7 @@ public class JsoPie
 
     public final native Number minSize()
         throws RuntimeException /*-{
-        return this["minSize"] = (this["minSize"] || {});
+        return this["minSize"] = (this["minSize"] || 80.0);
     }-*/
     ;
 
@@ -108,7 +108,7 @@ public class JsoPie
 
     public final native boolean showInLegend()
         throws RuntimeException /*-{
-        return this["showInLegend"] = (this["showInLegend"] || {});
+        return this["showInLegend"] = (this["showInLegend"] || false);
     }-*/
     ;
 
@@ -121,7 +121,7 @@ public class JsoPie
 
     public final native Number slicedOffset()
         throws RuntimeException /*-{
-        return this["slicedOffset"] = (this["slicedOffset"] || {});
+        return this["slicedOffset"] = (this["slicedOffset"] || 10.0);
     }-*/
     ;
 
@@ -134,7 +134,7 @@ public class JsoPie
 
     public final native Number startAngle()
         throws RuntimeException /*-{
-        return this["startAngle"] = (this["startAngle"] || {});
+        return this["startAngle"] = (this["startAngle"] || 0.0);
     }-*/
     ;
 
@@ -147,7 +147,7 @@ public class JsoPie
 
     public final native boolean stickyTracking()
         throws RuntimeException /*-{
-        return this["stickyTracking"] = (this["stickyTracking"] || {});
+        return this["stickyTracking"] = (this["stickyTracking"] || false);
     }-*/
     ;
 

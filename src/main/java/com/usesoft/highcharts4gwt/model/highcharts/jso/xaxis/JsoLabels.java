@@ -15,7 +15,7 @@ public class JsoLabels
 
     public final native String align()
         throws RuntimeException /*-{
-        return this["align"] = (this["align"] || {});
+        return this["align"] = (this["align"] || "center");
     }-*/
     ;
 
@@ -28,7 +28,7 @@ public class JsoLabels
 
     public final native Number distance()
         throws RuntimeException /*-{
-        return this["distance"] = (this["distance"] || {});
+        return this["distance"] = (this["distance"] || 15.0);
     }-*/
     ;
 
@@ -41,7 +41,7 @@ public class JsoLabels
 
     public final native boolean enabled()
         throws RuntimeException /*-{
-        return this["enabled"] = (this["enabled"] || {});
+        return this["enabled"] = (this["enabled"] || true);
     }-*/
     ;
 
@@ -54,7 +54,7 @@ public class JsoLabels
 
     public final native String format()
         throws RuntimeException /*-{
-        return this["format"] = (this["format"] || {});
+        return this["format"] = (this["format"] || "{value}");
     }-*/
     ;
 
@@ -67,7 +67,7 @@ public class JsoLabels
 
     public final native Number maxStaggerLines()
         throws RuntimeException /*-{
-        return this["maxStaggerLines"] = (this["maxStaggerLines"] || {});
+        return this["maxStaggerLines"] = (this["maxStaggerLines"] || 5.0);
     }-*/
     ;
 
@@ -80,7 +80,7 @@ public class JsoLabels
 
     public final native String overflow()
         throws RuntimeException /*-{
-        return this["overflow"] = (this["overflow"] || {});
+        return this["overflow"] = (this["overflow"] || "null");
     }-*/
     ;
 
@@ -93,7 +93,7 @@ public class JsoLabels
 
     public final native Number rotation()
         throws RuntimeException /*-{
-        return this["rotation"] = (this["rotation"] || {});
+        return this["rotation"] = (this["rotation"] || 0.0);
     }-*/
     ;
 
@@ -106,7 +106,7 @@ public class JsoLabels
 
     public final native Number staggerLines()
         throws RuntimeException /*-{
-        return this["staggerLines"] = (this["staggerLines"] || {});
+        return this["staggerLines"] = (this["staggerLines"] || null);
     }-*/
     ;
 
@@ -119,7 +119,7 @@ public class JsoLabels
 
     public final native Number step()
         throws RuntimeException /*-{
-        return this["step"] = (this["step"] || {});
+        return this["step"] = (this["step"] || null);
     }-*/
     ;
 
@@ -132,7 +132,7 @@ public class JsoLabels
 
     public final native boolean useHTML()
         throws RuntimeException /*-{
-        return this["useHTML"] = (this["useHTML"] || {});
+        return this["useHTML"] = (this["useHTML"] || false);
     }-*/
     ;
 
@@ -145,7 +145,7 @@ public class JsoLabels
 
     public final native Number x()
         throws RuntimeException /*-{
-        return this["x"] = (this["x"] || {});
+        return this["x"] = (this["x"] || 0.0);
     }-*/
     ;
 
@@ -158,7 +158,7 @@ public class JsoLabels
 
     public final native Number y()
         throws RuntimeException /*-{
-        return this["y"] = (this["y"] || {});
+        return this["y"] = (this["y"] || null);
     }-*/
     ;
 
@@ -171,7 +171,7 @@ public class JsoLabels
 
     public final native Number zIndex()
         throws RuntimeException /*-{
-        return this["zIndex"] = (this["zIndex"] || {});
+        return this["zIndex"] = (this["zIndex"] || 7.0);
     }-*/
     ;
 

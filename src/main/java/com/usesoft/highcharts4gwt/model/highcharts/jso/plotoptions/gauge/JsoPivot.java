@@ -15,7 +15,7 @@ public class JsoPivot
 
     public final native Number borderWidth()
         throws RuntimeException /*-{
-        return this["borderWidth"] = (this["borderWidth"] || {});
+        return this["borderWidth"] = (this["borderWidth"] || 0.0);
     }-*/
     ;
 
@@ -28,7 +28,7 @@ public class JsoPivot
 
     public final native Number radius()
         throws RuntimeException /*-{
-        return this["radius"] = (this["radius"] || {});
+        return this["radius"] = (this["radius"] || 5.0);
     }-*/
     ;
 

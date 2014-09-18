@@ -29,7 +29,7 @@ public class JsoSeries
 
     public final native String dataURL()
         throws RuntimeException /*-{
-        return this["dataURL"] = (this["dataURL"] || {});
+        return this["dataURL"] = (this["dataURL"] || "null");
     }-*/
     ;
 
@@ -42,7 +42,7 @@ public class JsoSeries
 
     public final native String id()
         throws RuntimeException /*-{
-        return this["id"] = (this["id"] || {});
+        return this["id"] = (this["id"] || "");
     }-*/
     ;
 
@@ -55,7 +55,7 @@ public class JsoSeries
 
     public final native Number index()
         throws RuntimeException /*-{
-        return this["index"] = (this["index"] || {});
+        return this["index"] = (this["index"] || null);
     }-*/
     ;
 
@@ -68,7 +68,7 @@ public class JsoSeries
 
     public final native Number legendIndex()
         throws RuntimeException /*-{
-        return this["legendIndex"] = (this["legendIndex"] || {});
+        return this["legendIndex"] = (this["legendIndex"] || null);
     }-*/
     ;
 
@@ -81,7 +81,7 @@ public class JsoSeries
 
     public final native String name()
         throws RuntimeException /*-{
-        return this["name"] = (this["name"] || {});
+        return this["name"] = (this["name"] || "null");
     }-*/
     ;
 
@@ -94,7 +94,7 @@ public class JsoSeries
 
     public final native String type()
         throws RuntimeException /*-{
-        return this["type"] = (this["type"] || {});
+        return this["type"] = (this["type"] || "null");
     }-*/
     ;
 
@@ -107,7 +107,7 @@ public class JsoSeries
 
     public final native Number zIndex()
         throws RuntimeException /*-{
-        return this["zIndex"] = (this["zIndex"] || {});
+        return this["zIndex"] = (this["zIndex"] || null);
     }-*/
     ;
 

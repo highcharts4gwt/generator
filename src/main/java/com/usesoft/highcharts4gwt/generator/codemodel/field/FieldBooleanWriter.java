@@ -9,10 +9,12 @@ import com.usesoft.highcharts4gwt.generator.codemodel.OutputTypeVisitor;
 public class FieldBooleanWriter extends FieldWriter implements OutputTypeVisitor<String, Void>
 {
 
-    // TODO should use default value
-    public FieldBooleanWriter(JCodeModel codeModel, JDefinedClass jClass, String className)
+    private final boolean defaultValue;
+
+    public FieldBooleanWriter(JCodeModel codeModel, JDefinedClass jClass, String className, boolean defaultValue)
     {
         super(codeModel, className, jClass);
+        this.defaultValue = defaultValue;
     }
 
     @Override
@@ -27,7 +29,8 @@ public class FieldBooleanWriter extends FieldWriter implements OutputTypeVisitor
     @CheckForNull
     public Void visitJso(String fieldName)
     {
-        JsoFieldHelper.addGetterSetterDeclaration(fieldName, boolean.class, getJclass(), getCodeModel());
+        JsoFieldHelper.writeGetterNativeCodeBoolean(fieldName, boolean.class, getJclass(), getCodeModel(), defaultValue);
+        JsoFieldHelper.writeSetterNativeCode(fieldName, boolean.class, getJclass(), getCodeModel());
         return null;
     }
 

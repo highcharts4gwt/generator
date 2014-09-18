@@ -16,7 +16,7 @@ public class JsoPlotBands
 
     public final native Number from()
         throws RuntimeException /*-{
-        return this["from"] = (this["from"] || {});
+        return this["from"] = (this["from"] || null);
     }-*/
     ;
 
@@ -29,7 +29,7 @@ public class JsoPlotBands
 
     public final native String id()
         throws RuntimeException /*-{
-        return this["id"] = (this["id"] || {});
+        return this["id"] = (this["id"] || "null");
     }-*/
     ;
 
@@ -55,7 +55,7 @@ public class JsoPlotBands
 
     public final native Number to()
         throws RuntimeException /*-{
-        return this["to"] = (this["to"] || {});
+        return this["to"] = (this["to"] || null);
     }-*/
     ;
 
@@ -68,7 +68,7 @@ public class JsoPlotBands
 
     public final native Number zIndex()
         throws RuntimeException /*-{
-        return this["zIndex"] = (this["zIndex"] || {});
+        return this["zIndex"] = (this["zIndex"] || null);
     }-*/
     ;
 

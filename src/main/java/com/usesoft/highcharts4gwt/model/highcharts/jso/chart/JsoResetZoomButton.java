@@ -15,7 +15,7 @@ public class JsoResetZoomButton
 
     public final native String relativeTo()
         throws RuntimeException /*-{
-        return this["relativeTo"] = (this["relativeTo"] || {});
+        return this["relativeTo"] = (this["relativeTo"] || "plot");
     }-*/
     ;
 

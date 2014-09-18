@@ -21,7 +21,7 @@ public class JsoXAxis
 
     public final native boolean allowDecimals()
         throws RuntimeException /*-{
-        return this["allowDecimals"] = (this["allowDecimals"] || {});
+        return this["allowDecimals"] = (this["allowDecimals"] || true);
     }-*/
     ;
 
@@ -34,7 +34,7 @@ public class JsoXAxis
 
     public final native Number ceiling()
         throws RuntimeException /*-{
-        return this["ceiling"] = (this["ceiling"] || {});
+        return this["ceiling"] = (this["ceiling"] || null);
     }-*/
     ;
 
@@ -47,7 +47,7 @@ public class JsoXAxis
 
     public final native boolean endOnTick()
         throws RuntimeException /*-{
-        return this["endOnTick"] = (this["endOnTick"] || {});
+        return this["endOnTick"] = (this["endOnTick"] || false);
     }-*/
     ;
 
@@ -73,7 +73,7 @@ public class JsoXAxis
 
     public final native Number floor()
         throws RuntimeException /*-{
-        return this["floor"] = (this["floor"] || {});
+        return this["floor"] = (this["floor"] || null);
     }-*/
     ;
 
@@ -86,7 +86,7 @@ public class JsoXAxis
 
     public final native String gridLineDashStyle()
         throws RuntimeException /*-{
-        return this["gridLineDashStyle"] = (this["gridLineDashStyle"] || {});
+        return this["gridLineDashStyle"] = (this["gridLineDashStyle"] || "Solid");
     }-*/
     ;
 
@@ -99,7 +99,7 @@ public class JsoXAxis
 
     public final native Number gridLineWidth()
         throws RuntimeException /*-{
-        return this["gridLineWidth"] = (this["gridLineWidth"] || {});
+        return this["gridLineWidth"] = (this["gridLineWidth"] || 0.0);
     }-*/
     ;
 
@@ -112,7 +112,7 @@ public class JsoXAxis
 
     public final native Number gridZIndex()
         throws RuntimeException /*-{
-        return this["gridZIndex"] = (this["gridZIndex"] || {});
+        return this["gridZIndex"] = (this["gridZIndex"] || 1.0);
     }-*/
     ;
 
@@ -125,7 +125,7 @@ public class JsoXAxis
 
     public final native String id()
         throws RuntimeException /*-{
-        return this["id"] = (this["id"] || {});
+        return this["id"] = (this["id"] || "null");
     }-*/
     ;
 
@@ -151,7 +151,7 @@ public class JsoXAxis
 
     public final native Number lineWidth()
         throws RuntimeException /*-{
-        return this["lineWidth"] = (this["lineWidth"] || {});
+        return this["lineWidth"] = (this["lineWidth"] || 1.0);
     }-*/
     ;
 
@@ -164,7 +164,7 @@ public class JsoXAxis
 
     public final native Number linkedTo()
         throws RuntimeException /*-{
-        return this["linkedTo"] = (this["linkedTo"] || {});
+        return this["linkedTo"] = (this["linkedTo"] || null);
     }-*/
     ;
 
@@ -177,7 +177,7 @@ public class JsoXAxis
 
     public final native Number max()
         throws RuntimeException /*-{
-        return this["max"] = (this["max"] || {});
+        return this["max"] = (this["max"] || null);
     }-*/
     ;
 
@@ -190,7 +190,7 @@ public class JsoXAxis
 
     public final native Number maxPadding()
         throws RuntimeException /*-{
-        return this["maxPadding"] = (this["maxPadding"] || {});
+        return this["maxPadding"] = (this["maxPadding"] || 0.01);
     }-*/
     ;
 
@@ -203,7 +203,7 @@ public class JsoXAxis
 
     public final native Number maxZoom()
         throws RuntimeException /*-{
-        return this["maxZoom"] = (this["maxZoom"] || {});
+        return this["maxZoom"] = (this["maxZoom"] || null);
     }-*/
     ;
 
@@ -216,7 +216,7 @@ public class JsoXAxis
 
     public final native Number min()
         throws RuntimeException /*-{
-        return this["min"] = (this["min"] || {});
+        return this["min"] = (this["min"] || null);
     }-*/
     ;
 
@@ -229,7 +229,7 @@ public class JsoXAxis
 
     public final native Number minPadding()
         throws RuntimeException /*-{
-        return this["minPadding"] = (this["minPadding"] || {});
+        return this["minPadding"] = (this["minPadding"] || 0.01);
     }-*/
     ;
 
@@ -242,7 +242,7 @@ public class JsoXAxis
 
     public final native Number minRange()
         throws RuntimeException /*-{
-        return this["minRange"] = (this["minRange"] || {});
+        return this["minRange"] = (this["minRange"] || null);
     }-*/
     ;
 
@@ -255,7 +255,7 @@ public class JsoXAxis
 
     public final native Number minTickInterval()
         throws RuntimeException /*-{
-        return this["minTickInterval"] = (this["minTickInterval"] || {});
+        return this["minTickInterval"] = (this["minTickInterval"] || null);
     }-*/
     ;
 
@@ -268,7 +268,7 @@ public class JsoXAxis
 
     public final native String minorGridLineDashStyle()
         throws RuntimeException /*-{
-        return this["minorGridLineDashStyle"] = (this["minorGridLineDashStyle"] || {});
+        return this["minorGridLineDashStyle"] = (this["minorGridLineDashStyle"] || "Solid");
     }-*/
     ;
 
@@ -281,7 +281,7 @@ public class JsoXAxis
 
     public final native Number minorGridLineWidth()
         throws RuntimeException /*-{
-        return this["minorGridLineWidth"] = (this["minorGridLineWidth"] || {});
+        return this["minorGridLineWidth"] = (this["minorGridLineWidth"] || 1.0);
     }-*/
     ;
 
@@ -294,7 +294,7 @@ public class JsoXAxis
 
     public final native Number minorTickInterval()
         throws RuntimeException /*-{
-        return this["minorTickInterval"] = (this["minorTickInterval"] || {});
+        return this["minorTickInterval"] = (this["minorTickInterval"] || null);
     }-*/
     ;
 
@@ -307,7 +307,7 @@ public class JsoXAxis
 
     public final native Number minorTickLength()
         throws RuntimeException /*-{
-        return this["minorTickLength"] = (this["minorTickLength"] || {});
+        return this["minorTickLength"] = (this["minorTickLength"] || 2.0);
     }-*/
     ;
 
@@ -320,7 +320,7 @@ public class JsoXAxis
 
     public final native String minorTickPosition()
         throws RuntimeException /*-{
-        return this["minorTickPosition"] = (this["minorTickPosition"] || {});
+        return this["minorTickPosition"] = (this["minorTickPosition"] || "outside");
     }-*/
     ;
 
@@ -333,7 +333,7 @@ public class JsoXAxis
 
     public final native Number minorTickWidth()
         throws RuntimeException /*-{
-        return this["minorTickWidth"] = (this["minorTickWidth"] || {});
+        return this["minorTickWidth"] = (this["minorTickWidth"] || 0.0);
     }-*/
     ;
 
@@ -346,7 +346,7 @@ public class JsoXAxis
 
     public final native Number offset()
         throws RuntimeException /*-{
-        return this["offset"] = (this["offset"] || {});
+        return this["offset"] = (this["offset"] || 0.0);
     }-*/
     ;
 
@@ -359,7 +359,7 @@ public class JsoXAxis
 
     public final native boolean opposite()
         throws RuntimeException /*-{
-        return this["opposite"] = (this["opposite"] || {});
+        return this["opposite"] = (this["opposite"] || false);
     }-*/
     ;
 
@@ -398,7 +398,7 @@ public class JsoXAxis
 
     public final native boolean reversed()
         throws RuntimeException /*-{
-        return this["reversed"] = (this["reversed"] || {});
+        return this["reversed"] = (this["reversed"] || false);
     }-*/
     ;
 
@@ -411,7 +411,7 @@ public class JsoXAxis
 
     public final native boolean showEmpty()
         throws RuntimeException /*-{
-        return this["showEmpty"] = (this["showEmpty"] || {});
+        return this["showEmpty"] = (this["showEmpty"] || true);
     }-*/
     ;
 
@@ -424,7 +424,7 @@ public class JsoXAxis
 
     public final native boolean showFirstLabel()
         throws RuntimeException /*-{
-        return this["showFirstLabel"] = (this["showFirstLabel"] || {});
+        return this["showFirstLabel"] = (this["showFirstLabel"] || true);
     }-*/
     ;
 
@@ -437,7 +437,7 @@ public class JsoXAxis
 
     public final native boolean showLastLabel()
         throws RuntimeException /*-{
-        return this["showLastLabel"] = (this["showLastLabel"] || {});
+        return this["showLastLabel"] = (this["showLastLabel"] || true);
     }-*/
     ;
 
@@ -450,7 +450,7 @@ public class JsoXAxis
 
     public final native Number startOfWeek()
         throws RuntimeException /*-{
-        return this["startOfWeek"] = (this["startOfWeek"] || {});
+        return this["startOfWeek"] = (this["startOfWeek"] || 1.0);
     }-*/
     ;
 
@@ -463,7 +463,7 @@ public class JsoXAxis
 
     public final native boolean startOnTick()
         throws RuntimeException /*-{
-        return this["startOnTick"] = (this["startOnTick"] || {});
+        return this["startOnTick"] = (this["startOnTick"] || false);
     }-*/
     ;
 
@@ -476,7 +476,7 @@ public class JsoXAxis
 
     public final native Number tickInterval()
         throws RuntimeException /*-{
-        return this["tickInterval"] = (this["tickInterval"] || {});
+        return this["tickInterval"] = (this["tickInterval"] || null);
     }-*/
     ;
 
@@ -489,7 +489,7 @@ public class JsoXAxis
 
     public final native Number tickLength()
         throws RuntimeException /*-{
-        return this["tickLength"] = (this["tickLength"] || {});
+        return this["tickLength"] = (this["tickLength"] || 10.0);
     }-*/
     ;
 
@@ -502,7 +502,7 @@ public class JsoXAxis
 
     public final native Number tickPixelInterval()
         throws RuntimeException /*-{
-        return this["tickPixelInterval"] = (this["tickPixelInterval"] || {});
+        return this["tickPixelInterval"] = (this["tickPixelInterval"] || null);
     }-*/
     ;
 
@@ -515,7 +515,7 @@ public class JsoXAxis
 
     public final native String tickPosition()
         throws RuntimeException /*-{
-        return this["tickPosition"] = (this["tickPosition"] || {});
+        return this["tickPosition"] = (this["tickPosition"] || "outside");
     }-*/
     ;
 
@@ -528,7 +528,7 @@ public class JsoXAxis
 
     public final native Number tickWidth()
         throws RuntimeException /*-{
-        return this["tickWidth"] = (this["tickWidth"] || {});
+        return this["tickWidth"] = (this["tickWidth"] || 1.0);
     }-*/
     ;
 
@@ -541,7 +541,7 @@ public class JsoXAxis
 
     public final native String tickmarkPlacement()
         throws RuntimeException /*-{
-        return this["tickmarkPlacement"] = (this["tickmarkPlacement"] || {});
+        return this["tickmarkPlacement"] = (this["tickmarkPlacement"] || "null");
     }-*/
     ;
 
@@ -567,7 +567,7 @@ public class JsoXAxis
 
     public final native String type()
         throws RuntimeException /*-{
-        return this["type"] = (this["type"] || {});
+        return this["type"] = (this["type"] || "linear");
     }-*/
     ;
 

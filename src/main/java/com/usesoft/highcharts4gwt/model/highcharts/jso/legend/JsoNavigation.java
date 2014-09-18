@@ -15,7 +15,7 @@ public class JsoNavigation
 
     public final native Number arrowSize()
         throws RuntimeException /*-{
-        return this["arrowSize"] = (this["arrowSize"] || {});
+        return this["arrowSize"] = (this["arrowSize"] || 12.0);
     }-*/
     ;
 

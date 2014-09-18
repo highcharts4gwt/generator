@@ -15,7 +15,7 @@ public class JsoErrorbar
 
     public final native String linkedTo()
         throws RuntimeException /*-{
-        return this["linkedTo"] = (this["linkedTo"] || {});
+        return this["linkedTo"] = (this["linkedTo"] || ":previous");
     }-*/
     ;
 
@@ -28,7 +28,7 @@ public class JsoErrorbar
 
     public final native Number whiskerWidth()
         throws RuntimeException /*-{
-        return this["whiskerWidth"] = (this["whiskerWidth"] || {});
+        return this["whiskerWidth"] = (this["whiskerWidth"] || null);
     }-*/
     ;
 

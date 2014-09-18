@@ -15,7 +15,7 @@ public class JsoGlobal
 
     public final native String VMLRadialGradientURL()
         throws RuntimeException /*-{
-        return this["VMLRadialGradientURL"] = (this["VMLRadialGradientURL"] || {});
+        return this["VMLRadialGradientURL"] = (this["VMLRadialGradientURL"] || "http://code.highcharts.com/{version}/gfx/vml-radial-gradient.png");
     }-*/
     ;
 
@@ -28,7 +28,7 @@ public class JsoGlobal
 
     public final native String canvasToolsURL()
         throws RuntimeException /*-{
-        return this["canvasToolsURL"] = (this["canvasToolsURL"] || {});
+        return this["canvasToolsURL"] = (this["canvasToolsURL"] || "http://code.highcharts.com/{version}/modules/canvas-tools.js");
     }-*/
     ;
 
@@ -41,7 +41,7 @@ public class JsoGlobal
 
     public final native Number timezoneOffset()
         throws RuntimeException /*-{
-        return this["timezoneOffset"] = (this["timezoneOffset"] || {});
+        return this["timezoneOffset"] = (this["timezoneOffset"] || 0.0);
     }-*/
     ;
 
@@ -54,7 +54,7 @@ public class JsoGlobal
 
     public final native boolean useUTC()
         throws RuntimeException /*-{
-        return this["useUTC"] = (this["useUTC"] || {});
+        return this["useUTC"] = (this["useUTC"] || true);
     }-*/
     ;
 

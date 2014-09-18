@@ -15,7 +15,7 @@ public class JsoBubble
 
     public final native boolean displayNegative()
         throws RuntimeException /*-{
-        return this["displayNegative"] = (this["displayNegative"] || {});
+        return this["displayNegative"] = (this["displayNegative"] || true);
     }-*/
     ;
 
@@ -28,7 +28,7 @@ public class JsoBubble
 
     public final native String maxSize()
         throws RuntimeException /*-{
-        return this["maxSize"] = (this["maxSize"] || {});
+        return this["maxSize"] = (this["maxSize"] || "20%");
     }-*/
     ;
 
@@ -41,7 +41,7 @@ public class JsoBubble
 
     public final native String minSize()
         throws RuntimeException /*-{
-        return this["minSize"] = (this["minSize"] || {});
+        return this["minSize"] = (this["minSize"] || "8");
     }-*/
     ;
 
@@ -54,7 +54,7 @@ public class JsoBubble
 
     public final native String sizeBy()
         throws RuntimeException /*-{
-        return this["sizeBy"] = (this["sizeBy"] || {});
+        return this["sizeBy"] = (this["sizeBy"] || "area");
     }-*/
     ;
 
@@ -67,7 +67,7 @@ public class JsoBubble
 
     public final native Number zMax()
         throws RuntimeException /*-{
-        return this["zMax"] = (this["zMax"] || {});
+        return this["zMax"] = (this["zMax"] || null);
     }-*/
     ;
 
@@ -80,7 +80,7 @@ public class JsoBubble
 
     public final native Number zMin()
         throws RuntimeException /*-{
-        return this["zMin"] = (this["zMin"] || {});
+        return this["zMin"] = (this["zMin"] || null);
     }-*/
     ;
 
@@ -93,7 +93,7 @@ public class JsoBubble
 
     public final native Number zThreshold()
         throws RuntimeException /*-{
-        return this["zThreshold"] = (this["zThreshold"] || {});
+        return this["zThreshold"] = (this["zThreshold"] || 0.0);
     }-*/
     ;
 

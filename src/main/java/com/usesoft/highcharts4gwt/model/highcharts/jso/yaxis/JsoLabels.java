@@ -15,7 +15,7 @@ public class JsoLabels
 
     public final native String align()
         throws RuntimeException /*-{
-        return this["align"] = (this["align"] || {});
+        return this["align"] = (this["align"] || "right");
     }-*/
     ;
 
@@ -28,7 +28,7 @@ public class JsoLabels
 
     public final native Number distance()
         throws RuntimeException /*-{
-        return this["distance"] = (this["distance"] || {});
+        return this["distance"] = (this["distance"] || 15.0);
     }-*/
     ;
 
@@ -41,7 +41,7 @@ public class JsoLabels
 
     public final native Number x()
         throws RuntimeException /*-{
-        return this["x"] = (this["x"] || {});
+        return this["x"] = (this["x"] || null);
     }-*/
     ;
 
@@ -54,7 +54,7 @@ public class JsoLabels
 
     public final native Number y()
         throws RuntimeException /*-{
-        return this["y"] = (this["y"] || {});
+        return this["y"] = (this["y"] || 3.0);
     }-*/
     ;
 

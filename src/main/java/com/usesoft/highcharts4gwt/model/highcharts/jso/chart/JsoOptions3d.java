@@ -16,7 +16,7 @@ public class JsoOptions3d
 
     public final native Number alpha()
         throws RuntimeException /*-{
-        return this["alpha"] = (this["alpha"] || {});
+        return this["alpha"] = (this["alpha"] || 0.0);
     }-*/
     ;
 
@@ -29,7 +29,7 @@ public class JsoOptions3d
 
     public final native Number beta()
         throws RuntimeException /*-{
-        return this["beta"] = (this["beta"] || {});
+        return this["beta"] = (this["beta"] || 0.0);
     }-*/
     ;
 
@@ -42,7 +42,7 @@ public class JsoOptions3d
 
     public final native Number depth()
         throws RuntimeException /*-{
-        return this["depth"] = (this["depth"] || {});
+        return this["depth"] = (this["depth"] || 100.0);
     }-*/
     ;
 
@@ -55,7 +55,7 @@ public class JsoOptions3d
 
     public final native boolean enabled()
         throws RuntimeException /*-{
-        return this["enabled"] = (this["enabled"] || {});
+        return this["enabled"] = (this["enabled"] || false);
     }-*/
     ;
 
@@ -81,7 +81,7 @@ public class JsoOptions3d
 
     public final native Number viewDistance()
         throws RuntimeException /*-{
-        return this["viewDistance"] = (this["viewDistance"] || {});
+        return this["viewDistance"] = (this["viewDistance"] || 100.0);
     }-*/
     ;
 

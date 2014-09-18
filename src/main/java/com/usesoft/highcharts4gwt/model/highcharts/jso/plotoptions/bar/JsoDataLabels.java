@@ -15,7 +15,7 @@ public class JsoDataLabels
 
     public final native String align()
         throws RuntimeException /*-{
-        return this["align"] = (this["align"] || {});
+        return this["align"] = (this["align"] || "left");
     }-*/
     ;
 
@@ -28,7 +28,7 @@ public class JsoDataLabels
 
     public final native Number x()
         throws RuntimeException /*-{
-        return this["x"] = (this["x"] || {});
+        return this["x"] = (this["x"] || 5.0);
     }-*/
     ;
 

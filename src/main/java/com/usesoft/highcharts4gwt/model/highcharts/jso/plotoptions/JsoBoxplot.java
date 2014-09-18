@@ -15,7 +15,7 @@ public class JsoBoxplot
 
     public final native Number lineWidth()
         throws RuntimeException /*-{
-        return this["lineWidth"] = (this["lineWidth"] || {});
+        return this["lineWidth"] = (this["lineWidth"] || 1.0);
     }-*/
     ;
 
@@ -28,7 +28,7 @@ public class JsoBoxplot
 
     public final native Number medianWidth()
         throws RuntimeException /*-{
-        return this["medianWidth"] = (this["medianWidth"] || {});
+        return this["medianWidth"] = (this["medianWidth"] || 2.0);
     }-*/
     ;
 
@@ -41,7 +41,7 @@ public class JsoBoxplot
 
     public final native String stemDashStyle()
         throws RuntimeException /*-{
-        return this["stemDashStyle"] = (this["stemDashStyle"] || {});
+        return this["stemDashStyle"] = (this["stemDashStyle"] || "Solid");
     }-*/
     ;
 
@@ -54,7 +54,7 @@ public class JsoBoxplot
 
     public final native Number stemWidth()
         throws RuntimeException /*-{
-        return this["stemWidth"] = (this["stemWidth"] || {});
+        return this["stemWidth"] = (this["stemWidth"] || null);
     }-*/
     ;
 
@@ -67,7 +67,7 @@ public class JsoBoxplot
 
     public final native Number whiskerWidth()
         throws RuntimeException /*-{
-        return this["whiskerWidth"] = (this["whiskerWidth"] || {});
+        return this["whiskerWidth"] = (this["whiskerWidth"] || 2.0);
     }-*/
     ;
 

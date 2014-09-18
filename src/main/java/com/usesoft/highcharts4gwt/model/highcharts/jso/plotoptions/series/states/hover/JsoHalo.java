@@ -15,7 +15,7 @@ public class JsoHalo
 
     public final native Number opacity()
         throws RuntimeException /*-{
-        return this["opacity"] = (this["opacity"] || {});
+        return this["opacity"] = (this["opacity"] || 0.25);
     }-*/
     ;
 
@@ -28,7 +28,7 @@ public class JsoHalo
 
     public final native Number size()
         throws RuntimeException /*-{
-        return this["size"] = (this["size"] || {});
+        return this["size"] = (this["size"] || 10.0);
     }-*/
     ;
 

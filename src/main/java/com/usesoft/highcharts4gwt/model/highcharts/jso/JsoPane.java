@@ -15,7 +15,7 @@ public class JsoPane
 
     public final native Number endAngle()
         throws RuntimeException /*-{
-        return this["endAngle"] = (this["endAngle"] || {});
+        return this["endAngle"] = (this["endAngle"] || null);
     }-*/
     ;
 
@@ -28,7 +28,7 @@ public class JsoPane
 
     public final native Number startAngle()
         throws RuntimeException /*-{
-        return this["startAngle"] = (this["startAngle"] || {});
+        return this["startAngle"] = (this["startAngle"] || null);
     }-*/
     ;
 

@@ -15,7 +15,7 @@ public class JsoSelect
 
     public final native boolean enabled()
         throws RuntimeException /*-{
-        return this["enabled"] = (this["enabled"] || {});
+        return this["enabled"] = (this["enabled"] || true);
     }-*/
     ;
 
@@ -28,7 +28,7 @@ public class JsoSelect
 
     public final native Number lineWidth()
         throws RuntimeException /*-{
-        return this["lineWidth"] = (this["lineWidth"] || {});
+        return this["lineWidth"] = (this["lineWidth"] || 0.0);
     }-*/
     ;
 
@@ -41,7 +41,7 @@ public class JsoSelect
 
     public final native Number radius()
         throws RuntimeException /*-{
-        return this["radius"] = (this["radius"] || {});
+        return this["radius"] = (this["radius"] || null);
     }-*/
     ;
 

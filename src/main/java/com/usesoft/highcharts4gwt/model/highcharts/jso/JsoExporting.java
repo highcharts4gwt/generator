@@ -29,7 +29,7 @@ public class JsoExporting
 
     public final native boolean enabled()
         throws RuntimeException /*-{
-        return this["enabled"] = (this["enabled"] || {});
+        return this["enabled"] = (this["enabled"] || true);
     }-*/
     ;
 
@@ -42,7 +42,7 @@ public class JsoExporting
 
     public final native String filename()
         throws RuntimeException /*-{
-        return this["filename"] = (this["filename"] || {});
+        return this["filename"] = (this["filename"] || "chart");
     }-*/
     ;
 
@@ -55,7 +55,7 @@ public class JsoExporting
 
     public final native Number scale()
         throws RuntimeException /*-{
-        return this["scale"] = (this["scale"] || {});
+        return this["scale"] = (this["scale"] || 2.0);
     }-*/
     ;
 
@@ -68,7 +68,7 @@ public class JsoExporting
 
     public final native Number sourceHeight()
         throws RuntimeException /*-{
-        return this["sourceHeight"] = (this["sourceHeight"] || {});
+        return this["sourceHeight"] = (this["sourceHeight"] || null);
     }-*/
     ;
 
@@ -81,7 +81,7 @@ public class JsoExporting
 
     public final native Number sourceWidth()
         throws RuntimeException /*-{
-        return this["sourceWidth"] = (this["sourceWidth"] || {});
+        return this["sourceWidth"] = (this["sourceWidth"] || null);
     }-*/
     ;
 
@@ -94,7 +94,7 @@ public class JsoExporting
 
     public final native String type()
         throws RuntimeException /*-{
-        return this["type"] = (this["type"] || {});
+        return this["type"] = (this["type"] || "image/png");
     }-*/
     ;
 
@@ -107,7 +107,7 @@ public class JsoExporting
 
     public final native String url()
         throws RuntimeException /*-{
-        return this["url"] = (this["url"] || {});
+        return this["url"] = (this["url"] || "http://export.highcharts.com");
     }-*/
     ;
 
@@ -120,7 +120,7 @@ public class JsoExporting
 
     public final native Number width()
         throws RuntimeException /*-{
-        return this["width"] = (this["width"] || {});
+        return this["width"] = (this["width"] || null);
     }-*/
     ;
 

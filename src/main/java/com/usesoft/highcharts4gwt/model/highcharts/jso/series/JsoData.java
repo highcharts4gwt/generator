@@ -16,7 +16,7 @@ public class JsoData
 
     public final native String drilldown()
         throws RuntimeException /*-{
-        return this["drilldown"] = (this["drilldown"] || {});
+        return this["drilldown"] = (this["drilldown"] || "");
     }-*/
     ;
 
@@ -29,7 +29,7 @@ public class JsoData
 
     public final native String id()
         throws RuntimeException /*-{
-        return this["id"] = (this["id"] || {});
+        return this["id"] = (this["id"] || "null");
     }-*/
     ;
 
@@ -42,7 +42,7 @@ public class JsoData
 
     public final native boolean isIntermediateSum()
         throws RuntimeException /*-{
-        return this["isIntermediateSum"] = (this["isIntermediateSum"] || {});
+        return this["isIntermediateSum"] = (this["isIntermediateSum"] || false);
     }-*/
     ;
 
@@ -55,7 +55,7 @@ public class JsoData
 
     public final native boolean isSum()
         throws RuntimeException /*-{
-        return this["isSum"] = (this["isSum"] || {});
+        return this["isSum"] = (this["isSum"] || false);
     }-*/
     ;
 
@@ -68,7 +68,7 @@ public class JsoData
 
     public final native Number legendIndex()
         throws RuntimeException /*-{
-        return this["legendIndex"] = (this["legendIndex"] || {});
+        return this["legendIndex"] = (this["legendIndex"] || null);
     }-*/
     ;
 
@@ -94,7 +94,7 @@ public class JsoData
 
     public final native String name()
         throws RuntimeException /*-{
-        return this["name"] = (this["name"] || {});
+        return this["name"] = (this["name"] || "null");
     }-*/
     ;
 
@@ -107,7 +107,7 @@ public class JsoData
 
     public final native boolean sliced()
         throws RuntimeException /*-{
-        return this["sliced"] = (this["sliced"] || {});
+        return this["sliced"] = (this["sliced"] || false);
     }-*/
     ;
 
@@ -120,7 +120,7 @@ public class JsoData
 
     public final native Number x()
         throws RuntimeException /*-{
-        return this["x"] = (this["x"] || {});
+        return this["x"] = (this["x"] || null);
     }-*/
     ;
 
@@ -133,7 +133,7 @@ public class JsoData
 
     public final native Number y()
         throws RuntimeException /*-{
-        return this["y"] = (this["y"] || {});
+        return this["y"] = (this["y"] || null);
     }-*/
     ;
 

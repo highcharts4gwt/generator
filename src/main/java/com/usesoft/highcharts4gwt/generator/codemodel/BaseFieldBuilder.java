@@ -44,7 +44,7 @@ public abstract class BaseFieldBuilder implements FieldBuilder
 
         FieldType fieldType = findFieldType(optionSpec, returnType);
 
-        fieldType.accept(new FieldWriterVisitor(optionSpec.getTitle(), codeModel, jClass, className), getOutputType());
+        fieldType.accept(new FieldWriterVisitor(optionSpec, codeModel, jClass, className), getOutputType());
 
         // TODO switch to visitor structure
 

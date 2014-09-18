@@ -15,7 +15,7 @@ public class JsoDataLabels
 
     public final native Number xHigh()
         throws RuntimeException /*-{
-        return this["xHigh"] = (this["xHigh"] || {});
+        return this["xHigh"] = (this["xHigh"] || 0.0);
     }-*/
     ;
 
@@ -28,7 +28,7 @@ public class JsoDataLabels
 
     public final native Number xLow()
         throws RuntimeException /*-{
-        return this["xLow"] = (this["xLow"] || {});
+        return this["xLow"] = (this["xLow"] || 0.0);
     }-*/
     ;
 
@@ -41,7 +41,7 @@ public class JsoDataLabels
 
     public final native Number yHigh()
         throws RuntimeException /*-{
-        return this["yHigh"] = (this["yHigh"] || {});
+        return this["yHigh"] = (this["yHigh"] || -6.0);
     }-*/
     ;
 
@@ -54,7 +54,7 @@ public class JsoDataLabels
 
     public final native Number yLow()
         throws RuntimeException /*-{
-        return this["yLow"] = (this["yLow"] || {});
+        return this["yLow"] = (this["yLow"] || 16.0);
     }-*/
     ;
 

@@ -15,7 +15,7 @@ public class JsoArearange
 
     public final native Number lineWidth()
         throws RuntimeException /*-{
-        return this["lineWidth"] = (this["lineWidth"] || {});
+        return this["lineWidth"] = (this["lineWidth"] || 1.0);
     }-*/
     ;
 
@@ -28,7 +28,7 @@ public class JsoArearange
 
     public final native boolean trackByArea()
         throws RuntimeException /*-{
-        return this["trackByArea"] = (this["trackByArea"] || {});
+        return this["trackByArea"] = (this["trackByArea"] || true);
     }-*/
     ;
 

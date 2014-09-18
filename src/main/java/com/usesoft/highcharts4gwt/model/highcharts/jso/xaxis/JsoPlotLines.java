@@ -16,7 +16,7 @@ public class JsoPlotLines
 
     public final native String dashStyle()
         throws RuntimeException /*-{
-        return this["dashStyle"] = (this["dashStyle"] || {});
+        return this["dashStyle"] = (this["dashStyle"] || "Solid");
     }-*/
     ;
 
@@ -29,7 +29,7 @@ public class JsoPlotLines
 
     public final native String id()
         throws RuntimeException /*-{
-        return this["id"] = (this["id"] || {});
+        return this["id"] = (this["id"] || "null");
     }-*/
     ;
 
@@ -55,7 +55,7 @@ public class JsoPlotLines
 
     public final native Number value()
         throws RuntimeException /*-{
-        return this["value"] = (this["value"] || {});
+        return this["value"] = (this["value"] || null);
     }-*/
     ;
 
@@ -68,7 +68,7 @@ public class JsoPlotLines
 
     public final native Number width()
         throws RuntimeException /*-{
-        return this["width"] = (this["width"] || {});
+        return this["width"] = (this["width"] || null);
     }-*/
     ;
 
@@ -81,7 +81,7 @@ public class JsoPlotLines
 
     public final native Number zIndex()
         throws RuntimeException /*-{
-        return this["zIndex"] = (this["zIndex"] || {});
+        return this["zIndex"] = (this["zIndex"] || null);
     }-*/
     ;
 

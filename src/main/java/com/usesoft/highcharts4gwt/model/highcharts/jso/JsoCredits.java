@@ -15,7 +15,7 @@ public class JsoCredits
 
     public final native boolean enabled()
         throws RuntimeException /*-{
-        return this["enabled"] = (this["enabled"] || {});
+        return this["enabled"] = (this["enabled"] || true);
     }-*/
     ;
 
@@ -28,7 +28,7 @@ public class JsoCredits
 
     public final native String href()
         throws RuntimeException /*-{
-        return this["href"] = (this["href"] || {});
+        return this["href"] = (this["href"] || "http://www.highcharts.com");
     }-*/
     ;
 
@@ -41,7 +41,7 @@ public class JsoCredits
 
     public final native String text()
         throws RuntimeException /*-{
-        return this["text"] = (this["text"] || {});
+        return this["text"] = (this["text"] || "Highcharts.com");
     }-*/
     ;
 

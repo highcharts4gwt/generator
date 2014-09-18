@@ -18,7 +18,7 @@ public class JsoChart
 
     public final native boolean alignTicks()
         throws RuntimeException /*-{
-        return this["alignTicks"] = (this["alignTicks"] || {});
+        return this["alignTicks"] = (this["alignTicks"] || true);
     }-*/
     ;
 
@@ -31,7 +31,7 @@ public class JsoChart
 
     public final native Number borderRadius()
         throws RuntimeException /*-{
-        return this["borderRadius"] = (this["borderRadius"] || {});
+        return this["borderRadius"] = (this["borderRadius"] || 0.0);
     }-*/
     ;
 
@@ -44,7 +44,7 @@ public class JsoChart
 
     public final native Number borderWidth()
         throws RuntimeException /*-{
-        return this["borderWidth"] = (this["borderWidth"] || {});
+        return this["borderWidth"] = (this["borderWidth"] || 0.0);
     }-*/
     ;
 
@@ -57,7 +57,7 @@ public class JsoChart
 
     public final native String className()
         throws RuntimeException /*-{
-        return this["className"] = (this["className"] || {});
+        return this["className"] = (this["className"] || "null");
     }-*/
     ;
 
@@ -70,7 +70,7 @@ public class JsoChart
 
     public final native String defaultSeriesType()
         throws RuntimeException /*-{
-        return this["defaultSeriesType"] = (this["defaultSeriesType"] || {});
+        return this["defaultSeriesType"] = (this["defaultSeriesType"] || "line");
     }-*/
     ;
 
@@ -96,7 +96,7 @@ public class JsoChart
 
     public final native Number height()
         throws RuntimeException /*-{
-        return this["height"] = (this["height"] || {});
+        return this["height"] = (this["height"] || null);
     }-*/
     ;
 
@@ -109,7 +109,7 @@ public class JsoChart
 
     public final native boolean ignoreHiddenSeries()
         throws RuntimeException /*-{
-        return this["ignoreHiddenSeries"] = (this["ignoreHiddenSeries"] || {});
+        return this["ignoreHiddenSeries"] = (this["ignoreHiddenSeries"] || true);
     }-*/
     ;
 
@@ -122,7 +122,7 @@ public class JsoChart
 
     public final native boolean inverted()
         throws RuntimeException /*-{
-        return this["inverted"] = (this["inverted"] || {});
+        return this["inverted"] = (this["inverted"] || false);
     }-*/
     ;
 
@@ -135,7 +135,7 @@ public class JsoChart
 
     public final native Number marginBottom()
         throws RuntimeException /*-{
-        return this["marginBottom"] = (this["marginBottom"] || {});
+        return this["marginBottom"] = (this["marginBottom"] || null);
     }-*/
     ;
 
@@ -148,7 +148,7 @@ public class JsoChart
 
     public final native Number marginLeft()
         throws RuntimeException /*-{
-        return this["marginLeft"] = (this["marginLeft"] || {});
+        return this["marginLeft"] = (this["marginLeft"] || null);
     }-*/
     ;
 
@@ -161,7 +161,7 @@ public class JsoChart
 
     public final native Number marginRight()
         throws RuntimeException /*-{
-        return this["marginRight"] = (this["marginRight"] || {});
+        return this["marginRight"] = (this["marginRight"] || null);
     }-*/
     ;
 
@@ -174,7 +174,7 @@ public class JsoChart
 
     public final native Number marginTop()
         throws RuntimeException /*-{
-        return this["marginTop"] = (this["marginTop"] || {});
+        return this["marginTop"] = (this["marginTop"] || null);
     }-*/
     ;
 
@@ -200,7 +200,7 @@ public class JsoChart
 
     public final native String panKey()
         throws RuntimeException /*-{
-        return this["panKey"] = (this["panKey"] || {});
+        return this["panKey"] = (this["panKey"] || "");
     }-*/
     ;
 
@@ -213,7 +213,7 @@ public class JsoChart
 
     public final native boolean panning()
         throws RuntimeException /*-{
-        return this["panning"] = (this["panning"] || {});
+        return this["panning"] = (this["panning"] || false);
     }-*/
     ;
 
@@ -226,7 +226,7 @@ public class JsoChart
 
     public final native String pinchType()
         throws RuntimeException /*-{
-        return this["pinchType"] = (this["pinchType"] || {});
+        return this["pinchType"] = (this["pinchType"] || "null");
     }-*/
     ;
 
@@ -239,7 +239,7 @@ public class JsoChart
 
     public final native String plotBackgroundImage()
         throws RuntimeException /*-{
-        return this["plotBackgroundImage"] = (this["plotBackgroundImage"] || {});
+        return this["plotBackgroundImage"] = (this["plotBackgroundImage"] || "null");
     }-*/
     ;
 
@@ -252,7 +252,7 @@ public class JsoChart
 
     public final native Number plotBorderWidth()
         throws RuntimeException /*-{
-        return this["plotBorderWidth"] = (this["plotBorderWidth"] || {});
+        return this["plotBorderWidth"] = (this["plotBorderWidth"] || 0.0);
     }-*/
     ;
 
@@ -265,7 +265,7 @@ public class JsoChart
 
     public final native boolean polar()
         throws RuntimeException /*-{
-        return this["polar"] = (this["polar"] || {});
+        return this["polar"] = (this["polar"] || false);
     }-*/
     ;
 
@@ -278,7 +278,7 @@ public class JsoChart
 
     public final native boolean reflow()
         throws RuntimeException /*-{
-        return this["reflow"] = (this["reflow"] || {});
+        return this["reflow"] = (this["reflow"] || true);
     }-*/
     ;
 
@@ -304,7 +304,7 @@ public class JsoChart
 
     public final native boolean showAxes()
         throws RuntimeException /*-{
-        return this["showAxes"] = (this["showAxes"] || {});
+        return this["showAxes"] = (this["showAxes"] || false);
     }-*/
     ;
 
@@ -317,7 +317,7 @@ public class JsoChart
 
     public final native Number spacingBottom()
         throws RuntimeException /*-{
-        return this["spacingBottom"] = (this["spacingBottom"] || {});
+        return this["spacingBottom"] = (this["spacingBottom"] || 15.0);
     }-*/
     ;
 
@@ -330,7 +330,7 @@ public class JsoChart
 
     public final native Number spacingLeft()
         throws RuntimeException /*-{
-        return this["spacingLeft"] = (this["spacingLeft"] || {});
+        return this["spacingLeft"] = (this["spacingLeft"] || 10.0);
     }-*/
     ;
 
@@ -343,7 +343,7 @@ public class JsoChart
 
     public final native Number spacingRight()
         throws RuntimeException /*-{
-        return this["spacingRight"] = (this["spacingRight"] || {});
+        return this["spacingRight"] = (this["spacingRight"] || 10.0);
     }-*/
     ;
 
@@ -356,7 +356,7 @@ public class JsoChart
 
     public final native Number spacingTop()
         throws RuntimeException /*-{
-        return this["spacingTop"] = (this["spacingTop"] || {});
+        return this["spacingTop"] = (this["spacingTop"] || 10.0);
     }-*/
     ;
 
@@ -369,7 +369,7 @@ public class JsoChart
 
     public final native String type()
         throws RuntimeException /*-{
-        return this["type"] = (this["type"] || {});
+        return this["type"] = (this["type"] || "line");
     }-*/
     ;
 
@@ -382,7 +382,7 @@ public class JsoChart
 
     public final native Number width()
         throws RuntimeException /*-{
-        return this["width"] = (this["width"] || {});
+        return this["width"] = (this["width"] || null);
     }-*/
     ;
 
@@ -395,7 +395,7 @@ public class JsoChart
 
     public final native String zoomType()
         throws RuntimeException /*-{
-        return this["zoomType"] = (this["zoomType"] || {});
+        return this["zoomType"] = (this["zoomType"] || "null");
     }-*/
     ;
 

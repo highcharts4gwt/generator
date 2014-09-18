@@ -15,7 +15,7 @@ public class JsoDataLabels
 
     public final native String align()
         throws RuntimeException /*-{
-        return this["align"] = (this["align"] || {});
+        return this["align"] = (this["align"] || "null");
     }-*/
     ;
 
@@ -28,7 +28,7 @@ public class JsoDataLabels
 
     public final native String connectorColor()
         throws RuntimeException /*-{
-        return this["connectorColor"] = (this["connectorColor"] || {});
+        return this["connectorColor"] = (this["connectorColor"] || "{point.color}");
     }-*/
     ;
 
@@ -41,7 +41,7 @@ public class JsoDataLabels
 
     public final native Number connectorPadding()
         throws RuntimeException /*-{
-        return this["connectorPadding"] = (this["connectorPadding"] || {});
+        return this["connectorPadding"] = (this["connectorPadding"] || 5.0);
     }-*/
     ;
 
@@ -54,7 +54,7 @@ public class JsoDataLabels
 
     public final native Number connectorWidth()
         throws RuntimeException /*-{
-        return this["connectorWidth"] = (this["connectorWidth"] || {});
+        return this["connectorWidth"] = (this["connectorWidth"] || 1.0);
     }-*/
     ;
 
@@ -67,7 +67,7 @@ public class JsoDataLabels
 
     public final native Number distance()
         throws RuntimeException /*-{
-        return this["distance"] = (this["distance"] || {});
+        return this["distance"] = (this["distance"] || 30.0);
     }-*/
     ;
 
@@ -80,7 +80,7 @@ public class JsoDataLabels
 
     public final native boolean enabled()
         throws RuntimeException /*-{
-        return this["enabled"] = (this["enabled"] || {});
+        return this["enabled"] = (this["enabled"] || true);
     }-*/
     ;
 
@@ -93,7 +93,7 @@ public class JsoDataLabels
 
     public final native boolean softConnector()
         throws RuntimeException /*-{
-        return this["softConnector"] = (this["softConnector"] || {});
+        return this["softConnector"] = (this["softConnector"] || true);
     }-*/
     ;
 

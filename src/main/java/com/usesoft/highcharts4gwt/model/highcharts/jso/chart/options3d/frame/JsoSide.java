@@ -15,7 +15,7 @@ public class JsoSide
 
     public final native Number size()
         throws RuntimeException /*-{
-        return this["size"] = (this["size"] || {});
+        return this["size"] = (this["size"] || 1.0);
     }-*/
     ;
 

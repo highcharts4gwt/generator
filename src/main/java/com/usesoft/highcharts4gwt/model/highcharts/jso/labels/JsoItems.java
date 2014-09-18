@@ -15,7 +15,7 @@ public class JsoItems
 
     public final native String html()
         throws RuntimeException /*-{
-        return this["html"] = (this["html"] || {});
+        return this["html"] = (this["html"] || "null");
     }-*/
     ;
 

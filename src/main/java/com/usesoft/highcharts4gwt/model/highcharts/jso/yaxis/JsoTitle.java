@@ -15,7 +15,7 @@ public class JsoTitle
 
     public final native Number margin()
         throws RuntimeException /*-{
-        return this["margin"] = (this["margin"] || {});
+        return this["margin"] = (this["margin"] || 40.0);
     }-*/
     ;
 
@@ -28,7 +28,7 @@ public class JsoTitle
 
     public final native Number rotation()
         throws RuntimeException /*-{
-        return this["rotation"] = (this["rotation"] || {});
+        return this["rotation"] = (this["rotation"] || 270.0);
     }-*/
     ;
 
@@ -41,7 +41,7 @@ public class JsoTitle
 
     public final native String text()
         throws RuntimeException /*-{
-        return this["text"] = (this["text"] || {});
+        return this["text"] = (this["text"] || "Values");
     }-*/
     ;
 

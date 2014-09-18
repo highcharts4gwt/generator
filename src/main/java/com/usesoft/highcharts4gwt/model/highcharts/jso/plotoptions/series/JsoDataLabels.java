@@ -15,7 +15,7 @@ public class JsoDataLabels
 
     public final native String align()
         throws RuntimeException /*-{
-        return this["align"] = (this["align"] || {});
+        return this["align"] = (this["align"] || "center");
     }-*/
     ;
 
@@ -28,7 +28,7 @@ public class JsoDataLabels
 
     public final native Number borderRadius()
         throws RuntimeException /*-{
-        return this["borderRadius"] = (this["borderRadius"] || {});
+        return this["borderRadius"] = (this["borderRadius"] || 0.0);
     }-*/
     ;
 
@@ -41,7 +41,7 @@ public class JsoDataLabels
 
     public final native Number borderWidth()
         throws RuntimeException /*-{
-        return this["borderWidth"] = (this["borderWidth"] || {});
+        return this["borderWidth"] = (this["borderWidth"] || 0.0);
     }-*/
     ;
 
@@ -54,7 +54,7 @@ public class JsoDataLabels
 
     public final native boolean crop()
         throws RuntimeException /*-{
-        return this["crop"] = (this["crop"] || {});
+        return this["crop"] = (this["crop"] || true);
     }-*/
     ;
 
@@ -67,7 +67,7 @@ public class JsoDataLabels
 
     public final native boolean defer()
         throws RuntimeException /*-{
-        return this["defer"] = (this["defer"] || {});
+        return this["defer"] = (this["defer"] || true);
     }-*/
     ;
 
@@ -80,7 +80,7 @@ public class JsoDataLabels
 
     public final native boolean enabled()
         throws RuntimeException /*-{
-        return this["enabled"] = (this["enabled"] || {});
+        return this["enabled"] = (this["enabled"] || false);
     }-*/
     ;
 
@@ -93,7 +93,7 @@ public class JsoDataLabels
 
     public final native String format()
         throws RuntimeException /*-{
-        return this["format"] = (this["format"] || {});
+        return this["format"] = (this["format"] || "{y}");
     }-*/
     ;
 
@@ -106,7 +106,7 @@ public class JsoDataLabels
 
     public final native boolean inside()
         throws RuntimeException /*-{
-        return this["inside"] = (this["inside"] || {});
+        return this["inside"] = (this["inside"] || false);
     }-*/
     ;
 
@@ -119,7 +119,7 @@ public class JsoDataLabels
 
     public final native String overflow()
         throws RuntimeException /*-{
-        return this["overflow"] = (this["overflow"] || {});
+        return this["overflow"] = (this["overflow"] || "justify");
     }-*/
     ;
 
@@ -132,7 +132,7 @@ public class JsoDataLabels
 
     public final native Number padding()
         throws RuntimeException /*-{
-        return this["padding"] = (this["padding"] || {});
+        return this["padding"] = (this["padding"] || 2.0);
     }-*/
     ;
 
@@ -145,7 +145,7 @@ public class JsoDataLabels
 
     public final native Number rotation()
         throws RuntimeException /*-{
-        return this["rotation"] = (this["rotation"] || {});
+        return this["rotation"] = (this["rotation"] || 0.0);
     }-*/
     ;
 
@@ -158,7 +158,7 @@ public class JsoDataLabels
 
     public final native String verticalAlign()
         throws RuntimeException /*-{
-        return this["verticalAlign"] = (this["verticalAlign"] || {});
+        return this["verticalAlign"] = (this["verticalAlign"] || "null");
     }-*/
     ;
 
@@ -171,7 +171,7 @@ public class JsoDataLabels
 
     public final native Number x()
         throws RuntimeException /*-{
-        return this["x"] = (this["x"] || {});
+        return this["x"] = (this["x"] || 0.0);
     }-*/
     ;
 
@@ -184,7 +184,7 @@ public class JsoDataLabels
 
     public final native Number y()
         throws RuntimeException /*-{
-        return this["y"] = (this["y"] || {});
+        return this["y"] = (this["y"] || -6.0);
     }-*/
     ;
 
@@ -197,7 +197,7 @@ public class JsoDataLabels
 
     public final native Number zIndex()
         throws RuntimeException /*-{
-        return this["zIndex"] = (this["zIndex"] || {});
+        return this["zIndex"] = (this["zIndex"] || 6.0);
     }-*/
     ;
 

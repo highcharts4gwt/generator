@@ -15,7 +15,7 @@ public class JsoTitle
 
     public final native String text()
         throws RuntimeException /*-{
-        return this["text"] = (this["text"] || {});
+        return this["text"] = (this["text"] || "null");
     }-*/
     ;
 

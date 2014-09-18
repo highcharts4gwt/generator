@@ -15,7 +15,7 @@ public class JsoDataLabels
 
     public final native Number borderRadius()
         throws RuntimeException /*-{
-        return this["borderRadius"] = (this["borderRadius"] || {});
+        return this["borderRadius"] = (this["borderRadius"] || 3.0);
     }-*/
     ;
 
@@ -28,7 +28,7 @@ public class JsoDataLabels
 
     public final native Number borderWidth()
         throws RuntimeException /*-{
-        return this["borderWidth"] = (this["borderWidth"] || {});
+        return this["borderWidth"] = (this["borderWidth"] || 1.0);
     }-*/
     ;
 
@@ -41,7 +41,7 @@ public class JsoDataLabels
 
     public final native boolean enabled()
         throws RuntimeException /*-{
-        return this["enabled"] = (this["enabled"] || {});
+        return this["enabled"] = (this["enabled"] || false);
     }-*/
     ;
 
@@ -54,7 +54,7 @@ public class JsoDataLabels
 
     public final native String verticalAlign()
         throws RuntimeException /*-{
-        return this["verticalAlign"] = (this["verticalAlign"] || {});
+        return this["verticalAlign"] = (this["verticalAlign"] || "top");
     }-*/
     ;
 
@@ -67,7 +67,7 @@ public class JsoDataLabels
 
     public final native Number y()
         throws RuntimeException /*-{
-        return this["y"] = (this["y"] || {});
+        return this["y"] = (this["y"] || 15.0);
     }-*/
     ;
 
@@ -80,7 +80,7 @@ public class JsoDataLabels
 
     public final native Number zIndex()
         throws RuntimeException /*-{
-        return this["zIndex"] = (this["zIndex"] || {});
+        return this["zIndex"] = (this["zIndex"] || 2.0);
     }-*/
     ;
 

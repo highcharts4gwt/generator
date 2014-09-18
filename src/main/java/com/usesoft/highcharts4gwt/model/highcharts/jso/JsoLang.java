@@ -16,7 +16,7 @@ public class JsoLang
 
     public final native String contextButtonTitle()
         throws RuntimeException /*-{
-        return this["contextButtonTitle"] = (this["contextButtonTitle"] || {});
+        return this["contextButtonTitle"] = (this["contextButtonTitle"] || "Chart context menu");
     }-*/
     ;
 
@@ -29,7 +29,7 @@ public class JsoLang
 
     public final native String decimalPoint()
         throws RuntimeException /*-{
-        return this["decimalPoint"] = (this["decimalPoint"] || {});
+        return this["decimalPoint"] = (this["decimalPoint"] || ".");
     }-*/
     ;
 
@@ -42,7 +42,7 @@ public class JsoLang
 
     public final native String downloadJPEG()
         throws RuntimeException /*-{
-        return this["downloadJPEG"] = (this["downloadJPEG"] || {});
+        return this["downloadJPEG"] = (this["downloadJPEG"] || "Download JPEG image");
     }-*/
     ;
 
@@ -55,7 +55,7 @@ public class JsoLang
 
     public final native String downloadPDF()
         throws RuntimeException /*-{
-        return this["downloadPDF"] = (this["downloadPDF"] || {});
+        return this["downloadPDF"] = (this["downloadPDF"] || "Download PDF document");
     }-*/
     ;
 
@@ -68,7 +68,7 @@ public class JsoLang
 
     public final native String downloadPNG()
         throws RuntimeException /*-{
-        return this["downloadPNG"] = (this["downloadPNG"] || {});
+        return this["downloadPNG"] = (this["downloadPNG"] || "Download PNG image");
     }-*/
     ;
 
@@ -81,7 +81,7 @@ public class JsoLang
 
     public final native String downloadSVG()
         throws RuntimeException /*-{
-        return this["downloadSVG"] = (this["downloadSVG"] || {});
+        return this["downloadSVG"] = (this["downloadSVG"] || "Download SVG vector image");
     }-*/
     ;
 
@@ -94,7 +94,7 @@ public class JsoLang
 
     public final native String drillUpText()
         throws RuntimeException /*-{
-        return this["drillUpText"] = (this["drillUpText"] || {});
+        return this["drillUpText"] = (this["drillUpText"] || "Back to {series.name}");
     }-*/
     ;
 
@@ -107,7 +107,7 @@ public class JsoLang
 
     public final native String loading()
         throws RuntimeException /*-{
-        return this["loading"] = (this["loading"] || {});
+        return this["loading"] = (this["loading"] || "Loading...");
     }-*/
     ;
 
@@ -133,7 +133,7 @@ public class JsoLang
 
     public final native String noData()
         throws RuntimeException /*-{
-        return this["noData"] = (this["noData"] || {});
+        return this["noData"] = (this["noData"] || "No data to display");
     }-*/
     ;
 
@@ -159,7 +159,7 @@ public class JsoLang
 
     public final native String printChart()
         throws RuntimeException /*-{
-        return this["printChart"] = (this["printChart"] || {});
+        return this["printChart"] = (this["printChart"] || "Print chart");
     }-*/
     ;
 
@@ -172,7 +172,7 @@ public class JsoLang
 
     public final native String resetZoom()
         throws RuntimeException /*-{
-        return this["resetZoom"] = (this["resetZoom"] || {});
+        return this["resetZoom"] = (this["resetZoom"] || "Reset zoom");
     }-*/
     ;
 
@@ -185,7 +185,7 @@ public class JsoLang
 
     public final native String resetZoomTitle()
         throws RuntimeException /*-{
-        return this["resetZoomTitle"] = (this["resetZoomTitle"] || {});
+        return this["resetZoomTitle"] = (this["resetZoomTitle"] || "Reset zoom level 1:1");
     }-*/
     ;
 
@@ -211,7 +211,7 @@ public class JsoLang
 
     public final native String thousandsSep()
         throws RuntimeException /*-{
-        return this["thousandsSep"] = (this["thousandsSep"] || {});
+        return this["thousandsSep"] = (this["thousandsSep"] || ",");
     }-*/
     ;
 

@@ -15,7 +15,7 @@ public class JsoWaterfall
 
     public final native String dashStyle()
         throws RuntimeException /*-{
-        return this["dashStyle"] = (this["dashStyle"] || {});
+        return this["dashStyle"] = (this["dashStyle"] || "Dot");
     }-*/
     ;
 

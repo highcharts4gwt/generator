@@ -15,7 +15,7 @@ public class JsoDial
 
     public final native String baseLength()
         throws RuntimeException /*-{
-        return this["baseLength"] = (this["baseLength"] || {});
+        return this["baseLength"] = (this["baseLength"] || "70%");
     }-*/
     ;
 
@@ -28,7 +28,7 @@ public class JsoDial
 
     public final native Number baseWidth()
         throws RuntimeException /*-{
-        return this["baseWidth"] = (this["baseWidth"] || {});
+        return this["baseWidth"] = (this["baseWidth"] || 3.0);
     }-*/
     ;
 
@@ -41,7 +41,7 @@ public class JsoDial
 
     public final native Number borderWidth()
         throws RuntimeException /*-{
-        return this["borderWidth"] = (this["borderWidth"] || {});
+        return this["borderWidth"] = (this["borderWidth"] || 0.0);
     }-*/
     ;
 
@@ -54,7 +54,7 @@ public class JsoDial
 
     public final native String radius()
         throws RuntimeException /*-{
-        return this["radius"] = (this["radius"] || {});
+        return this["radius"] = (this["radius"] || "80%");
     }-*/
     ;
 
@@ -67,7 +67,7 @@ public class JsoDial
 
     public final native String rearLength()
         throws RuntimeException /*-{
-        return this["rearLength"] = (this["rearLength"] || {});
+        return this["rearLength"] = (this["rearLength"] || "10%");
     }-*/
     ;
 
@@ -80,7 +80,7 @@ public class JsoDial
 
     public final native Number topWidth()
         throws RuntimeException /*-{
-        return this["topWidth"] = (this["topWidth"] || {});
+        return this["topWidth"] = (this["topWidth"] || 1.0);
     }-*/
     ;
 

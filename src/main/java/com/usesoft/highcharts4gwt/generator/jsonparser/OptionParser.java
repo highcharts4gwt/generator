@@ -49,18 +49,18 @@ public class OptionParser
         List<String> excluding = getFieldAsListString(jsonOption, FIELD_EXCLUDING);
 
         return new OptionSpec(fullName, name, title).setValues(values).setDefaults(getFieldAsString(jsonOption, FIELD_DEFAULTS))
-                        .setExtending(getFieldAsString(jsonOption, FIELD_EXTENDING)).setExcluding(excluding)
-                        .setIsParent(Boolean.parseBoolean(getFieldAsString(jsonOption, FIELD_ISPARENT))).setSince(getFieldAsString(jsonOption, FIELD_SINCE))
-                        .setDemo(getFieldAsString(jsonOption, FIELD_DEMO)).setSeeAlso(getFieldAsString(jsonOption, FIELD_SEEALSO))
-                        .setParent(getFieldAsString(jsonOption, FIELD_PARENT)).setReturnType(getFieldAsString(jsonOption, FIELD_RETURNTYPE))
-                        .setDescription(getFieldAsString(jsonOption, FIELD_DESCRIPTION))
-                        .setDeprecated(Boolean.parseBoolean(getFieldAsString(jsonOption, FIELD_DEPRECATED)));
+                .setExtending(getFieldAsString(jsonOption, FIELD_EXTENDING)).setExcluding(excluding)
+                .setIsParent(Boolean.parseBoolean(getFieldAsString(jsonOption, FIELD_ISPARENT))).setSince(getFieldAsString(jsonOption, FIELD_SINCE))
+                .setDemo(getFieldAsString(jsonOption, FIELD_DEMO)).setSeeAlso(getFieldAsString(jsonOption, FIELD_SEEALSO))
+                .setParent(getFieldAsString(jsonOption, FIELD_PARENT)).setReturnType(getFieldAsString(jsonOption, FIELD_RETURNTYPE))
+                .setDescription(getFieldAsString(jsonOption, FIELD_DESCRIPTION))
+                .setDeprecated(Boolean.parseBoolean(getFieldAsString(jsonOption, FIELD_DEPRECATED)));
     }
 
     @CheckForNull
     private static String getFieldAsString(JSONObject jsonOption, String fieldName)
     {
-        String value = jsonOption.get(fieldName).toString();
+        String value = jsonOption.get(fieldName).toString().trim();
         if (value.equals(NULL))
             return null;
         return value;

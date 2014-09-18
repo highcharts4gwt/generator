@@ -15,7 +15,7 @@ public class JsoHover
 
     public final native Number brightness()
         throws RuntimeException /*-{
-        return this["brightness"] = (this["brightness"] || {});
+        return this["brightness"] = (this["brightness"] || 0.1);
     }-*/
     ;
 

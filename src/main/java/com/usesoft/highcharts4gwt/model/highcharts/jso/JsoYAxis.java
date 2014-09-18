@@ -22,7 +22,7 @@ public class JsoYAxis
 
     public final native boolean endOnTick()
         throws RuntimeException /*-{
-        return this["endOnTick"] = (this["endOnTick"] || {});
+        return this["endOnTick"] = (this["endOnTick"] || true);
     }-*/
     ;
 
@@ -48,7 +48,7 @@ public class JsoYAxis
 
     public final native String gridLineInterpolation()
         throws RuntimeException /*-{
-        return this["gridLineInterpolation"] = (this["gridLineInterpolation"] || {});
+        return this["gridLineInterpolation"] = (this["gridLineInterpolation"] || "null");
     }-*/
     ;
 
@@ -61,7 +61,7 @@ public class JsoYAxis
 
     public final native Number gridLineWidth()
         throws RuntimeException /*-{
-        return this["gridLineWidth"] = (this["gridLineWidth"] || {});
+        return this["gridLineWidth"] = (this["gridLineWidth"] || 1.0);
     }-*/
     ;
 
@@ -87,7 +87,7 @@ public class JsoYAxis
 
     public final native Number lineWidth()
         throws RuntimeException /*-{
-        return this["lineWidth"] = (this["lineWidth"] || {});
+        return this["lineWidth"] = (this["lineWidth"] || 0.0);
     }-*/
     ;
 
@@ -100,7 +100,7 @@ public class JsoYAxis
 
     public final native Number maxPadding()
         throws RuntimeException /*-{
-        return this["maxPadding"] = (this["maxPadding"] || {});
+        return this["maxPadding"] = (this["maxPadding"] || 0.05);
     }-*/
     ;
 
@@ -113,7 +113,7 @@ public class JsoYAxis
 
     public final native Number minPadding()
         throws RuntimeException /*-{
-        return this["minPadding"] = (this["minPadding"] || {});
+        return this["minPadding"] = (this["minPadding"] || 0.05);
     }-*/
     ;
 
@@ -152,7 +152,7 @@ public class JsoYAxis
 
     public final native boolean reversedStacks()
         throws RuntimeException /*-{
-        return this["reversedStacks"] = (this["reversedStacks"] || {});
+        return this["reversedStacks"] = (this["reversedStacks"] || true);
     }-*/
     ;
 
@@ -165,7 +165,7 @@ public class JsoYAxis
 
     public final native boolean showLastLabel()
         throws RuntimeException /*-{
-        return this["showLastLabel"] = (this["showLastLabel"] || {});
+        return this["showLastLabel"] = (this["showLastLabel"] || true);
     }-*/
     ;
 
@@ -191,7 +191,7 @@ public class JsoYAxis
 
     public final native boolean startOnTick()
         throws RuntimeException /*-{
-        return this["startOnTick"] = (this["startOnTick"] || {});
+        return this["startOnTick"] = (this["startOnTick"] || true);
     }-*/
     ;
 
@@ -204,7 +204,7 @@ public class JsoYAxis
 
     public final native Number tickWidth()
         throws RuntimeException /*-{
-        return this["tickWidth"] = (this["tickWidth"] || {});
+        return this["tickWidth"] = (this["tickWidth"] || 0.0);
     }-*/
     ;
 

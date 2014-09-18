@@ -15,7 +15,7 @@ public class JsoStackLabels
 
     public final native String align()
         throws RuntimeException /*-{
-        return this["align"] = (this["align"] || {});
+        return this["align"] = (this["align"] || "null");
     }-*/
     ;
 
@@ -28,7 +28,7 @@ public class JsoStackLabels
 
     public final native boolean enabled()
         throws RuntimeException /*-{
-        return this["enabled"] = (this["enabled"] || {});
+        return this["enabled"] = (this["enabled"] || false);
     }-*/
     ;
 
@@ -41,7 +41,7 @@ public class JsoStackLabels
 
     public final native String format()
         throws RuntimeException /*-{
-        return this["format"] = (this["format"] || {});
+        return this["format"] = (this["format"] || "{total}");
     }-*/
     ;
 
@@ -54,7 +54,7 @@ public class JsoStackLabels
 
     public final native Number rotation()
         throws RuntimeException /*-{
-        return this["rotation"] = (this["rotation"] || {});
+        return this["rotation"] = (this["rotation"] || 0.0);
     }-*/
     ;
 
@@ -67,7 +67,7 @@ public class JsoStackLabels
 
     public final native String textAlign()
         throws RuntimeException /*-{
-        return this["textAlign"] = (this["textAlign"] || {});
+        return this["textAlign"] = (this["textAlign"] || "null");
     }-*/
     ;
 
@@ -80,7 +80,7 @@ public class JsoStackLabels
 
     public final native boolean useHTML()
         throws RuntimeException /*-{
-        return this["useHTML"] = (this["useHTML"] || {});
+        return this["useHTML"] = (this["useHTML"] || false);
     }-*/
     ;
 
@@ -93,7 +93,7 @@ public class JsoStackLabels
 
     public final native String verticalAlign()
         throws RuntimeException /*-{
-        return this["verticalAlign"] = (this["verticalAlign"] || {});
+        return this["verticalAlign"] = (this["verticalAlign"] || "null");
     }-*/
     ;
 
@@ -106,7 +106,7 @@ public class JsoStackLabels
 
     public final native Number x()
         throws RuntimeException /*-{
-        return this["x"] = (this["x"] || {});
+        return this["x"] = (this["x"] || null);
     }-*/
     ;
 
@@ -119,7 +119,7 @@ public class JsoStackLabels
 
     public final native Number y()
         throws RuntimeException /*-{
-        return this["y"] = (this["y"] || {});
+        return this["y"] = (this["y"] || null);
     }-*/
     ;
 

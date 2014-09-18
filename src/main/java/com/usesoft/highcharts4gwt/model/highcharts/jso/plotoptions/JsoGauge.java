@@ -15,7 +15,7 @@ public class JsoGauge
 
     public final native Number overshoot()
         throws RuntimeException /*-{
-        return this["overshoot"] = (this["overshoot"] || {});
+        return this["overshoot"] = (this["overshoot"] || 0.0);
     }-*/
     ;
 
@@ -28,7 +28,7 @@ public class JsoGauge
 
     public final native boolean showInLegend()
         throws RuntimeException /*-{
-        return this["showInLegend"] = (this["showInLegend"] || {});
+        return this["showInLegend"] = (this["showInLegend"] || false);
     }-*/
     ;
 
@@ -41,7 +41,7 @@ public class JsoGauge
 
     public final native boolean wrap()
         throws RuntimeException /*-{
-        return this["wrap"] = (this["wrap"] || {});
+        return this["wrap"] = (this["wrap"] || true);
     }-*/
     ;
 

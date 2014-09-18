@@ -15,7 +15,7 @@ public class JsoColumn
 
     public final native Number borderRadius()
         throws RuntimeException /*-{
-        return this["borderRadius"] = (this["borderRadius"] || {});
+        return this["borderRadius"] = (this["borderRadius"] || 0.0);
     }-*/
     ;
 
@@ -28,7 +28,7 @@ public class JsoColumn
 
     public final native Number borderWidth()
         throws RuntimeException /*-{
-        return this["borderWidth"] = (this["borderWidth"] || {});
+        return this["borderWidth"] = (this["borderWidth"] || 1.0);
     }-*/
     ;
 
@@ -41,7 +41,7 @@ public class JsoColumn
 
     public final native boolean colorByPoint()
         throws RuntimeException /*-{
-        return this["colorByPoint"] = (this["colorByPoint"] || {});
+        return this["colorByPoint"] = (this["colorByPoint"] || false);
     }-*/
     ;
 
@@ -54,7 +54,7 @@ public class JsoColumn
 
     public final native Number cropThreshold()
         throws RuntimeException /*-{
-        return this["cropThreshold"] = (this["cropThreshold"] || {});
+        return this["cropThreshold"] = (this["cropThreshold"] || 50.0);
     }-*/
     ;
 
@@ -67,7 +67,7 @@ public class JsoColumn
 
     public final native Number depth()
         throws RuntimeException /*-{
-        return this["depth"] = (this["depth"] || {});
+        return this["depth"] = (this["depth"] || 25.0);
     }-*/
     ;
 
@@ -80,7 +80,7 @@ public class JsoColumn
 
     public final native Number edgeWidth()
         throws RuntimeException /*-{
-        return this["edgeWidth"] = (this["edgeWidth"] || {});
+        return this["edgeWidth"] = (this["edgeWidth"] || 1.0);
     }-*/
     ;
 
@@ -93,7 +93,7 @@ public class JsoColumn
 
     public final native Number groupPadding()
         throws RuntimeException /*-{
-        return this["groupPadding"] = (this["groupPadding"] || {});
+        return this["groupPadding"] = (this["groupPadding"] || 0.2);
     }-*/
     ;
 
@@ -106,7 +106,7 @@ public class JsoColumn
 
     public final native Number groupZPadding()
         throws RuntimeException /*-{
-        return this["groupZPadding"] = (this["groupZPadding"] || {});
+        return this["groupZPadding"] = (this["groupZPadding"] || 1.0);
     }-*/
     ;
 
@@ -119,7 +119,7 @@ public class JsoColumn
 
     public final native boolean grouping()
         throws RuntimeException /*-{
-        return this["grouping"] = (this["grouping"] || {});
+        return this["grouping"] = (this["grouping"] || true);
     }-*/
     ;
 
@@ -132,7 +132,7 @@ public class JsoColumn
 
     public final native Number minPointLength()
         throws RuntimeException /*-{
-        return this["minPointLength"] = (this["minPointLength"] || {});
+        return this["minPointLength"] = (this["minPointLength"] || 0.0);
     }-*/
     ;
 
@@ -145,7 +145,7 @@ public class JsoColumn
 
     public final native Number pointPadding()
         throws RuntimeException /*-{
-        return this["pointPadding"] = (this["pointPadding"] || {});
+        return this["pointPadding"] = (this["pointPadding"] || 0.1);
     }-*/
     ;
 
@@ -158,7 +158,7 @@ public class JsoColumn
 
     public final native Number pointRange()
         throws RuntimeException /*-{
-        return this["pointRange"] = (this["pointRange"] || {});
+        return this["pointRange"] = (this["pointRange"] || null);
     }-*/
     ;
 
@@ -171,7 +171,7 @@ public class JsoColumn
 
     public final native Number pointWidth()
         throws RuntimeException /*-{
-        return this["pointWidth"] = (this["pointWidth"] || {});
+        return this["pointWidth"] = (this["pointWidth"] || null);
     }-*/
     ;
 
@@ -184,7 +184,7 @@ public class JsoColumn
 
     public final native Number threshold()
         throws RuntimeException /*-{
-        return this["threshold"] = (this["threshold"] || {});
+        return this["threshold"] = (this["threshold"] || 0.0);
     }-*/
     ;
 

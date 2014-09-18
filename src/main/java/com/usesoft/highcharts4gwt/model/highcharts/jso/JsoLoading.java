@@ -15,7 +15,7 @@ public class JsoLoading
 
     public final native Number hideDuration()
         throws RuntimeException /*-{
-        return this["hideDuration"] = (this["hideDuration"] || {});
+        return this["hideDuration"] = (this["hideDuration"] || 100.0);
     }-*/
     ;
 
@@ -28,7 +28,7 @@ public class JsoLoading
 
     public final native Number showDuration()
         throws RuntimeException /*-{
-        return this["showDuration"] = (this["showDuration"] || {});
+        return this["showDuration"] = (this["showDuration"] || 100.0);
     }-*/
     ;
 

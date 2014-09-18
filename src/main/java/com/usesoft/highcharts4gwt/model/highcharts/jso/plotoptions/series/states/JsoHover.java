@@ -16,7 +16,7 @@ public class JsoHover
 
     public final native boolean enabled()
         throws RuntimeException /*-{
-        return this["enabled"] = (this["enabled"] || {});
+        return this["enabled"] = (this["enabled"] || true);
     }-*/
     ;
 
@@ -29,7 +29,7 @@ public class JsoHover
 
     public final native Number lineWidth()
         throws RuntimeException /*-{
-        return this["lineWidth"] = (this["lineWidth"] || {});
+        return this["lineWidth"] = (this["lineWidth"] || 2.0);
     }-*/
     ;
 
@@ -42,7 +42,7 @@ public class JsoHover
 
     public final native Number lineWidthPlus()
         throws RuntimeException /*-{
-        return this["lineWidthPlus"] = (this["lineWidthPlus"] || {});
+        return this["lineWidthPlus"] = (this["lineWidthPlus"] || 1.0);
     }-*/
     ;
 

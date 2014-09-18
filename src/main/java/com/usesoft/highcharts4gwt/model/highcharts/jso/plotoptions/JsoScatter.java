@@ -15,7 +15,7 @@ public class JsoScatter
 
     public final native Number lineWidth()
         throws RuntimeException /*-{
-        return this["lineWidth"] = (this["lineWidth"] || {});
+        return this["lineWidth"] = (this["lineWidth"] || 0.0);
     }-*/
     ;
 
@@ -28,7 +28,7 @@ public class JsoScatter
 
     public final native boolean stickyTracking()
         throws RuntimeException /*-{
-        return this["stickyTracking"] = (this["stickyTracking"] || {});
+        return this["stickyTracking"] = (this["stickyTracking"] || false);
     }-*/
     ;
 
