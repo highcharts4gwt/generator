@@ -16,7 +16,7 @@ public class JsoButtons
 
     public final native ContextButton contextButton()
         throws RuntimeException /*-{
-        return this["contextButton"] = (this["contextButton"] || {});
+        return this["contextButton"] = (this["contextButton"] || null);
     }-*/
     ;
 

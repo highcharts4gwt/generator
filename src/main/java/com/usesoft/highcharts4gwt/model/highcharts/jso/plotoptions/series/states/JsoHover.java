@@ -55,7 +55,7 @@ public class JsoHover
 
     public final native Marker marker()
         throws RuntimeException /*-{
-        return this["marker"] = (this["marker"] || {});
+        return this["marker"] = (this["marker"] || null);
     }-*/
     ;
 

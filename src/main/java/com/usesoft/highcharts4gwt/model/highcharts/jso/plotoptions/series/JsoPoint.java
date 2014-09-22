@@ -16,7 +16,7 @@ public class JsoPoint
 
     public final native Events events()
         throws RuntimeException /*-{
-        return this["events"] = (this["events"] || {});
+        return this["events"] = (this["events"] || null);
     }-*/
     ;
 

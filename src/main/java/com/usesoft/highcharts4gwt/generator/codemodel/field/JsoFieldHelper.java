@@ -4,7 +4,7 @@ import com.sun.codemodel.JClass;
 import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JDefinedClass;
 import com.sun.codemodel.JMod;
-import com.usesoft.highcharts4gwt.generator.codemodel.jso.NativeContentHack;
+import com.usesoft.highcharts4gwt.generator.codemodel.klass.NativeContentHack;
 
 public class JsoFieldHelper
 {

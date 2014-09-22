@@ -8,6 +8,8 @@ public interface FieldTypeVisitor<IN, OUT>
 
     OUT visitString(IN in);
 
+    OUT visitClass(IN in);
+
     OUT visitArrayString(IN in);
 
     OUT visitArrayNumber(IN in);

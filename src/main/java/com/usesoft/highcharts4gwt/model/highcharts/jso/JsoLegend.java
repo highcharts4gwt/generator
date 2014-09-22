@@ -198,7 +198,7 @@ public class JsoLegend
 
     public final native Navigation navigation()
         throws RuntimeException /*-{
-        return this["navigation"] = (this["navigation"] || {});
+        return this["navigation"] = (this["navigation"] || null);
     }-*/
     ;
 

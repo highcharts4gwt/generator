@@ -1,4 +1,4 @@
-package com.usesoft.highcharts4gwt.generator.codemodel.jso;
+package com.usesoft.highcharts4gwt.generator.codemodel.klass;
 
 import java.util.Iterator;
 import java.util.List;

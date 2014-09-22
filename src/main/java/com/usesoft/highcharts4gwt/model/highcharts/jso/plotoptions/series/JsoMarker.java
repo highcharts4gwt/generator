@@ -68,7 +68,7 @@ public class JsoMarker
 
     public final native States states()
         throws RuntimeException /*-{
-        return this["states"] = (this["states"] || {});
+        return this["states"] = (this["states"] || null);
     }-*/
     ;
 

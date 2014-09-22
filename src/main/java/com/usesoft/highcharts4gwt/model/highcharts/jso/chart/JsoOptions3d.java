@@ -68,7 +68,7 @@ public class JsoOptions3d
 
     public final native Frame frame()
         throws RuntimeException /*-{
-        return this["frame"] = (this["frame"] || {});
+        return this["frame"] = (this["frame"] || null);
     }-*/
     ;
 

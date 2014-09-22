@@ -6,7 +6,7 @@ import com.usesoft.highcharts4gwt.generator.graph.OptionSpec;
 
 public interface FieldBuilder
 {
-    void addField(OptionSpec optionSpec);
+    void addField(OptionSpec optionSpec, OutputType outputType);
 
     void setCodeModel(JCodeModel codeModel);
 

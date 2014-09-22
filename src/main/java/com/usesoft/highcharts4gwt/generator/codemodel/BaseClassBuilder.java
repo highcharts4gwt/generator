@@ -35,9 +35,12 @@ public abstract class BaseClassBuilder implements ClassBuilder
     @CheckForNull
     private OptionTree tree;
 
+    private final BaseFieldBuilder fieldBuilder;
+
     public BaseClassBuilder(String rootDirectory) throws JClassAlreadyExistsException
     {
         this.rootDirectory = rootDirectory;
+        fieldBuilder = new BaseFieldBuilder();
     }
 
     @Override
@@ -47,9 +50,9 @@ public abstract class BaseClassBuilder implements ClassBuilder
 
         jClass = declareType(packageName, className);
 
-        getFieldBuilder().setJclass(jClass);
-        getFieldBuilder().setCodeModel(codeModel);
-        getFieldBuilder().setClassName(getPrefix() + className);
+        fieldBuilder.setJclass(jClass);
+        fieldBuilder.setCodeModel(codeModel);
+        fieldBuilder.setClassName(getPrefix() + className);
 
         ClassRegistry.INSTANCE.put(optionSpec, getOutputType(), jClass);
 
@@ -62,7 +65,7 @@ public abstract class BaseClassBuilder implements ClassBuilder
         {
             for (OptionSpec optionSpec : children)
             {
-                getFieldBuilder().addField(optionSpec);
+                fieldBuilder.addField(optionSpec, getOutputType());
             }
         }
 
@@ -91,8 +94,6 @@ public abstract class BaseClassBuilder implements ClassBuilder
         this.tree = tree;
         return this;
     }
-
-    protected abstract FieldBuilder getFieldBuilder();
 
     protected abstract String getPrefix();
 

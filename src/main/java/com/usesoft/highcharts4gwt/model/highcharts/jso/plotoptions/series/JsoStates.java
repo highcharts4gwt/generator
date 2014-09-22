@@ -16,7 +16,7 @@ public class JsoStates
 
     public final native Hover hover()
         throws RuntimeException /*-{
-        return this["hover"] = (this["hover"] || {});
+        return this["hover"] = (this["hover"] || null);
     }-*/
     ;
 

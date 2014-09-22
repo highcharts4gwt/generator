@@ -6,7 +6,7 @@ import com.sun.codemodel.JDefinedClass;
 import com.usesoft.highcharts4gwt.generator.codemodel.field.FieldType;
 import com.usesoft.highcharts4gwt.generator.graph.OptionSpec;
 
-public abstract class BaseFieldBuilder implements FieldBuilder
+public final class BaseFieldBuilder implements FieldBuilder
 {
     private JCodeModel codeModel;
     private JDefinedClass jClass;
@@ -35,25 +35,13 @@ public abstract class BaseFieldBuilder implements FieldBuilder
     }
 
     @Override
-    public void addField(OptionSpec optionSpec)
+    public void addField(OptionSpec optionSpec, OutputType outputType)
     {
-        // if (optionSpec.isParent())
-        // addClassField(optionSpec.getName(), optionSpec.getName());
-
         String returnType = optionSpec.getReturnType();
 
         FieldType fieldType = findFieldType(optionSpec, returnType);
 
-        fieldType.accept(new FieldWriterVisitor(optionSpec, codeModel, jClass, className), getOutputType());
-
-        // TODO switch to visitor structure
-        if (returnType == null)
-            addClassField(ClassRegistry.INSTANCE.getRegistry().get(new ClassRegistry.RegistryKey(optionSpec, OutputType.Interface)), optionSpec.getTitle());
-
-        // if (returnType != null &&
-        // returnType.equals("Array<Object|Array|Number>"))
-        // addNumberArray(optionSpec.getTitle());
-
+        fieldType.accept(new FieldWriterVisitor(optionSpec, codeModel, jClass, className), outputType);
     }
 
     private FieldType findFieldType(OptionSpec optionSpec, String returnType)
@@ -68,6 +56,9 @@ public abstract class BaseFieldBuilder implements FieldBuilder
             return FieldType.ArrayString;
         if (returnType != null && returnType.equals("Array<Number>"))
             return FieldType.ArrayNumber;
+        if (returnType == null)
+            return FieldType.Class;
+
         if (returnType != null && returnType.equals("Array<Object>"))
         {
             JClass jClass2 = ClassRegistry.INSTANCE.getRegistry().get(new ClassRegistry.RegistryKey(optionSpec, OutputType.Interface));
@@ -84,32 +75,6 @@ public abstract class BaseFieldBuilder implements FieldBuilder
     {
         this.jClass = jClass;
     }
-
-    protected abstract OutputType getOutputType();
-
-    // protected abstract void addNumberField(String fieldName);
-    //
-    // protected abstract void addStringField(String fieldName);
-    //
-    // protected abstract void addBooleanField(String fieldName);
-
-    protected abstract void addObjectField(String fieldName);
-
-    protected abstract void addFunctionField(String fieldName);
-
-    protected abstract void addColorField(String fieldName);
-
-    protected abstract void addMixedField(String fieldName);
-
-    protected abstract void addCssObjectField(String fieldName);
-
-    protected abstract void addClassField(JClass jClass, String fieldName);
-
-    // protected abstract void addStringArray(String fieldName);
-    //
-    // protected abstract void addNumberArray(String fieldName);
-
-    // protected abstract void addObjectArray(JClass jClass, String fieldName);
 
     protected JDefinedClass getJclass()
     {

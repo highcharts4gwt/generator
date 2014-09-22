@@ -84,7 +84,7 @@ public class JsoChart
 
     public final native Events events()
         throws RuntimeException /*-{
-        return this["events"] = (this["events"] || {});
+        return this["events"] = (this["events"] || null);
     }-*/
     ;
 
@@ -188,7 +188,7 @@ public class JsoChart
 
     public final native Options3d options3d()
         throws RuntimeException /*-{
-        return this["options3d"] = (this["options3d"] || {});
+        return this["options3d"] = (this["options3d"] || null);
     }-*/
     ;
 
@@ -292,7 +292,7 @@ public class JsoChart
 
     public final native ResetZoomButton resetZoomButton()
         throws RuntimeException /*-{
-        return this["resetZoomButton"] = (this["resetZoomButton"] || {});
+        return this["resetZoomButton"] = (this["resetZoomButton"] || null);
     }-*/
     ;
 

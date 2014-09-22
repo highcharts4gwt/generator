@@ -16,7 +16,7 @@ public class JsoExporting
 
     public final native Buttons buttons()
         throws RuntimeException /*-{
-        return this["buttons"] = (this["buttons"] || {});
+        return this["buttons"] = (this["buttons"] || null);
     }-*/
     ;
 

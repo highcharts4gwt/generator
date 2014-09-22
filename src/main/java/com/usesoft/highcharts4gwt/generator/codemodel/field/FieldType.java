@@ -37,6 +37,15 @@ public enum FieldType
         }
 
     },
+    Class
+    {
+        @Override
+        @CheckForNull
+        public <IN, OUT> OUT accept(FieldTypeVisitor<IN, OUT> visitor, IN in)
+        {
+            return visitor.visitClass(in);
+        }
+    },
     ArrayString
     {
 
@@ -47,15 +56,6 @@ public enum FieldType
             return visitor.visitArrayString(in);
         }
 
-    },
-    Other
-    {
-        @Override
-        @CheckForNull
-        public <IN, OUT> OUT accept(FieldTypeVisitor<IN, OUT> visitor, IN in)
-        {
-            return visitor.visitOther(in);
-        }
     },
     ArrayNumber
     {
@@ -73,6 +73,15 @@ public enum FieldType
         public <IN, OUT> OUT accept(FieldTypeVisitor<IN, OUT> visitor, IN in)
         {
             return visitor.visitArrayObject(in);
+        }
+    },
+    Other
+    {
+        @Override
+        @CheckForNull
+        public <IN, OUT> OUT accept(FieldTypeVisitor<IN, OUT> visitor, IN in)
+        {
+            return visitor.visitOther(in);
         }
     };
 

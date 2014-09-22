@@ -61,7 +61,7 @@ public class JsoXAxis
 
     public final native Events events()
         throws RuntimeException /*-{
-        return this["events"] = (this["events"] || {});
+        return this["events"] = (this["events"] || null);
     }-*/
     ;
 
@@ -139,7 +139,7 @@ public class JsoXAxis
 
     public final native Labels labels()
         throws RuntimeException /*-{
-        return this["labels"] = (this["labels"] || {});
+        return this["labels"] = (this["labels"] || null);
     }-*/
     ;
 
@@ -568,7 +568,7 @@ public class JsoXAxis
 
     public final native Title title()
         throws RuntimeException /*-{
-        return this["title"] = (this["title"] || {});
+        return this["title"] = (this["title"] || null);
     }-*/
     ;
 

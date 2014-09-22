@@ -3,9 +3,9 @@ package com.usesoft.highcharts4gwt.generator;
 import com.sun.codemodel.JClassAlreadyExistsException;
 import com.usesoft.highcharts4gwt.generator.codemodel.ClassBuilder;
 import com.usesoft.highcharts4gwt.generator.codemodel.OutputTypeVisitor;
-import com.usesoft.highcharts4gwt.generator.codemodel.api.InterfaceClassBuilder;
-import com.usesoft.highcharts4gwt.generator.codemodel.jso.JsoClassBuilder;
-import com.usesoft.highcharts4gwt.generator.codemodel.mock.MockClassBuilder;
+import com.usesoft.highcharts4gwt.generator.codemodel.klass.InterfaceClassBuilder;
+import com.usesoft.highcharts4gwt.generator.codemodel.klass.JsoClassBuilder;
+import com.usesoft.highcharts4gwt.generator.codemodel.klass.MockClassBuilder;
 
 public class ClassWritterVisitor implements OutputTypeVisitor<String, ClassBuilder>
 {
