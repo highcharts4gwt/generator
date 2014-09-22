@@ -14,6 +14,7 @@ import com.usesoft.highcharts4gwt.model.highcharts.api.Loading;
 import com.usesoft.highcharts4gwt.model.highcharts.api.Navigation;
 import com.usesoft.highcharts4gwt.model.highcharts.api.NoData;
 import com.usesoft.highcharts4gwt.model.highcharts.api.PlotOptions;
+import com.usesoft.highcharts4gwt.model.highcharts.api.Series;
 import com.usesoft.highcharts4gwt.model.highcharts.api.Subtitle;
 import com.usesoft.highcharts4gwt.model.highcharts.api.Title;
 import com.usesoft.highcharts4gwt.model.highcharts.api.Tooltip;
@@ -75,9 +76,9 @@ public interface ChartOptions {
 
     ChartOptions exporting(Exporting exporting);
 
-    Array<ChartOptions> series();
+    Array<Series> series();
 
-    ChartOptions series(Array<ChartOptions> series);
+    ChartOptions series(Array<Series> series);
 
     Lang lang();
 

@@ -7,6 +7,8 @@ import com.usesoft.highcharts4gwt.model.array.api.ArrayNumber;
 import com.usesoft.highcharts4gwt.model.highcharts.api.XAxis;
 import com.usesoft.highcharts4gwt.model.highcharts.api.xaxis.Events;
 import com.usesoft.highcharts4gwt.model.highcharts.api.xaxis.Labels;
+import com.usesoft.highcharts4gwt.model.highcharts.api.xaxis.PlotBands;
+import com.usesoft.highcharts4gwt.model.highcharts.api.xaxis.PlotLines;
 import com.usesoft.highcharts4gwt.model.highcharts.api.xaxis.Title;
 
 public class JsoXAxis
@@ -369,26 +371,26 @@ public class JsoXAxis
     }-*/
     ;
 
-    public final native Array<JsoXAxis> plotBands()
+    public final native Array<PlotBands> plotBands()
         throws RuntimeException /*-{
         return this["plotBands"] = (this["plotBands"] || null);
     }-*/
     ;
 
-    public final native JsoXAxis plotBands(Array<JsoXAxis> plotBands)
+    public final native JsoXAxis plotBands(Array<PlotBands> plotBands)
         throws RuntimeException /*-{
         this["plotBands"] = plotBands;
         return this;
     }-*/
     ;
 
-    public final native Array<JsoXAxis> plotLines()
+    public final native Array<PlotLines> plotLines()
         throws RuntimeException /*-{
         return this["plotLines"] = (this["plotLines"] || null);
     }-*/
     ;
 
-    public final native JsoXAxis plotLines(Array<JsoXAxis> plotLines)
+    public final native JsoXAxis plotLines(Array<PlotLines> plotLines)
         throws RuntimeException /*-{
         this["plotLines"] = plotLines;
         return this;

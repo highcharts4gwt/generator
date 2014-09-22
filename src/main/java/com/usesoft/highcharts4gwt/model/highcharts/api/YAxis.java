@@ -4,6 +4,8 @@ package com.usesoft.highcharts4gwt.model.highcharts.api;
 import com.usesoft.highcharts4gwt.model.array.api.Array;
 import com.usesoft.highcharts4gwt.model.highcharts.api.yaxis.Events;
 import com.usesoft.highcharts4gwt.model.highcharts.api.yaxis.Labels;
+import com.usesoft.highcharts4gwt.model.highcharts.api.yaxis.PlotBands;
+import com.usesoft.highcharts4gwt.model.highcharts.api.yaxis.PlotLines;
 import com.usesoft.highcharts4gwt.model.highcharts.api.yaxis.StackLabels;
 import com.usesoft.highcharts4gwt.model.highcharts.api.yaxis.Title;
 
@@ -42,13 +44,13 @@ public interface YAxis {
 
     YAxis minPadding(Number minPadding);
 
-    Array<YAxis> plotBands();
+    Array<PlotBands> plotBands();
 
-    YAxis plotBands(Array<YAxis> plotBands);
+    YAxis plotBands(Array<PlotBands> plotBands);
 
-    Array<YAxis> plotLines();
+    Array<PlotLines> plotLines();
 
-    YAxis plotLines(Array<YAxis> plotLines);
+    YAxis plotLines(Array<PlotLines> plotLines);
 
     boolean reversedStacks();
 

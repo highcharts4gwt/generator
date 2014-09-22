@@ -80,6 +80,6 @@ public class FieldWriterVisitor implements FieldTypeVisitor<OutputType, Void>
     public Void visitArrayObject(OutputType in)
     {
         String defaultValue = optionSpec.getDefaults();
-        return in.accept(new FieldArrayObjectWriter(codeModel, jClass, className, defaultValue), fieldName);
+        return in.accept(new FieldArrayObjectWriter(codeModel, jClass, className, optionSpec, defaultValue), fieldName);
     }
 }
