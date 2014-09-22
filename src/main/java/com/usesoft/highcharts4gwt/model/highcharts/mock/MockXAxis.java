@@ -2,11 +2,10 @@
 package com.usesoft.highcharts4gwt.model.highcharts.mock;
 
 import com.usesoft.highcharts4gwt.model.array.api.Array;
+import com.usesoft.highcharts4gwt.model.array.api.ArrayNumber;
 import com.usesoft.highcharts4gwt.model.highcharts.api.XAxis;
 import com.usesoft.highcharts4gwt.model.highcharts.api.xaxis.Events;
 import com.usesoft.highcharts4gwt.model.highcharts.api.xaxis.Labels;
-import com.usesoft.highcharts4gwt.model.highcharts.api.xaxis.PlotBands;
-import com.usesoft.highcharts4gwt.model.highcharts.api.xaxis.PlotLines;
 import com.usesoft.highcharts4gwt.model.highcharts.api.xaxis.Title;
 
 public class MockXAxis
@@ -40,8 +39,8 @@ public class MockXAxis
     private Number minorTickWidth;
     private Number offset;
     private boolean opposite;
-    private Array<PlotBands> plotBands;
-    private Array<PlotLines> plotLines;
+    private Array<MockXAxis> plotBands;
+    private Array<MockXAxis> plotLines;
     private boolean reversed;
     private boolean showEmpty;
     private boolean showFirstLabel;
@@ -52,6 +51,7 @@ public class MockXAxis
     private Number tickLength;
     private Number tickPixelInterval;
     private String tickPosition;
+    private ArrayNumber tickPositions;
     private Number tickWidth;
     private String tickmarkPlacement;
     private Title title;
@@ -300,20 +300,20 @@ public class MockXAxis
         return this;
     }
 
-    public Array<PlotBands> plotBands() {
+    public Array<MockXAxis> plotBands() {
         return plotBands;
     }
 
-    public MockXAxis plotBands(Array<PlotBands> plotBands) {
+    public MockXAxis plotBands(Array<MockXAxis> plotBands) {
         this.plotBands = plotBands;
         return this;
     }
 
-    public Array<PlotLines> plotLines() {
+    public Array<MockXAxis> plotLines() {
         return plotLines;
     }
 
-    public MockXAxis plotLines(Array<PlotLines> plotLines) {
+    public MockXAxis plotLines(Array<MockXAxis> plotLines) {
         this.plotLines = plotLines;
         return this;
     }
@@ -405,6 +405,15 @@ public class MockXAxis
 
     public MockXAxis tickPosition(String tickPosition) {
         this.tickPosition = tickPosition;
+        return this;
+    }
+
+    public ArrayNumber tickPositions() {
+        return tickPositions;
+    }
+
+    public MockXAxis tickPositions(ArrayNumber tickPositions) {
+        this.tickPositions = tickPositions;
         return this;
     }
 

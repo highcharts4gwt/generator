@@ -1,5 +1,6 @@
 package com.usesoft.highcharts4gwt.generator.codemodel.field;
 
+import com.sun.codemodel.JClass;
 import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JDefinedClass;
 import com.sun.codemodel.JMod;
@@ -16,6 +17,7 @@ public class JsoFieldHelper
         return "/*-{\n" + "        return this[\"" + fieldName + "\"] = (this[\"" + fieldName + "\"] || " + jsniDefaultValue + ");\n" + "    }-*/";
     }
 
+    // TODO See how this could go to FieldType, in each type implem
     private static String getJsniDefaultValueForString(String defaultValue)
     {
         return "\"" + defaultValue + "\"";
@@ -28,9 +30,15 @@ public class JsoFieldHelper
 
     private static String getJsniDefaultValueForNumber(Number defaultValue)
     {
+        // TODO Report to HS - Number default value with null ?
         if (defaultValue == null)
             return "null";
         return Double.toString((Double) defaultValue);
+    }
+
+    private static String getJsniDefaultValueForArrayString(String defaultValue)
+    {
+        return defaultValue;
     }
 
     private static String getJsniDefaultValueForObject()
@@ -54,6 +62,12 @@ public class JsoFieldHelper
         jDefinedClass.method(JMod.NATIVE + JMod.FINAL + JMod.PUBLIC, type, fieldName)._throws(getterContentHack);
     }
 
+    private static void writeGetterNativeCode(String fieldName, JClass type, JDefinedClass jDefinedClass, JCodeModel jCodeModel, String getterCode)
+    {
+        NativeContentHack getterContentHack = new NativeContentHack(jCodeModel, getterCode);
+        jDefinedClass.method(JMod.NATIVE + JMod.FINAL + JMod.PUBLIC, type, fieldName)._throws(getterContentHack);
+    }
+
     public static void writeGetterNativeCodeString(String fieldName, Class<?> type, JDefinedClass jDefinedClass, JCodeModel jCodeModel, String defaultValue)
     {
         String getterCode = getJsniGetterCode(fieldName, getJsniDefaultValueForString(defaultValue));
@@ -72,19 +86,43 @@ public class JsoFieldHelper
         writeGetterNativeCode(fieldName, type, jDefinedClass, jCodeModel, getterCode);
     }
 
-    public static void writeGetterNativeCodeObject(String fieldName, Class<?> type, JDefinedClass jDefinedClass, JCodeModel jCodeModel)
+    public static void writeGetterNativeCodeArrayString(String fieldName, Class<?> type, JDefinedClass jDefinedClass, JCodeModel jCodeModel, String defaultValue)
     {
-        String getterCode = getJsniGetterCode(fieldName, getJsniDefaultValueForObject());
+        String getterCode = getJsniGetterCode(fieldName, getJsniDefaultValueForArrayString(defaultValue));
         writeGetterNativeCode(fieldName, type, jDefinedClass, jCodeModel, getterCode);
     }
 
-    public static void writeGetterNativeCodeArray(String fieldName, Class<?> type, JDefinedClass jDefinedClass, JCodeModel jCodeModel)
+    public static void writeGetterNativeCodeArrayString(String fieldName, JClass type, JDefinedClass jDefinedClass, JCodeModel jCodeModel, String defaultValue)
     {
-        String getterCode = getJsniGetterCode(fieldName, getJsniDefaultValueForArray());
+        String getterCode = getJsniGetterCode(fieldName, getJsniDefaultValueForArrayString(defaultValue));
         writeGetterNativeCode(fieldName, type, jDefinedClass, jCodeModel, getterCode);
     }
+
+    // public static void writeGetterNativeCodeObject(String fieldName, Class<?>
+    // type, JDefinedClass jDefinedClass, JCodeModel jCodeModel)
+    // {
+    // String getterCode = getJsniGetterCode(fieldName,
+    // getJsniDefaultValueForObject());
+    // writeGetterNativeCode(fieldName, type, jDefinedClass, jCodeModel,
+    // getterCode);
+    // }
+    //
+    // public static void writeGetterNativeCodeArray(String fieldName, Class<?>
+    // type, JDefinedClass jDefinedClass, JCodeModel jCodeModel)
+    // {
+    // String getterCode = getJsniGetterCode(fieldName,
+    // getJsniDefaultValueForArray());
+    // writeGetterNativeCode(fieldName, type, jDefinedClass, jCodeModel,
+    // getterCode);
+    // }
 
     public static void writeSetterNativeCode(String fieldName, Class<?> type, JDefinedClass jDefinedClass, JCodeModel jCodeModel)
+    {
+        NativeContentHack setterContentHack = new NativeContentHack(jCodeModel, JsoFieldHelper.getJsniSetterCode(fieldName));
+        jDefinedClass.method(JMod.NATIVE + JMod.FINAL + JMod.PUBLIC, jDefinedClass, fieldName)._throws(setterContentHack).param(type, fieldName);
+    }
+
+    public static void writeSetterNativeCode(String fieldName, JClass type, JDefinedClass jDefinedClass, JCodeModel jCodeModel)
     {
         NativeContentHack setterContentHack = new NativeContentHack(jCodeModel, JsoFieldHelper.getJsniSetterCode(fieldName));
         jDefinedClass.method(JMod.NATIVE + JMod.FINAL + JMod.PUBLIC, jDefinedClass, fieldName)._throws(setterContentHack).param(type, fieldName);

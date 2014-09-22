@@ -1,6 +1,7 @@
 
 package com.usesoft.highcharts4gwt.model.highcharts.api;
 
+import com.usesoft.highcharts4gwt.model.array.api.ArrayNumber;
 import com.usesoft.highcharts4gwt.model.highcharts.api.chart.Events;
 import com.usesoft.highcharts4gwt.model.highcharts.api.chart.Options3d;
 import com.usesoft.highcharts4gwt.model.highcharts.api.chart.ResetZoomButton;
@@ -99,6 +100,10 @@ public interface Chart {
     boolean showAxes();
 
     Chart showAxes(boolean showAxes);
+
+    ArrayNumber spacing();
+
+    Chart spacing(ArrayNumber spacing);
 
     Number spacingBottom();
 

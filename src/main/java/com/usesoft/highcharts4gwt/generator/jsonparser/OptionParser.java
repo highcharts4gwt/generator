@@ -60,6 +60,7 @@ public class OptionParser
     @CheckForNull
     private static String getFieldAsString(JSONObject jsonOption, String fieldName)
     {
+        // TODO Report to HS - Need to trim because some values with ' '
         String value = jsonOption.get(fieldName).toString().trim();
         if (value.equals(NULL))
             return null;

@@ -5,9 +5,6 @@ import com.sun.codemodel.JMod;
 import com.usesoft.highcharts4gwt.generator.codemodel.BaseFieldBuilder;
 import com.usesoft.highcharts4gwt.generator.codemodel.FieldBuilder;
 import com.usesoft.highcharts4gwt.generator.codemodel.OutputType;
-import com.usesoft.highcharts4gwt.model.array.api.Array;
-import com.usesoft.highcharts4gwt.model.array.api.ArrayNumber;
-import com.usesoft.highcharts4gwt.model.array.api.ArrayString;
 
 public class JsoFieldBuilder extends BaseFieldBuilder implements FieldBuilder
 {
@@ -98,40 +95,6 @@ public class JsoFieldBuilder extends BaseFieldBuilder implements FieldBuilder
         NativeContentHack setterContentHack = new NativeContentHack(getCodeModel(), getSetterContent(fieldName));
         getJclass().method(JMod.NATIVE + JMod.FINAL + JMod.PUBLIC, getJclass(), fieldName)._throws(setterContentHack).param(jClass, fieldName);
 
-    }
-
-    @Override
-    protected void addStringArray(String fieldName)
-    {
-        NativeContentHack getterContentHack = new NativeContentHack(getCodeModel(), getGetterForArrayContent(fieldName));
-        getJclass().method(JMod.NATIVE + JMod.FINAL + JMod.PUBLIC, ArrayString.class, fieldName)._throws(getterContentHack);
-
-        NativeContentHack setterContentHack = new NativeContentHack(getCodeModel(), getSetterContent(fieldName));
-        getJclass().method(JMod.NATIVE + JMod.FINAL + JMod.PUBLIC, getJclass(), fieldName)._throws(setterContentHack).param(ArrayString.class, fieldName);
-    }
-
-    @Override
-    protected void addNumberArray(String fieldName)
-    {
-        NativeContentHack getterContentHack = new NativeContentHack(getCodeModel(), getGetterForArrayContent(fieldName));
-        getJclass().method(JMod.NATIVE + JMod.FINAL + JMod.PUBLIC, ArrayNumber.class, fieldName)._throws(getterContentHack);
-
-        NativeContentHack setterContentHack = new NativeContentHack(getCodeModel(), getSetterContent(fieldName));
-        getJclass().method(JMod.NATIVE + JMod.FINAL + JMod.PUBLIC, getJclass(), fieldName)._throws(setterContentHack).param(ArrayNumber.class, fieldName);
-    }
-
-    @Override
-    protected void addObjectArray(JClass jClass, String fieldName)
-    {
-        JClass detailClass = jClass;
-        JClass rawLLclazz = getCodeModel().ref(Array.class);
-        JClass fieldClazz = rawLLclazz.narrow(detailClass);
-
-        NativeContentHack getterContentHack = new NativeContentHack(getCodeModel(), getGetterForArrayContent(fieldName));
-        getJclass().method(JMod.NATIVE + JMod.FINAL + JMod.PUBLIC, fieldClazz, fieldName)._throws(getterContentHack);
-
-        NativeContentHack setterContentHack = new NativeContentHack(getCodeModel(), getSetterContent(fieldName));
-        getJclass().method(JMod.NATIVE + JMod.FINAL + JMod.PUBLIC, getJclass(), fieldName)._throws(setterContentHack).param(fieldClazz, fieldName);
     }
 
     @Override

@@ -13,6 +13,7 @@ public enum FieldType
         {
             return visitor.visitNumber(in);
         }
+
     },
     Boolean
     {
@@ -23,6 +24,7 @@ public enum FieldType
         {
             return visitor.visitBoolean(in);
         }
+
     },
     String
     {
@@ -33,6 +35,18 @@ public enum FieldType
         {
             return visitor.visitString(in);
         }
+
+    },
+    ArrayString
+    {
+
+        @CheckForNull
+        @Override
+        public <IN, OUT> OUT accept(FieldTypeVisitor<IN, OUT> visitor, IN in)
+        {
+            return visitor.visitArrayString(in);
+        }
+
     },
     Other
     {
@@ -42,8 +56,27 @@ public enum FieldType
         {
             return visitor.visitOther(in);
         }
+    },
+    ArrayNumber
+    {
+        @Override
+        @CheckForNull
+        public <IN, OUT> OUT accept(FieldTypeVisitor<IN, OUT> visitor, IN in)
+        {
+            return visitor.visitArrayNumber(in);
+        }
+    },
+    ArrayObject
+    {
+        @Override
+        @CheckForNull
+        public <IN, OUT> OUT accept(FieldTypeVisitor<IN, OUT> visitor, IN in)
+        {
+            return visitor.visitArrayObject(in);
+        }
     };
 
     @CheckForNull
     public abstract <IN, OUT> OUT accept(FieldTypeVisitor<IN, OUT> visitor, IN in);
+
 }

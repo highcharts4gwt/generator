@@ -30,7 +30,7 @@ public class JsoPie
 
     public final native ArrayString center()
         throws RuntimeException /*-{
-        return this["center"] = (this["center"] || []);
+        return this["center"] = (this["center"] || [null, null]);
     }-*/
     ;
 

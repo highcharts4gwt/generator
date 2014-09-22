@@ -16,7 +16,6 @@ import com.usesoft.highcharts4gwt.model.highcharts.api.Loading;
 import com.usesoft.highcharts4gwt.model.highcharts.api.Navigation;
 import com.usesoft.highcharts4gwt.model.highcharts.api.NoData;
 import com.usesoft.highcharts4gwt.model.highcharts.api.PlotOptions;
-import com.usesoft.highcharts4gwt.model.highcharts.api.Series;
 import com.usesoft.highcharts4gwt.model.highcharts.api.Subtitle;
 import com.usesoft.highcharts4gwt.model.highcharts.api.Title;
 import com.usesoft.highcharts4gwt.model.highcharts.api.Tooltip;
@@ -201,13 +200,13 @@ public class JsoChartOptions
     }-*/
     ;
 
-    public final native Array<Series> series()
+    public final native Array<JsoChartOptions> series()
         throws RuntimeException /*-{
-        return this["series"] = (this["series"] || []);
+        return this["series"] = (this["series"] || null);
     }-*/
     ;
 
-    public final native JsoChartOptions series(Array<Series> series)
+    public final native JsoChartOptions series(Array<JsoChartOptions> series)
         throws RuntimeException /*-{
         this["series"] = series;
         return this;

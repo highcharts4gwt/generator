@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -12,7 +11,6 @@ import java.util.Properties;
 import javax.annotation.CheckForNull;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
 import org.json.JSONArray;
 
 import com.sun.codemodel.JClassAlreadyExistsException;
@@ -22,13 +20,17 @@ import com.usesoft.highcharts4gwt.generator.graph.OptionSpec;
 import com.usesoft.highcharts4gwt.generator.graph.OptionTree;
 import com.usesoft.highcharts4gwt.generator.graph.OptionUtils;
 import com.usesoft.highcharts4gwt.generator.graph.Options;
+import com.usesoft.highcharts4gwt.generator.highsoft.Product;
 
 public abstract class BaseGenerator implements Generator
 {
-    public BaseGenerator() throws IOException
+    private final Product product;
+
+    public BaseGenerator(Product product) throws IOException
     {
+        this.product = product;
         properties = loadProperties();
-        packageName = getOutputPackagePrefix() + getOutputPackageSuffix();
+        packageName = getOutputPackagePrefix() + getProductPackageName();
         cleanDirectory(getRootDirectory() + "/" + packageToPath(packageName));
     }
 
@@ -39,29 +41,10 @@ public abstract class BaseGenerator implements Generator
         createClasses(options);
     }
 
-    @CheckForNull
-    public static String fetchOptionsAsString(String highchartOptionsUrl) throws IOException
+    public String getProductPackageName()
     {
-        InputStream optionsInputStream = null;
-        String optionsAsString;
-
-        try
-        {
-            optionsInputStream = new URL(highchartOptionsUrl).openStream();
-            optionsAsString = IOUtils.toString(optionsInputStream);
-        }
-        finally
-        {
-            if (optionsInputStream != null)
-                optionsInputStream.close();
-        }
-
-        return optionsAsString;
+        return product.getProductPackageName();
     }
-
-    public abstract String getOptionsFileUrl() throws IOException;
-
-    public abstract String getOutputPackageSuffix();
 
     protected final String getOutputPackagePrefix() throws IOException
     {
@@ -161,11 +144,10 @@ public abstract class BaseGenerator implements Generator
 
     private Options createOptions() throws IOException
     {
-        String url = getOptionsFileUrl();
-        String optionsAsString = fetchOptionsAsString(url);
+        String optionsAsString = readProductOptionsFile();
 
         if (optionsAsString == null)
-            throw new RuntimeException("Cannot fetch options from highchart web site for url : " + url);
+            throw new RuntimeException("Cannot read options from " + product.getProductPackageName());
 
         JSONArray jsonArray = JsonUtils.extractOptions(optionsAsString);
 

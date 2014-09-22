@@ -14,7 +14,7 @@ public enum Product
         }
 
         @Override
-        public String getPackageName()
+        public String getProductPackageName()
         {
             return "highcharts";
         }
@@ -29,7 +29,7 @@ public enum Product
         }
 
         @Override
-        public String getPackageName()
+        public String getProductPackageName()
         {
             return "highmaps";
         }
@@ -44,7 +44,7 @@ public enum Product
         }
 
         @Override
-        public String getPackageName()
+        public String getProductPackageName()
         {
             return "highstock";
         }
@@ -53,6 +53,6 @@ public enum Product
     @CheckForNull
     public abstract <IN, OUT> OUT accept(ProductVisitor<IN, OUT> visitor, IN in);
 
-    public abstract String getPackageName();
+    public abstract String getProductPackageName();
 
 }

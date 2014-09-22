@@ -120,7 +120,7 @@ public class JsoLang
 
     public final native ArrayString months()
         throws RuntimeException /*-{
-        return this["months"] = (this["months"] || []);
+        return this["months"] = (this["months"] || [ "January" , "February" , "March" , "April" , "May" , "June" , "July" , "August" , "September" , "October" , "November" , "December"]);
     }-*/
     ;
 
@@ -146,7 +146,7 @@ public class JsoLang
 
     public final native ArrayString numericSymbols()
         throws RuntimeException /*-{
-        return this["numericSymbols"] = (this["numericSymbols"] || []);
+        return this["numericSymbols"] = (this["numericSymbols"] || [ "k" , "M" , "G" , "T" , "P" , "E"]);
     }-*/
     ;
 
@@ -198,7 +198,7 @@ public class JsoLang
 
     public final native ArrayString shortMonths()
         throws RuntimeException /*-{
-        return this["shortMonths"] = (this["shortMonths"] || []);
+        return this["shortMonths"] = (this["shortMonths"] || [ "Jan" , "Feb" , "Mar" , "Apr" , "May" , "Jun" , "Jul" , "Aug" , "Sep" , "Oct" , "Nov" , "Dec"]);
     }-*/
     ;
 
@@ -224,7 +224,7 @@ public class JsoLang
 
     public final native ArrayString weekdays()
         throws RuntimeException /*-{
-        return this["weekdays"] = (this["weekdays"] || []);
+        return this["weekdays"] = (this["weekdays"] || ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]);
     }-*/
     ;
 

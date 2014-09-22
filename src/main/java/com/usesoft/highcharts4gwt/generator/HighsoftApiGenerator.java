@@ -2,21 +2,23 @@ package com.usesoft.highcharts4gwt.generator;
 
 import javax.annotation.CheckForNull;
 
+import com.usesoft.highcharts4gwt.generator.highsoft.Product;
 import com.usesoft.highcharts4gwt.generator.highsoft.ProductVisitor;
 
 public class HighsoftApiGenerator implements ProductVisitor<Void, Void>
 {
 
+    @Override
     @CheckForNull
     public Void visitHighcharts(@CheckForNull Void in)
     {
-        HighchartsGenerator generator;
+        Generator generator;
         try
         {
-            generator = new HighchartsGenerator();
+            // generator = new OnlineGenerator(Product.Highcharts);
+            generator = new OfflineGenerator(Product.Highcharts);
             generator.generate();
-        }
-        catch (Exception e)
+        } catch (Exception e)
         {
             throw new RuntimeException("Could not generate sources.", e);
         }
@@ -24,12 +26,14 @@ public class HighsoftApiGenerator implements ProductVisitor<Void, Void>
         return null;
     }
 
+    @Override
     @CheckForNull
     public Void visitHighmaps(@CheckForNull Void in)
     {
         return null;
     }
 
+    @Override
     @CheckForNull
     public Void visitHighstock(@CheckForNull Void in)
     {

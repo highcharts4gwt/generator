@@ -3,11 +3,10 @@ package com.usesoft.highcharts4gwt.model.highcharts.jso;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.usesoft.highcharts4gwt.model.array.api.Array;
+import com.usesoft.highcharts4gwt.model.array.api.ArrayNumber;
 import com.usesoft.highcharts4gwt.model.highcharts.api.XAxis;
 import com.usesoft.highcharts4gwt.model.highcharts.api.xaxis.Events;
 import com.usesoft.highcharts4gwt.model.highcharts.api.xaxis.Labels;
-import com.usesoft.highcharts4gwt.model.highcharts.api.xaxis.PlotBands;
-import com.usesoft.highcharts4gwt.model.highcharts.api.xaxis.PlotLines;
 import com.usesoft.highcharts4gwt.model.highcharts.api.xaxis.Title;
 
 public class JsoXAxis
@@ -370,26 +369,26 @@ public class JsoXAxis
     }-*/
     ;
 
-    public final native Array<PlotBands> plotBands()
+    public final native Array<JsoXAxis> plotBands()
         throws RuntimeException /*-{
-        return this["plotBands"] = (this["plotBands"] || []);
+        return this["plotBands"] = (this["plotBands"] || null);
     }-*/
     ;
 
-    public final native JsoXAxis plotBands(Array<PlotBands> plotBands)
+    public final native JsoXAxis plotBands(Array<JsoXAxis> plotBands)
         throws RuntimeException /*-{
         this["plotBands"] = plotBands;
         return this;
     }-*/
     ;
 
-    public final native Array<PlotLines> plotLines()
+    public final native Array<JsoXAxis> plotLines()
         throws RuntimeException /*-{
-        return this["plotLines"] = (this["plotLines"] || []);
+        return this["plotLines"] = (this["plotLines"] || null);
     }-*/
     ;
 
-    public final native JsoXAxis plotLines(Array<PlotLines> plotLines)
+    public final native JsoXAxis plotLines(Array<JsoXAxis> plotLines)
         throws RuntimeException /*-{
         this["plotLines"] = plotLines;
         return this;
@@ -522,6 +521,19 @@ public class JsoXAxis
     public final native JsoXAxis tickPosition(String tickPosition)
         throws RuntimeException /*-{
         this["tickPosition"] = tickPosition;
+        return this;
+    }-*/
+    ;
+
+    public final native ArrayNumber tickPositions()
+        throws RuntimeException /*-{
+        return this["tickPositions"] = (this["tickPositions"] || null);
+    }-*/
+    ;
+
+    public final native JsoXAxis tickPositions(ArrayNumber tickPositions)
+        throws RuntimeException /*-{
+        this["tickPositions"] = tickPositions;
         return this;
     }-*/
     ;

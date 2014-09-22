@@ -1,6 +1,7 @@
 
 package com.usesoft.highcharts4gwt.model.highcharts.mock;
 
+import com.usesoft.highcharts4gwt.model.array.api.ArrayNumber;
 import com.usesoft.highcharts4gwt.model.highcharts.api.Chart;
 import com.usesoft.highcharts4gwt.model.highcharts.api.chart.Events;
 import com.usesoft.highcharts4gwt.model.highcharts.api.chart.Options3d;
@@ -33,6 +34,7 @@ public class MockChart
     private boolean reflow;
     private ResetZoomButton resetZoomButton;
     private boolean showAxes;
+    private ArrayNumber spacing;
     private Number spacingBottom;
     private Number spacingLeft;
     private Number spacingRight;
@@ -245,6 +247,15 @@ public class MockChart
 
     public MockChart showAxes(boolean showAxes) {
         this.showAxes = showAxes;
+        return this;
+    }
+
+    public ArrayNumber spacing() {
+        return spacing;
+    }
+
+    public MockChart spacing(ArrayNumber spacing) {
+        this.spacing = spacing;
         return this;
     }
 

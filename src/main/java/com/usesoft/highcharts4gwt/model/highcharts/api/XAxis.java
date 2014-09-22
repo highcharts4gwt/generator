@@ -2,10 +2,9 @@
 package com.usesoft.highcharts4gwt.model.highcharts.api;
 
 import com.usesoft.highcharts4gwt.model.array.api.Array;
+import com.usesoft.highcharts4gwt.model.array.api.ArrayNumber;
 import com.usesoft.highcharts4gwt.model.highcharts.api.xaxis.Events;
 import com.usesoft.highcharts4gwt.model.highcharts.api.xaxis.Labels;
-import com.usesoft.highcharts4gwt.model.highcharts.api.xaxis.PlotBands;
-import com.usesoft.highcharts4gwt.model.highcharts.api.xaxis.PlotLines;
 import com.usesoft.highcharts4gwt.model.highcharts.api.xaxis.Title;
 
 public interface XAxis {
@@ -119,13 +118,13 @@ public interface XAxis {
 
     XAxis opposite(boolean opposite);
 
-    Array<PlotBands> plotBands();
+    Array<XAxis> plotBands();
 
-    XAxis plotBands(Array<PlotBands> plotBands);
+    XAxis plotBands(Array<XAxis> plotBands);
 
-    Array<PlotLines> plotLines();
+    Array<XAxis> plotLines();
 
-    XAxis plotLines(Array<PlotLines> plotLines);
+    XAxis plotLines(Array<XAxis> plotLines);
 
     boolean reversed();
 
@@ -166,6 +165,10 @@ public interface XAxis {
     String tickPosition();
 
     XAxis tickPosition(String tickPosition);
+
+    ArrayNumber tickPositions();
+
+    XAxis tickPositions(ArrayNumber tickPositions);
 
     Number tickWidth();
 

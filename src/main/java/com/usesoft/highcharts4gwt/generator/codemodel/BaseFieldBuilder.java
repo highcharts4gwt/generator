@@ -47,20 +47,13 @@ public abstract class BaseFieldBuilder implements FieldBuilder
         fieldType.accept(new FieldWriterVisitor(optionSpec, codeModel, jClass, className), getOutputType());
 
         // TODO switch to visitor structure
-
         if (returnType == null)
             addClassField(ClassRegistry.INSTANCE.getRegistry().get(new ClassRegistry.RegistryKey(optionSpec, OutputType.Interface)), optionSpec.getTitle());
-        if (returnType != null && returnType.equals("Array<String>"))
-            addStringArray(optionSpec.getTitle());
-        if (returnType != null && returnType.equals("Array<Object|Array|Number>"))
-            addNumberArray(optionSpec.getTitle());
-        if (returnType != null && returnType.equals("Array<Object>"))
-        {
-            JClass jClass2 = ClassRegistry.INSTANCE.getRegistry().get(new ClassRegistry.RegistryKey(optionSpec, OutputType.Interface));
-            if (jClass2 != null) // TODO @rqu need to treat case of
-                                 // drilldown.series
-                addObjectArray(jClass2, optionSpec.getTitle());
-        }
+
+        // if (returnType != null &&
+        // returnType.equals("Array<Object|Array|Number>"))
+        // addNumberArray(optionSpec.getTitle());
+
     }
 
     private FieldType findFieldType(OptionSpec optionSpec, String returnType)
@@ -71,6 +64,17 @@ public abstract class BaseFieldBuilder implements FieldBuilder
             return FieldType.String;
         if (returnType != null && returnType.equalsIgnoreCase("Boolean"))
             return FieldType.Boolean;
+        if (returnType != null && returnType.equals("Array<String>"))
+            return FieldType.ArrayString;
+        if (returnType != null && returnType.equals("Array<Number>"))
+            return FieldType.ArrayNumber;
+        if (returnType != null && returnType.equals("Array<Object>"))
+        {
+            JClass jClass2 = ClassRegistry.INSTANCE.getRegistry().get(new ClassRegistry.RegistryKey(optionSpec, OutputType.Interface));
+            if (jClass2 != null) // TODO @rqu need to treat case of
+                                 // drilldown.series
+                return FieldType.ArrayObject;
+        }
 
         return FieldType.Other;
     }
@@ -101,11 +105,11 @@ public abstract class BaseFieldBuilder implements FieldBuilder
 
     protected abstract void addClassField(JClass jClass, String fieldName);
 
-    protected abstract void addStringArray(String fieldName);
+    // protected abstract void addStringArray(String fieldName);
+    //
+    // protected abstract void addNumberArray(String fieldName);
 
-    protected abstract void addNumberArray(String fieldName);
-
-    protected abstract void addObjectArray(JClass jClass, String fieldName);
+    // protected abstract void addObjectArray(JClass jClass, String fieldName);
 
     protected JDefinedClass getJclass()
     {

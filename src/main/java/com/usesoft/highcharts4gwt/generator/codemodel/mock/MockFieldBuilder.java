@@ -10,9 +10,6 @@ import com.sun.codemodel.JVar;
 import com.usesoft.highcharts4gwt.generator.codemodel.BaseFieldBuilder;
 import com.usesoft.highcharts4gwt.generator.codemodel.FieldBuilder;
 import com.usesoft.highcharts4gwt.generator.codemodel.OutputType;
-import com.usesoft.highcharts4gwt.model.array.api.Array;
-import com.usesoft.highcharts4gwt.model.array.api.ArrayNumber;
-import com.usesoft.highcharts4gwt.model.array.api.ArrayString;
 
 public class MockFieldBuilder extends BaseFieldBuilder implements FieldBuilder
 {
@@ -121,55 +118,6 @@ public class MockFieldBuilder extends BaseFieldBuilder implements FieldBuilder
 
         setter.body().assign(JExpr._this().ref(field), setterParam)._return(JExpr._this());
 
-    }
-
-    @Override
-    protected void addStringArray(String fieldName)
-    {
-        JFieldVar field = getJclass().field(JMod.PRIVATE, ArrayString.class, fieldName);
-
-        JMethod getter = getJclass().method(JMod.PUBLIC, ArrayString.class, fieldName);
-        JBlock block = getter.body();
-        block._return(field);
-
-        JMethod setter = getJclass().method(JMod.PUBLIC, getJclass(), fieldName);
-        JVar setterParam = setter.param(ArrayString.class, fieldName);
-
-        setter.body().assign(JExpr._this().ref(field), setterParam)._return(JExpr._this());
-    }
-
-    @Override
-    protected void addNumberArray(String fieldName)
-    {
-        JFieldVar field = getJclass().field(JMod.PRIVATE, ArrayNumber.class, fieldName);
-
-        JMethod getter = getJclass().method(JMod.PUBLIC, ArrayNumber.class, fieldName);
-        JBlock block = getter.body();
-        block._return(field);
-
-        JMethod setter = getJclass().method(JMod.PUBLIC, getJclass(), fieldName);
-        JVar setterParam = setter.param(ArrayNumber.class, fieldName);
-
-        setter.body().assign(JExpr._this().ref(field), setterParam)._return(JExpr._this());
-    }
-
-    @Override
-    protected void addObjectArray(JClass jClass, String fieldName)
-    {
-        JClass detailClass = jClass;
-        JClass rawLLclazz = getCodeModel().ref(Array.class);
-        JClass fieldClazz = rawLLclazz.narrow(detailClass);
-
-        JFieldVar field = getJclass().field(JMod.PRIVATE, fieldClazz, fieldName);
-
-        JMethod getter = getJclass().method(JMod.PUBLIC, fieldClazz, fieldName);
-        JBlock block = getter.body();
-        block._return(field);
-
-        JMethod setter = getJclass().method(JMod.PUBLIC, getJclass(), fieldName);
-        JVar setterParam = setter.param(fieldClazz, fieldName);
-
-        setter.body().assign(JExpr._this().ref(field), setterParam)._return(JExpr._this());
     }
 
     @Override

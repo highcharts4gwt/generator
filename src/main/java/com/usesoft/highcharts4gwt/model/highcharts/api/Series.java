@@ -1,14 +1,9 @@
 
 package com.usesoft.highcharts4gwt.model.highcharts.api;
 
-import com.usesoft.highcharts4gwt.model.array.api.ArrayNumber;
 
 public interface Series {
 
-
-    ArrayNumber data();
-
-    Series data(ArrayNumber data);
 
     String dataURL();
 

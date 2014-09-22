@@ -4,7 +4,6 @@ package com.usesoft.highcharts4gwt.model.highcharts.jso;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.usesoft.highcharts4gwt.model.array.api.Array;
 import com.usesoft.highcharts4gwt.model.highcharts.api.Labels;
-import com.usesoft.highcharts4gwt.model.highcharts.api.labels.Items;
 
 public class JsoLabels
     extends JavaScriptObject
@@ -15,13 +14,13 @@ public class JsoLabels
     protected JsoLabels() {
     }
 
-    public final native Array<Items> items()
+    public final native Array<JsoLabels> items()
         throws RuntimeException /*-{
-        return this["items"] = (this["items"] || []);
+        return this["items"] = (this["items"] || null);
     }-*/
     ;
 
-    public final native JsoLabels items(Array<Items> items)
+    public final native JsoLabels items(Array<JsoLabels> items)
         throws RuntimeException /*-{
         this["items"] = items;
         return this;

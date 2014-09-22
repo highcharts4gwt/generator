@@ -2,6 +2,7 @@
 package com.usesoft.highcharts4gwt.model.highcharts.jso;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.usesoft.highcharts4gwt.model.array.api.ArrayNumber;
 import com.usesoft.highcharts4gwt.model.highcharts.api.Chart;
 import com.usesoft.highcharts4gwt.model.highcharts.api.chart.Events;
 import com.usesoft.highcharts4gwt.model.highcharts.api.chart.Options3d;
@@ -311,6 +312,19 @@ public class JsoChart
     public final native JsoChart showAxes(boolean showAxes)
         throws RuntimeException /*-{
         this["showAxes"] = showAxes;
+        return this;
+    }-*/
+    ;
+
+    public final native ArrayNumber spacing()
+        throws RuntimeException /*-{
+        return this["spacing"] = (this["spacing"] || [10, 10, 15, 10]);
+    }-*/
+    ;
+
+    public final native JsoChart spacing(ArrayNumber spacing)
+        throws RuntimeException /*-{
+        this["spacing"] = spacing;
         return this;
     }-*/
     ;
