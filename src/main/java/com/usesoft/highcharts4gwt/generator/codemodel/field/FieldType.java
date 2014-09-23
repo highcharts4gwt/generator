@@ -83,6 +83,15 @@ public enum FieldType
         {
             return visitor.visitOther(in);
         }
+    },
+    Data
+    {
+        @Override
+        @CheckForNull
+        public <IN, OUT> OUT accept(FieldTypeVisitor<IN, OUT> visitor, IN in)
+        {
+            return visitor.visitData(in);
+        }
     };
 
     @CheckForNull

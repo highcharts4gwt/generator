@@ -17,11 +17,11 @@ public class FieldClassWriter extends FieldWriter implements OutputTypeVisitor<S
     private final OptionSpec optionSpec;
     private final JClass interfaceJClass;
 
-    public FieldClassWriter(JCodeModel codeModel, JDefinedClass jClass, String className, OptionSpec optionSpec, String defaultValue)
+    public FieldClassWriter(JCodeModel codeModel, JDefinedClass jClass, String className, OptionSpec optionSpec)
     {
         super(codeModel, className, jClass);
         this.optionSpec = optionSpec;
-        this.defaultValue = defaultValue;
+        this.defaultValue = optionSpec.getDefaults();
         interfaceJClass = ClassRegistry.INSTANCE.getRegistry().get(new ClassRegistry.RegistryKey(this.optionSpec, OutputType.Interface));
     }
 

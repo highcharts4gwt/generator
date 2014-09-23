@@ -16,11 +16,11 @@ public class FieldArrayObjectWriter extends FieldWriter implements OutputTypeVis
     private final String defaultValue;
     private final OptionSpec optionSpec;
 
-    public FieldArrayObjectWriter(JCodeModel codeModel, JDefinedClass jClass, String className, OptionSpec optionSpec, String defaultValue)
+    public FieldArrayObjectWriter(JCodeModel codeModel, JDefinedClass jClass, String className, OptionSpec optionSpec)
     {
         super(codeModel, className, jClass);
         this.optionSpec = optionSpec;
-        this.defaultValue = defaultValue;
+        this.defaultValue = optionSpec.getDefaults();
     }
 
     @Override

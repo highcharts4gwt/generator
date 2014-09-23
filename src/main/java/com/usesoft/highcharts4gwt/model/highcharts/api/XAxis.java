@@ -3,6 +3,7 @@ package com.usesoft.highcharts4gwt.model.highcharts.api;
 
 import com.usesoft.highcharts4gwt.model.array.api.Array;
 import com.usesoft.highcharts4gwt.model.array.api.ArrayNumber;
+import com.usesoft.highcharts4gwt.model.array.api.ArrayString;
 import com.usesoft.highcharts4gwt.model.highcharts.api.xaxis.Events;
 import com.usesoft.highcharts4gwt.model.highcharts.api.xaxis.Labels;
 import com.usesoft.highcharts4gwt.model.highcharts.api.xaxis.PlotBands;
@@ -15,6 +16,10 @@ public interface XAxis {
     boolean allowDecimals();
 
     XAxis allowDecimals(boolean allowDecimals);
+
+    ArrayString categories();
+
+    XAxis categories(ArrayString categories);
 
     Number ceiling();
 

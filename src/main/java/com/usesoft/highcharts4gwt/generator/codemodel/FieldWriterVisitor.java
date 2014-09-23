@@ -7,6 +7,7 @@ import com.usesoft.highcharts4gwt.generator.codemodel.field.FieldArrayObjectWrit
 import com.usesoft.highcharts4gwt.generator.codemodel.field.FieldArrayStringWriter;
 import com.usesoft.highcharts4gwt.generator.codemodel.field.FieldBooleanWriter;
 import com.usesoft.highcharts4gwt.generator.codemodel.field.FieldClassWriter;
+import com.usesoft.highcharts4gwt.generator.codemodel.field.FieldDataWriter;
 import com.usesoft.highcharts4gwt.generator.codemodel.field.FieldNumberWriter;
 import com.usesoft.highcharts4gwt.generator.codemodel.field.FieldStringWriter;
 import com.usesoft.highcharts4gwt.generator.codemodel.field.FieldTypeVisitor;
@@ -46,15 +47,13 @@ public class FieldWriterVisitor implements FieldTypeVisitor<OutputType, Void>
     @Override
     public Void visitBoolean(OutputType in)
     {
-        boolean defaultValue = Boolean.parseBoolean(optionSpec.getDefaults());
-        return in.accept(new FieldBooleanWriter(codeModel, jClass, className, defaultValue), fieldName);
+        return in.accept(new FieldBooleanWriter(codeModel, jClass, className, Boolean.parseBoolean(optionSpec.getDefaults())), fieldName);
     }
 
     @Override
     public Void visitString(OutputType in)
     {
-        String defaultValue = optionSpec.getDefaults();
-        return in.accept(new FieldStringWriter(codeModel, jClass, className, defaultValue), fieldName);
+        return in.accept(new FieldStringWriter(codeModel, jClass, className, optionSpec.getDefaults()), fieldName);
     }
 
     @Override
@@ -66,30 +65,31 @@ public class FieldWriterVisitor implements FieldTypeVisitor<OutputType, Void>
     @Override
     public Void visitArrayString(OutputType in)
     {
-        String defaultValue = optionSpec.getDefaults();
-        return in.accept(new FieldArrayStringWriter(codeModel, jClass, className, defaultValue), fieldName);
+        return in.accept(new FieldArrayStringWriter(codeModel, jClass, className, optionSpec.getDefaults()), fieldName);
     }
 
     @Override
     public Void visitArrayNumber(OutputType in)
     {
-        String defaultValue = optionSpec.getDefaults();
-        return in.accept(new FieldArrayNumberWriter(codeModel, jClass, className, defaultValue), fieldName);
+        return in.accept(new FieldArrayNumberWriter(codeModel, jClass, className, optionSpec.getDefaults()), fieldName);
     }
 
     @Override
     public Void visitArrayObject(OutputType in)
     {
-        String defaultValue = optionSpec.getDefaults();
-        return in.accept(new FieldArrayObjectWriter(codeModel, jClass, className, optionSpec, defaultValue), fieldName);
+        return in.accept(new FieldArrayObjectWriter(codeModel, jClass, className, optionSpec), fieldName);
     }
 
     @Override
     public Void visitClass(OutputType in)
     {
-        String defaultValue = optionSpec.getDefaults();
+        return in.accept(new FieldClassWriter(codeModel, jClass, className, optionSpec), fieldName);
+    }
 
-        return in.accept(new FieldClassWriter(codeModel, jClass, className, optionSpec, defaultValue), fieldName);
+    @Override
+    public Void visitData(OutputType in)
+    {
+        return in.accept(new FieldDataWriter(codeModel, jClass, className, optionSpec.getDefaults()), fieldName);
     }
 
 }

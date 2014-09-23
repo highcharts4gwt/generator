@@ -3,6 +3,7 @@ package com.usesoft.highcharts4gwt.model.highcharts.mock;
 
 import com.usesoft.highcharts4gwt.model.array.api.Array;
 import com.usesoft.highcharts4gwt.model.array.api.ArrayNumber;
+import com.usesoft.highcharts4gwt.model.array.api.ArrayString;
 import com.usesoft.highcharts4gwt.model.highcharts.api.XAxis;
 import com.usesoft.highcharts4gwt.model.highcharts.api.xaxis.Events;
 import com.usesoft.highcharts4gwt.model.highcharts.api.xaxis.Labels;
@@ -15,6 +16,7 @@ public class MockXAxis
 {
 
     private boolean allowDecimals;
+    private ArrayString categories;
     private Number ceiling;
     private boolean endOnTick;
     private Events events;
@@ -65,6 +67,15 @@ public class MockXAxis
 
     public MockXAxis allowDecimals(boolean allowDecimals) {
         this.allowDecimals = allowDecimals;
+        return this;
+    }
+
+    public ArrayString categories() {
+        return categories;
+    }
+
+    public MockXAxis categories(ArrayString categories) {
+        this.categories = categories;
         return this;
     }
 

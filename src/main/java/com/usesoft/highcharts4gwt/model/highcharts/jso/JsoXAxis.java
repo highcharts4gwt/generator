@@ -4,6 +4,7 @@ package com.usesoft.highcharts4gwt.model.highcharts.jso;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.usesoft.highcharts4gwt.model.array.api.Array;
 import com.usesoft.highcharts4gwt.model.array.api.ArrayNumber;
+import com.usesoft.highcharts4gwt.model.array.api.ArrayString;
 import com.usesoft.highcharts4gwt.model.highcharts.api.XAxis;
 import com.usesoft.highcharts4gwt.model.highcharts.api.xaxis.Events;
 import com.usesoft.highcharts4gwt.model.highcharts.api.xaxis.Labels;
@@ -29,6 +30,19 @@ public class JsoXAxis
     public final native JsoXAxis allowDecimals(boolean allowDecimals)
         throws RuntimeException /*-{
         this["allowDecimals"] = allowDecimals;
+        return this;
+    }-*/
+    ;
+
+    public final native ArrayString categories()
+        throws RuntimeException /*-{
+        return this["categories"] = (this["categories"] || null);
+    }-*/
+    ;
+
+    public final native JsoXAxis categories(ArrayString categories)
+        throws RuntimeException /*-{
+        this["categories"] = categories;
         return this;
     }-*/
     ;

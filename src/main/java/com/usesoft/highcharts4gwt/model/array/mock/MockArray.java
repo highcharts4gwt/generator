@@ -9,6 +9,12 @@ public class MockArray<T> extends ArrayList<T> implements Array<T>
     private static final long serialVersionUID = 1L;
 
     @Override
+    public T getItem(int index)
+    {
+        return get(index);
+    }
+
+    @Override
     public int length()
     {
         return size();

@@ -1,12 +1,14 @@
 
 package com.usesoft.highcharts4gwt.model.highcharts.mock;
 
+import com.usesoft.highcharts4gwt.model.array.api.ArrayNumber;
 import com.usesoft.highcharts4gwt.model.highcharts.api.Series;
 
 public class MockSeries
     implements Series
 {
 
+    private ArrayNumber data;
     private String dataURL;
     private String id;
     private Number index;
@@ -14,6 +16,15 @@ public class MockSeries
     private String name;
     private String type;
     private Number zIndex;
+
+    public ArrayNumber data() {
+        return data;
+    }
+
+    public MockSeries data(ArrayNumber data) {
+        this.data = data;
+        return this;
+    }
 
     public String dataURL() {
         return dataURL;

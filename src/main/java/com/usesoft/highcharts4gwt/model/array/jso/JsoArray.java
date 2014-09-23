@@ -4,22 +4,29 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
 import com.usesoft.highcharts4gwt.model.array.api.Array;
 
-public class JsoArray<T extends JavaScriptObject> extends JsArray<T> implements Array<T>
+public class JsoArray<T> extends JsArray<JavaScriptObject> implements Array<T>
 {
 
     protected JsoArray()
     {
     }
 
+    @SuppressWarnings("unchecked")
     @Override
-    final public void insert(int index, T value)
+    public final T getItem(int index)
     {
-        set(index, value);
+        return (T) get(index);
     }
 
     @Override
-    public void addToEnd(T value)
+    final public void insert(int index, T value)
     {
-        push(value);
+        set(index, (JavaScriptObject) value);
+    }
+
+    @Override
+    final public void addToEnd(T value)
+    {
+        push((JavaScriptObject) value);
     }
 }

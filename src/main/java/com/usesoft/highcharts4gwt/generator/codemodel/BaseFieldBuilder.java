@@ -63,6 +63,11 @@ public final class BaseFieldBuilder implements FieldBuilder
             return FieldType.ArrayString;
         if (returnType.equals("Array<Number>"))
             return FieldType.ArrayNumber;
+        if (returnType.equals("Array<Object|Array|Number>"))
+            return FieldType.Data;
+        // TODO treat category case
+        if (returnType.equals("Array") && optionSpec.getFullname().equals("xAxis.categories"))
+            return FieldType.ArrayString;
         if (returnType.equals("Array<Object>"))
         {
             JClass jClass2 = ClassRegistry.INSTANCE.getRegistry().get(new ClassRegistry.RegistryKey(optionSpec, OutputType.Interface));
