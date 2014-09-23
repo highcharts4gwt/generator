@@ -12,7 +12,7 @@ Lot of work to do but a big first step accomplished :)
 
 Here is the result inside the test project application: 
 
-
+![First Chart](./ScreenShot.png)
 
 
 
