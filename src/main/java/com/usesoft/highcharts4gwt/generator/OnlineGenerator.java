@@ -35,7 +35,8 @@ public class OnlineGenerator extends BaseGenerator
         {
             optionsInputStream = new URL(highchartOptionsUrl).openStream();
             optionsAsString = IOUtils.toString(optionsInputStream);
-        } finally
+        }
+        finally
         {
             if (optionsInputStream != null)
                 optionsInputStream.close();

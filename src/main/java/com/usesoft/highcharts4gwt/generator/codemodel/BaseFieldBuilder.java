@@ -46,28 +46,44 @@ public final class BaseFieldBuilder implements FieldBuilder
 
     private FieldType findFieldType(OptionSpec optionSpec, String returnType)
     {
-        if (returnType != null && returnType.equalsIgnoreCase("Number"))
-            return FieldType.Number;
-        if (returnType != null && returnType.equalsIgnoreCase("String"))
-            return FieldType.String;
-        if (returnType != null && returnType.equalsIgnoreCase("Boolean"))
-            return FieldType.Boolean;
-        if (returnType != null && returnType.equals("Array<String>"))
-            return FieldType.ArrayString;
-        if (returnType != null && returnType.equals("Array<Number>"))
-            return FieldType.ArrayNumber;
-        if (returnType == null)
-            return FieldType.Class;
+        FieldType fieldType = findFieldTypeForSimpleFied(returnType);
 
-        if (returnType != null && returnType.equals("Array<Object>"))
+        if (fieldType == null)
+            fieldType = findFieldTypeForArray(optionSpec, returnType);
+
+        if (fieldType == null)
+            fieldType = FieldType.Other;
+
+        return fieldType;
+    }
+
+    private FieldType findFieldTypeForArray(OptionSpec optionSpec, String returnType)
+    {
+        if (returnType.equals("Array<String>"))
+            return FieldType.ArrayString;
+        if (returnType.equals("Array<Number>"))
+            return FieldType.ArrayNumber;
+        if (returnType.equals("Array<Object>"))
         {
             JClass jClass2 = ClassRegistry.INSTANCE.getRegistry().get(new ClassRegistry.RegistryKey(optionSpec, OutputType.Interface));
             if (jClass2 != null) // TODO @rqu need to treat case of
                                  // drilldown.series
                 return FieldType.ArrayObject;
         }
+        return null;
+    }
 
-        return FieldType.Other;
+    private FieldType findFieldTypeForSimpleFied(String returnType)
+    {
+        if (returnType == null)
+            return FieldType.Class;
+        if (returnType.equalsIgnoreCase("Number"))
+            return FieldType.Number;
+        if (returnType.equalsIgnoreCase("String"))
+            return FieldType.String;
+        if (returnType.equalsIgnoreCase("Boolean"))
+            return FieldType.Boolean;
+        return null;
     }
 
     @Override

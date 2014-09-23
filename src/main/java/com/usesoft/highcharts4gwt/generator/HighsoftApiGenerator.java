@@ -18,7 +18,8 @@ public class HighsoftApiGenerator implements ProductVisitor<Void, Void>
             // generator = new OnlineGenerator(Product.Highcharts);
             generator = new OfflineGenerator(Product.Highcharts);
             generator.generate();
-        } catch (Exception e)
+        }
+        catch (Exception e)
         {
             throw new RuntimeException("Could not generate sources.", e);
         }

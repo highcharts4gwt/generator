@@ -32,7 +32,8 @@ public class OfflineGenerator extends BaseGenerator
             optionsAsString = IOUtils.toString(optionsInputStream);
             return optionsAsString;
 
-        } finally
+        }
+        finally
         {
             if (optionsInputStream != null)
                 optionsInputStream.close();

@@ -11,5 +11,5 @@ public interface Generator
     void generate() throws IOException, JClassAlreadyExistsException;
 
     @CheckForNull
-    public String readProductOptionsFile() throws IOException;
+    String readProductOptionsFile() throws IOException;
 }
