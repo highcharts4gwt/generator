@@ -6,11 +6,17 @@ highcharts4gwt
 ## Status
 v0 still in development.
 
-First alpha working, display a chart with a custom Title / subtitle.
+First rendering of a chart achieved by using the generated API !!!
 
-Simply run highcharts4gwt as a Java application it will generate the API code.
+Lot of work to do but a big first step accomplished :)
 
-For now only support String / Number / Boolean and Class fields. Will work on arrays ASAP to be able to display a first serie soon :)
+Here is the result inside the test project application: 
+
+
+
+
+
+If you want to test simply run highcharts4gwt as a Java application it will generate the API code.
 
 ## Description
 The goal of this project is to create an "auto-generated" GWT highcharts wrapper.
