@@ -42,7 +42,7 @@ public class JsoPlotBands
 
     public final native Label label()
         throws RuntimeException /*-{
-        return this["label"] = (this["label"] || null);
+        return this["label"] = (this["label"] || {});
     }-*/
     ;
 

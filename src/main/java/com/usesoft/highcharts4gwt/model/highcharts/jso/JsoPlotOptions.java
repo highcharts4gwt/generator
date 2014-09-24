@@ -22,7 +22,7 @@ public class JsoPlotOptions
 
     public final native Area area()
         throws RuntimeException /*-{
-        return this["area"] = (this["area"] || null);
+        return this["area"] = (this["area"] || {});
     }-*/
     ;
 
@@ -35,7 +35,7 @@ public class JsoPlotOptions
 
     public final native Areaspline areaspline()
         throws RuntimeException /*-{
-        return this["areaspline"] = (this["areaspline"] || null);
+        return this["areaspline"] = (this["areaspline"] || {});
     }-*/
     ;
 
@@ -48,7 +48,7 @@ public class JsoPlotOptions
 
     public final native Bar bar()
         throws RuntimeException /*-{
-        return this["bar"] = (this["bar"] || null);
+        return this["bar"] = (this["bar"] || {});
     }-*/
     ;
 
@@ -61,7 +61,7 @@ public class JsoPlotOptions
 
     public final native Line line()
         throws RuntimeException /*-{
-        return this["line"] = (this["line"] || null);
+        return this["line"] = (this["line"] || {});
     }-*/
     ;
 
@@ -74,7 +74,7 @@ public class JsoPlotOptions
 
     public final native Pie pie()
         throws RuntimeException /*-{
-        return this["pie"] = (this["pie"] || null);
+        return this["pie"] = (this["pie"] || {});
     }-*/
     ;
 
@@ -87,7 +87,7 @@ public class JsoPlotOptions
 
     public final native Series series()
         throws RuntimeException /*-{
-        return this["series"] = (this["series"] || null);
+        return this["series"] = (this["series"] || {});
     }-*/
     ;
 
@@ -100,7 +100,7 @@ public class JsoPlotOptions
 
     public final native Spline spline()
         throws RuntimeException /*-{
-        return this["spline"] = (this["spline"] || null);
+        return this["spline"] = (this["spline"] || {});
     }-*/
     ;
 

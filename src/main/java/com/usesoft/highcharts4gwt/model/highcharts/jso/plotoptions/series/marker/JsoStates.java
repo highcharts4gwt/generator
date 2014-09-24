@@ -17,7 +17,7 @@ public class JsoStates
 
     public final native Hover hover()
         throws RuntimeException /*-{
-        return this["hover"] = (this["hover"] || null);
+        return this["hover"] = (this["hover"] || {});
     }-*/
     ;
 
@@ -30,7 +30,7 @@ public class JsoStates
 
     public final native Select select()
         throws RuntimeException /*-{
-        return this["select"] = (this["select"] || null);
+        return this["select"] = (this["select"] || {});
     }-*/
     ;
 

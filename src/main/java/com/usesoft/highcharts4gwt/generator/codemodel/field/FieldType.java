@@ -37,7 +37,7 @@ public enum FieldType
         }
 
     },
-    Class
+    Object
     {
         @Override
         @CheckForNull

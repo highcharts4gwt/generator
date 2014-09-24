@@ -16,7 +16,7 @@ public class JsoNavigation
 
     public final native ButtonOptions buttonOptions()
         throws RuntimeException /*-{
-        return this["buttonOptions"] = (this["buttonOptions"] || null);
+        return this["buttonOptions"] = (this["buttonOptions"] || {});
     }-*/
     ;
 

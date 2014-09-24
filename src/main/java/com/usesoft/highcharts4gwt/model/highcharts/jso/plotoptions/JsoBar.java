@@ -16,7 +16,7 @@ public class JsoBar
 
     public final native DataLabels dataLabels()
         throws RuntimeException /*-{
-        return this["dataLabels"] = (this["dataLabels"] || null);
+        return this["dataLabels"] = (this["dataLabels"] || {});
     }-*/
     ;
 

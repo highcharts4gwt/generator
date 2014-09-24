@@ -81,7 +81,7 @@ public class JsoData
 
     public final native Marker marker()
         throws RuntimeException /*-{
-        return this["marker"] = (this["marker"] || null);
+        return this["marker"] = (this["marker"] || {});
     }-*/
     ;
 

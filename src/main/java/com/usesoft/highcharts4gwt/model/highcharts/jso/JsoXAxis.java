@@ -36,7 +36,7 @@ public class JsoXAxis
 
     public final native ArrayString categories()
         throws RuntimeException /*-{
-        return this["categories"] = (this["categories"] || null);
+        return this["categories"] = (this["categories"] || []);
     }-*/
     ;
 
@@ -75,7 +75,7 @@ public class JsoXAxis
 
     public final native Events events()
         throws RuntimeException /*-{
-        return this["events"] = (this["events"] || null);
+        return this["events"] = (this["events"] || {});
     }-*/
     ;
 
@@ -153,7 +153,7 @@ public class JsoXAxis
 
     public final native Labels labels()
         throws RuntimeException /*-{
-        return this["labels"] = (this["labels"] || null);
+        return this["labels"] = (this["labels"] || {});
     }-*/
     ;
 
@@ -387,7 +387,7 @@ public class JsoXAxis
 
     public final native Array<PlotBands> plotBands()
         throws RuntimeException /*-{
-        return this["plotBands"] = (this["plotBands"] || null);
+        return this["plotBands"] = (this["plotBands"] || []);
     }-*/
     ;
 
@@ -400,7 +400,7 @@ public class JsoXAxis
 
     public final native Array<PlotLines> plotLines()
         throws RuntimeException /*-{
-        return this["plotLines"] = (this["plotLines"] || null);
+        return this["plotLines"] = (this["plotLines"] || []);
     }-*/
     ;
 
@@ -543,7 +543,7 @@ public class JsoXAxis
 
     public final native ArrayNumber tickPositions()
         throws RuntimeException /*-{
-        return this["tickPositions"] = (this["tickPositions"] || null);
+        return this["tickPositions"] = (this["tickPositions"] || []);
     }-*/
     ;
 
@@ -582,7 +582,7 @@ public class JsoXAxis
 
     public final native Title title()
         throws RuntimeException /*-{
-        return this["title"] = (this["title"] || null);
+        return this["title"] = (this["title"] || {});
     }-*/
     ;
 

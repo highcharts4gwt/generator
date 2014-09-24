@@ -36,8 +36,17 @@ public class JsoFieldHelper
         return Double.toString((Double) defaultValue);
     }
 
-    private static String getJsniDefaultValueForArrayString(String defaultValue)
+    private static String getJsniDefaultValueForArray(String defaultValue)
     {
+        if (defaultValue == null)
+            return "[]";
+        return defaultValue;
+    }
+
+    private static String getJsniDefaultValueForObject(String defaultValue)
+    {
+        if (defaultValue == null)
+            return "{}";
         return defaultValue;
     }
 
@@ -76,19 +85,27 @@ public class JsoFieldHelper
         writeGetterNativeCode(fieldName, type, jDefinedClass, jCodeModel, getterCode);
     }
 
-    public static void writeGetterNativeCodeArrayString(String fieldName,
-                    Class<?> type,
-                    JDefinedClass jDefinedClass,
-                    JCodeModel jCodeModel,
-                    String defaultValue)
+    public static void writeGetterNativeCodeArrayString(String fieldName, Class<?> type, JDefinedClass jDefinedClass, JCodeModel jCodeModel, String defaultValue)
     {
-        String getterCode = getJsniGetterCode(fieldName, getJsniDefaultValueForArrayString(defaultValue));
+        String getterCode = getJsniGetterCode(fieldName, getJsniDefaultValueForArray(defaultValue));
+        writeGetterNativeCode(fieldName, type, jDefinedClass, jCodeModel, getterCode);
+    }
+
+    public static void writeGetterNativeCodeObject(String fieldName, JClass type, JDefinedClass jDefinedClass, JCodeModel jCodeModel, String defaultValue)
+    {
+        String getterCode = getJsniGetterCode(fieldName, getJsniDefaultValueForObject(defaultValue));
         writeGetterNativeCode(fieldName, type, jDefinedClass, jCodeModel, getterCode);
     }
 
     public static void writeGetterNativeCodeArrayString(String fieldName, JClass type, JDefinedClass jDefinedClass, JCodeModel jCodeModel, String defaultValue)
     {
-        String getterCode = getJsniGetterCode(fieldName, getJsniDefaultValueForArrayString(defaultValue));
+        String getterCode = getJsniGetterCode(fieldName, getJsniDefaultValueForArray(defaultValue));
+        writeGetterNativeCode(fieldName, type, jDefinedClass, jCodeModel, getterCode);
+    }
+
+    public static void writeGetterNativeCodeArrayObject(String fieldName, JClass type, JDefinedClass jDefinedClass, JCodeModel jCodeModel, String defaultValue)
+    {
+        String getterCode = getJsniGetterCode(fieldName, getJsniDefaultValueForArray(defaultValue));
         writeGetterNativeCode(fieldName, type, jDefinedClass, jCodeModel, getterCode);
     }
 

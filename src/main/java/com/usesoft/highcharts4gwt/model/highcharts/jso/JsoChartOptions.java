@@ -34,7 +34,7 @@ public class JsoChartOptions
 
     public final native Global global()
         throws RuntimeException /*-{
-        return this["global"] = (this["global"] || null);
+        return this["global"] = (this["global"] || {});
     }-*/
     ;
 
@@ -47,7 +47,7 @@ public class JsoChartOptions
 
     public final native Drilldown drilldown()
         throws RuntimeException /*-{
-        return this["drilldown"] = (this["drilldown"] || null);
+        return this["drilldown"] = (this["drilldown"] || {});
     }-*/
     ;
 
@@ -60,7 +60,7 @@ public class JsoChartOptions
 
     public final native Legend legend()
         throws RuntimeException /*-{
-        return this["legend"] = (this["legend"] || null);
+        return this["legend"] = (this["legend"] || {});
     }-*/
     ;
 
@@ -73,7 +73,7 @@ public class JsoChartOptions
 
     public final native Chart chart()
         throws RuntimeException /*-{
-        return this["chart"] = (this["chart"] || null);
+        return this["chart"] = (this["chart"] || {});
     }-*/
     ;
 
@@ -86,7 +86,7 @@ public class JsoChartOptions
 
     public final native PlotOptions plotOptions()
         throws RuntimeException /*-{
-        return this["plotOptions"] = (this["plotOptions"] || null);
+        return this["plotOptions"] = (this["plotOptions"] || {});
     }-*/
     ;
 
@@ -99,7 +99,7 @@ public class JsoChartOptions
 
     public final native XAxis xAxis()
         throws RuntimeException /*-{
-        return this["xAxis"] = (this["xAxis"] || null);
+        return this["xAxis"] = (this["xAxis"] || {});
     }-*/
     ;
 
@@ -112,7 +112,7 @@ public class JsoChartOptions
 
     public final native Navigation navigation()
         throws RuntimeException /*-{
-        return this["navigation"] = (this["navigation"] || null);
+        return this["navigation"] = (this["navigation"] || {});
     }-*/
     ;
 
@@ -125,7 +125,7 @@ public class JsoChartOptions
 
     public final native Subtitle subtitle()
         throws RuntimeException /*-{
-        return this["subtitle"] = (this["subtitle"] || null);
+        return this["subtitle"] = (this["subtitle"] || {});
     }-*/
     ;
 
@@ -138,7 +138,7 @@ public class JsoChartOptions
 
     public final native Title title()
         throws RuntimeException /*-{
-        return this["title"] = (this["title"] || null);
+        return this["title"] = (this["title"] || {});
     }-*/
     ;
 
@@ -151,7 +151,7 @@ public class JsoChartOptions
 
     public final native YAxis yAxis()
         throws RuntimeException /*-{
-        return this["yAxis"] = (this["yAxis"] || null);
+        return this["yAxis"] = (this["yAxis"] || {});
     }-*/
     ;
 
@@ -164,7 +164,7 @@ public class JsoChartOptions
 
     public final native Tooltip tooltip()
         throws RuntimeException /*-{
-        return this["tooltip"] = (this["tooltip"] || null);
+        return this["tooltip"] = (this["tooltip"] || {});
     }-*/
     ;
 
@@ -177,7 +177,7 @@ public class JsoChartOptions
 
     public final native NoData noData()
         throws RuntimeException /*-{
-        return this["noData"] = (this["noData"] || null);
+        return this["noData"] = (this["noData"] || {});
     }-*/
     ;
 
@@ -190,7 +190,7 @@ public class JsoChartOptions
 
     public final native Exporting exporting()
         throws RuntimeException /*-{
-        return this["exporting"] = (this["exporting"] || null);
+        return this["exporting"] = (this["exporting"] || {});
     }-*/
     ;
 
@@ -203,7 +203,7 @@ public class JsoChartOptions
 
     public final native Array<Series> series()
         throws RuntimeException /*-{
-        return this["series"] = (this["series"] || null);
+        return this["series"] = (this["series"] || []);
     }-*/
     ;
 
@@ -216,7 +216,7 @@ public class JsoChartOptions
 
     public final native Lang lang()
         throws RuntimeException /*-{
-        return this["lang"] = (this["lang"] || null);
+        return this["lang"] = (this["lang"] || {});
     }-*/
     ;
 
@@ -229,7 +229,7 @@ public class JsoChartOptions
 
     public final native Credits credits()
         throws RuntimeException /*-{
-        return this["credits"] = (this["credits"] || null);
+        return this["credits"] = (this["credits"] || {});
     }-*/
     ;
 
@@ -242,7 +242,7 @@ public class JsoChartOptions
 
     public final native Loading loading()
         throws RuntimeException /*-{
-        return this["loading"] = (this["loading"] || null);
+        return this["loading"] = (this["loading"] || {});
     }-*/
     ;
 
@@ -255,7 +255,7 @@ public class JsoChartOptions
 
     public final native Labels labels()
         throws RuntimeException /*-{
-        return this["labels"] = (this["labels"] || null);
+        return this["labels"] = (this["labels"] || {});
     }-*/
     ;
 

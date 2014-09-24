@@ -6,7 +6,7 @@ import com.usesoft.highcharts4gwt.generator.codemodel.field.FieldArrayNumberWrit
 import com.usesoft.highcharts4gwt.generator.codemodel.field.FieldArrayObjectWriter;
 import com.usesoft.highcharts4gwt.generator.codemodel.field.FieldArrayStringWriter;
 import com.usesoft.highcharts4gwt.generator.codemodel.field.FieldBooleanWriter;
-import com.usesoft.highcharts4gwt.generator.codemodel.field.FieldClassWriter;
+import com.usesoft.highcharts4gwt.generator.codemodel.field.FieldObjectWriter;
 import com.usesoft.highcharts4gwt.generator.codemodel.field.FieldDataWriter;
 import com.usesoft.highcharts4gwt.generator.codemodel.field.FieldNumberWriter;
 import com.usesoft.highcharts4gwt.generator.codemodel.field.FieldStringWriter;
@@ -83,7 +83,7 @@ public class FieldWriterVisitor implements FieldTypeVisitor<OutputType, Void>
     @Override
     public Void visitClass(OutputType in)
     {
-        return in.accept(new FieldClassWriter(codeModel, jClass, className, optionSpec), fieldName);
+        return in.accept(new FieldObjectWriter(codeModel, jClass, className, optionSpec), fieldName);
     }
 
     @Override

@@ -39,8 +39,18 @@ public class FieldArrayObjectWriter extends FieldWriter implements OutputTypeVis
     {
         JClass fieldClazz = getRealClass();
 
-        JsoFieldHelper.writeGetterNativeCodeArrayString(fieldName, fieldClazz, getJclass(), getCodeModel(), defaultValue);
+        JsoFieldHelper.writeGetterNativeCodeArrayObject(fieldName, fieldClazz, getJclass(), getCodeModel(), defaultValue);
         JsoFieldHelper.writeSetterNativeCode(fieldName, fieldClazz, getJclass(), getCodeModel());
+        return null;
+    }
+
+    @Override
+    @CheckForNull
+    public Void visitMock(String fieldName)
+    {
+        JClass fieldClazz = getRealClass();
+
+        MockFieldHelper.addGetterSetterDeclaration(fieldName, fieldClazz, getJclass());
         return null;
     }
 
@@ -52,16 +62,6 @@ public class FieldArrayObjectWriter extends FieldWriter implements OutputTypeVis
         JClass rawLLclazz = getCodeModel().ref(Array.class);
         JClass fieldClazz = rawLLclazz.narrow(jClass);
         return fieldClazz;
-    }
-
-    @Override
-    @CheckForNull
-    public Void visitMock(String fieldName)
-    {
-        JClass fieldClazz = getRealClass();
-
-        MockFieldHelper.addGetterSetterDeclaration(fieldName, fieldClazz, getJclass());
-        return null;
     }
 
 }

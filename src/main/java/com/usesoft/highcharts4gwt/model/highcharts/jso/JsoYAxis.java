@@ -35,7 +35,7 @@ public class JsoYAxis
 
     public final native Events events()
         throws RuntimeException /*-{
-        return this["events"] = (this["events"] || null);
+        return this["events"] = (this["events"] || {});
     }-*/
     ;
 
@@ -74,7 +74,7 @@ public class JsoYAxis
 
     public final native Labels labels()
         throws RuntimeException /*-{
-        return this["labels"] = (this["labels"] || null);
+        return this["labels"] = (this["labels"] || {});
     }-*/
     ;
 
@@ -126,7 +126,7 @@ public class JsoYAxis
 
     public final native Array<PlotBands> plotBands()
         throws RuntimeException /*-{
-        return this["plotBands"] = (this["plotBands"] || null);
+        return this["plotBands"] = (this["plotBands"] || []);
     }-*/
     ;
 
@@ -139,7 +139,7 @@ public class JsoYAxis
 
     public final native Array<PlotLines> plotLines()
         throws RuntimeException /*-{
-        return this["plotLines"] = (this["plotLines"] || null);
+        return this["plotLines"] = (this["plotLines"] || []);
     }-*/
     ;
 
@@ -178,7 +178,7 @@ public class JsoYAxis
 
     public final native StackLabels stackLabels()
         throws RuntimeException /*-{
-        return this["stackLabels"] = (this["stackLabels"] || null);
+        return this["stackLabels"] = (this["stackLabels"] || {});
     }-*/
     ;
 
@@ -217,7 +217,7 @@ public class JsoYAxis
 
     public final native Title title()
         throws RuntimeException /*-{
-        return this["title"] = (this["title"] || null);
+        return this["title"] = (this["title"] || {});
     }-*/
     ;
 

@@ -10,14 +10,14 @@ import com.usesoft.highcharts4gwt.generator.codemodel.OutputType;
 import com.usesoft.highcharts4gwt.generator.codemodel.OutputTypeVisitor;
 import com.usesoft.highcharts4gwt.generator.graph.OptionSpec;
 
-public class FieldClassWriter extends FieldWriter implements OutputTypeVisitor<String, Void>
+public class FieldObjectWriter extends FieldWriter implements OutputTypeVisitor<String, Void>
 {
 
     private final String defaultValue;
     private final OptionSpec optionSpec;
     private final JClass interfaceJClass;
 
-    public FieldClassWriter(JCodeModel codeModel, JDefinedClass jClass, String className, OptionSpec optionSpec)
+    public FieldObjectWriter(JCodeModel codeModel, JDefinedClass jClass, String className, OptionSpec optionSpec)
     {
         super(codeModel, className, jClass);
         this.optionSpec = optionSpec;
@@ -38,7 +38,7 @@ public class FieldClassWriter extends FieldWriter implements OutputTypeVisitor<S
     @CheckForNull
     public Void visitJso(String fieldName)
     {
-        JsoFieldHelper.writeGetterNativeCodeArrayString(fieldName, interfaceJClass, getJclass(), getCodeModel(), defaultValue);
+        JsoFieldHelper.writeGetterNativeCodeObject(fieldName, interfaceJClass, getJclass(), getCodeModel(), defaultValue);
         JsoFieldHelper.writeSetterNativeCode(fieldName, interfaceJClass, getJclass(), getCodeModel());
         return null;
     }

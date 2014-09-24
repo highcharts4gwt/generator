@@ -110,7 +110,7 @@ public class JsoSeries
 
     public final native DataLabels dataLabels()
         throws RuntimeException /*-{
-        return this["dataLabels"] = (this["dataLabels"] || null);
+        return this["dataLabels"] = (this["dataLabels"] || {});
     }-*/
     ;
 
@@ -136,7 +136,7 @@ public class JsoSeries
 
     public final native Events events()
         throws RuntimeException /*-{
-        return this["events"] = (this["events"] || null);
+        return this["events"] = (this["events"] || {});
     }-*/
     ;
 
@@ -175,7 +175,7 @@ public class JsoSeries
 
     public final native Marker marker()
         throws RuntimeException /*-{
-        return this["marker"] = (this["marker"] || null);
+        return this["marker"] = (this["marker"] || {});
     }-*/
     ;
 
@@ -188,7 +188,7 @@ public class JsoSeries
 
     public final native Point point()
         throws RuntimeException /*-{
-        return this["point"] = (this["point"] || null);
+        return this["point"] = (this["point"] || {});
     }-*/
     ;
 

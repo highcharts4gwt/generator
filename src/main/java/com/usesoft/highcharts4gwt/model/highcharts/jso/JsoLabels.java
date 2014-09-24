@@ -17,7 +17,7 @@ public class JsoLabels
 
     public final native Array<Items> items()
         throws RuntimeException /*-{
-        return this["items"] = (this["items"] || null);
+        return this["items"] = (this["items"] || []);
     }-*/
     ;
 

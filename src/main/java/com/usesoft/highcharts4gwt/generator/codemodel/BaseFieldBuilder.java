@@ -81,7 +81,7 @@ public final class BaseFieldBuilder implements FieldBuilder
     private FieldType findFieldTypeForSimpleFied(String returnType)
     {
         if (returnType == null)
-            return FieldType.Class;
+            return FieldType.Object;
         if (returnType.equalsIgnoreCase("Number"))
             return FieldType.Number;
         if (returnType.equalsIgnoreCase("String"))
