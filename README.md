@@ -17,44 +17,44 @@ Here is the result inside the test project application:
 
 What the code looks like : 
 
-        ChartOptions options = (JsoChartOptions) JavaScriptObject.createObject();
-        
-        options.subtitle().text("Chart reflow is set to true");
-        options.title().text("Chart reflow is set to true");
+	ChartOptions options = (JsoChartOptions) JavaScriptObject.createObject();
 
-        Series series = (Series) JavaScriptObject.createObject();
-        
-        ArrayNumber data = series.data();
-	       data.push(29.9);
-        data.push(71.5);
-        data.push(106.4);
-        data.push(129.2);
-        data.push(144.0);
-        data.push(176.0);
-        data.push(135.6);
-        data.push(148.5);
-        data.push(216.4);
-        data.push(194.1);
-        data.push(95.6);
-        data.push(54.4);
+	options.subtitle().text("Chart reflow is set to true");
+	options.title().text("Chart reflow is set to true");
 
-        options.series().addToEnd(series);
-        
-        ArrayString categories = options.xAxis().categories();
-		      categories.push("Jan");
-        categories.push("Feb");
-        categories.push("Mar");
-        categories.push("Apr");
-        categories.push("May");
-        categories.push("Jun");
-        categories.push("Jul");
-        categories.push("Aug");
-        categories.push("Sep");
-        categories.push("Oct");
-        categories.push("Nov");
-        categories.push("Dec");
- 
-        container.renderChart(options);
+	Series series = (Series) JavaScriptObject.createObject();
+
+	ArrayNumber data = series.data();
+	data.push(29.9);
+	data.push(71.5);
+	data.push(106.4);
+	data.push(129.2);
+	data.push(144.0);
+	data.push(176.0);
+	data.push(135.6);
+	data.push(148.5);
+	data.push(216.4);
+	data.push(194.1);
+	data.push(95.6);
+	data.push(54.4);
+
+	options.series().addToEnd(series);
+
+	ArrayString categories = options.xAxis().categories();
+	categories.push("Jan");
+	categories.push("Feb");
+	categories.push("Mar");
+	categories.push("Apr");
+	categories.push("May");
+	categories.push("Jun");
+	categories.push("Jul");
+	categories.push("Aug");
+	categories.push("Sep");
+	categories.push("Oct");
+	categories.push("Nov");
+	categories.push("Dec");
+
+	container.renderChart(options);
 
 
 If you want to test simply run highcharts4gwt as a Java application it will generate the API code.
