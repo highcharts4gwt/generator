@@ -17,7 +17,7 @@ Here is the result inside the test project application:
 
 What the code looks like : 
 
-	ChartOptions options = (JsoChartOptions) JavaScriptObject.createObject();
+	ChartOptions options = (ChartOptions) JavaScriptObject.createObject();
 
 	options.subtitle().text("Chart reflow is set to true");
 	options.title().text("Chart reflow is set to true");
