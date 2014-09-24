@@ -14,6 +14,12 @@ public enum FieldType
             return visitor.visitNumber(in);
         }
 
+        @Override
+        public boolean isArray()
+        {
+            return false;
+        }
+
     },
     Boolean
     {
@@ -23,6 +29,12 @@ public enum FieldType
         public <IN, OUT> OUT accept(FieldTypeVisitor<IN, OUT> visitor, IN in)
         {
             return visitor.visitBoolean(in);
+        }
+
+        @Override
+        public boolean isArray()
+        {
+            return false;
         }
 
     },
@@ -36,6 +48,12 @@ public enum FieldType
             return visitor.visitString(in);
         }
 
+        @Override
+        public boolean isArray()
+        {
+            return false;
+        }
+
     },
     Object
     {
@@ -44,6 +62,12 @@ public enum FieldType
         public <IN, OUT> OUT accept(FieldTypeVisitor<IN, OUT> visitor, IN in)
         {
             return visitor.visitClass(in);
+        }
+
+        @Override
+        public boolean isArray()
+        {
+            return false;
         }
     },
     ArrayString
@@ -56,6 +80,12 @@ public enum FieldType
             return visitor.visitArrayString(in);
         }
 
+        @Override
+        public boolean isArray()
+        {
+            return true;
+        }
+
     },
     ArrayNumber
     {
@@ -64,6 +94,12 @@ public enum FieldType
         public <IN, OUT> OUT accept(FieldTypeVisitor<IN, OUT> visitor, IN in)
         {
             return visitor.visitArrayNumber(in);
+        }
+
+        @Override
+        public boolean isArray()
+        {
+            return true;
         }
     },
     ArrayObject
@@ -74,6 +110,12 @@ public enum FieldType
         {
             return visitor.visitArrayObject(in);
         }
+
+        @Override
+        public boolean isArray()
+        {
+            return true;
+        }
     },
     Other
     {
@@ -82,6 +124,12 @@ public enum FieldType
         public <IN, OUT> OUT accept(FieldTypeVisitor<IN, OUT> visitor, IN in)
         {
             return visitor.visitOther(in);
+        }
+
+        @Override
+        public boolean isArray()
+        {
+            return false;
         }
     },
     Data
@@ -92,9 +140,17 @@ public enum FieldType
         {
             return visitor.visitData(in);
         }
+
+        @Override
+        public boolean isArray()
+        {
+            return true;
+        }
     };
 
     @CheckForNull
     public abstract <IN, OUT> OUT accept(FieldTypeVisitor<IN, OUT> visitor, IN in);
+
+    public abstract boolean isArray();
 
 }

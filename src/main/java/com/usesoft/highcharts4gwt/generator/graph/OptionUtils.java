@@ -4,6 +4,9 @@ import java.util.List;
 
 import javax.annotation.CheckForNull;
 
+import com.usesoft.highcharts4gwt.generator.codemodel.BaseFieldBuilder;
+import com.usesoft.highcharts4gwt.generator.codemodel.field.FieldType;
+
 public class OptionUtils
 {
     private OptionUtils()
@@ -74,6 +77,11 @@ public class OptionUtils
         String fullName = optionSpec.getFullname();
         int index = fullName.lastIndexOf(".");
         String className = fullName.substring(index + 1, index + 2).toUpperCase() + fullName.substring(index + 2);
+
+        FieldType fieldType = BaseFieldBuilder.findFieldType(optionSpec);
+        if (optionSpec.isParent() && fieldType.isArray() && !className.equals("Series") && className.endsWith("s"))
+            className = className.substring(0, className.length() - 1);
+
         return className;
     }
 

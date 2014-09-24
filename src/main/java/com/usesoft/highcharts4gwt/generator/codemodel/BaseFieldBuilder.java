@@ -37,19 +37,18 @@ public final class BaseFieldBuilder implements FieldBuilder
     @Override
     public void addField(OptionSpec optionSpec, OutputType outputType)
     {
-        String returnType = optionSpec.getReturnType();
 
-        FieldType fieldType = findFieldType(optionSpec, returnType);
+        FieldType fieldType = findFieldType(optionSpec);
 
         fieldType.accept(new FieldWriterVisitor(optionSpec, codeModel, jClass, className), outputType);
     }
 
-    private FieldType findFieldType(OptionSpec optionSpec, String returnType)
+    public static FieldType findFieldType(OptionSpec optionSpec)
     {
-        FieldType fieldType = findFieldTypeForSimpleFied(returnType);
+        FieldType fieldType = findFieldTypeForSimpleFied(optionSpec.getReturnType());
 
         if (fieldType == null)
-            fieldType = findFieldTypeForArray(optionSpec, returnType);
+            fieldType = findFieldTypeForArray(optionSpec);
 
         if (fieldType == null)
             fieldType = FieldType.Other;
@@ -57,8 +56,9 @@ public final class BaseFieldBuilder implements FieldBuilder
         return fieldType;
     }
 
-    private FieldType findFieldTypeForArray(OptionSpec optionSpec, String returnType)
+    private static FieldType findFieldTypeForArray(OptionSpec optionSpec)
     {
+        String returnType = optionSpec.getReturnType();
         if (returnType.equals("Array<String>"))
             return FieldType.ArrayString;
         if (returnType.equals("Array<Number>"))
@@ -71,14 +71,16 @@ public final class BaseFieldBuilder implements FieldBuilder
         if (returnType.equals("Array<Object>"))
         {
             JClass jClass2 = ClassRegistry.INSTANCE.getRegistry().get(new ClassRegistry.RegistryKey(optionSpec, OutputType.Interface));
-            if (jClass2 != null) // TODO @rqu need to treat case of
-                                 // drilldown.series
+            if (jClass2 != null)
+
+                // TODO @rqu need to treat case of
+                // drilldown.series / xAxis.plotBands
                 return FieldType.ArrayObject;
         }
         return null;
     }
 
-    private FieldType findFieldTypeForSimpleFied(String returnType)
+    private static FieldType findFieldTypeForSimpleFied(String returnType)
     {
         if (returnType == null)
             return FieldType.Object;
