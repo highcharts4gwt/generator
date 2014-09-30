@@ -32,6 +32,19 @@ public class JsoChartOptions
     protected JsoChartOptions() {
     }
 
+    public final native Array<Series> series()
+        throws RuntimeException /*-{
+        return this["series"] = (this["series"] || []);
+    }-*/
+    ;
+
+    public final native JsoChartOptions series(Array<Series> series)
+        throws RuntimeException /*-{
+        this["series"] = series;
+        return this;
+    }-*/
+    ;
+
     public final native Global global()
         throws RuntimeException /*-{
         return this["global"] = (this["global"] || {});
@@ -197,19 +210,6 @@ public class JsoChartOptions
     public final native JsoChartOptions exporting(Exporting exporting)
         throws RuntimeException /*-{
         this["exporting"] = exporting;
-        return this;
-    }-*/
-    ;
-
-    public final native Array<Series> series()
-        throws RuntimeException /*-{
-        return this["series"] = (this["series"] || []);
-    }-*/
-    ;
-
-    public final native JsoChartOptions series(Array<Series> series)
-        throws RuntimeException /*-{
-        this["series"] = series;
         return this;
     }-*/
     ;

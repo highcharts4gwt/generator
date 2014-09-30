@@ -2,11 +2,11 @@
 package com.usesoft.highcharts4gwt.model.highcharts.api.labels;
 
 
-public interface Items {
+public interface Item {
 
 
     String html();
 
-    Items html(String html);
+    Item html(String html);
 
 }

@@ -28,6 +28,8 @@ public class FieldArrayObjectWriter extends FieldWriter implements OutputTypeVis
     public Void visitInterface(String fieldName)
     {
         JClass fieldClazz = getRealClass();
+        if (fieldClazz == null)
+            return null;
 
         InterfaceFieldHelper.addGetterSetterDeclaration(fieldName, fieldClazz, getJclass());
         return null;
@@ -38,6 +40,8 @@ public class FieldArrayObjectWriter extends FieldWriter implements OutputTypeVis
     public Void visitJso(String fieldName)
     {
         JClass fieldClazz = getRealClass();
+        if (fieldClazz == null)
+            return null;
 
         JsoFieldHelper.writeGetterNativeCodeArrayObject(fieldName, fieldClazz, getJclass(), getCodeModel(), defaultValue);
         JsoFieldHelper.writeSetterNativeCode(fieldName, fieldClazz, getJclass(), getCodeModel());
@@ -49,6 +53,8 @@ public class FieldArrayObjectWriter extends FieldWriter implements OutputTypeVis
     public Void visitMock(String fieldName)
     {
         JClass fieldClazz = getRealClass();
+        if (fieldClazz == null)
+            return null;
 
         MockFieldHelper.addGetterSetterDeclaration(fieldName, fieldClazz, getJclass());
         return null;
@@ -58,6 +64,12 @@ public class FieldArrayObjectWriter extends FieldWriter implements OutputTypeVis
     {
         // use interface type
         JClass jClass = ClassRegistry.INSTANCE.getRegistry().get(new ClassRegistry.RegistryKey(optionSpec, OutputType.Interface));
+
+        if (jClass == null)
+        {
+            System.out.println("Could not create Array<Object> for type " + optionSpec.getFullname());
+            return null;
+        }
 
         JClass rawLLclazz = getCodeModel().ref(Array.class);
         JClass fieldClazz = rawLLclazz.narrow(jClass);

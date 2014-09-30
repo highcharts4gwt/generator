@@ -6,8 +6,8 @@ import com.usesoft.highcharts4gwt.model.array.api.Array;
 import com.usesoft.highcharts4gwt.model.highcharts.api.YAxis;
 import com.usesoft.highcharts4gwt.model.highcharts.api.yaxis.Events;
 import com.usesoft.highcharts4gwt.model.highcharts.api.yaxis.Labels;
-import com.usesoft.highcharts4gwt.model.highcharts.api.yaxis.PlotBands;
-import com.usesoft.highcharts4gwt.model.highcharts.api.yaxis.PlotLines;
+import com.usesoft.highcharts4gwt.model.highcharts.api.yaxis.PlotBand;
+import com.usesoft.highcharts4gwt.model.highcharts.api.yaxis.PlotLine;
 import com.usesoft.highcharts4gwt.model.highcharts.api.yaxis.StackLabels;
 import com.usesoft.highcharts4gwt.model.highcharts.api.yaxis.Title;
 
@@ -124,26 +124,26 @@ public class JsoYAxis
     }-*/
     ;
 
-    public final native Array<PlotBands> plotBands()
+    public final native Array<PlotBand> plotBands()
         throws RuntimeException /*-{
         return this["plotBands"] = (this["plotBands"] || []);
     }-*/
     ;
 
-    public final native JsoYAxis plotBands(Array<PlotBands> plotBands)
+    public final native JsoYAxis plotBands(Array<PlotBand> plotBands)
         throws RuntimeException /*-{
         this["plotBands"] = plotBands;
         return this;
     }-*/
     ;
 
-    public final native Array<PlotLines> plotLines()
+    public final native Array<PlotLine> plotLines()
         throws RuntimeException /*-{
         return this["plotLines"] = (this["plotLines"] || []);
     }-*/
     ;
 
-    public final native JsoYAxis plotLines(Array<PlotLines> plotLines)
+    public final native JsoYAxis plotLines(Array<PlotLine> plotLines)
         throws RuntimeException /*-{
         this["plotLines"] = plotLines;
         return this;

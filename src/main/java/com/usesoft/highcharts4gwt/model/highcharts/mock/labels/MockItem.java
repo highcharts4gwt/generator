@@ -1,10 +1,10 @@
 
 package com.usesoft.highcharts4gwt.model.highcharts.mock.labels;
 
-import com.usesoft.highcharts4gwt.model.highcharts.api.labels.Items;
+import com.usesoft.highcharts4gwt.model.highcharts.api.labels.Item;
 
 public class MockItem
-    implements Items
+    implements Item
 {
 
     private String html;

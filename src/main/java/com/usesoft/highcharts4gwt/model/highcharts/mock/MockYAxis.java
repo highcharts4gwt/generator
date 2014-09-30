@@ -5,8 +5,8 @@ import com.usesoft.highcharts4gwt.model.array.api.Array;
 import com.usesoft.highcharts4gwt.model.highcharts.api.YAxis;
 import com.usesoft.highcharts4gwt.model.highcharts.api.yaxis.Events;
 import com.usesoft.highcharts4gwt.model.highcharts.api.yaxis.Labels;
-import com.usesoft.highcharts4gwt.model.highcharts.api.yaxis.PlotBands;
-import com.usesoft.highcharts4gwt.model.highcharts.api.yaxis.PlotLines;
+import com.usesoft.highcharts4gwt.model.highcharts.api.yaxis.PlotBand;
+import com.usesoft.highcharts4gwt.model.highcharts.api.yaxis.PlotLine;
 import com.usesoft.highcharts4gwt.model.highcharts.api.yaxis.StackLabels;
 import com.usesoft.highcharts4gwt.model.highcharts.api.yaxis.Title;
 
@@ -22,8 +22,8 @@ public class MockYAxis
     private Number lineWidth;
     private Number maxPadding;
     private Number minPadding;
-    private Array<PlotBands> plotBands;
-    private Array<PlotLines> plotLines;
+    private Array<PlotBand> plotBands;
+    private Array<PlotLine> plotLines;
     private boolean reversedStacks;
     private boolean showLastLabel;
     private StackLabels stackLabels;
@@ -103,20 +103,20 @@ public class MockYAxis
         return this;
     }
 
-    public Array<PlotBands> plotBands() {
+    public Array<PlotBand> plotBands() {
         return plotBands;
     }
 
-    public MockYAxis plotBands(Array<PlotBands> plotBands) {
+    public MockYAxis plotBands(Array<PlotBand> plotBands) {
         this.plotBands = plotBands;
         return this;
     }
 
-    public Array<PlotLines> plotLines() {
+    public Array<PlotLine> plotLines() {
         return plotLines;
     }
 
-    public MockYAxis plotLines(Array<PlotLines> plotLines) {
+    public MockYAxis plotLines(Array<PlotLine> plotLines) {
         this.plotLines = plotLines;
         return this;
     }

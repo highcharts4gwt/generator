@@ -1,11 +1,11 @@
 
 package com.usesoft.highcharts4gwt.model.highcharts.mock.xaxis;
 
-import com.usesoft.highcharts4gwt.model.highcharts.api.xaxis.PlotBands;
+import com.usesoft.highcharts4gwt.model.highcharts.api.xaxis.PlotBand;
 import com.usesoft.highcharts4gwt.model.highcharts.api.xaxis.plotbands.Label;
 
 public class MockPlotBand
-    implements PlotBands
+    implements PlotBand
 {
 
     private Number from;

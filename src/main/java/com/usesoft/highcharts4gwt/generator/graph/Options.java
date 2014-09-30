@@ -5,9 +5,9 @@ import java.util.List;
 
 import javax.annotation.CheckForNull;
 
-
 /**
  * Contains all the OptionTrees.
+ * 
  * @author rquillevere
  */
 public class Options
@@ -31,11 +31,15 @@ public class Options
     }
 
     /**
-     * Create an {@link OptionTree} with the root initialized. Add it to the tree list.
+     * Create an {@link OptionTree} with the root initialized. Add it to the
+     * tree list.
+     * 
      * @param option
-     *        An {@link OptionSpec} that should belong to that tree. From its fullname we will discover the root fullname.
+     *            An {@link OptionSpec} that should belong to that tree. From
+     *            its fullname we will discover the root fullname.
      * @param options
-     *        The list of all {@link OptionSpec}, needed to find the real root of the option tree based on its fullname.
+     *            The list of all {@link OptionSpec}, needed to find the real
+     *            root of the option tree based on its fullname.
      * @return
      */
     private OptionTree addNewTree(OptionSpec option, List<OptionSpec> options)
@@ -52,8 +56,9 @@ public class Options
 
     /**
      * Find the {@link OptionTree} in which this option belongs.
+     * 
      * @param option
-     *        an {@link OptionSpec}.
+     *            an {@link OptionSpec}.
      * @return the OptionTree found or null.
      */
     @CheckForNull
@@ -65,8 +70,9 @@ public class Options
 
     /**
      * Find the {@link OptionTree} in which this option belongs.
+     * 
      * @param option
-     *        an {@link OptionSpec}.
+     *            an {@link OptionSpec}.
      * @return the OptionTree found or null.
      */
     @CheckForNull
@@ -79,6 +85,25 @@ public class Options
         }
 
         return null;
+    }
+
+    public void sortTrees()
+    {
+        // TODO find a better solution
+        // put the Series tree before for drilldown.series case
+
+        List<OptionTree> newTrees = new ArrayList<OptionTree>();
+
+        for (OptionTree tree : trees)
+        {
+            if (tree.getRoot().getName().equals("series"))
+                newTrees.add(0, tree);
+            else
+                newTrees.add(tree);
+        }
+
+        trees.clear();
+        trees.addAll(newTrees);
     }
 
 }

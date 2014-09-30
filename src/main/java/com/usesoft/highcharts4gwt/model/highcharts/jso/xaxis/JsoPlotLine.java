@@ -2,12 +2,12 @@
 package com.usesoft.highcharts4gwt.model.highcharts.jso.xaxis;
 
 import com.google.gwt.core.client.JavaScriptObject;
-import com.usesoft.highcharts4gwt.model.highcharts.api.xaxis.PlotLines;
+import com.usesoft.highcharts4gwt.model.highcharts.api.xaxis.PlotLine;
 import com.usesoft.highcharts4gwt.model.highcharts.api.xaxis.plotlines.Label;
 
 public class JsoPlotLine
     extends JavaScriptObject
-    implements PlotLines
+    implements PlotLine
 {
 
 

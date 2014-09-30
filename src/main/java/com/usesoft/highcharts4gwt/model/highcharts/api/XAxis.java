@@ -6,8 +6,8 @@ import com.usesoft.highcharts4gwt.model.array.api.ArrayNumber;
 import com.usesoft.highcharts4gwt.model.array.api.ArrayString;
 import com.usesoft.highcharts4gwt.model.highcharts.api.xaxis.Events;
 import com.usesoft.highcharts4gwt.model.highcharts.api.xaxis.Labels;
-import com.usesoft.highcharts4gwt.model.highcharts.api.xaxis.PlotBands;
-import com.usesoft.highcharts4gwt.model.highcharts.api.xaxis.PlotLines;
+import com.usesoft.highcharts4gwt.model.highcharts.api.xaxis.PlotBand;
+import com.usesoft.highcharts4gwt.model.highcharts.api.xaxis.PlotLine;
 import com.usesoft.highcharts4gwt.model.highcharts.api.xaxis.Title;
 
 public interface XAxis {
@@ -125,13 +125,13 @@ public interface XAxis {
 
     XAxis opposite(boolean opposite);
 
-    Array<PlotBands> plotBands();
+    Array<PlotBand> plotBands();
 
-    XAxis plotBands(Array<PlotBands> plotBands);
+    XAxis plotBands(Array<PlotBand> plotBands);
 
-    Array<PlotLines> plotLines();
+    Array<PlotLine> plotLines();
 
-    XAxis plotLines(Array<PlotLines> plotLines);
+    XAxis plotLines(Array<PlotLine> plotLines);
 
     boolean reversed();
 

@@ -2,11 +2,11 @@
 package com.usesoft.highcharts4gwt.model.highcharts.jso.labels;
 
 import com.google.gwt.core.client.JavaScriptObject;
-import com.usesoft.highcharts4gwt.model.highcharts.api.labels.Items;
+import com.usesoft.highcharts4gwt.model.highcharts.api.labels.Item;
 
 public class JsoItem
     extends JavaScriptObject
-    implements Items
+    implements Item
 {
 
 

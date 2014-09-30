@@ -1,6 +1,5 @@
 package com.usesoft.highcharts4gwt.generator.codemodel;
 
-import com.sun.codemodel.JClass;
 import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JDefinedClass;
 import com.usesoft.highcharts4gwt.generator.codemodel.field.FieldType;
@@ -70,12 +69,13 @@ public final class BaseFieldBuilder implements FieldBuilder
             return FieldType.ArrayString;
         if (returnType.equals("Array<Object>"))
         {
-            JClass jClass2 = ClassRegistry.INSTANCE.getRegistry().get(new ClassRegistry.RegistryKey(optionSpec, OutputType.Interface));
-            if (jClass2 != null)
+            // JClass jClass2 = ClassRegistry.INSTANCE.getRegistry().get(new
+            // ClassRegistry.RegistryKey(optionSpec, OutputType.Interface));
+            // if (jClass2 != null)
 
-                // TODO @rqu need to treat case of
-                // drilldown.series / xAxis.plotBands
-                return FieldType.ArrayObject;
+            // TODO @rqu need to treat case of
+            // drilldown.series / xAxis.plotBands
+            return FieldType.ArrayObject;
         }
         return null;
     }

@@ -38,6 +38,7 @@ public abstract class BaseGenerator implements Generator
     public void generate() throws IOException, JClassAlreadyExistsException
     {
         options = createOptions();
+        options.sortTrees();
         createClasses(options);
     }
 

@@ -26,6 +26,7 @@ public class MockChartOptions
     implements ChartOptions
 {
 
+    private Array<Series> series;
     private Global global;
     private Drilldown drilldown;
     private Legend legend;
@@ -39,11 +40,19 @@ public class MockChartOptions
     private Tooltip tooltip;
     private NoData noData;
     private Exporting exporting;
-    private Array<Series> series;
     private Lang lang;
     private Credits credits;
     private Loading loading;
     private Labels labels;
+
+    public Array<Series> series() {
+        return series;
+    }
+
+    public MockChartOptions series(Array<Series> series) {
+        this.series = series;
+        return this;
+    }
 
     public Global global() {
         return global;
@@ -159,15 +168,6 @@ public class MockChartOptions
 
     public MockChartOptions exporting(Exporting exporting) {
         this.exporting = exporting;
-        return this;
-    }
-
-    public Array<Series> series() {
-        return series;
-    }
-
-    public MockChartOptions series(Array<Series> series) {
-        this.series = series;
         return this;
     }
 

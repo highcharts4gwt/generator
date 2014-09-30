@@ -1,11 +1,11 @@
 
 package com.usesoft.highcharts4gwt.model.highcharts.mock.xaxis;
 
-import com.usesoft.highcharts4gwt.model.highcharts.api.xaxis.PlotLines;
+import com.usesoft.highcharts4gwt.model.highcharts.api.xaxis.PlotLine;
 import com.usesoft.highcharts4gwt.model.highcharts.api.xaxis.plotlines.Label;
 
 public class MockPlotLine
-    implements PlotLines
+    implements PlotLine
 {
 
     private String dashStyle;

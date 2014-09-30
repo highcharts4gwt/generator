@@ -24,6 +24,10 @@ import com.usesoft.highcharts4gwt.model.highcharts.api.YAxis;
 public interface ChartOptions {
 
 
+    Array<Series> series();
+
+    ChartOptions series(Array<Series> series);
+
     Global global();
 
     ChartOptions global(Global global);
@@ -75,10 +79,6 @@ public interface ChartOptions {
     Exporting exporting();
 
     ChartOptions exporting(Exporting exporting);
-
-    Array<Series> series();
-
-    ChartOptions series(Array<Series> series);
 
     Lang lang();
 
