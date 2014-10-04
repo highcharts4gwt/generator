@@ -1,11 +1,11 @@
 
 package com.usesoft.highcharts4gwt.model.highcharts.jso.plotoptions;
 
-import com.google.gwt.core.client.JavaScriptObject;
 import com.usesoft.highcharts4gwt.model.highcharts.api.plotoptions.Gauge;
+import com.usesoft.highcharts4gwt.model.highcharts.jso.plotoptions.JsoSeries;
 
 public class JsoGauge
-    extends JavaScriptObject
+    extends JsoSeries
     implements Gauge
 {
 
@@ -22,19 +22,6 @@ public class JsoGauge
     public final native JsoGauge overshoot(Number overshoot)
         throws RuntimeException /*-{
         this["overshoot"] = overshoot;
-        return this;
-    }-*/
-    ;
-
-    public final native boolean showInLegend()
-        throws RuntimeException /*-{
-        return this["showInLegend"] = (this["showInLegend"] || false);
-    }-*/
-    ;
-
-    public final native JsoGauge showInLegend(boolean showInLegend)
-        throws RuntimeException /*-{
-        this["showInLegend"] = showInLegend;
         return this;
     }-*/
     ;

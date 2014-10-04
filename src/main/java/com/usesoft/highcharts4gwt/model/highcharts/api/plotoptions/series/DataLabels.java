@@ -1,13 +1,12 @@
 
 package com.usesoft.highcharts4gwt.model.highcharts.api.plotoptions.series;
 
+import com.usesoft.highcharts4gwt.model.highcharts.api.xaxis.Labels;
 
-public interface DataLabels {
+public interface DataLabels
+    extends Labels
+{
 
-
-    String align();
-
-    DataLabels align(String align);
 
     Number borderRadius();
 
@@ -25,44 +24,16 @@ public interface DataLabels {
 
     DataLabels defer(boolean defer);
 
-    boolean enabled();
-
-    DataLabels enabled(boolean enabled);
-
-    String format();
-
-    DataLabels format(String format);
-
     boolean inside();
 
     DataLabels inside(boolean inside);
-
-    String overflow();
-
-    DataLabels overflow(String overflow);
 
     Number padding();
 
     DataLabels padding(Number padding);
 
-    Number rotation();
-
-    DataLabels rotation(Number rotation);
-
     String verticalAlign();
 
     DataLabels verticalAlign(String verticalAlign);
-
-    Number x();
-
-    DataLabels x(Number x);
-
-    Number y();
-
-    DataLabels y(Number y);
-
-    Number zIndex();
-
-    DataLabels zIndex(Number zIndex);
 
 }

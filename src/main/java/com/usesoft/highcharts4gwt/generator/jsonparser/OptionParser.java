@@ -9,7 +9,7 @@ import org.json.JSONObject;
 
 import com.google.common.base.Splitter;
 import com.google.common.base.Strings;
-import com.usesoft.highcharts4gwt.generator.graph.OptionSpec;
+import com.usesoft.highcharts4gwt.generator.graph.Option;
 
 public class OptionParser
 {
@@ -37,7 +37,7 @@ public class OptionParser
     }
 
     @CheckForNull
-    public static OptionSpec parse(JSONObject jsonOption)
+    public static Option parse(JSONObject jsonOption)
     {
         String fullName = getNonNullFieldAsString(jsonOption, FIELD_FULLNAME);
 
@@ -48,7 +48,7 @@ public class OptionParser
         List<String> values = getFieldAsListString(jsonOption, FIELD_VALUES);
         List<String> excluding = getFieldAsListString(jsonOption, FIELD_EXCLUDING);
 
-        return new OptionSpec(fullName, name, title).setValues(values).setDefaults(getFieldAsString(jsonOption, FIELD_DEFAULTS))
+        return new Option(fullName, name, title).setValues(values).setDefaults(getFieldAsString(jsonOption, FIELD_DEFAULTS))
                 .setExtending(getFieldAsString(jsonOption, FIELD_EXTENDING)).setExcluding(excluding)
                 .setIsParent(Boolean.parseBoolean(getFieldAsString(jsonOption, FIELD_ISPARENT))).setSince(getFieldAsString(jsonOption, FIELD_SINCE))
                 .setDemo(getFieldAsString(jsonOption, FIELD_DEMO)).setSeeAlso(getFieldAsString(jsonOption, FIELD_SEEALSO))

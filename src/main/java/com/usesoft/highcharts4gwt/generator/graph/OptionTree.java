@@ -5,64 +5,80 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.CheckForNull;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 
 /**
- * A tree of options. It contains a root and different maps and lists to be able to generate the classes (from leaves to root of the tree). Leaves are fields.
+ * A tree of options. It contains a root and different maps and lists to be able
+ * to generate the classes (from leaves to root of the tree). Leaves are fields.
+ * 
  * @author rquillevere
  */
 public class OptionTree
 {
-    public OptionTree(OptionSpec root)
+    final static Logger logger = LoggerFactory.getLogger(OptionTree.class);
+
+    public OptionTree(Option root)
     {
         this.root = root;
-        this.parentToChildrenRelations = new HashMap<OptionSpec, List<OptionSpec>>();
-        this.childToParentRelations = new HashMap<OptionSpec, OptionSpec>();
-        this.leaves = new ArrayList<OptionSpec>();
-        this.all = new ArrayList<OptionSpec>();
+        this.parentToChildrenRelations = new HashMap<Option, List<Option>>();
+        this.childToParentRelations = new HashMap<Option, Option>();
+        this.leaves = new ArrayList<Option>();
+        this.all = new ArrayList<Option>();
     }
 
-    public OptionSpec getRoot()
+    public Option getRoot()
     {
         return root;
     }
 
-    public Map<OptionSpec, List<OptionSpec>> getParentToChildrenRelations()
+    @CheckForNull
+    public List<Option> getChildren(Option option)
     {
-        return parentToChildrenRelations;
+        return parentToChildrenRelations.get(option);
     }
 
-    public void computeAndAddRelation(OptionSpec option, List<OptionSpec> options)
+    @CheckForNull
+    public Option getParent(Option option)
+    {
+        return childToParentRelations.get(option);
+    }
+
+    public void addParentChildren(Option option, List<Option> children)
+    {
+        parentToChildrenRelations.put(option, children);
+    }
+
+    public void computeAndAddRelation(Option option, List<Option> options)
     {
         all.add(option);
 
         setLeavesInfo(option);
 
-        setDepthInfo(option);
-
         if (OptionUtils.isRoot(option))
             return;
 
-        OptionSpec parent = OptionUtils.findParent(option, options);
+        Option parent = OptionUtils.findParent(option, options);
 
         if (parent == null)
             return;
 
         setParentChildrenInfo(option, parent);
+
     }
 
-    public HashMap<OptionSpec, OptionSpec> getChildToParentRelations()
-    {
-        return childToParentRelations;
-    }
-
-    public ArrayList<OptionSpec> getLeaves()
+    public ArrayList<Option> getLeaves()
     {
         return leaves;
     }
 
-    public ArrayList<OptionSpec> getAll()
+    public ArrayList<Option> getAll()
     {
         return all;
     }
@@ -89,61 +105,40 @@ public class OptionTree
         return Objects.hashCode(getRoot());
     }
 
-    public int getDepth()
+    @VisibleForTesting
+    Map<Option, List<Option>> getParentToChildrenRelations()
     {
-        return depth;
+        return parentToChildrenRelations;
     }
 
-    public Map<Integer, List<OptionSpec>> getOptionsByDepth()
-    {
-        return optionsByDepth;
-    }
-
-    private void setLeavesInfo(OptionSpec option)
+    private void setLeavesInfo(Option option)
     {
         if (!option.isParent())
             leaves.add(option);
     }
 
-    private void setParentChildrenInfo(OptionSpec option, OptionSpec parent)
+    private void setParentChildrenInfo(Option option, Option parent)
     {
         childToParentRelations.put(option, parent);
 
-        List<OptionSpec> children = parentToChildrenRelations.get(parent);
+        List<Option> children = parentToChildrenRelations.get(parent);
 
         if (children == null)
         {
-            List<OptionSpec> list = new ArrayList<OptionSpec>();
+            List<Option> list = new ArrayList<Option>();
             list.add(option);
             parentToChildrenRelations.put(parent, list);
-        }
-        else
+        } else
             children.add(option);
     }
 
-    private void setDepthInfo(OptionSpec option)
-    {
-        int depth2 = OptionUtils.depth(option);
-        List<OptionSpec> list = optionsByDepth.get(depth2);
-        if (list == null)
-            list = new ArrayList<OptionSpec>();
+    private final Option root;
 
-        list.add(option);
-        optionsByDepth.put(depth2, list);
+    private final ArrayList<Option> leaves;
+    private final ArrayList<Option> all;
 
-        this.depth = depth2 > this.depth ? depth2 : this.depth;
-    }
+    private final Map<Option, List<Option>> parentToChildrenRelations;
 
-    private final OptionSpec root;
-
-    private final ArrayList<OptionSpec> leaves;
-    private final ArrayList<OptionSpec> all;
-
-    private final Map<OptionSpec, List<OptionSpec>> parentToChildrenRelations;
-
-    private final HashMap<OptionSpec, OptionSpec> childToParentRelations;
-
-    private int depth = 0;
-    private final Map<Integer, List<OptionSpec>> optionsByDepth = new HashMap<Integer, List<OptionSpec>>();
+    private final HashMap<Option, Option> childToParentRelations;
 
 }

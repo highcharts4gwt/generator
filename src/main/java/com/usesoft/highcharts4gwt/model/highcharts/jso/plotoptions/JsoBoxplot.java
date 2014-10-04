@@ -1,30 +1,17 @@
 
 package com.usesoft.highcharts4gwt.model.highcharts.jso.plotoptions;
 
-import com.google.gwt.core.client.JavaScriptObject;
 import com.usesoft.highcharts4gwt.model.highcharts.api.plotoptions.Boxplot;
+import com.usesoft.highcharts4gwt.model.highcharts.jso.plotoptions.JsoColumn;
 
 public class JsoBoxplot
-    extends JavaScriptObject
+    extends JsoColumn
     implements Boxplot
 {
 
 
     protected JsoBoxplot() {
     }
-
-    public final native Number lineWidth()
-        throws RuntimeException /*-{
-        return this["lineWidth"] = (this["lineWidth"] || 1.0);
-    }-*/
-    ;
-
-    public final native JsoBoxplot lineWidth(Number lineWidth)
-        throws RuntimeException /*-{
-        this["lineWidth"] = lineWidth;
-        return this;
-    }-*/
-    ;
 
     public final native Number medianWidth()
         throws RuntimeException /*-{

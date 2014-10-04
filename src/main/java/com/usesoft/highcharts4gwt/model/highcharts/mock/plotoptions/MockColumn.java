@@ -2,15 +2,16 @@
 package com.usesoft.highcharts4gwt.model.highcharts.mock.plotoptions;
 
 import com.usesoft.highcharts4gwt.model.highcharts.api.plotoptions.Column;
+import com.usesoft.highcharts4gwt.model.highcharts.mock.plotoptions.MockSeries;
 
 public class MockColumn
+    extends MockSeries
     implements Column
 {
 
     private Number borderRadius;
     private Number borderWidth;
     private boolean colorByPoint;
-    private Number cropThreshold;
     private Number depth;
     private Number edgeWidth;
     private Number groupPadding;
@@ -20,7 +21,6 @@ public class MockColumn
     private Number pointPadding;
     private Number pointRange;
     private Number pointWidth;
-    private Number threshold;
 
     public Number borderRadius() {
         return borderRadius;
@@ -46,15 +46,6 @@ public class MockColumn
 
     public MockColumn colorByPoint(boolean colorByPoint) {
         this.colorByPoint = colorByPoint;
-        return this;
-    }
-
-    public Number cropThreshold() {
-        return cropThreshold;
-    }
-
-    public MockColumn cropThreshold(Number cropThreshold) {
-        this.cropThreshold = cropThreshold;
         return this;
     }
 
@@ -136,15 +127,6 @@ public class MockColumn
 
     public MockColumn pointWidth(Number pointWidth) {
         this.pointWidth = pointWidth;
-        return this;
-    }
-
-    public Number threshold() {
-        return threshold;
-    }
-
-    public MockColumn threshold(Number threshold) {
-        this.threshold = threshold;
         return this;
     }
 

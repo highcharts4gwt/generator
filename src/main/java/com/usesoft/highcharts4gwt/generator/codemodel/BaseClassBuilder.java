@@ -2,20 +2,29 @@ package com.usesoft.highcharts4gwt.generator.codemodel;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.CheckForNull;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.google.common.base.Strings;
 import com.sun.codemodel.ClassType;
+import com.sun.codemodel.JClass;
 import com.sun.codemodel.JClassAlreadyExistsException;
 import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JDefinedClass;
-import com.usesoft.highcharts4gwt.generator.graph.OptionSpec;
+import com.usesoft.highcharts4gwt.generator.graph.Option;
 import com.usesoft.highcharts4gwt.generator.graph.OptionTree;
 import com.usesoft.highcharts4gwt.generator.graph.OptionUtils;
+import com.usesoft.highcharts4gwt.generator.graph.OptionsData;
 
 public abstract class BaseClassBuilder implements ClassBuilder
 {
+    final static Logger logger = LoggerFactory.getLogger(BaseClassBuilder.class);
+
     @CheckForNull
     private JCodeModel codeModel;
 
@@ -30,12 +39,16 @@ public abstract class BaseClassBuilder implements ClassBuilder
     private String className;
 
     @CheckForNull
-    private OptionSpec optionSpec;
+    private Option option;
 
     @CheckForNull
     private OptionTree tree;
 
     private final BaseFieldBuilder fieldBuilder;
+
+    private Option extendedOption;
+
+    private OptionsData optionsData;
 
     public BaseClassBuilder(String rootDirectory) throws JClassAlreadyExistsException
     {
@@ -46,31 +59,98 @@ public abstract class BaseClassBuilder implements ClassBuilder
     @Override
     public void build() throws IOException, JClassAlreadyExistsException
     {
-        codeModel = new JCodeModel();
+        JClass found = ClassRegistry.INSTANCE.getRegistry().get(new ClassRegistry.RegistryKey(option, getOutputType()));
+        if (found != null)
+        {
+            logger.info("Already written;" + option);
+            return;
+        }
 
+        codeModel = new JCodeModel();
         jClass = declareType(packageName, className);
 
-        fieldBuilder.setJclass(jClass);
-        fieldBuilder.setCodeModel(codeModel);
-        fieldBuilder.setClassName(getPrefix() + className);
-
-        ClassRegistry.INSTANCE.put(optionSpec, getOutputType(), jClass);
+        addExtension();
 
         if (tree == null)
             throw new RuntimeException("Need to set the tree to build a class");
 
-        List<OptionSpec> children = tree.getParentToChildrenRelations().get(optionSpec);
+        buildFields();
+
+        writeClassToFileSystem();
+
+        ClassRegistry.INSTANCE.put(option, getOutputType(), jClass);
+    }
+
+    private void addExtension()
+    {
+        if (extendedOption != null)
+        {
+            JClass extendedJclass = ClassRegistry.INSTANCE.getRegistry().get(new ClassRegistry.RegistryKey(extendedOption, getOutputType()));
+            if (extendedJclass == null)
+            {
+                logger.error("Missing extendedJClass;" + extendedOption);
+                throw new RuntimeException("Missing extendedJClass;" + extendedOption);
+            }
+            jClass._extends(extendedJclass);
+        }
+    }
+
+    private void writeClassToFileSystem() throws IOException
+    {
+        if (codeModel != null) // CS
+            codeModel.build(new File(rootDirectory));
+    }
+
+    private void buildFields()
+    {
+        fieldBuilder.setJclass(jClass);
+        fieldBuilder.setCodeModel(codeModel);
+        fieldBuilder.setClassName(getPrefix() + className);
+
+        List<Option> existingChildren = getFieldFromExtendedOptionRecursive(extendedOption, optionsData);
+
+        List<Option> children = tree.getChildren(option);
 
         if (children != null)
         {
-            for (OptionSpec optionSpec : children)
+            for (Option child : children)
             {
-                fieldBuilder.addField(optionSpec, getOutputType());
+                String optionName = child.getTitle();
+                boolean alreadyInExtended = false;
+                for (Option existingChild : existingChildren)
+                {
+                    if (existingChild.getTitle().equals(optionName))
+                        alreadyInExtended = true;
+                }
+
+                if (!alreadyInExtended)
+                {
+                    if (extendedOption != null)
+                        logger.info("Adding field;" + child + "for class;" + option + ";not present in extended class;" + extendedOption);
+                    fieldBuilder.addField(child, getOutputType());
+                }
+
             }
         }
+    }
 
-        if (codeModel != null) // CS
-            codeModel.build(new File(rootDirectory));
+    private static List<Option> getFieldFromExtendedOptionRecursive(Option extendedOption, OptionsData optionsData)
+    {
+        List<Option> existingChildren = new ArrayList<Option>();
+        if (extendedOption != null)
+        {
+            OptionTree extendedOptionTree = optionsData.findTree(extendedOption);
+            existingChildren = extendedOptionTree.getChildren(extendedOption);
+
+            if (!Strings.isNullOrEmpty(extendedOption.getExtending()))
+            {
+                Option optionRecursive = optionsData.findExtendedOption(extendedOption, optionsData);
+                if (optionRecursive != null)
+                    existingChildren.addAll(getFieldFromExtendedOptionRecursive(optionRecursive, optionsData));
+            }
+
+        }
+        return existingChildren;
     }
 
     @Override
@@ -81,9 +161,10 @@ public abstract class BaseClassBuilder implements ClassBuilder
     }
 
     @Override
-    public ClassBuilder setOptionSpec(OptionSpec optionSpec)
+    public ClassBuilder setOption(Option optionSpec, OptionsData optionsData)
     {
-        this.optionSpec = optionSpec;
+        this.option = optionSpec;
+        this.optionsData = optionsData;
         this.className = OptionUtils.getClassName(optionSpec);
         return this;
     }
@@ -108,9 +189,14 @@ public abstract class BaseClassBuilder implements ClassBuilder
         return codeModel;
     }
 
-    protected OptionSpec getOptionSpec()
+    protected Option getOptionSpec()
     {
-        return optionSpec;
+        return option;
     }
 
+    @Override
+    public void setExtendedOption(Option extendedOption)
+    {
+        this.extendedOption = extendedOption;
+    }
 }

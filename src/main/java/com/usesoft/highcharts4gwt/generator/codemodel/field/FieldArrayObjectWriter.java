@@ -2,21 +2,26 @@ package com.usesoft.highcharts4gwt.generator.codemodel.field;
 
 import javax.annotation.CheckForNull;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.sun.codemodel.JClass;
 import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JDefinedClass;
 import com.usesoft.highcharts4gwt.generator.codemodel.ClassRegistry;
 import com.usesoft.highcharts4gwt.generator.codemodel.OutputType;
 import com.usesoft.highcharts4gwt.generator.codemodel.OutputTypeVisitor;
-import com.usesoft.highcharts4gwt.generator.graph.OptionSpec;
+import com.usesoft.highcharts4gwt.generator.graph.Option;
 import com.usesoft.highcharts4gwt.model.array.api.Array;
 
 public class FieldArrayObjectWriter extends FieldWriter implements OutputTypeVisitor<String, Void>
 {
-    private final String defaultValue;
-    private final OptionSpec optionSpec;
+    final static Logger logger = LoggerFactory.getLogger(FieldArrayObjectWriter.class);
 
-    public FieldArrayObjectWriter(JCodeModel codeModel, JDefinedClass jClass, String className, OptionSpec optionSpec)
+    private final String defaultValue;
+    private final Option optionSpec;
+
+    public FieldArrayObjectWriter(JCodeModel codeModel, JDefinedClass jClass, String className, Option optionSpec)
     {
         super(codeModel, className, jClass);
         this.optionSpec = optionSpec;
@@ -67,7 +72,7 @@ public class FieldArrayObjectWriter extends FieldWriter implements OutputTypeVis
 
         if (jClass == null)
         {
-            System.out.println("Could not create Array<Object> for type " + optionSpec.getFullname());
+            logger.error("Could not create Array<Object> for type " + optionSpec.getFullname());
             return null;
         }
 

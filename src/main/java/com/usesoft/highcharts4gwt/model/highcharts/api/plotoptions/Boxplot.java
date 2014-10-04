@@ -1,13 +1,12 @@
 
 package com.usesoft.highcharts4gwt.model.highcharts.api.plotoptions;
 
+import com.usesoft.highcharts4gwt.model.highcharts.api.plotoptions.Column;
 
-public interface Boxplot {
+public interface Boxplot
+    extends Column
+{
 
-
-    Number lineWidth();
-
-    Boxplot lineWidth(Number lineWidth);
 
     Number medianWidth();
 

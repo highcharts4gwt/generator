@@ -1,16 +1,11 @@
 
 package com.usesoft.highcharts4gwt.model.highcharts.api.plotoptions;
 
+import com.usesoft.highcharts4gwt.model.highcharts.api.plotoptions.Series;
 
-public interface Scatter {
+public interface Scatter
+    extends Series
+{
 
-
-    Number lineWidth();
-
-    Scatter lineWidth(Number lineWidth);
-
-    boolean stickyTracking();
-
-    Scatter stickyTracking(boolean stickyTracking);
 
 }

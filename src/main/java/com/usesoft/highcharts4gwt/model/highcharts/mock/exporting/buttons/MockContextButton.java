@@ -2,8 +2,10 @@
 package com.usesoft.highcharts4gwt.model.highcharts.mock.exporting.buttons;
 
 import com.usesoft.highcharts4gwt.model.highcharts.api.exporting.buttons.ContextButton;
+import com.usesoft.highcharts4gwt.model.highcharts.mock.navigation.MockButtonOptions;
 
 public class MockContextButton
+    extends MockButtonOptions
     implements ContextButton
 {
 

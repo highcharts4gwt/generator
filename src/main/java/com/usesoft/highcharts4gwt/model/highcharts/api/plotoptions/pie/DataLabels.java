@@ -2,12 +2,10 @@
 package com.usesoft.highcharts4gwt.model.highcharts.api.plotoptions.pie;
 
 
-public interface DataLabels {
+public interface DataLabels
+    extends com.usesoft.highcharts4gwt.model.highcharts.api.plotoptions.series.DataLabels
+{
 
-
-    String align();
-
-    DataLabels align(String align);
 
     String connectorColor();
 
@@ -20,14 +18,6 @@ public interface DataLabels {
     Number connectorWidth();
 
     DataLabels connectorWidth(Number connectorWidth);
-
-    Number distance();
-
-    DataLabels distance(Number distance);
-
-    boolean enabled();
-
-    DataLabels enabled(boolean enabled);
 
     boolean softConnector();
 

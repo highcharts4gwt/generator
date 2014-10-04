@@ -14,6 +14,19 @@ public class JsoPlotBand
     protected JsoPlotBand() {
     }
 
+    public final native Number borderWidth()
+        throws RuntimeException /*-{
+        return this["borderWidth"] = (this["borderWidth"] || 0.0);
+    }-*/
+    ;
+
+    public final native JsoPlotBand borderWidth(Number borderWidth)
+        throws RuntimeException /*-{
+        this["borderWidth"] = borderWidth;
+        return this;
+    }-*/
+    ;
+
     public final native Number from()
         throws RuntimeException /*-{
         return this["from"] = (this["from"] || null);

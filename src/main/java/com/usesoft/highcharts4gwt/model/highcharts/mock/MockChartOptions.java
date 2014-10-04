@@ -26,33 +26,24 @@ public class MockChartOptions
     implements ChartOptions
 {
 
-    private Array<Series> series;
     private Global global;
     private Drilldown drilldown;
     private Legend legend;
     private Chart chart;
     private PlotOptions plotOptions;
     private XAxis xAxis;
-    private Navigation navigation;
-    private Subtitle subtitle;
-    private Title title;
     private YAxis yAxis;
+    private Title title;
+    private Navigation navigation;
+    private Exporting exporting;
+    private Subtitle subtitle;
     private Tooltip tooltip;
     private NoData noData;
-    private Exporting exporting;
+    private Array<Series> series;
     private Lang lang;
     private Credits credits;
     private Loading loading;
     private Labels labels;
-
-    public Array<Series> series() {
-        return series;
-    }
-
-    public MockChartOptions series(Array<Series> series) {
-        this.series = series;
-        return this;
-    }
 
     public Global global() {
         return global;
@@ -108,21 +99,12 @@ public class MockChartOptions
         return this;
     }
 
-    public Navigation navigation() {
-        return navigation;
+    public YAxis yAxis() {
+        return yAxis;
     }
 
-    public MockChartOptions navigation(Navigation navigation) {
-        this.navigation = navigation;
-        return this;
-    }
-
-    public Subtitle subtitle() {
-        return subtitle;
-    }
-
-    public MockChartOptions subtitle(Subtitle subtitle) {
-        this.subtitle = subtitle;
+    public MockChartOptions yAxis(YAxis yAxis) {
+        this.yAxis = yAxis;
         return this;
     }
 
@@ -135,12 +117,30 @@ public class MockChartOptions
         return this;
     }
 
-    public YAxis yAxis() {
-        return yAxis;
+    public Navigation navigation() {
+        return navigation;
     }
 
-    public MockChartOptions yAxis(YAxis yAxis) {
-        this.yAxis = yAxis;
+    public MockChartOptions navigation(Navigation navigation) {
+        this.navigation = navigation;
+        return this;
+    }
+
+    public Exporting exporting() {
+        return exporting;
+    }
+
+    public MockChartOptions exporting(Exporting exporting) {
+        this.exporting = exporting;
+        return this;
+    }
+
+    public Subtitle subtitle() {
+        return subtitle;
+    }
+
+    public MockChartOptions subtitle(Subtitle subtitle) {
+        this.subtitle = subtitle;
         return this;
     }
 
@@ -162,12 +162,12 @@ public class MockChartOptions
         return this;
     }
 
-    public Exporting exporting() {
-        return exporting;
+    public Array<Series> series() {
+        return series;
     }
 
-    public MockChartOptions exporting(Exporting exporting) {
-        this.exporting = exporting;
+    public MockChartOptions series(Array<Series> series) {
+        this.series = series;
         return this;
     }
 

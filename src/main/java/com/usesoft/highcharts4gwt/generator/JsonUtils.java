@@ -6,8 +6,8 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import com.usesoft.highcharts4gwt.generator.graph.OptionSpec;
-import com.usesoft.highcharts4gwt.generator.graph.Options;
+import com.usesoft.highcharts4gwt.generator.graph.Option;
+import com.usesoft.highcharts4gwt.generator.graph.OptionsData;
 import com.usesoft.highcharts4gwt.generator.jsonparser.OptionParser;
 
 public class JsonUtils
@@ -18,18 +18,19 @@ public class JsonUtils
 
     public static JSONArray extractOptions(String optionsAsString)
     {
-        JSONObject options = new JSONObject(optionsAsString);
-        JSONObject root = (JSONObject) options.get("Options");
-        return root.getJSONArray("options");
+        JSONArray options = new JSONArray(optionsAsString);
+        return options;
+        // JSONObject root = (JSONObject) options.get("Options");
+        // return root.getJSONArray("options");
     }
 
-    public static Options createOptions(JSONArray jsonArray)
+    public static OptionsData createOptions(JSONArray jsonArray)
     {
-        List<OptionSpec> specs = readSpecs(jsonArray);
+        List<Option> specs = readSpecs(jsonArray);
 
-        Options options = new Options();
+        OptionsData options = new OptionsData();
 
-        for (OptionSpec optionSpec : specs)
+        for (Option optionSpec : specs)
         {
             options.add(optionSpec, specs);
         }
@@ -37,14 +38,14 @@ public class JsonUtils
         return options;
     }
 
-    public static List<OptionSpec> readSpecs(JSONArray jsonArray)
+    public static List<Option> readSpecs(JSONArray jsonArray)
     {
-        List<OptionSpec> specs = new ArrayList<OptionSpec>();
+        List<Option> specs = new ArrayList<Option>();
 
         for (int i = 0; i < jsonArray.length(); i++)
         {
             JSONObject jsonOption = (JSONObject) jsonArray.get(i);
-            OptionSpec option = OptionParser.parse(jsonOption);
+            Option option = OptionParser.parse(jsonOption);
             if (option != null)
                 specs.add(option);
         }

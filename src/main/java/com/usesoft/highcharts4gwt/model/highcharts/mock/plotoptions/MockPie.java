@@ -3,9 +3,10 @@ package com.usesoft.highcharts4gwt.model.highcharts.mock.plotoptions;
 
 import com.usesoft.highcharts4gwt.model.array.api.ArrayString;
 import com.usesoft.highcharts4gwt.model.highcharts.api.plotoptions.Pie;
-import com.usesoft.highcharts4gwt.model.highcharts.api.plotoptions.pie.Events;
+import com.usesoft.highcharts4gwt.model.highcharts.mock.plotoptions.MockSeries;
 
 public class MockPie
+    extends MockSeries
     implements Pie
 {
 
@@ -13,13 +14,10 @@ public class MockPie
     private ArrayString center;
     private Number depth;
     private Number endAngle;
-    private Events events;
     private boolean ignoreHiddenPoint;
     private Number minSize;
-    private boolean showInLegend;
     private Number slicedOffset;
     private Number startAngle;
-    private boolean stickyTracking;
 
     public Number borderWidth() {
         return borderWidth;
@@ -57,15 +55,6 @@ public class MockPie
         return this;
     }
 
-    public Events events() {
-        return events;
-    }
-
-    public MockPie events(Events events) {
-        this.events = events;
-        return this;
-    }
-
     public boolean ignoreHiddenPoint() {
         return ignoreHiddenPoint;
     }
@@ -84,15 +73,6 @@ public class MockPie
         return this;
     }
 
-    public boolean showInLegend() {
-        return showInLegend;
-    }
-
-    public MockPie showInLegend(boolean showInLegend) {
-        this.showInLegend = showInLegend;
-        return this;
-    }
-
     public Number slicedOffset() {
         return slicedOffset;
     }
@@ -108,15 +88,6 @@ public class MockPie
 
     public MockPie startAngle(Number startAngle) {
         this.startAngle = startAngle;
-        return this;
-    }
-
-    public boolean stickyTracking() {
-        return stickyTracking;
-    }
-
-    public MockPie stickyTracking(boolean stickyTracking) {
-        this.stickyTracking = stickyTracking;
         return this;
     }
 

@@ -4,25 +4,14 @@ package com.usesoft.highcharts4gwt.model.highcharts.mock.plotoptions.pie;
 import com.usesoft.highcharts4gwt.model.highcharts.api.plotoptions.pie.DataLabels;
 
 public class MockDataLabels
+    extends com.usesoft.highcharts4gwt.model.highcharts.mock.plotoptions.series.MockDataLabels
     implements DataLabels
 {
 
-    private String align;
     private String connectorColor;
     private Number connectorPadding;
     private Number connectorWidth;
-    private Number distance;
-    private boolean enabled;
     private boolean softConnector;
-
-    public String align() {
-        return align;
-    }
-
-    public MockDataLabels align(String align) {
-        this.align = align;
-        return this;
-    }
 
     public String connectorColor() {
         return connectorColor;
@@ -48,24 +37,6 @@ public class MockDataLabels
 
     public MockDataLabels connectorWidth(Number connectorWidth) {
         this.connectorWidth = connectorWidth;
-        return this;
-    }
-
-    public Number distance() {
-        return distance;
-    }
-
-    public MockDataLabels distance(Number distance) {
-        this.distance = distance;
-        return this;
-    }
-
-    public boolean enabled() {
-        return enabled;
-    }
-
-    public MockDataLabels enabled(boolean enabled) {
-        this.enabled = enabled;
         return this;
     }
 

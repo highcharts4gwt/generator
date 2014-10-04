@@ -6,7 +6,7 @@ import java.util.Map;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 import com.sun.codemodel.JClass;
-import com.usesoft.highcharts4gwt.generator.graph.OptionSpec;
+import com.usesoft.highcharts4gwt.generator.graph.Option;
 
 public class ClassRegistry
 {
@@ -19,7 +19,7 @@ public class ClassRegistry
         return registry;
     }
 
-    public void put(OptionSpec optionSpec, OutputType type, JClass jClass)
+    public void put(Option optionSpec, OutputType type, JClass jClass)
     {
         registry.put(new RegistryKey(optionSpec, type), jClass);
     }
@@ -30,16 +30,16 @@ public class ClassRegistry
 
     public static class RegistryKey
     {
-        private final OptionSpec optionSpec;
+        private final Option optionSpec;
         private final OutputType type;
 
-        public RegistryKey(OptionSpec optionSpec, OutputType type)
+        public RegistryKey(Option optionSpec, OutputType type)
         {
             this.optionSpec = optionSpec;
             this.type = type;
         }
 
-        public OptionSpec getOptionSpec()
+        public Option getOptionSpec()
         {
             return optionSpec;
         }

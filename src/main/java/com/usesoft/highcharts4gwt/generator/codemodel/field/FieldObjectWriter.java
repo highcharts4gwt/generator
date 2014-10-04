@@ -8,16 +8,16 @@ import com.sun.codemodel.JDefinedClass;
 import com.usesoft.highcharts4gwt.generator.codemodel.ClassRegistry;
 import com.usesoft.highcharts4gwt.generator.codemodel.OutputType;
 import com.usesoft.highcharts4gwt.generator.codemodel.OutputTypeVisitor;
-import com.usesoft.highcharts4gwt.generator.graph.OptionSpec;
+import com.usesoft.highcharts4gwt.generator.graph.Option;
 
 public class FieldObjectWriter extends FieldWriter implements OutputTypeVisitor<String, Void>
 {
 
     private final String defaultValue;
-    private final OptionSpec optionSpec;
+    private final Option optionSpec;
     private final JClass interfaceJClass;
 
-    public FieldObjectWriter(JCodeModel codeModel, JDefinedClass jClass, String className, OptionSpec optionSpec)
+    public FieldObjectWriter(JCodeModel codeModel, JDefinedClass jClass, String className, Option optionSpec)
     {
         super(codeModel, className, jClass);
         this.optionSpec = optionSpec;

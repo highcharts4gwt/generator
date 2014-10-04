@@ -2,25 +2,17 @@
 package com.usesoft.highcharts4gwt.model.highcharts.mock.plotoptions;
 
 import com.usesoft.highcharts4gwt.model.highcharts.api.plotoptions.Boxplot;
+import com.usesoft.highcharts4gwt.model.highcharts.mock.plotoptions.MockColumn;
 
 public class MockBoxplot
+    extends MockColumn
     implements Boxplot
 {
 
-    private Number lineWidth;
     private Number medianWidth;
     private String stemDashStyle;
     private Number stemWidth;
     private Number whiskerWidth;
-
-    public Number lineWidth() {
-        return lineWidth;
-    }
-
-    public MockBoxplot lineWidth(Number lineWidth) {
-        this.lineWidth = lineWidth;
-        return this;
-    }
 
     public Number medianWidth() {
         return medianWidth;

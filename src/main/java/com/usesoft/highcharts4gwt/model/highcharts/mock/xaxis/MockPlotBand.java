@@ -8,11 +8,21 @@ public class MockPlotBand
     implements PlotBand
 {
 
+    private Number borderWidth;
     private Number from;
     private String id;
     private Label label;
     private Number to;
     private Number zIndex;
+
+    public Number borderWidth() {
+        return borderWidth;
+    }
+
+    public MockPlotBand borderWidth(Number borderWidth) {
+        this.borderWidth = borderWidth;
+        return this;
+    }
 
     public Number from() {
         return from;

@@ -1,42 +1,15 @@
 
 package com.usesoft.highcharts4gwt.model.highcharts.jso.plotoptions.bar;
 
-import com.google.gwt.core.client.JavaScriptObject;
 import com.usesoft.highcharts4gwt.model.highcharts.api.plotoptions.bar.DataLabels;
 
 public class JsoDataLabels
-    extends JavaScriptObject
+    extends com.usesoft.highcharts4gwt.model.highcharts.jso.plotoptions.column.JsoDataLabels
     implements DataLabels
 {
 
 
     protected JsoDataLabels() {
     }
-
-    public final native String align()
-        throws RuntimeException /*-{
-        return this["align"] = (this["align"] || "left");
-    }-*/
-    ;
-
-    public final native JsoDataLabels align(String align)
-        throws RuntimeException /*-{
-        this["align"] = align;
-        return this;
-    }-*/
-    ;
-
-    public final native Number x()
-        throws RuntimeException /*-{
-        return this["x"] = (this["x"] || 5.0);
-    }-*/
-    ;
-
-    public final native JsoDataLabels x(Number x)
-        throws RuntimeException /*-{
-        this["x"] = x;
-        return this;
-    }-*/
-    ;
 
 }

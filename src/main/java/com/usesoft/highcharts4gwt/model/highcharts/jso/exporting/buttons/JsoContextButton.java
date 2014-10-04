@@ -1,11 +1,11 @@
 
 package com.usesoft.highcharts4gwt.model.highcharts.jso.exporting.buttons;
 
-import com.google.gwt.core.client.JavaScriptObject;
 import com.usesoft.highcharts4gwt.model.highcharts.api.exporting.buttons.ContextButton;
+import com.usesoft.highcharts4gwt.model.highcharts.jso.navigation.JsoButtonOptions;
 
 public class JsoContextButton
-    extends JavaScriptObject
+    extends JsoButtonOptions
     implements ContextButton
 {
 

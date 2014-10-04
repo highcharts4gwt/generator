@@ -2,13 +2,14 @@
 package com.usesoft.highcharts4gwt.model.highcharts.mock.plotoptions;
 
 import com.usesoft.highcharts4gwt.model.highcharts.api.plotoptions.Area;
+import com.usesoft.highcharts4gwt.model.highcharts.mock.plotoptions.MockSeries;
 
 public class MockArea
+    extends MockSeries
     implements Area
 {
 
     private Number fillOpacity;
-    private Number threshold;
     private boolean trackByArea;
 
     public Number fillOpacity() {
@@ -17,15 +18,6 @@ public class MockArea
 
     public MockArea fillOpacity(Number fillOpacity) {
         this.fillOpacity = fillOpacity;
-        return this;
-    }
-
-    public Number threshold() {
-        return threshold;
-    }
-
-    public MockArea threshold(Number threshold) {
-        this.threshold = threshold;
         return this;
     }
 

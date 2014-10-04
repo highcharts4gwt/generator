@@ -24,10 +24,6 @@ import com.usesoft.highcharts4gwt.model.highcharts.api.YAxis;
 public interface ChartOptions {
 
 
-    Array<Series> series();
-
-    ChartOptions series(Array<Series> series);
-
     Global global();
 
     ChartOptions global(Global global);
@@ -52,21 +48,25 @@ public interface ChartOptions {
 
     ChartOptions xAxis(XAxis xAxis);
 
-    Navigation navigation();
+    YAxis yAxis();
 
-    ChartOptions navigation(Navigation navigation);
-
-    Subtitle subtitle();
-
-    ChartOptions subtitle(Subtitle subtitle);
+    ChartOptions yAxis(YAxis yAxis);
 
     Title title();
 
     ChartOptions title(Title title);
 
-    YAxis yAxis();
+    Navigation navigation();
 
-    ChartOptions yAxis(YAxis yAxis);
+    ChartOptions navigation(Navigation navigation);
+
+    Exporting exporting();
+
+    ChartOptions exporting(Exporting exporting);
+
+    Subtitle subtitle();
+
+    ChartOptions subtitle(Subtitle subtitle);
 
     Tooltip tooltip();
 
@@ -76,9 +76,9 @@ public interface ChartOptions {
 
     ChartOptions noData(NoData noData);
 
-    Exporting exporting();
+    Array<Series> series();
 
-    ChartOptions exporting(Exporting exporting);
+    ChartOptions series(Array<Series> series);
 
     Lang lang();
 

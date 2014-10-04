@@ -3,6 +3,7 @@ package com.usesoft.highcharts4gwt.model.highcharts.jso.plotoptions.pie.states;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.usesoft.highcharts4gwt.model.highcharts.api.plotoptions.pie.states.Hover;
+import com.usesoft.highcharts4gwt.model.highcharts.api.plotoptions.pie.states.hover.Marker;
 
 public class JsoHover
     extends JavaScriptObject
@@ -13,15 +14,54 @@ public class JsoHover
     protected JsoHover() {
     }
 
-    public final native Number brightness()
+    public final native boolean enabled()
         throws RuntimeException /*-{
-        return this["brightness"] = (this["brightness"] || 0.1);
+        return this["enabled"] = (this["enabled"] || true);
     }-*/
     ;
 
-    public final native JsoHover brightness(Number brightness)
+    public final native JsoHover enabled(boolean enabled)
         throws RuntimeException /*-{
-        this["brightness"] = brightness;
+        this["enabled"] = enabled;
+        return this;
+    }-*/
+    ;
+
+    public final native Number lineWidth()
+        throws RuntimeException /*-{
+        return this["lineWidth"] = (this["lineWidth"] || 2.0);
+    }-*/
+    ;
+
+    public final native JsoHover lineWidth(Number lineWidth)
+        throws RuntimeException /*-{
+        this["lineWidth"] = lineWidth;
+        return this;
+    }-*/
+    ;
+
+    public final native Number lineWidthPlus()
+        throws RuntimeException /*-{
+        return this["lineWidthPlus"] = (this["lineWidthPlus"] || 1.0);
+    }-*/
+    ;
+
+    public final native JsoHover lineWidthPlus(Number lineWidthPlus)
+        throws RuntimeException /*-{
+        this["lineWidthPlus"] = lineWidthPlus;
+        return this;
+    }-*/
+    ;
+
+    public final native Marker marker()
+        throws RuntimeException /*-{
+        return this["marker"] = (this["marker"] || {});
+    }-*/
+    ;
+
+    public final native JsoHover marker(Marker marker)
+        throws RuntimeException /*-{
+        this["marker"] = marker;
         return this;
     }-*/
     ;

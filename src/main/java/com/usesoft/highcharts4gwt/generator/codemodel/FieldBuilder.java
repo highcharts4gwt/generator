@@ -2,11 +2,11 @@ package com.usesoft.highcharts4gwt.generator.codemodel;
 
 import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JDefinedClass;
-import com.usesoft.highcharts4gwt.generator.graph.OptionSpec;
+import com.usesoft.highcharts4gwt.generator.graph.Option;
 
 public interface FieldBuilder
 {
-    void addField(OptionSpec optionSpec, OutputType outputType);
+    void addField(Option optionSpec, OutputType outputType);
 
     void setCodeModel(JCodeModel codeModel);
 

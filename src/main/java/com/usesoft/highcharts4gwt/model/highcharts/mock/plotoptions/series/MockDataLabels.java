@@ -2,35 +2,20 @@
 package com.usesoft.highcharts4gwt.model.highcharts.mock.plotoptions.series;
 
 import com.usesoft.highcharts4gwt.model.highcharts.api.plotoptions.series.DataLabels;
+import com.usesoft.highcharts4gwt.model.highcharts.mock.xaxis.MockLabels;
 
 public class MockDataLabels
+    extends MockLabels
     implements DataLabels
 {
 
-    private String align;
     private Number borderRadius;
     private Number borderWidth;
     private boolean crop;
     private boolean defer;
-    private boolean enabled;
-    private String format;
     private boolean inside;
-    private String overflow;
     private Number padding;
-    private Number rotation;
     private String verticalAlign;
-    private Number x;
-    private Number y;
-    private Number zIndex;
-
-    public String align() {
-        return align;
-    }
-
-    public MockDataLabels align(String align) {
-        this.align = align;
-        return this;
-    }
 
     public Number borderRadius() {
         return borderRadius;
@@ -68,39 +53,12 @@ public class MockDataLabels
         return this;
     }
 
-    public boolean enabled() {
-        return enabled;
-    }
-
-    public MockDataLabels enabled(boolean enabled) {
-        this.enabled = enabled;
-        return this;
-    }
-
-    public String format() {
-        return format;
-    }
-
-    public MockDataLabels format(String format) {
-        this.format = format;
-        return this;
-    }
-
     public boolean inside() {
         return inside;
     }
 
     public MockDataLabels inside(boolean inside) {
         this.inside = inside;
-        return this;
-    }
-
-    public String overflow() {
-        return overflow;
-    }
-
-    public MockDataLabels overflow(String overflow) {
-        this.overflow = overflow;
         return this;
     }
 
@@ -113,48 +71,12 @@ public class MockDataLabels
         return this;
     }
 
-    public Number rotation() {
-        return rotation;
-    }
-
-    public MockDataLabels rotation(Number rotation) {
-        this.rotation = rotation;
-        return this;
-    }
-
     public String verticalAlign() {
         return verticalAlign;
     }
 
     public MockDataLabels verticalAlign(String verticalAlign) {
         this.verticalAlign = verticalAlign;
-        return this;
-    }
-
-    public Number x() {
-        return x;
-    }
-
-    public MockDataLabels x(Number x) {
-        this.x = x;
-        return this;
-    }
-
-    public Number y() {
-        return y;
-    }
-
-    public MockDataLabels y(Number y) {
-        this.y = y;
-        return this;
-    }
-
-    public Number zIndex() {
-        return zIndex;
-    }
-
-    public MockDataLabels zIndex(Number zIndex) {
-        this.zIndex = zIndex;
         return this;
     }
 

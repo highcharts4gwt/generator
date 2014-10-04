@@ -1,30 +1,16 @@
 
 package com.usesoft.highcharts4gwt.model.highcharts.jso.plotoptions.pie;
 
-import com.google.gwt.core.client.JavaScriptObject;
 import com.usesoft.highcharts4gwt.model.highcharts.api.plotoptions.pie.DataLabels;
 
 public class JsoDataLabels
-    extends JavaScriptObject
+    extends com.usesoft.highcharts4gwt.model.highcharts.jso.plotoptions.series.JsoDataLabels
     implements DataLabels
 {
 
 
     protected JsoDataLabels() {
     }
-
-    public final native String align()
-        throws RuntimeException /*-{
-        return this["align"] = (this["align"] || "null");
-    }-*/
-    ;
-
-    public final native JsoDataLabels align(String align)
-        throws RuntimeException /*-{
-        this["align"] = align;
-        return this;
-    }-*/
-    ;
 
     public final native String connectorColor()
         throws RuntimeException /*-{
@@ -61,32 +47,6 @@ public class JsoDataLabels
     public final native JsoDataLabels connectorWidth(Number connectorWidth)
         throws RuntimeException /*-{
         this["connectorWidth"] = connectorWidth;
-        return this;
-    }-*/
-    ;
-
-    public final native Number distance()
-        throws RuntimeException /*-{
-        return this["distance"] = (this["distance"] || 30.0);
-    }-*/
-    ;
-
-    public final native JsoDataLabels distance(Number distance)
-        throws RuntimeException /*-{
-        this["distance"] = distance;
-        return this;
-    }-*/
-    ;
-
-    public final native boolean enabled()
-        throws RuntimeException /*-{
-        return this["enabled"] = (this["enabled"] || true);
-    }-*/
-    ;
-
-    public final native JsoDataLabels enabled(boolean enabled)
-        throws RuntimeException /*-{
-        this["enabled"] = enabled;
         return this;
     }-*/
     ;

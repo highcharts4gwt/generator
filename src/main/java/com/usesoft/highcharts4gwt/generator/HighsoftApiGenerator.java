@@ -2,11 +2,15 @@ package com.usesoft.highcharts4gwt.generator;
 
 import javax.annotation.CheckForNull;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.usesoft.highcharts4gwt.generator.highsoft.Product;
 import com.usesoft.highcharts4gwt.generator.highsoft.ProductVisitor;
 
 public class HighsoftApiGenerator implements ProductVisitor<Void, Void>
 {
+    final static Logger logger = LoggerFactory.getLogger(HighsoftApiGenerator.class);
 
     @Override
     @CheckForNull
@@ -15,11 +19,11 @@ public class HighsoftApiGenerator implements ProductVisitor<Void, Void>
         Generator generator;
         try
         {
-            // generator = new OnlineGenerator(Product.Highcharts);
-            generator = new OfflineGenerator(Product.Highcharts);
+            logger.info("Highcharts API generation");
+            generator = new OnlineGenerator(Product.Highcharts);
+            // generator = new OfflineGenerator(Product.Highcharts);
             generator.generate();
-        }
-        catch (Exception e)
+        } catch (Exception e)
         {
             throw new RuntimeException("Could not generate sources.", e);
         }

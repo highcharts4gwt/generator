@@ -1,11 +1,11 @@
 
 package com.usesoft.highcharts4gwt.model.highcharts.jso.plotoptions;
 
-import com.google.gwt.core.client.JavaScriptObject;
 import com.usesoft.highcharts4gwt.model.highcharts.api.plotoptions.Line;
+import com.usesoft.highcharts4gwt.model.highcharts.jso.plotoptions.JsoSeries;
 
 public class JsoLine
-    extends JavaScriptObject
+    extends JsoSeries
     implements Line
 {
 

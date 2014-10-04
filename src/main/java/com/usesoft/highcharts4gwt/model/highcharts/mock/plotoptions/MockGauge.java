@@ -2,13 +2,14 @@
 package com.usesoft.highcharts4gwt.model.highcharts.mock.plotoptions;
 
 import com.usesoft.highcharts4gwt.model.highcharts.api.plotoptions.Gauge;
+import com.usesoft.highcharts4gwt.model.highcharts.mock.plotoptions.MockSeries;
 
 public class MockGauge
+    extends MockSeries
     implements Gauge
 {
 
     private Number overshoot;
-    private boolean showInLegend;
     private boolean wrap;
 
     public Number overshoot() {
@@ -17,15 +18,6 @@ public class MockGauge
 
     public MockGauge overshoot(Number overshoot) {
         this.overshoot = overshoot;
-        return this;
-    }
-
-    public boolean showInLegend() {
-        return showInLegend;
-    }
-
-    public MockGauge showInLegend(boolean showInLegend) {
-        this.showInLegend = showInLegend;
         return this;
     }
 

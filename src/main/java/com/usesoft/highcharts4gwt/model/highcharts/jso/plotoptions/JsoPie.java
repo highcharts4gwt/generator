@@ -1,13 +1,12 @@
 
 package com.usesoft.highcharts4gwt.model.highcharts.jso.plotoptions;
 
-import com.google.gwt.core.client.JavaScriptObject;
 import com.usesoft.highcharts4gwt.model.array.api.ArrayString;
 import com.usesoft.highcharts4gwt.model.highcharts.api.plotoptions.Pie;
-import com.usesoft.highcharts4gwt.model.highcharts.api.plotoptions.pie.Events;
+import com.usesoft.highcharts4gwt.model.highcharts.jso.plotoptions.JsoSeries;
 
 public class JsoPie
-    extends JavaScriptObject
+    extends JsoSeries
     implements Pie
 {
 
@@ -67,19 +66,6 @@ public class JsoPie
     }-*/
     ;
 
-    public final native Events events()
-        throws RuntimeException /*-{
-        return this["events"] = (this["events"] || {});
-    }-*/
-    ;
-
-    public final native JsoPie events(Events events)
-        throws RuntimeException /*-{
-        this["events"] = events;
-        return this;
-    }-*/
-    ;
-
     public final native boolean ignoreHiddenPoint()
         throws RuntimeException /*-{
         return this["ignoreHiddenPoint"] = (this["ignoreHiddenPoint"] || true);
@@ -106,19 +92,6 @@ public class JsoPie
     }-*/
     ;
 
-    public final native boolean showInLegend()
-        throws RuntimeException /*-{
-        return this["showInLegend"] = (this["showInLegend"] || false);
-    }-*/
-    ;
-
-    public final native JsoPie showInLegend(boolean showInLegend)
-        throws RuntimeException /*-{
-        this["showInLegend"] = showInLegend;
-        return this;
-    }-*/
-    ;
-
     public final native Number slicedOffset()
         throws RuntimeException /*-{
         return this["slicedOffset"] = (this["slicedOffset"] || 10.0);
@@ -141,19 +114,6 @@ public class JsoPie
     public final native JsoPie startAngle(Number startAngle)
         throws RuntimeException /*-{
         this["startAngle"] = startAngle;
-        return this;
-    }-*/
-    ;
-
-    public final native boolean stickyTracking()
-        throws RuntimeException /*-{
-        return this["stickyTracking"] = (this["stickyTracking"] || false);
-    }-*/
-    ;
-
-    public final native JsoPie stickyTracking(boolean stickyTracking)
-        throws RuntimeException /*-{
-        this["stickyTracking"] = stickyTracking;
         return this;
     }-*/
     ;

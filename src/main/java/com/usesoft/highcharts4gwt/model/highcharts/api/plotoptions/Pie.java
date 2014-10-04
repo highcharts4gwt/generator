@@ -2,9 +2,11 @@
 package com.usesoft.highcharts4gwt.model.highcharts.api.plotoptions;
 
 import com.usesoft.highcharts4gwt.model.array.api.ArrayString;
-import com.usesoft.highcharts4gwt.model.highcharts.api.plotoptions.pie.Events;
+import com.usesoft.highcharts4gwt.model.highcharts.api.plotoptions.Series;
 
-public interface Pie {
+public interface Pie
+    extends Series
+{
 
 
     Number borderWidth();
@@ -23,10 +25,6 @@ public interface Pie {
 
     Pie endAngle(Number endAngle);
 
-    Events events();
-
-    Pie events(Events events);
-
     boolean ignoreHiddenPoint();
 
     Pie ignoreHiddenPoint(boolean ignoreHiddenPoint);
@@ -35,10 +33,6 @@ public interface Pie {
 
     Pie minSize(Number minSize);
 
-    boolean showInLegend();
-
-    Pie showInLegend(boolean showInLegend);
-
     Number slicedOffset();
 
     Pie slicedOffset(Number slicedOffset);
@@ -46,9 +40,5 @@ public interface Pie {
     Number startAngle();
 
     Pie startAngle(Number startAngle);
-
-    boolean stickyTracking();
-
-    Pie stickyTracking(boolean stickyTracking);
 
 }

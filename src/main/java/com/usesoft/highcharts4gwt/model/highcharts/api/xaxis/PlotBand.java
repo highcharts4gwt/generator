@@ -6,6 +6,10 @@ import com.usesoft.highcharts4gwt.model.highcharts.api.xaxis.plotbands.Label;
 public interface PlotBand {
 
 
+    Number borderWidth();
+
+    PlotBand borderWidth(Number borderWidth);
+
     Number from();
 
     PlotBand from(Number from);

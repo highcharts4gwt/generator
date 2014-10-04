@@ -1,13 +1,11 @@
 
 package com.usesoft.highcharts4gwt.model.highcharts.api.plotoptions;
 
-import com.usesoft.highcharts4gwt.model.highcharts.api.plotoptions.bar.DataLabels;
+import com.usesoft.highcharts4gwt.model.highcharts.api.plotoptions.Column;
 
-public interface Bar {
+public interface Bar
+    extends Column
+{
 
-
-    DataLabels dataLabels();
-
-    Bar dataLabels(DataLabels dataLabels);
 
 }

@@ -9,7 +9,7 @@ import org.apache.commons.io.IOUtils;
 import org.json.JSONObject;
 import org.junit.Test;
 
-import com.usesoft.highcharts4gwt.generator.graph.OptionSpec;
+import com.usesoft.highcharts4gwt.generator.graph.Option;
 import com.usesoft.highcharts4gwt.generator.jsonparser.OptionParser;
 
 public class TestOptionParser
@@ -24,7 +24,7 @@ public class TestOptionParser
     {
         JSONObject optionAsJson = extractOption(Option1);
 
-        OptionSpec option = OptionParser.parse(optionAsJson);
+        Option option = OptionParser.parse(optionAsJson);
 
         assertThat(option.getFullname()).isEqualTo("drilldown.activeAxisLabelStyle");
         assertThat(option.getName()).isEqualTo("drilldown--activeAxisLabelStyle");
@@ -48,7 +48,7 @@ public class TestOptionParser
     {
         JSONObject optionAsJson = extractOption(Option2);
 
-        OptionSpec option = OptionParser.parse(optionAsJson);
+        Option option = OptionParser.parse(optionAsJson);
 
         assertThat(option.getFullname()).isEqualTo("global.VMLRadialGradientURL");
         assertThat(option.getName()).isEqualTo("global--VMLRadialGradientURL");
@@ -72,7 +72,7 @@ public class TestOptionParser
     {
         JSONObject optionAsJson = extractOption(Option3);
 
-        OptionSpec option = OptionParser.parse(optionAsJson);
+        Option option = OptionParser.parse(optionAsJson);
 
         assertThat(option.getFullname()).isEqualTo("legend.align");
         assertThat(option.getName()).isEqualTo("legend--align");

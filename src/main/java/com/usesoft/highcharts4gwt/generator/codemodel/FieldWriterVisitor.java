@@ -11,7 +11,7 @@ import com.usesoft.highcharts4gwt.generator.codemodel.field.FieldDataWriter;
 import com.usesoft.highcharts4gwt.generator.codemodel.field.FieldNumberWriter;
 import com.usesoft.highcharts4gwt.generator.codemodel.field.FieldStringWriter;
 import com.usesoft.highcharts4gwt.generator.codemodel.field.FieldTypeVisitor;
-import com.usesoft.highcharts4gwt.generator.graph.OptionSpec;
+import com.usesoft.highcharts4gwt.generator.graph.Option;
 
 public class FieldWriterVisitor implements FieldTypeVisitor<OutputType, Void>
 {
@@ -19,9 +19,9 @@ public class FieldWriterVisitor implements FieldTypeVisitor<OutputType, Void>
     private final JCodeModel codeModel;
     private final JDefinedClass jClass;
     private final String className;
-    private final OptionSpec optionSpec;
+    private final Option optionSpec;
 
-    public FieldWriterVisitor(OptionSpec optionSpec, JCodeModel codeModel, JDefinedClass jClass, String className)
+    public FieldWriterVisitor(Option optionSpec, JCodeModel codeModel, JDefinedClass jClass, String className)
     {
         this.optionSpec = optionSpec;
         this.fieldName = optionSpec.getTitle();

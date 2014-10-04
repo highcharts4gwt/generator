@@ -7,11 +7,15 @@ import java.net.URL;
 import javax.annotation.CheckForNull;
 
 import org.apache.commons.io.IOUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.usesoft.highcharts4gwt.generator.highsoft.Product;
 
 public class OnlineGenerator extends BaseGenerator
 {
+    final static Logger logger = LoggerFactory.getLogger(OnlineGenerator.class);
+
     public OnlineGenerator(Product product) throws IOException
     {
         super(product);
@@ -35,13 +39,18 @@ public class OnlineGenerator extends BaseGenerator
         {
             optionsInputStream = new URL(highchartOptionsUrl).openStream();
             optionsAsString = IOUtils.toString(optionsInputStream);
-        }
-        finally
+        } finally
         {
             if (optionsInputStream != null)
                 optionsInputStream.close();
         }
 
         return optionsAsString;
+    }
+
+    @Override
+    protected Logger getLogger()
+    {
+        return logger;
     }
 }

@@ -3,7 +3,7 @@ package com.usesoft.highcharts4gwt.generator.codemodel;
 import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JDefinedClass;
 import com.usesoft.highcharts4gwt.generator.codemodel.field.FieldType;
-import com.usesoft.highcharts4gwt.generator.graph.OptionSpec;
+import com.usesoft.highcharts4gwt.generator.graph.Option;
 
 public final class BaseFieldBuilder implements FieldBuilder
 {
@@ -34,7 +34,7 @@ public final class BaseFieldBuilder implements FieldBuilder
     }
 
     @Override
-    public void addField(OptionSpec optionSpec, OutputType outputType)
+    public void addField(Option optionSpec, OutputType outputType)
     {
 
         FieldType fieldType = findFieldType(optionSpec);
@@ -42,7 +42,7 @@ public final class BaseFieldBuilder implements FieldBuilder
         fieldType.accept(new FieldWriterVisitor(optionSpec, codeModel, jClass, className), outputType);
     }
 
-    public static FieldType findFieldType(OptionSpec optionSpec)
+    public static FieldType findFieldType(Option optionSpec)
     {
         FieldType fieldType = findFieldTypeForSimpleFied(optionSpec.getReturnType());
 
@@ -55,7 +55,7 @@ public final class BaseFieldBuilder implements FieldBuilder
         return fieldType;
     }
 
-    private static FieldType findFieldTypeForArray(OptionSpec optionSpec)
+    private static FieldType findFieldTypeForArray(Option optionSpec)
     {
         String returnType = optionSpec.getReturnType();
         if (returnType.equals("Array<String>"))

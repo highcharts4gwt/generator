@@ -2,21 +2,12 @@
 package com.usesoft.highcharts4gwt.model.highcharts.mock.plotoptions;
 
 import com.usesoft.highcharts4gwt.model.highcharts.api.plotoptions.Bar;
-import com.usesoft.highcharts4gwt.model.highcharts.api.plotoptions.bar.DataLabels;
+import com.usesoft.highcharts4gwt.model.highcharts.mock.plotoptions.MockColumn;
 
 public class MockBar
+    extends MockColumn
     implements Bar
 {
 
-    private DataLabels dataLabels;
-
-    public DataLabels dataLabels() {
-        return dataLabels;
-    }
-
-    public MockBar dataLabels(DataLabels dataLabels) {
-        this.dataLabels = dataLabels;
-        return this;
-    }
 
 }

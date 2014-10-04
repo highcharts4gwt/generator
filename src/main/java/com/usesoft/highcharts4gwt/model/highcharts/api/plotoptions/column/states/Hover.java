@@ -1,12 +1,25 @@
 
 package com.usesoft.highcharts4gwt.model.highcharts.api.plotoptions.column.states;
 
+import com.usesoft.highcharts4gwt.model.highcharts.api.plotoptions.column.states.hover.Marker;
 
 public interface Hover {
 
 
-    Number brightness();
+    boolean enabled();
 
-    Hover brightness(Number brightness);
+    Hover enabled(boolean enabled);
+
+    Number lineWidth();
+
+    Hover lineWidth(Number lineWidth);
+
+    Number lineWidthPlus();
+
+    Hover lineWidthPlus(Number lineWidthPlus);
+
+    Marker marker();
+
+    Hover marker(Marker marker);
 
 }

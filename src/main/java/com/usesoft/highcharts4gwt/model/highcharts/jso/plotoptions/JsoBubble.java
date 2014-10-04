@@ -1,11 +1,11 @@
 
 package com.usesoft.highcharts4gwt.model.highcharts.jso.plotoptions;
 
-import com.google.gwt.core.client.JavaScriptObject;
 import com.usesoft.highcharts4gwt.model.highcharts.api.plotoptions.Bubble;
+import com.usesoft.highcharts4gwt.model.highcharts.jso.plotoptions.JsoScatter;
 
 public class JsoBubble
-    extends JavaScriptObject
+    extends JsoScatter
     implements Bubble
 {
 

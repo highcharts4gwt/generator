@@ -13,31 +13,31 @@ public class OptionUtils
     {
     }
 
-    public static boolean isRoot(OptionSpec option)
+    public static boolean isRoot(Option option)
     {
         return option.getFullname().equals(extractRootFullName(option));
     }
 
-    public static int depth(OptionSpec option)
+    public static int depth(Option option)
     {
         String fullname = option.getFullname();
         int length = fullname.split("\\.").length;
         return length - 1;
     }
 
-    public static String extractRootFullName(OptionSpec option)
+    public static String extractRootFullName(Option option)
     {
         String optionFullName = option.getFullname();
         return extractRootFullName(optionFullName);
     }
 
-    private static String extractRootFullName(String optionFullName)
+    public static String extractRootFullName(String optionFullName)
     {
         return optionFullName.split("\\.")[0];
     }
 
     @CheckForNull
-    public static String extractParentFullName(OptionSpec option)
+    public static String extractParentFullName(Option option)
     {
         String fullname = option.getFullname();
         int lastIndexOf = fullname.lastIndexOf(".");
@@ -49,10 +49,17 @@ public class OptionUtils
         return parentFullName;
     }
 
-    @CheckForNull
-    public static OptionSpec find(List<OptionSpec> options, String optionFullName)
+    public static String transformExtendsNameToFullname(String nameWithDash)
     {
-        int index = options.indexOf(new OptionSpec(optionFullName, "", ""));
+        String out = nameWithDash.replace("--", ".");
+        out = nameWithDash.replace("-", ".");
+        return out;
+    }
+
+    @CheckForNull
+    public static Option find(String optionFullName, List<Option> options)
+    {
+        int index = options.indexOf(new Option(optionFullName, "", ""));
 
         if (index == -1)
             return null;
@@ -61,18 +68,18 @@ public class OptionUtils
     }
 
     @CheckForNull
-    public static OptionSpec findParent(OptionSpec option, List<OptionSpec> options)
+    public static Option findParent(Option option, List<Option> options)
     {
         String parentFullName = OptionUtils.extractParentFullName(option);
 
         if (parentFullName == null)
             return null;
 
-        OptionSpec parent = OptionUtils.find(options, parentFullName);
+        Option parent = OptionUtils.find(parentFullName, options);
         return parent;
     }
 
-    public static String getClassName(OptionSpec optionSpec)
+    public static String getClassName(Option optionSpec)
     {
         String fullName = optionSpec.getFullname();
         int index = fullName.lastIndexOf(".");
@@ -85,7 +92,7 @@ public class OptionUtils
         return className;
     }
 
-    public static String getHighchartsPackageName(OptionSpec optionSpec)
+    public static String getHighchartsPackageName(Option optionSpec)
     {
         String fullName = optionSpec.getFullname();
         int index = fullName.lastIndexOf(".");

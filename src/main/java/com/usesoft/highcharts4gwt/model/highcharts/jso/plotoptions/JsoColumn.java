@@ -1,11 +1,11 @@
 
 package com.usesoft.highcharts4gwt.model.highcharts.jso.plotoptions;
 
-import com.google.gwt.core.client.JavaScriptObject;
 import com.usesoft.highcharts4gwt.model.highcharts.api.plotoptions.Column;
+import com.usesoft.highcharts4gwt.model.highcharts.jso.plotoptions.JsoSeries;
 
 public class JsoColumn
-    extends JavaScriptObject
+    extends JsoSeries
     implements Column
 {
 
@@ -48,19 +48,6 @@ public class JsoColumn
     public final native JsoColumn colorByPoint(boolean colorByPoint)
         throws RuntimeException /*-{
         this["colorByPoint"] = colorByPoint;
-        return this;
-    }-*/
-    ;
-
-    public final native Number cropThreshold()
-        throws RuntimeException /*-{
-        return this["cropThreshold"] = (this["cropThreshold"] || 50.0);
-    }-*/
-    ;
-
-    public final native JsoColumn cropThreshold(Number cropThreshold)
-        throws RuntimeException /*-{
-        this["cropThreshold"] = cropThreshold;
         return this;
     }-*/
     ;
@@ -178,19 +165,6 @@ public class JsoColumn
     public final native JsoColumn pointWidth(Number pointWidth)
         throws RuntimeException /*-{
         this["pointWidth"] = pointWidth;
-        return this;
-    }-*/
-    ;
-
-    public final native Number threshold()
-        throws RuntimeException /*-{
-        return this["threshold"] = (this["threshold"] || 0.0);
-    }-*/
-    ;
-
-    public final native JsoColumn threshold(Number threshold)
-        throws RuntimeException /*-{
-        this["threshold"] = threshold;
         return this;
     }-*/
     ;

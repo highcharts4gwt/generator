@@ -1,6 +1,4 @@
-{
-    "Options": {
-        "options": [
+ [
             {
                 "values": null,
                 "fullname": "global.Date",
@@ -11647,5 +11645,3 @@
                 "description": "Decides in what dimensions the user can zoom by dragging the mouse. Can be one of <code>x</code>, <code>y</code> or <code>xy</code>."
             }
         ]
-    }
-}

@@ -1,8 +1,11 @@
 
 package com.usesoft.highcharts4gwt.model.highcharts.api.plotoptions;
 
+import com.usesoft.highcharts4gwt.model.highcharts.api.plotoptions.Series;
 
-public interface Column {
+public interface Column
+    extends Series
+{
 
 
     Number borderRadius();
@@ -16,10 +19,6 @@ public interface Column {
     boolean colorByPoint();
 
     Column colorByPoint(boolean colorByPoint);
-
-    Number cropThreshold();
-
-    Column cropThreshold(Number cropThreshold);
 
     Number depth();
 
@@ -56,9 +55,5 @@ public interface Column {
     Number pointWidth();
 
     Column pointWidth(Number pointWidth);
-
-    Number threshold();
-
-    Column threshold(Number threshold);
 
 }
