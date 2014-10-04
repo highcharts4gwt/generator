@@ -6,9 +6,10 @@ highcharts4gwt
 ## Status
 v0 still in development.
 
-I re-wrote the way I generated the classes. Thanks to that I am able to support inheritances betweens options.
+[Highcharts wrapper](https://github.com/highcharts4gwt/highcharts)
 
-It starts to look good on the "static" side. 
+
+I re-wrote the way I generated the classes. Thanks to that I am able to support inheritances betweens options. It starts to look good on the "static" side. 
 
 Plus I created a new project "highcharts" were I put all the chart options. It is cleaner so that the chart options are not mixed with the generator code. You can use that project to test the api in your gwt project. 
 
