@@ -15,58 +15,6 @@ Plus I created a new project "highcharts" were I put all the chart options. It i
 
 See the project readme for more info on how to use it.
 
-First rendering of a chart achieved by using the generated API !!!
-
-Lot of work to do but a big first step accomplished :)
-
-Here is the result inside the test project application: 
-
-![First Chart](./screenshot.png)
-
-
-What the code looks like : 
-
-	ChartOptions options = (ChartOptions) JavaScriptObject.createObject();
-
-	options.subtitle().text("Chart reflow is set to true");
-	options.title().text("Chart reflow is set to true");
-
-	Series series = (Series) JavaScriptObject.createObject();
-
-	ArrayNumber data = series.data();
-	data.push(29.9);
-	data.push(71.5);
-	data.push(106.4);
-	data.push(129.2);
-	data.push(144.0);
-	data.push(176.0);
-	data.push(135.6);
-	data.push(148.5);
-	data.push(216.4);
-	data.push(194.1);
-	data.push(95.6);
-	data.push(54.4);
-
-	options.series().addToEnd(series);
-
-	ArrayString categories = options.xAxis().categories();
-	categories.push("Jan");
-	categories.push("Feb");
-	categories.push("Mar");
-	categories.push("Apr");
-	categories.push("May");
-	categories.push("Jun");
-	categories.push("Jul");
-	categories.push("Aug");
-	categories.push("Sep");
-	categories.push("Oct");
-	categories.push("Nov");
-	categories.push("Dec");
-
-	container.renderChart(options);
-
-
-If you want to test simply run highcharts4gwt as a Java application it will generate the API code.
 
 ## Description
 The goal of this project is to create an "auto-generated" GWT highcharts wrapper.
