@@ -6,7 +6,7 @@ highcharts4gwt
 ## Status
 v0 still in development.
 
-[Highcharts wrapper](https://github.com/highcharts4gwt/highcharts)
+Go to [Highcharts wrapper](https://github.com/highcharts4gwt/highcharts) to test the wrapper !
 
 
 I re-wrote the way I generated the classes. Thanks to that I am able to support inheritances betweens options. It starts to look good on the "static" side. 
