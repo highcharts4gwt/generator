@@ -1,20 +1,25 @@
 package com.usesoft.highcharts4gwt.generator.codemodel;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JDefinedClass;
 import com.usesoft.highcharts4gwt.generator.codemodel.field.FieldArrayNumberWriter;
 import com.usesoft.highcharts4gwt.generator.codemodel.field.FieldArrayObjectWriter;
 import com.usesoft.highcharts4gwt.generator.codemodel.field.FieldArrayStringWriter;
 import com.usesoft.highcharts4gwt.generator.codemodel.field.FieldBooleanWriter;
-import com.usesoft.highcharts4gwt.generator.codemodel.field.FieldObjectWriter;
 import com.usesoft.highcharts4gwt.generator.codemodel.field.FieldDataWriter;
 import com.usesoft.highcharts4gwt.generator.codemodel.field.FieldNumberWriter;
+import com.usesoft.highcharts4gwt.generator.codemodel.field.FieldObjectWriter;
 import com.usesoft.highcharts4gwt.generator.codemodel.field.FieldStringWriter;
 import com.usesoft.highcharts4gwt.generator.codemodel.field.FieldTypeVisitor;
 import com.usesoft.highcharts4gwt.generator.graph.Option;
 
 public class FieldWriterVisitor implements FieldTypeVisitor<OutputType, Void>
 {
+    final static Logger logger = LoggerFactory.getLogger(FieldWriterVisitor.class);
+
     private final String fieldName;
     private final JCodeModel codeModel;
     private final JDefinedClass jClass;
@@ -92,4 +97,17 @@ public class FieldWriterVisitor implements FieldTypeVisitor<OutputType, Void>
         return in.accept(new FieldDataWriter(codeModel, jClass, className, optionSpec.getDefaults()), fieldName);
     }
 
+    @Override
+    public Void visitJsonObject(OutputType in)
+    {
+        // TODO should precise that this is an "object" not a string value
+        return in.accept(new FieldStringWriter(codeModel, jClass, className, optionSpec.getDefaults()), fieldName);
+    }
+
+    @Override
+    public Void visitCssObject(OutputType in)
+    {
+        // TODO should precise that this is an "object" not a string value
+        return in.accept(new FieldStringWriter(codeModel, jClass, className, optionSpec.getDefaults()), fieldName);
+    }
 }

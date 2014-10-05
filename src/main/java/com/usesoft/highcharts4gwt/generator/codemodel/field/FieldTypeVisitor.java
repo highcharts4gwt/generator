@@ -12,6 +12,10 @@ public interface FieldTypeVisitor<IN, OUT>
 
     OUT visitData(IN in);
 
+    OUT visitJsonObject(IN in);
+
+    OUT visitCssObject(IN in);
+
     OUT visitArrayString(IN in);
 
     OUT visitArrayNumber(IN in);
