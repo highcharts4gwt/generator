@@ -10,7 +10,6 @@ import com.google.common.base.Strings;
 
 /**
  * Contains all the OptionTrees.
- * 
  * @author rquillevere
  */
 public class OptionsData
@@ -35,9 +34,8 @@ public class OptionsData
 
     /**
      * Find the {@link OptionTree} in which this option belongs.
-     * 
      * @param option
-     *            an {@link Option}.
+     *        an {@link Option}.
      * @return the OptionTree found or null.
      */
     @CheckForNull
@@ -49,9 +47,8 @@ public class OptionsData
 
     /**
      * Find the {@link OptionTree} in which this option belongs.
-     * 
      * @param option
-     *            an {@link Option}.
+     *        an {@link Option}.
      * @return the OptionTree found or null.
      */
     @CheckForNull
@@ -80,15 +77,11 @@ public class OptionsData
     }
 
     /**
-     * Create an {@link OptionTree} with the root initialized. Add it to the
-     * tree list.
-     * 
+     * Create an {@link OptionTree} with the root initialized. Add it to the tree list.
      * @param option
-     *            An {@link Option} that should belong to that tree. From its
-     *            fullname we will discover the root fullname.
+     *        An {@link Option} that should belong to that tree. From its fullname we will discover the root fullname.
      * @param options
-     *            The list of all {@link Option}, needed to find the real root
-     *            of the option tree based on its fullname.
+     *        The list of all {@link Option}, needed to find the real root of the option tree based on its fullname.
      * @return
      */
     private OptionTree createEmptyTree(Option option, List<Option> options)

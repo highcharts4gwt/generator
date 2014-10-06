@@ -14,7 +14,7 @@ import com.usesoft.highcharts4gwt.generator.highsoft.Product;
 
 public class OnlineGenerator extends BaseGenerator
 {
-    final static Logger logger = LoggerFactory.getLogger(OnlineGenerator.class);
+    private static final Logger logger = LoggerFactory.getLogger(OnlineGenerator.class);
 
     public OnlineGenerator(Product product) throws IOException
     {
@@ -39,7 +39,8 @@ public class OnlineGenerator extends BaseGenerator
         {
             optionsInputStream = new URL(highchartOptionsUrl).openStream();
             optionsAsString = IOUtils.toString(optionsInputStream);
-        } finally
+        }
+        finally
         {
             if (optionsInputStream != null)
                 optionsInputStream.close();

@@ -16,7 +16,7 @@ import com.usesoft.highcharts4gwt.model.array.api.Array;
 
 public class FieldArrayObjectWriter extends FieldWriter implements OutputTypeVisitor<String, Void>
 {
-    final static Logger logger = LoggerFactory.getLogger(FieldArrayObjectWriter.class);
+    private static final Logger logger = LoggerFactory.getLogger(FieldArrayObjectWriter.class);
 
     private final String defaultValue;
     private final Option optionSpec;

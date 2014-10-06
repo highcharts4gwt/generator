@@ -15,14 +15,12 @@ import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 
 /**
- * A tree of options. It contains a root and different maps and lists to be able
- * to generate the classes (from leaves to root of the tree). Leaves are fields.
- * 
+ * A tree of options. It contains a root and different maps and lists to be able to generate the classes (from leaves to root of the tree). Leaves are fields.
  * @author rquillevere
  */
 public class OptionTree
 {
-    final static Logger logger = LoggerFactory.getLogger(OptionTree.class);
+    private static final Logger logger = LoggerFactory.getLogger(OptionTree.class);
 
     public OptionTree(Option root)
     {
@@ -128,7 +126,8 @@ public class OptionTree
             List<Option> list = new ArrayList<Option>();
             list.add(option);
             parentToChildrenRelations.put(parent, list);
-        } else
+        }
+        else
             children.add(option);
     }
 

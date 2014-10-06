@@ -18,7 +18,7 @@ import com.usesoft.highcharts4gwt.generator.graph.Option;
 
 public class FieldWriterVisitor implements FieldTypeVisitor<OutputType, Void>
 {
-    final static Logger logger = LoggerFactory.getLogger(FieldWriterVisitor.class);
+    private static final Logger logger = LoggerFactory.getLogger(FieldWriterVisitor.class);
 
     private final String fieldName;
     private final JCodeModel codeModel;
@@ -44,7 +44,7 @@ public class FieldWriterVisitor implements FieldTypeVisitor<OutputType, Void>
         // TODO Report to HS - Strange cases with numbers ?
         Double defaultValue = null;
         if (optionSpec.getDefaults() != null && !optionSpec.getDefaults().equals("null") && !optionSpec.getDefaults().equals("undefined")
-                && !optionSpec.getDefaults().equals(""))
+                        && !optionSpec.getDefaults().equals(""))
             defaultValue = Double.parseDouble(optionSpec.getDefaults());
         return in.accept(new FieldNumberWriter(codeModel, jClass, className, defaultValue), fieldName);
     }

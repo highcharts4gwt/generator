@@ -10,7 +10,7 @@ import com.usesoft.highcharts4gwt.generator.highsoft.ProductVisitor;
 
 public class HighsoftApiGenerator implements ProductVisitor<Void, Void>
 {
-    final static Logger logger = LoggerFactory.getLogger(HighsoftApiGenerator.class);
+    private static final Logger logger = LoggerFactory.getLogger(HighsoftApiGenerator.class);
 
     @Override
     @CheckForNull
@@ -23,7 +23,8 @@ public class HighsoftApiGenerator implements ProductVisitor<Void, Void>
             generator = new OnlineGenerator(Product.Highcharts);
             // generator = new OfflineGenerator(Product.Highcharts);
             generator.generate();
-        } catch (Exception e)
+        }
+        catch (Exception e)
         {
             throw new RuntimeException("Could not generate sources.", e);
         }

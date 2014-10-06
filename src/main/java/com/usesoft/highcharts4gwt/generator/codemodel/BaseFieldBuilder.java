@@ -10,7 +10,7 @@ import com.usesoft.highcharts4gwt.generator.graph.Option;
 
 public final class BaseFieldBuilder implements FieldBuilder
 {
-    final static Logger logger = LoggerFactory.getLogger(BaseClassBuilder.class);
+    private static final Logger logger = LoggerFactory.getLogger(BaseClassBuilder.class);
 
     private JCodeModel codeModel;
     private JDefinedClass jClass;

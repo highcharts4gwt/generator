@@ -23,7 +23,7 @@ import com.usesoft.highcharts4gwt.generator.graph.OptionsData;
 
 public abstract class BaseClassBuilder implements ClassBuilder
 {
-    final static Logger logger = LoggerFactory.getLogger(BaseClassBuilder.class);
+    private static final Logger logger = LoggerFactory.getLogger(BaseClassBuilder.class);
 
     @CheckForNull
     private JCodeModel codeModel;
@@ -91,6 +91,10 @@ public abstract class BaseClassBuilder implements ClassBuilder
                 logger.error("Missing extendedJClass;" + extendedOption);
                 throw new RuntimeException("Missing extendedJClass;" + extendedOption);
             }
+
+            if (jClass == null)
+                throw new RuntimeException("jClass should not be null");
+
             jClass._extends(extendedJclass);
         }
     }
@@ -103,11 +107,12 @@ public abstract class BaseClassBuilder implements ClassBuilder
 
     private void buildFields()
     {
-        fieldBuilder.setJclass(jClass);
-        fieldBuilder.setCodeModel(codeModel);
-        fieldBuilder.setClassName(getPrefix() + className);
+        initFieldBuilder();
 
         List<Option> existingChildren = getFieldFromExtendedOptionRecursive(extendedOption, optionsData);
+
+        if (tree == null || option == null)
+            throw new RuntimeException("tree/option should not be null");
 
         List<Option> children = tree.getChildren(option);
 
@@ -115,23 +120,34 @@ public abstract class BaseClassBuilder implements ClassBuilder
         {
             for (Option child : children)
             {
-                String optionName = child.getTitle();
-                boolean alreadyInExtended = false;
-                for (Option existingChild : existingChildren)
-                {
-                    if (existingChild.getTitle().equals(optionName))
-                        alreadyInExtended = true;
-                }
-
-                if (!alreadyInExtended)
-                {
-                    if (extendedOption != null)
-                        logger.info("Adding field;" + child + "for class;" + option + ";not present in extended class;" + extendedOption);
-                    fieldBuilder.addField(child, getOutputType());
-                }
-
+                addField(existingChildren, child);
             }
         }
+    }
+
+    private void addField(List<Option> existingChildren, Option child)
+    {
+        String optionName = child.getTitle();
+        boolean alreadyInExtended = false;
+        for (Option existingChild : existingChildren)
+        {
+            if (existingChild.getTitle().equals(optionName))
+                alreadyInExtended = true;
+        }
+
+        if (!alreadyInExtended)
+        {
+            if (extendedOption != null)
+                logger.info("Adding field;" + child + "for class;" + option + ";not present in extended class;" + extendedOption);
+            fieldBuilder.addField(child, getOutputType());
+        }
+    }
+
+    private void initFieldBuilder()
+    {
+        fieldBuilder.setJclass(jClass);
+        fieldBuilder.setCodeModel(codeModel);
+        fieldBuilder.setClassName(getPrefix() + className);
     }
 
     private static List<Option> getFieldFromExtendedOptionRecursive(Option extendedOption, OptionsData optionsData)
