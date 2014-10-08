@@ -10,6 +10,7 @@ import com.usesoft.highcharts4gwt.generator.codemodel.field.FieldArrayObjectWrit
 import com.usesoft.highcharts4gwt.generator.codemodel.field.FieldArrayStringWriter;
 import com.usesoft.highcharts4gwt.generator.codemodel.field.FieldBooleanWriter;
 import com.usesoft.highcharts4gwt.generator.codemodel.field.FieldDataWriter;
+import com.usesoft.highcharts4gwt.generator.codemodel.field.FieldJsonObjectWriter;
 import com.usesoft.highcharts4gwt.generator.codemodel.field.FieldNumberWriter;
 import com.usesoft.highcharts4gwt.generator.codemodel.field.FieldObjectWriter;
 import com.usesoft.highcharts4gwt.generator.codemodel.field.FieldStringWriter;
@@ -101,7 +102,7 @@ public class FieldWriterVisitor implements FieldTypeVisitor<OutputType, Void>
     public Void visitJsonObject(OutputType in)
     {
         // TODO should precise that this is an "object" not a string value
-        return in.accept(new FieldStringWriter(codeModel, jClass, className, optionSpec.getDefaults()), fieldName);
+        return in.accept(new FieldJsonObjectWriter(codeModel, jClass, className, optionSpec.getDefaults()), fieldName);
     }
 
     @Override
