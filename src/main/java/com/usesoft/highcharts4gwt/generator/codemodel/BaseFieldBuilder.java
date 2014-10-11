@@ -100,8 +100,8 @@ public final class BaseFieldBuilder implements FieldBuilder
             return FieldType.String;
         if (returnType.equalsIgnoreCase("Boolean"))
             return FieldType.Boolean;
-        // if (returnType.equalsIgnoreCase("CSSObject"))
-        // return FieldType.CssObject;
+        if (returnType.equalsIgnoreCase("CSSObject"))
+            return FieldType.CssObject;
         return null;
     }
 

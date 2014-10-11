@@ -45,7 +45,7 @@ public class FieldWriterVisitor implements FieldTypeVisitor<OutputType, Void>
         // TODO Report to HS - Strange cases with numbers ?
         Double defaultValue = null;
         if (optionSpec.getDefaults() != null && !optionSpec.getDefaults().equals("null") && !optionSpec.getDefaults().equals("undefined")
-                        && !optionSpec.getDefaults().equals(""))
+                && !optionSpec.getDefaults().equals(""))
             defaultValue = Double.parseDouble(optionSpec.getDefaults());
         return in.accept(new FieldNumberWriter(codeModel, jClass, className, defaultValue), fieldName);
     }
@@ -109,6 +109,6 @@ public class FieldWriterVisitor implements FieldTypeVisitor<OutputType, Void>
     public Void visitCssObject(OutputType in)
     {
         // TODO should precise that this is an "object" not a string value
-        return in.accept(new FieldStringWriter(codeModel, jClass, className, optionSpec.getDefaults()), fieldName);
+        return in.accept(new FieldJsonObjectWriter(codeModel, jClass, className, optionSpec.getDefaults()), fieldName);
     }
 }
