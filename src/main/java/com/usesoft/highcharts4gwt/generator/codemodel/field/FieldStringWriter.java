@@ -38,7 +38,7 @@ public class FieldStringWriter extends FieldWriter implements OutputTypeVisitor<
     @CheckForNull
     public Void visitMock(String fieldName)
     {
-        MockFieldHelper.addGetterSetterDeclaration(fieldName, String.class, getJclass());
+        MockFieldHelper.addGetterSetterDeclaration(fieldName, fieldName, String.class, getJclass());
         return null;
     }
 

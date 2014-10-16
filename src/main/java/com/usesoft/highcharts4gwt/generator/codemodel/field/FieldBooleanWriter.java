@@ -38,7 +38,7 @@ public class FieldBooleanWriter extends FieldWriter implements OutputTypeVisitor
     @CheckForNull
     public Void visitMock(String fieldName)
     {
-        MockFieldHelper.addGetterSetterDeclaration(fieldName, boolean.class, getJclass());
+        MockFieldHelper.addGetterSetterDeclaration(fieldName, fieldName, boolean.class, getJclass());
         return null;
     }
 

@@ -61,7 +61,7 @@ public class FieldArrayObjectWriter extends FieldWriter implements OutputTypeVis
         if (fieldClazz == null)
             return null;
 
-        MockFieldHelper.addGetterSetterDeclaration(fieldName, fieldClazz, getJclass());
+        MockFieldHelper.addGetterSetterDeclaration(fieldName, fieldName, fieldClazz, getJclass());
         return null;
     }
 

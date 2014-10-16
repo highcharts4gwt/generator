@@ -15,11 +15,11 @@ public class InterfaceFieldHelper
         addGetterSetterDeclaration(fieldName, fieldName, type, jDefinedClass);
     }
 
-    public static void addGetterSetterDeclaration(String fieldName, String methodName, Class<?> type, JDefinedClass jDefinedClass)
+    public static void addGetterSetterDeclaration(String fieldName, String paramName, Class<?> type, JDefinedClass jDefinedClass)
     {
-        jDefinedClass.method(JMod.NONE, type, methodName);
+        jDefinedClass.method(JMod.NONE, type, fieldName);
 
-        jDefinedClass.method(JMod.NONE, jDefinedClass, methodName).param(type, fieldName);
+        jDefinedClass.method(JMod.NONE, jDefinedClass, fieldName).param(type, paramName);
     }
 
     public static void addGetterSetterDeclaration(String fieldName, JClass type, JDefinedClass jDefinedClass)
@@ -27,10 +27,10 @@ public class InterfaceFieldHelper
         addGetterSetterDeclaration(fieldName, fieldName, type, jDefinedClass);
     }
 
-    public static void addGetterSetterDeclaration(String fieldName, String methodName, JClass type, JDefinedClass jDefinedClass)
+    public static void addGetterSetterDeclaration(String fieldName, String paramName, JClass type, JDefinedClass jDefinedClass)
     {
-        jDefinedClass.method(JMod.NONE, type, methodName);
+        jDefinedClass.method(JMod.NONE, type, fieldName);
 
-        jDefinedClass.method(JMod.NONE, jDefinedClass, methodName).param(type, fieldName);
+        jDefinedClass.method(JMod.NONE, jDefinedClass, fieldName).param(type, paramName);
     }
 }

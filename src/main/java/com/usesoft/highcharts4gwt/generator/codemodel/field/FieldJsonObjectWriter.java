@@ -21,7 +21,9 @@ public class FieldJsonObjectWriter extends FieldWriter implements OutputTypeVisi
     @CheckForNull
     public Void visitInterface(String fieldName)
     {
-        InterfaceFieldHelper.addGetterSetterDeclaration(fieldName, String.class, getJclass());
+        String paramName = computeParamName(fieldName);
+
+        InterfaceFieldHelper.addGetterSetterDeclaration(fieldName, paramName, String.class, getJclass());
         return null;
     }
 
@@ -29,8 +31,10 @@ public class FieldJsonObjectWriter extends FieldWriter implements OutputTypeVisi
     @CheckForNull
     public Void visitJso(String fieldName)
     {
+        String paramName = computeParamName(fieldName);
+
         JsoFieldHelper.writeGetterNativeCodeStringWithStringify(fieldName, String.class, getJclass(), getCodeModel(), defaultValue);
-        JsoFieldHelper.writeSetterNativeCodeWithParse(fieldName, String.class, getJclass(), getCodeModel());
+        JsoFieldHelper.writeSetterNativeCodeWithParse(fieldName, paramName, String.class, getJclass(), getCodeModel());
         return null;
     }
 
@@ -38,8 +42,15 @@ public class FieldJsonObjectWriter extends FieldWriter implements OutputTypeVisi
     @CheckForNull
     public Void visitMock(String fieldName)
     {
-        MockFieldHelper.addGetterSetterDeclaration(fieldName, String.class, getJclass());
+        String paramName = computeParamName(fieldName);
+
+        MockFieldHelper.addGetterSetterDeclaration(fieldName, paramName, String.class, getJclass());
         return null;
+    }
+
+    private String computeParamName(String fieldName)
+    {
+        return fieldName + "AsJsonString";
     }
 
 }

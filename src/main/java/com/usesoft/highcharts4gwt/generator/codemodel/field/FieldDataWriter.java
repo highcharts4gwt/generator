@@ -40,7 +40,7 @@ public class FieldDataWriter extends FieldWriter implements OutputTypeVisitor<St
     @CheckForNull
     public Void visitMock(String fieldName)
     {
-        MockFieldHelper.addGetterSetterDeclaration(fieldName, ArrayNumber.class, getJclass());
+        MockFieldHelper.addGetterSetterDeclaration(fieldName, fieldName, ArrayNumber.class, getJclass());
         return null;
     }
 

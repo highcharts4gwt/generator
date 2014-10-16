@@ -38,7 +38,7 @@ public class FieldArrayStringWriter extends FieldWriter implements OutputTypeVis
     @CheckForNull
     public Void visitMock(String fieldName)
     {
-        MockFieldHelper.addGetterSetterDeclaration(fieldName, ArrayString.class, getJclass());
+        MockFieldHelper.addGetterSetterDeclaration(fieldName, fieldName, ArrayString.class, getJclass());
         return null;
     }
 
