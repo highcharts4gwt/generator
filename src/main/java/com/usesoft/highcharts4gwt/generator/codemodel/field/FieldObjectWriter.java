@@ -14,15 +14,15 @@ public class FieldObjectWriter extends FieldWriter implements OutputTypeVisitor<
 {
 
     private final String defaultValue;
-    private final Option optionSpec;
+    private final Option option;
     private final JClass interfaceJClass;
 
-    public FieldObjectWriter(JCodeModel codeModel, JDefinedClass jClass, String className, Option optionSpec)
+    public FieldObjectWriter(JCodeModel codeModel, JDefinedClass jClass, String className, Option option)
     {
         super(codeModel, className, jClass);
-        this.optionSpec = optionSpec;
-        this.defaultValue = optionSpec.getDefaults();
-        interfaceJClass = ClassRegistry.INSTANCE.getRegistry().get(new ClassRegistry.RegistryKey(this.optionSpec, OutputType.Interface));
+        this.option = option;
+        this.defaultValue = option.getDefaults();
+        interfaceJClass = ClassRegistry.INSTANCE.getRegistry().get(new ClassRegistry.RegistryKey(this.option, OutputType.Interface));
     }
 
     @Override

@@ -1,10 +1,13 @@
 package com.usesoft.highcharts4gwt.generator.codemodel;
 
+import javax.annotation.CheckForNull;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JDefinedClass;
+import com.usesoft.highcharts4gwt.generator.codemodel.field.FieldArrayJsonObjectWriter;
 import com.usesoft.highcharts4gwt.generator.codemodel.field.FieldArrayNumberWriter;
 import com.usesoft.highcharts4gwt.generator.codemodel.field.FieldArrayObjectWriter;
 import com.usesoft.highcharts4gwt.generator.codemodel.field.FieldArrayStringWriter;
@@ -25,11 +28,11 @@ public class FieldWriterVisitor implements FieldTypeVisitor<OutputType, Void>
     private final JCodeModel codeModel;
     private final JDefinedClass jClass;
     private final String className;
-    private final Option optionSpec;
+    private final Option option;
 
     public FieldWriterVisitor(Option optionSpec, JCodeModel codeModel, JDefinedClass jClass, String className)
     {
-        this.optionSpec = optionSpec;
+        this.option = optionSpec;
         this.fieldName = optionSpec.getTitle();
         this.codeModel = codeModel;
         this.jClass = jClass;
@@ -39,27 +42,46 @@ public class FieldWriterVisitor implements FieldTypeVisitor<OutputType, Void>
     @Override
     public Void visitNumber(OutputType in)
     {
-        // System.out.println("fieldName :" + fieldName);
-        // System.out.println("Number default :" + optionSpec.getDefaults());
+        String defaultValue = null;
+        String fromOption = option.getDefaults();
+        defaultValue = getDefaultValueForNumber(fromOption);
 
-        // TODO Report to HS - Strange cases with numbers ?
-        Double defaultValue = null;
-        if (optionSpec.getDefaults() != null && !optionSpec.getDefaults().equals("null") && !optionSpec.getDefaults().equals("undefined")
-                && !optionSpec.getDefaults().equals(""))
-            defaultValue = Double.parseDouble(optionSpec.getDefaults());
         return in.accept(new FieldNumberWriter(codeModel, jClass, className, defaultValue), fieldName);
+    }
+
+    private String getDefaultValueForNumber(@CheckForNull String fromOption)
+    {
+        // TODO Report to HS - Strange cases with numbers - empty or undefined ?
+        String defaultValue;
+        if (fromOption == null || fromOption.equals("null"))
+        {
+            defaultValue = "null";
+        }
+        else if (fromOption.equals("undefined"))
+        {
+            defaultValue = "undefined";
+        }
+        else if (fromOption.equals(""))
+        {
+            defaultValue = "''";
+        }
+        else
+        {
+            defaultValue = Double.toString(Double.parseDouble(fromOption));
+        }
+        return defaultValue;
     }
 
     @Override
     public Void visitBoolean(OutputType in)
     {
-        return in.accept(new FieldBooleanWriter(codeModel, jClass, className, Boolean.parseBoolean(optionSpec.getDefaults())), fieldName);
+        return in.accept(new FieldBooleanWriter(codeModel, jClass, className, Boolean.parseBoolean(option.getDefaults())), fieldName);
     }
 
     @Override
     public Void visitString(OutputType in)
     {
-        return in.accept(new FieldStringWriter(codeModel, jClass, className, optionSpec.getDefaults()), fieldName);
+        return in.accept(new FieldStringWriter(codeModel, jClass, className, option.getDefaults()), fieldName);
     }
 
     @Override
@@ -71,44 +93,50 @@ public class FieldWriterVisitor implements FieldTypeVisitor<OutputType, Void>
     @Override
     public Void visitArrayString(OutputType in)
     {
-        return in.accept(new FieldArrayStringWriter(codeModel, jClass, className, optionSpec.getDefaults()), fieldName);
+        return in.accept(new FieldArrayStringWriter(codeModel, jClass, className, option.getDefaults()), fieldName);
     }
 
     @Override
     public Void visitArrayNumber(OutputType in)
     {
-        return in.accept(new FieldArrayNumberWriter(codeModel, jClass, className, optionSpec.getDefaults()), fieldName);
+        return in.accept(new FieldArrayNumberWriter(codeModel, jClass, className, option.getDefaults()), fieldName);
     }
 
     @Override
     public Void visitArrayObject(OutputType in)
     {
-        return in.accept(new FieldArrayObjectWriter(codeModel, jClass, className, optionSpec), fieldName);
+        return in.accept(new FieldArrayObjectWriter(codeModel, jClass, className, option), fieldName);
     }
 
     @Override
     public Void visitClass(OutputType in)
     {
-        return in.accept(new FieldObjectWriter(codeModel, jClass, className, optionSpec), fieldName);
+        return in.accept(new FieldObjectWriter(codeModel, jClass, className, option), fieldName);
     }
 
     @Override
     public Void visitData(OutputType in)
     {
-        return in.accept(new FieldDataWriter(codeModel, jClass, className, optionSpec.getDefaults()), fieldName);
+        return in.accept(new FieldDataWriter(codeModel, jClass, className, option.getDefaults()), fieldName);
     }
 
     @Override
     public Void visitJsonObject(OutputType in)
     {
         // TODO should precise that this is an "object" not a string value
-        return in.accept(new FieldJsonObjectWriter(codeModel, jClass, className, optionSpec.getDefaults()), fieldName);
+        return in.accept(new FieldJsonObjectWriter(codeModel, jClass, className, option.getDefaults()), fieldName);
     }
 
     @Override
     public Void visitCssObject(OutputType in)
     {
         // TODO should precise that this is an "object" not a string value
-        return in.accept(new FieldJsonObjectWriter(codeModel, jClass, className, optionSpec.getDefaults()), fieldName);
+        return in.accept(new FieldJsonObjectWriter(codeModel, jClass, className, option.getDefaults()), fieldName);
+    }
+
+    @Override
+    public Void visitArrayJsonObject(OutputType in)
+    {
+        return in.accept(new FieldArrayJsonObjectWriter(codeModel, className, jClass, option), fieldName);
     }
 }

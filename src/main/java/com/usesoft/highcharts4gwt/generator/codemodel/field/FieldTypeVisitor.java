@@ -22,5 +22,7 @@ public interface FieldTypeVisitor<IN, OUT>
 
     OUT visitArrayObject(IN in);
 
+    OUT visitArrayJsonObject(IN in);
+
     OUT visitOther(IN in); // not implemented cases
 }

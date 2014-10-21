@@ -8,9 +8,9 @@ import com.usesoft.highcharts4gwt.generator.codemodel.OutputTypeVisitor;
 
 public class FieldNumberWriter extends FieldWriter implements OutputTypeVisitor<String, Void>
 {
-    private final Double defaultValue;
+    private final String defaultValue;
 
-    public FieldNumberWriter(JCodeModel codeModel, JDefinedClass jClass, String className, Double defaultValue)
+    public FieldNumberWriter(JCodeModel codeModel, JDefinedClass jClass, String className, String defaultValue)
     {
         super(codeModel, className, jClass);
         this.defaultValue = defaultValue;

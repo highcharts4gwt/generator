@@ -49,18 +49,12 @@ public final class BaseFieldBuilder implements FieldBuilder
 
     public static FieldType findFieldType(Option option)
     {
-        FieldType fieldType = findFieldTypeForSimpleFied(option);
+        String returnType = option.getReturnType();
 
-        if (fieldType == null)
-            fieldType = findFieldTypeForArray(option);
-
-        if (fieldType == null)
-        {
-            logger.warn("field type not identified yet;" + option.getReturnType() + ";option;" + option);
-            fieldType = FieldType.Other;
-        }
-
-        return fieldType;
+        if (returnType != null && returnType.startsWith("Array"))
+            return findFieldTypeForArray(option);
+        else
+            return findFieldTypeForNonArray(option);
     }
 
     private static FieldType findFieldTypeForArray(Option option)
@@ -72,24 +66,52 @@ public final class BaseFieldBuilder implements FieldBuilder
             return FieldType.ArrayNumber;
         if (returnType.equals("Array<Object|Array|Number>"))
             return FieldType.Data;
-        // TODO treat category case
-        if (returnType.equals("Array") && option.getFullname().equals("xAxis.categories"))
-            return FieldType.ArrayString;
+        if (returnType.equals("Array"))
+        {
+            if (option.getFullname().equals("xAxis.categories") || option.getFullname().equals("yAxis.categories"))
+                return FieldType.ArrayString;
+            else
+                return FieldType.ArrayNumber;
+        }
         if (returnType.equals("Array<Object>"))
         {
-            // TODO @rqu need to treat case of
-            // drilldown.series / xAxis.plotBands
-            return FieldType.ArrayObject;
+            if (option.getFullname().equals("drilldown.series"))
+            {
+                // TODO treat that pseudo inheritance case
+                logger.warn("drilldown.series not treated yet;");
+                return FieldType.Other;
+            }
+            else if (!option.isParent())
+            {
+                return FieldType.ArrayJsonObject;
+            }
+            else
+            {
+                return FieldType.ArrayObject;
+            }
         }
 
-        return null;
+        logger.warn("field type not identified yet;" + option.getReturnType() + ";option;" + option);
+        return FieldType.Other;
     }
 
-    private static FieldType findFieldTypeForSimpleFied(Option option)
+    private static FieldType findFieldTypeForNonArray(Option option)
     {
         String returnType = option.getReturnType();
         if (returnType == null)
             return FieldType.Object;
+        if (returnType.equals(""))
+        {
+            if (!option.isParent())
+            {
+                logger.warn("Field with empty return type;not treated;option;" + option);
+                return FieldType.DoNotTreat;
+            }
+            else
+            {
+                return FieldType.Object;
+            }
+        }
         if (returnType.equalsIgnoreCase("Object") && !option.isParent())
             return FieldType.JsonObject;
         if (returnType.equalsIgnoreCase("Object"))
@@ -102,7 +124,9 @@ public final class BaseFieldBuilder implements FieldBuilder
             return FieldType.Boolean;
         if (returnType.equalsIgnoreCase("CSSObject"))
             return FieldType.CssObject;
-        return null;
+
+        logger.warn("field type not identified yet;" + option.getReturnType() + ";option;" + option);
+        return FieldType.Other;
     }
 
     @Override

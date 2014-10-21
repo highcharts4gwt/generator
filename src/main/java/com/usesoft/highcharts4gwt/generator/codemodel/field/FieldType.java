@@ -176,6 +176,34 @@ public enum FieldType
         {
             return false;
         }
+    },
+    DoNotTreat
+    {
+        @Override
+        public <IN, OUT> OUT accept(FieldTypeVisitor<IN, OUT> visitor, IN in)
+        {
+            return null;
+        }
+
+        @Override
+        public boolean isArray()
+        {
+            return false;
+        }
+    },
+    ArrayJsonObject
+    {
+        @Override
+        public <IN, OUT> OUT accept(FieldTypeVisitor<IN, OUT> visitor, IN in)
+        {
+            return visitor.visitArrayJsonObject(in);
+        }
+
+        @Override
+        public boolean isArray()
+        {
+            return true;
+        }
     };
 
     @CheckForNull

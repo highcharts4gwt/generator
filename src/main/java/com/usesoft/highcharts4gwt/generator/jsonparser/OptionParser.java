@@ -49,12 +49,12 @@ public class OptionParser
         List<String> excluding = getFieldAsListString(jsonOption, FIELD_EXCLUDING);
 
         return new Option(fullName, name, title).setValues(values).setDefaults(getFieldAsString(jsonOption, FIELD_DEFAULTS))
-                .setExtending(getFieldAsString(jsonOption, FIELD_EXTENDING)).setExcluding(excluding)
-                .setIsParent(Boolean.parseBoolean(getFieldAsString(jsonOption, FIELD_ISPARENT))).setSince(getFieldAsString(jsonOption, FIELD_SINCE))
-                .setDemo(getFieldAsString(jsonOption, FIELD_DEMO)).setSeeAlso(getFieldAsString(jsonOption, FIELD_SEEALSO))
-                .setParent(getFieldAsString(jsonOption, FIELD_PARENT)).setReturnType(getFieldAsString(jsonOption, FIELD_RETURNTYPE))
-                .setDescription(getFieldAsString(jsonOption, FIELD_DESCRIPTION))
-                .setDeprecated(Boolean.parseBoolean(getFieldAsString(jsonOption, FIELD_DEPRECATED)));
+                        .setExtending(getFieldAsString(jsonOption, FIELD_EXTENDING)).setExcluding(excluding)
+                        .setIsParent(Boolean.parseBoolean(getFieldAsString(jsonOption, FIELD_ISPARENT))).setSince(getFieldAsString(jsonOption, FIELD_SINCE))
+                        .setDemo(getFieldAsString(jsonOption, FIELD_DEMO)).setSeeAlso(getFieldAsString(jsonOption, FIELD_SEEALSO))
+                        .setParent(getFieldAsString(jsonOption, FIELD_PARENT)).setReturnType(getFieldAsString(jsonOption, FIELD_RETURNTYPE))
+                        .setDescription(getFieldAsString(jsonOption, FIELD_DESCRIPTION))
+                        .setDeprecated(Boolean.parseBoolean(getFieldAsString(jsonOption, FIELD_DEPRECATED)));
     }
 
     @CheckForNull
@@ -69,7 +69,7 @@ public class OptionParser
 
     private static String getNonNullFieldAsString(JSONObject jsonOption, String fieldName)
     {
-        String value = jsonOption.get(fieldName).toString();
+        String value = jsonOption.get(fieldName).toString().trim();
         if (value.equals(NULL))
             throw new RuntimeException(fieldName + SHOULD_NOT_BE_NULL);
         return value;
@@ -77,7 +77,7 @@ public class OptionParser
 
     private static List<String> getFieldAsListString(JSONObject jsonOption, String fieldName)
     {
-        String valuesAsString = jsonOption.get(fieldName).toString();
+        String valuesAsString = jsonOption.get(fieldName).toString().trim();
 
         if (Strings.isNullOrEmpty(valuesAsString) || valuesAsString.equals(NULL))
             return new ArrayList<String>();
