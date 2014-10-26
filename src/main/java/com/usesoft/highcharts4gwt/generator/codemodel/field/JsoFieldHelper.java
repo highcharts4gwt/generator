@@ -1,5 +1,7 @@
 package com.usesoft.highcharts4gwt.generator.codemodel.field;
 
+import javax.annotation.CheckForNull;
+
 import com.google.common.base.Strings;
 import com.sun.codemodel.JClass;
 import com.sun.codemodel.JCodeModel;
@@ -22,7 +24,7 @@ public class JsoFieldHelper
     private static String getJsniGetterCodeWithStringify(String fieldName, String jsniDefaultValue)
     {
         return "/*-{\n" + "        this[\"" + fieldName + "\"] = (this[\"" + fieldName + "\"] || " + jsniDefaultValue + ");\n"
-                        + "        return JSON.stringify(this[\"" + fieldName + "\"]);\n" + "    }-*/";
+                + "        return JSON.stringify(this[\"" + fieldName + "\"]);\n" + "    }-*/";
     }
 
     // Setter
@@ -34,6 +36,26 @@ public class JsoFieldHelper
     private static String getJsniSetterCodeWithParse(String fieldName, String paramName)
     {
         return "/*-{\n" + "        this[\"" + fieldName + "\"] = JSON.parse(" + paramName + ");\n" + "        return this;\n" + "    }-*/";
+    }
+
+    private static String getJsniDefaultValueForNumber(@CheckForNull String defaultValueFromOption)
+    {
+        // TODO Report to HS - Strange cases with numbers - empty or undefined ?
+        String out;
+        if (defaultValueFromOption == null || defaultValueFromOption.equals("null"))
+        {
+            out = "null";
+        } else if (defaultValueFromOption.equals("undefined"))
+        {
+            out = "undefined";
+        } else if (defaultValueFromOption.equals(""))
+        {
+            out = "''";
+        } else
+        {
+            out = Double.toString(Double.parseDouble(defaultValueFromOption));
+        }
+        return out;
     }
 
     private static String getJsniDefaultValueForJsonObject(String defaultValue)
@@ -85,11 +107,8 @@ public class JsoFieldHelper
         writeGetterNativeCode(fieldName, type, jDefinedClass, jCodeModel, getterCode);
     }
 
-    public static void writeGetterNativeCodeStringWithStringify(String fieldName,
-                    Class<?> type,
-                    JDefinedClass jDefinedClass,
-                    JCodeModel jCodeModel,
-                    String defaultValue)
+    public static void writeGetterNativeCodeStringWithStringify(String fieldName, Class<?> type, JDefinedClass jDefinedClass, JCodeModel jCodeModel,
+            String defaultValue)
     {
         String getterCode = getJsniGetterCodeWithStringify(fieldName, getJsniDefaultValueForJsonObject(defaultValue));
         writeGetterNativeCode(fieldName, type, jDefinedClass, jCodeModel, getterCode);
@@ -103,15 +122,11 @@ public class JsoFieldHelper
 
     public static void writeGetterNativeCodeNumber(String fieldName, Class<?> type, JDefinedClass jDefinedClass, JCodeModel jCodeModel, String defaultValue)
     {
-        String getterCode = getJsniGetterCode(fieldName, defaultValue);
+        String getterCode = getJsniGetterCode(fieldName, getJsniDefaultValueForNumber(defaultValue));
         writeGetterNativeCode(fieldName, type, jDefinedClass, jCodeModel, getterCode);
     }
 
-    public static void writeGetterNativeCodeArrayString(String fieldName,
-                    Class<?> type,
-                    JDefinedClass jDefinedClass,
-                    JCodeModel jCodeModel,
-                    String defaultValue)
+    public static void writeGetterNativeCodeArrayString(String fieldName, Class<?> type, JDefinedClass jDefinedClass, JCodeModel jCodeModel, String defaultValue)
     {
         String getterCode = getJsniGetterCode(fieldName, getJsniDefaultValueForArray(defaultValue));
         writeGetterNativeCode(fieldName, type, jDefinedClass, jCodeModel, getterCode);
@@ -135,11 +150,8 @@ public class JsoFieldHelper
         writeGetterNativeCode(fieldName, type, jDefinedClass, jCodeModel, getterCode);
     }
 
-    public static void writeGetterNativeCodeArrayJsonObject(String fieldName,
-                    Class<?> type,
-                    JDefinedClass jDefinedClass,
-                    JCodeModel jCodeModel,
-                    String defaultValue)
+    public static void writeGetterNativeCodeArrayJsonObject(String fieldName, Class<?> type, JDefinedClass jDefinedClass, JCodeModel jCodeModel,
+            String defaultValue)
     {
         String getterCode = getJsniGetterCodeWithStringify(fieldName, getJsniDefaultValueForArray(defaultValue));
         writeGetterNativeCode(fieldName, type, jDefinedClass, jCodeModel, getterCode);

@@ -1,7 +1,5 @@
 package com.usesoft.highcharts4gwt.generator.codemodel;
 
-import javax.annotation.CheckForNull;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -42,34 +40,9 @@ public class FieldWriterVisitor implements FieldTypeVisitor<OutputType, Void>
     @Override
     public Void visitNumber(OutputType in)
     {
-        String defaultValue = null;
-        String fromOption = option.getDefaults();
-        defaultValue = getDefaultValueForNumber(fromOption);
+        String defaultValue = option.getDefaults();
 
         return in.accept(new FieldNumberWriter(codeModel, jClass, className, defaultValue), fieldName);
-    }
-
-    private String getDefaultValueForNumber(@CheckForNull String fromOption)
-    {
-        // TODO Report to HS - Strange cases with numbers - empty or undefined ?
-        String defaultValue;
-        if (fromOption == null || fromOption.equals("null"))
-        {
-            defaultValue = "null";
-        }
-        else if (fromOption.equals("undefined"))
-        {
-            defaultValue = "undefined";
-        }
-        else if (fromOption.equals(""))
-        {
-            defaultValue = "''";
-        }
-        else
-        {
-            defaultValue = Double.toString(Double.parseDouble(fromOption));
-        }
-        return defaultValue;
     }
 
     @Override
