@@ -24,7 +24,7 @@ public class JsoFieldHelper
     private static String getJsniGetterCodeWithStringify(String fieldName, String jsniDefaultValue)
     {
         return "/*-{\n" + "        this[\"" + fieldName + "\"] = (this[\"" + fieldName + "\"] || " + jsniDefaultValue + ");\n"
-                + "        return JSON.stringify(this[\"" + fieldName + "\"]);\n" + "    }-*/";
+                        + "        return JSON.stringify(this[\"" + fieldName + "\"]);\n" + "    }-*/";
     }
 
     // Setter
@@ -45,13 +45,16 @@ public class JsoFieldHelper
         if (defaultValueFromOption == null || defaultValueFromOption.equals("null"))
         {
             out = "null";
-        } else if (defaultValueFromOption.equals("undefined"))
+        }
+        else if (defaultValueFromOption.equals("undefined"))
         {
             out = "undefined";
-        } else if (defaultValueFromOption.equals(""))
+        }
+        else if (defaultValueFromOption.equals(""))
         {
             out = "''";
-        } else
+        }
+        else
         {
             out = Double.toString(Double.parseDouble(defaultValueFromOption));
         }
@@ -107,8 +110,11 @@ public class JsoFieldHelper
         writeGetterNativeCode(fieldName, type, jDefinedClass, jCodeModel, getterCode);
     }
 
-    public static void writeGetterNativeCodeStringWithStringify(String fieldName, Class<?> type, JDefinedClass jDefinedClass, JCodeModel jCodeModel,
-            String defaultValue)
+    public static void writeGetterNativeCodeStringWithStringify(String fieldName,
+                    Class<?> type,
+                    JDefinedClass jDefinedClass,
+                    JCodeModel jCodeModel,
+                    String defaultValue)
     {
         String getterCode = getJsniGetterCodeWithStringify(fieldName, getJsniDefaultValueForJsonObject(defaultValue));
         writeGetterNativeCode(fieldName, type, jDefinedClass, jCodeModel, getterCode);
@@ -126,7 +132,11 @@ public class JsoFieldHelper
         writeGetterNativeCode(fieldName, type, jDefinedClass, jCodeModel, getterCode);
     }
 
-    public static void writeGetterNativeCodeArrayString(String fieldName, Class<?> type, JDefinedClass jDefinedClass, JCodeModel jCodeModel, String defaultValue)
+    public static void writeGetterNativeCodeArrayString(String fieldName,
+                    Class<?> type,
+                    JDefinedClass jDefinedClass,
+                    JCodeModel jCodeModel,
+                    String defaultValue)
     {
         String getterCode = getJsniGetterCode(fieldName, getJsniDefaultValueForArray(defaultValue));
         writeGetterNativeCode(fieldName, type, jDefinedClass, jCodeModel, getterCode);
@@ -150,8 +160,11 @@ public class JsoFieldHelper
         writeGetterNativeCode(fieldName, type, jDefinedClass, jCodeModel, getterCode);
     }
 
-    public static void writeGetterNativeCodeArrayJsonObject(String fieldName, Class<?> type, JDefinedClass jDefinedClass, JCodeModel jCodeModel,
-            String defaultValue)
+    public static void writeGetterNativeCodeArrayJsonObject(String fieldName,
+                    Class<?> type,
+                    JDefinedClass jDefinedClass,
+                    JCodeModel jCodeModel,
+                    String defaultValue)
     {
         String getterCode = getJsniGetterCodeWithStringify(fieldName, getJsniDefaultValueForArray(defaultValue));
         writeGetterNativeCode(fieldName, type, jDefinedClass, jCodeModel, getterCode);

@@ -46,10 +46,14 @@ public final class BaseFieldBuilder implements FieldBuilder
     {
 
         List<FieldType> types = FieldTypeHelper.findTypes(option);
+        boolean pipe = false;
+        if (types.size() > 1)
+            pipe = true;
 
         for (FieldType fieldType : types)
         {
-            fieldType.accept(new FieldWriterVisitor(option, codeModel, jClass, className), outputType);
+
+            fieldType.accept(new FieldWriterVisitor(option, codeModel, jClass, className, pipe), outputType);
         }
     }
 

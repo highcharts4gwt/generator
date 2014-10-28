@@ -21,9 +21,9 @@ public class FieldArrayObjectWriter extends FieldWriter implements OutputTypeVis
     private final String defaultValue;
     private final Option optionSpec;
 
-    public FieldArrayObjectWriter(JCodeModel codeModel, JDefinedClass jClass, String className, Option optionSpec)
+    public FieldArrayObjectWriter(JCodeModel codeModel, JDefinedClass jClass, String className, Option optionSpec, boolean pipe)
     {
-        super(codeModel, className, jClass);
+        super(codeModel, className, jClass, pipe);
         this.optionSpec = optionSpec;
         this.defaultValue = optionSpec.getDefaults();
     }
@@ -61,7 +61,7 @@ public class FieldArrayObjectWriter extends FieldWriter implements OutputTypeVis
         if (fieldClazz == null)
             return null;
 
-        MockFieldHelper.addGetterSetterDeclaration(fieldName, fieldName, fieldClazz, getJclass());
+        MockFieldHelper.addGetterSetterDeclaration(fieldName, computeFieldName(fieldName), fieldName, fieldClazz, getJclass());
         return null;
     }
 
@@ -81,4 +81,8 @@ public class FieldArrayObjectWriter extends FieldWriter implements OutputTypeVis
         return fieldClazz;
     }
 
+    private String computeFieldName(String fieldName)
+    {
+        return fieldName + "AsArrayObject";
+    }
 }

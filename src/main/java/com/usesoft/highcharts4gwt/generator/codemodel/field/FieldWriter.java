@@ -5,11 +5,12 @@ import com.sun.codemodel.JDefinedClass;
 
 public abstract class FieldWriter
 {
-    public FieldWriter(JCodeModel codeModel, String className, JDefinedClass jClass)
+    public FieldWriter(JCodeModel codeModel, String className, JDefinedClass jClass, boolean pipe)
     {
         this.codeModel = codeModel;
         this.className = className;
         this.jClass = jClass;
+        this.pipe = pipe;
     }
 
     protected JCodeModel getCodeModel()
@@ -27,6 +28,12 @@ public abstract class FieldWriter
         return jClass;
     }
 
+    public boolean hasPipe()
+    {
+        return pipe;
+    }
+
+    private final boolean pipe;
     private final JCodeModel codeModel;
     private final JDefinedClass jClass;
     private final String className;

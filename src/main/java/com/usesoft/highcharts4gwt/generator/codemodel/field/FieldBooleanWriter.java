@@ -11,9 +11,9 @@ public class FieldBooleanWriter extends FieldWriter implements OutputTypeVisitor
 
     private final boolean defaultValue;
 
-    public FieldBooleanWriter(JCodeModel codeModel, JDefinedClass jClass, String className, boolean defaultValue)
+    public FieldBooleanWriter(JCodeModel codeModel, JDefinedClass jClass, String className, boolean defaultValue, boolean pipe)
     {
-        super(codeModel, className, jClass);
+        super(codeModel, className, jClass, pipe);
         this.defaultValue = defaultValue;
     }
 
@@ -21,7 +21,7 @@ public class FieldBooleanWriter extends FieldWriter implements OutputTypeVisitor
     @CheckForNull
     public Void visitInterface(String fieldName)
     {
-        InterfaceFieldHelper.addGetterSetterDeclaration(fieldName, boolean.class, getJclass());
+        InterfaceFieldHelper.addGetterSetterDeclaration(fieldName, fieldName, boolean.class, getJclass());
         return null;
     }
 
@@ -38,8 +38,13 @@ public class FieldBooleanWriter extends FieldWriter implements OutputTypeVisitor
     @CheckForNull
     public Void visitMock(String fieldName)
     {
-        MockFieldHelper.addGetterSetterDeclaration(fieldName, fieldName, boolean.class, getJclass());
+        MockFieldHelper.addGetterSetterDeclaration(fieldName, computeFieldName(fieldName), fieldName, boolean.class, getJclass());
         return null;
+    }
+
+    private String computeFieldName(String fieldName)
+    {
+        return fieldName + "AsBoolean";
     }
 
 }

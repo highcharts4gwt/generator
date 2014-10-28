@@ -11,9 +11,9 @@ public class FieldJsonObjectWriter extends FieldWriter implements OutputTypeVisi
 
     private final String defaultValue;
 
-    public FieldJsonObjectWriter(JCodeModel codeModel, JDefinedClass jClass, String className, String defaultValue)
+    public FieldJsonObjectWriter(JCodeModel codeModel, JDefinedClass jClass, String className, String defaultValue, boolean pipe)
     {
-        super(codeModel, className, jClass);
+        super(codeModel, className, jClass, pipe);
         this.defaultValue = defaultValue;
     }
 
@@ -23,7 +23,7 @@ public class FieldJsonObjectWriter extends FieldWriter implements OutputTypeVisi
     {
         String paramName = computeParamName(fieldName);
 
-        InterfaceFieldHelper.addGetterSetterDeclaration(fieldName, paramName, String.class, getJclass());
+        InterfaceFieldHelper.addGetterSetterDeclaration(fieldName, paramName, fieldName, fieldName, String.class, getJclass());
         return null;
     }
 
@@ -44,7 +44,7 @@ public class FieldJsonObjectWriter extends FieldWriter implements OutputTypeVisi
     {
         String paramName = computeParamName(fieldName);
 
-        MockFieldHelper.addGetterSetterDeclaration(fieldName, paramName, String.class, getJclass());
+        MockFieldHelper.addGetterSetterDeclaration(fieldName, paramName, paramName, String.class, getJclass());
         return null;
     }
 

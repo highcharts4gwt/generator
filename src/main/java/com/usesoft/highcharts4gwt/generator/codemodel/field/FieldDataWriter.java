@@ -12,9 +12,9 @@ public class FieldDataWriter extends FieldWriter implements OutputTypeVisitor<St
 
     private final String defaultValue;
 
-    public FieldDataWriter(JCodeModel codeModel, JDefinedClass jClass, String className, String defaultValue)
+    public FieldDataWriter(JCodeModel codeModel, JDefinedClass jClass, String className, String defaultValue, boolean pipe)
     {
-        super(codeModel, className, jClass);
+        super(codeModel, className, jClass, pipe);
         this.defaultValue = defaultValue;
     }
 
@@ -23,7 +23,7 @@ public class FieldDataWriter extends FieldWriter implements OutputTypeVisitor<St
     public Void visitInterface(String fieldName)
     {
 
-        InterfaceFieldHelper.addGetterSetterDeclaration(fieldName, ArrayNumber.class, getJclass());
+        InterfaceFieldHelper.addGetterSetterDeclaration(fieldName, fieldName, ArrayNumber.class, getJclass());
         return null;
     }
 
@@ -40,7 +40,7 @@ public class FieldDataWriter extends FieldWriter implements OutputTypeVisitor<St
     @CheckForNull
     public Void visitMock(String fieldName)
     {
-        MockFieldHelper.addGetterSetterDeclaration(fieldName, fieldName, ArrayNumber.class, getJclass());
+        MockFieldHelper.addGetterSetterDeclaration(fieldName, fieldName, fieldName, ArrayNumber.class, getJclass());
         return null;
     }
 

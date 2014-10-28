@@ -60,7 +60,8 @@ public class FieldTypeHelper
         if (returnType.equals("Array<Object|Array|Number>"))
         {
             out.add(FieldType.Data);
-        } else
+        }
+        else
         {
             logger.warn("field type array with pipe not supported yet;" + option.getReturnType() + ";option;" + option);
             out.add(FieldType.Other);
@@ -82,21 +83,25 @@ public class FieldTypeHelper
                 out.add(FieldType.ArrayString);
             else
                 out.add(FieldType.ArrayNumber);
-        } else if (returnType.equals("Array<Object>"))
+        }
+        else if (returnType.equals("Array<Object>"))
         {
             if (option.getFullname().equals("drilldown.series"))
             {
                 // TODO treat that pseudo inheritance case
                 logger.warn("drilldown.series not treated yet;");
                 out.add(FieldType.Other);
-            } else if (!option.isParent())
+            }
+            else if (!option.isParent())
             {
                 out.add(FieldType.ArrayJsonObject);
-            } else
+            }
+            else
             {
                 out.add(FieldType.ArrayObject);
             }
-        } else
+        }
+        else
         {
             logger.warn("field type not supported yet;" + option.getReturnType() + ";option;" + option);
             out.add(FieldType.Other);
@@ -117,11 +122,13 @@ public class FieldTypeHelper
             {
                 logger.warn("Field with empty return type;not treated;option;" + option);
                 out.add(FieldType.DoNotTreat);
-            } else
+            }
+            else
             {
                 out.add(FieldType.Object);
             }
-        } else if (returnType.equalsIgnoreCase("Object") && !option.isParent())
+        }
+        else if (returnType.equalsIgnoreCase("Object") && !option.isParent())
             out.add(FieldType.JsonObject);
         else if (returnType.equalsIgnoreCase("Object"))
             out.add(FieldType.Object);
@@ -133,12 +140,13 @@ public class FieldTypeHelper
             out.add(FieldType.Boolean);
         else if (returnType.equalsIgnoreCase("CSSObject"))
             out.add(FieldType.CssObject);
-        else if (returnType.equalsIgnoreCase(ARRAY)){
-        	//TODO ask highcharts to improve doc for those
-        	if (option.getFullname().equals("xAxis.categories") || option.getFullname().equals("yAxis.categories"))
-        		out.add(FieldType.ArrayString);
+        else if (returnType.equalsIgnoreCase(ARRAY))
+        {
+            // TODO ask highcharts to improve doc for those
+            if (option.getFullname().equals("xAxis.categories") || option.getFullname().equals("yAxis.categories"))
+                out.add(FieldType.ArrayString);
             else
-            	out.add(FieldType.ArrayNumber);
+                out.add(FieldType.ArrayNumber);
         }
         else
         {
@@ -157,29 +165,31 @@ public class FieldTypeHelper
         for (int i = 1; i <= matcher.groupCount(); i++)
         {
             String type = matcher.group(i);
-            // if (type.equalsIgnoreCase(OBJECT))
-            // out.add(FieldType.JsonObject);
-            // else if (type.equalsIgnoreCase(NUMBER))
-            // out.add(FieldType.Number);
-            // else if (type.equalsIgnoreCase(STRING))
-            // out.add(FieldType.String);
-            // else if (type.equalsIgnoreCase(BOOLEAN))
-            // out.add(FieldType.Boolean);
-            // else if (type.equalsIgnoreCase(CSSObject))
-            // out.add(FieldType.CssObject);
-            // else if (type.equalsIgnoreCase(ARRAY))
-
-            // logger.warn("field type not supported with simple pipe;" +
-            // returnType + ";option;" + option);
+            if (type.equalsIgnoreCase(OBJECT))
+                out.add(FieldType.JsonObject);
+            else if (type.equalsIgnoreCase(NUMBER))
+                out.add(FieldType.Number);
+            else if (type.equalsIgnoreCase(STRING))
+                out.add(FieldType.String);
+            else if (type.equalsIgnoreCase(BOOLEAN))
+                out.add(FieldType.Boolean);
+            else if (type.equalsIgnoreCase(CSSObject))
+                out.add(FieldType.CssObject);
+            else if (type.equalsIgnoreCase(ARRAY))
+                logger.warn("field type not supported with simple pipe;" + returnType + ";option;" + option);
+            else
+            {
+                logger.warn("field type not supported with simple pipe;" + returnType + ";option;" + option);
+            }
 
             logger.info("field possible type;" + type + ";option;" + option);
         }
 
-        if (out.size() == 0)
-        {
-            logger.warn("field type not supported with pipe;" + returnType + ";option;" + option);
-            out.add(FieldType.Other);
-        }
+        // if (out.size() == 0)
+        // {
+        // logger.warn("field type not supported with pipe;" + returnType + ";option;" + option);
+        // out.add(FieldType.Other);
+        // }
 
         return out;
     }

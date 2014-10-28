@@ -10,9 +10,9 @@ public class FieldNumberWriter extends FieldWriter implements OutputTypeVisitor<
 {
     private final String defaultValue;
 
-    public FieldNumberWriter(JCodeModel codeModel, JDefinedClass jClass, String className, String defaultValue)
+    public FieldNumberWriter(JCodeModel codeModel, JDefinedClass jClass, String className, String defaultValue, boolean pipe)
     {
-        super(codeModel, className, jClass);
+        super(codeModel, className, jClass, pipe);
         this.defaultValue = defaultValue;
     }
 
@@ -20,6 +20,9 @@ public class FieldNumberWriter extends FieldWriter implements OutputTypeVisitor<
     @CheckForNull
     public Void visitInterface(String fieldName)
     {
+       blabla do the same for all
+        if (hasPipe())
+            InterfaceFieldHelper.addGetterSetterDeclaration(fieldName, computeFieldName(fieldName), Number.class, getJclass());
         InterfaceFieldHelper.addGetterSetterDeclaration(fieldName, Number.class, getJclass());
         return null;
     }
@@ -37,8 +40,13 @@ public class FieldNumberWriter extends FieldWriter implements OutputTypeVisitor<
     @CheckForNull
     public Void visitMock(String fieldName)
     {
-        MockFieldHelper.addGetterSetterDeclaration(fieldName, fieldName, Number.class, getJclass());
+        MockFieldHelper.addGetterSetterDeclaration(fieldName, computeFieldName(fieldName), fieldName, Number.class, getJclass());
         return null;
+    }
+
+    private String computeFieldName(String fieldName)
+    {
+        return fieldName + "AsNumber";
     }
 
 }

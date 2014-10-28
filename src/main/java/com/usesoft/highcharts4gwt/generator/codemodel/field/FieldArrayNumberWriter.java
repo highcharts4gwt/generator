@@ -11,9 +11,9 @@ public class FieldArrayNumberWriter extends FieldWriter implements OutputTypeVis
 {
     private final String defaultValue;
 
-    public FieldArrayNumberWriter(JCodeModel codeModel, JDefinedClass jClass, String className, String defaultValue)
+    public FieldArrayNumberWriter(JCodeModel codeModel, JDefinedClass jClass, String className, String defaultValue, boolean pipe)
     {
-        super(codeModel, className, jClass);
+        super(codeModel, className, jClass, pipe);
         this.defaultValue = defaultValue;
     }
 
@@ -21,7 +21,7 @@ public class FieldArrayNumberWriter extends FieldWriter implements OutputTypeVis
     @CheckForNull
     public Void visitInterface(String fieldName)
     {
-        InterfaceFieldHelper.addGetterSetterDeclaration(fieldName, ArrayNumber.class, getJclass());
+        InterfaceFieldHelper.addGetterSetterDeclaration(fieldName, fieldName, ArrayNumber.class, getJclass());
         return null;
     }
 
@@ -39,8 +39,13 @@ public class FieldArrayNumberWriter extends FieldWriter implements OutputTypeVis
     @CheckForNull
     public Void visitMock(String fieldName)
     {
-        MockFieldHelper.addGetterSetterDeclaration(fieldName, fieldName, ArrayNumber.class, getJclass());
+        MockFieldHelper.addGetterSetterDeclaration(fieldName, computeFieldName(fieldName), fieldName, ArrayNumber.class, getJclass());
         return null;
+    }
+
+    private String computeFieldName(String fieldName)
+    {
+        return fieldName + "AsArrayNumber";
     }
 
 }

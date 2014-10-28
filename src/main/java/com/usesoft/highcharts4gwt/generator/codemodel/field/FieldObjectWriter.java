@@ -17,9 +17,9 @@ public class FieldObjectWriter extends FieldWriter implements OutputTypeVisitor<
     private final Option option;
     private final JClass interfaceJClass;
 
-    public FieldObjectWriter(JCodeModel codeModel, JDefinedClass jClass, String className, Option option)
+    public FieldObjectWriter(JCodeModel codeModel, JDefinedClass jClass, String className, Option option, boolean pipe)
     {
-        super(codeModel, className, jClass);
+        super(codeModel, className, jClass, pipe);
         this.option = option;
         this.defaultValue = option.getDefaults();
         interfaceJClass = ClassRegistry.INSTANCE.getRegistry().get(new ClassRegistry.RegistryKey(this.option, OutputType.Interface));
@@ -47,8 +47,12 @@ public class FieldObjectWriter extends FieldWriter implements OutputTypeVisitor<
     @CheckForNull
     public Void visitMock(String fieldName)
     {
-        MockFieldHelper.addGetterSetterDeclaration(fieldName, fieldName, interfaceJClass, getJclass());
+        MockFieldHelper.addGetterSetterDeclaration(fieldName, computeFieldName(fieldName), fieldName, interfaceJClass, getJclass());
         return null;
     }
 
+    private String computeFieldName(String fieldName)
+    {
+        return fieldName + "AsObject";
+    }
 }

@@ -14,9 +14,9 @@ public class FieldArrayJsonObjectWriter extends FieldWriter implements OutputTyp
     private final Option optionSpec;
     private final String defaultValue;
 
-    public FieldArrayJsonObjectWriter(JCodeModel codeModel, String className, JDefinedClass jClass, Option optionSpec)
+    public FieldArrayJsonObjectWriter(JCodeModel codeModel, String className, JDefinedClass jClass, Option optionSpec, boolean pipe)
     {
-        super(codeModel, className, jClass);
+        super(codeModel, className, jClass, pipe);
         this.optionSpec = optionSpec;
         this.defaultValue = optionSpec.getDefaults();
     }
@@ -26,7 +26,7 @@ public class FieldArrayJsonObjectWriter extends FieldWriter implements OutputTyp
     {
         String paramName = computeParamName(fieldName);
 
-        InterfaceFieldHelper.addGetterSetterDeclaration(fieldName, paramName, String.class, getJclass());
+        InterfaceFieldHelper.addGetterSetterDeclaration(fieldName, paramName, fieldName, fieldName, String.class, getJclass());
         return null;
     }
 
@@ -45,7 +45,7 @@ public class FieldArrayJsonObjectWriter extends FieldWriter implements OutputTyp
     {
         String paramName = computeParamName(fieldName);
 
-        MockFieldHelper.addGetterSetterDeclaration(fieldName, paramName, String.class, getJclass());
+        MockFieldHelper.addGetterSetterDeclaration(fieldName, paramName, paramName, String.class, getJclass());
         return null;
     }
 
