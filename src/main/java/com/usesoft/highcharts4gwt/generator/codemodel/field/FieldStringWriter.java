@@ -6,28 +6,28 @@ import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JDefinedClass;
 import com.usesoft.highcharts4gwt.generator.codemodel.OutputTypeVisitor;
 
-public class FieldStringWriter extends FieldWriter implements OutputTypeVisitor<String, Void>
+public class FieldStringWriter extends FieldWriter implements OutputTypeVisitor<Void, Void>
 {
 
     private final String defaultValue;
 
-    public FieldStringWriter(JCodeModel codeModel, JDefinedClass jClass, String className, String defaultValue, boolean pipe)
+    public FieldStringWriter(JCodeModel codeModel, JDefinedClass jClass, String className, String defaultValue, boolean pipe, String fieldName)
     {
-        super(codeModel, className, jClass, pipe);
+        super(codeModel, className, jClass, pipe, fieldName);
         this.defaultValue = defaultValue;
     }
 
     @Override
     @CheckForNull
-    public Void visitInterface(String fieldName)
+    public Void visitInterface(Void in)
     {
-        InterfaceFieldHelper.addGetterSetterDeclaration(fieldName, fieldName, String.class, getJclass());
+        InterfaceFieldHelper.addGetterSetterDeclaration(getNames(), String.class, getJclass());
         return null;
     }
 
     @Override
     @CheckForNull
-    public Void visitJso(String fieldName)
+    public Void visitJso(Void in)
     {
         JsoFieldHelper.writeGetterNativeCodeString(fieldName, String.class, getJclass(), getCodeModel(), defaultValue);
         JsoFieldHelper.writeSetterNativeCode(fieldName, String.class, getJclass(), getCodeModel());
@@ -36,7 +36,7 @@ public class FieldStringWriter extends FieldWriter implements OutputTypeVisitor<
 
     @Override
     @CheckForNull
-    public Void visitMock(String fieldName)
+    public Void visitMock(Void in)
     {
         MockFieldHelper.addGetterSetterDeclaration(fieldName, computeFieldName(fieldName), fieldName, String.class, getJclass());
         return null;
@@ -45,6 +45,12 @@ public class FieldStringWriter extends FieldWriter implements OutputTypeVisitor<
     private String computeFieldName(String fieldName)
     {
         return fieldName + "AsString";
+    }
+
+    @Override
+    protected String getNameExtension()
+    {
+        return "AsString";
     }
 
 }

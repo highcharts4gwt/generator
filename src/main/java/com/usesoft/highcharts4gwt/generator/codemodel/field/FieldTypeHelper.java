@@ -165,31 +165,31 @@ public class FieldTypeHelper
         for (int i = 1; i <= matcher.groupCount(); i++)
         {
             String type = matcher.group(i);
-            if (type.equalsIgnoreCase(OBJECT))
-                out.add(FieldType.JsonObject);
-            else if (type.equalsIgnoreCase(NUMBER))
-                out.add(FieldType.Number);
-            else if (type.equalsIgnoreCase(STRING))
-                out.add(FieldType.String);
-            else if (type.equalsIgnoreCase(BOOLEAN))
-                out.add(FieldType.Boolean);
-            else if (type.equalsIgnoreCase(CSSObject))
-                out.add(FieldType.CssObject);
-            else if (type.equalsIgnoreCase(ARRAY))
-                logger.warn("field type not supported with simple pipe;" + returnType + ";option;" + option);
-            else
-            {
-                logger.warn("field type not supported with simple pipe;" + returnType + ";option;" + option);
-            }
+            // if (type.equalsIgnoreCase(OBJECT))
+            // out.add(FieldType.JsonObject);
+            // else if (type.equalsIgnoreCase(NUMBER))
+            // out.add(FieldType.Number);
+            // else if (type.equalsIgnoreCase(STRING))
+            // out.add(FieldType.String);
+            // else if (type.equalsIgnoreCase(BOOLEAN))
+            // out.add(FieldType.Boolean);
+            // else if (type.equalsIgnoreCase(CSSObject))
+            // out.add(FieldType.CssObject);
+            // else if (type.equalsIgnoreCase(ARRAY))
+            // logger.warn("field type not supported with simple pipe;" + returnType + ";option;" + option);
+            // else
+            // {
+            // logger.warn("field type not supported with simple pipe;" + returnType + ";option;" + option);
+            // }
 
             logger.info("field possible type;" + type + ";option;" + option);
         }
 
-        // if (out.size() == 0)
-        // {
-        // logger.warn("field type not supported with pipe;" + returnType + ";option;" + option);
-        // out.add(FieldType.Other);
-        // }
+        if (out.size() == 0)
+        {
+            logger.warn("field type not supported with pipe;" + returnType + ";option;" + option);
+            out.add(FieldType.Other);
+        }
 
         return out;
     }

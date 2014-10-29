@@ -6,30 +6,28 @@ import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JDefinedClass;
 import com.usesoft.highcharts4gwt.generator.codemodel.OutputTypeVisitor;
 
-public class FieldJsonObjectWriter extends FieldWriter implements OutputTypeVisitor<String, Void>
+public class FieldJsonObjectWriter extends FieldWriter implements OutputTypeVisitor<Void, Void>
 {
 
     private final String defaultValue;
 
-    public FieldJsonObjectWriter(JCodeModel codeModel, JDefinedClass jClass, String className, String defaultValue, boolean pipe)
+    public FieldJsonObjectWriter(JCodeModel codeModel, JDefinedClass jClass, String className, String defaultValue, boolean pipe, String fieldName)
     {
-        super(codeModel, className, jClass, pipe);
+        super(codeModel, className, jClass, pipe, fieldName);
         this.defaultValue = defaultValue;
     }
 
     @Override
     @CheckForNull
-    public Void visitInterface(String fieldName)
+    public Void visitInterface(Void in)
     {
-        String paramName = computeParamName(fieldName);
-
-        InterfaceFieldHelper.addGetterSetterDeclaration(fieldName, paramName, fieldName, fieldName, String.class, getJclass());
+        InterfaceFieldHelper.addGetterSetterDeclaration(getNames(), String.class, getJclass());
         return null;
     }
 
     @Override
     @CheckForNull
-    public Void visitJso(String fieldName)
+    public Void visitJso(Void in)
     {
         String paramName = computeParamName(fieldName);
 
@@ -40,7 +38,7 @@ public class FieldJsonObjectWriter extends FieldWriter implements OutputTypeVisi
 
     @Override
     @CheckForNull
-    public Void visitMock(String fieldName)
+    public Void visitMock(Void in)
     {
         String paramName = computeParamName(fieldName);
 
@@ -48,9 +46,22 @@ public class FieldJsonObjectWriter extends FieldWriter implements OutputTypeVisi
         return null;
     }
 
+    // TODO remove this
     private String computeParamName(String fieldName)
     {
         return fieldName + "AsJsonString";
+    }
+
+    @Override
+    protected String getNameExtension()
+    {
+        return "AsJsonString";
+    }
+
+    @Override
+    protected boolean isParamNameSpecial()
+    {
+        return true;
     }
 
 }

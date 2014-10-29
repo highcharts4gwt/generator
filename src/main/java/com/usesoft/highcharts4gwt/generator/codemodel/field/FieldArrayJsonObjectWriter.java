@@ -8,30 +8,34 @@ import com.sun.codemodel.JDefinedClass;
 import com.usesoft.highcharts4gwt.generator.codemodel.OutputTypeVisitor;
 import com.usesoft.highcharts4gwt.generator.graph.Option;
 
-public class FieldArrayJsonObjectWriter extends FieldWriter implements OutputTypeVisitor<String, Void>
+public class FieldArrayJsonObjectWriter extends FieldWriter implements OutputTypeVisitor<Void, Void>
 {
     private static final Logger logger = LoggerFactory.getLogger(FieldArrayJsonObjectWriter.class);
-    private final Option optionSpec;
+    private final Option option;
     private final String defaultValue;
 
-    public FieldArrayJsonObjectWriter(JCodeModel codeModel, String className, JDefinedClass jClass, Option optionSpec, boolean pipe)
+    public FieldArrayJsonObjectWriter(JCodeModel codeModel, String className, JDefinedClass jClass, Option option, boolean pipe, String fieldName)
     {
-        super(codeModel, className, jClass, pipe);
-        this.optionSpec = optionSpec;
-        this.defaultValue = optionSpec.getDefaults();
+        super(codeModel, className, jClass, pipe, fieldName);
+        this.option = option;
+        this.defaultValue = option.getDefaults();
     }
 
     @Override
-    public Void visitInterface(String fieldName)
+    protected boolean isParamNameSpecial()
     {
-        String paramName = computeParamName(fieldName);
+        return true;
+    }
 
-        InterfaceFieldHelper.addGetterSetterDeclaration(fieldName, paramName, fieldName, fieldName, String.class, getJclass());
+    @Override
+    public Void visitInterface(Void in)
+    {
+        InterfaceFieldHelper.addGetterSetterDeclaration(getNames(), String.class, getJclass());
         return null;
     }
 
     @Override
-    public Void visitJso(String fieldName)
+    public Void visitJso(Void in)
     {
         String paramName = computeParamName(fieldName);
 
@@ -41,17 +45,25 @@ public class FieldArrayJsonObjectWriter extends FieldWriter implements OutputTyp
     }
 
     @Override
-    public Void visitMock(String fieldName)
+    public Void visitMock(Void in)
     {
+        // TODO remove this go to NAME
         String paramName = computeParamName(fieldName);
 
         MockFieldHelper.addGetterSetterDeclaration(fieldName, paramName, paramName, String.class, getJclass());
         return null;
     }
 
+    // TODO remove this go to NAME
     private String computeParamName(String fieldName)
     {
         return fieldName + "AsJsonStringArray";
+    }
+
+    @Override
+    protected String getNameExtension()
+    {
+        return "AsJsonStringArray";
     }
 
 }

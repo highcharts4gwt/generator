@@ -7,27 +7,27 @@ import com.sun.codemodel.JDefinedClass;
 import com.usesoft.highcharts4gwt.generator.codemodel.OutputTypeVisitor;
 import com.usesoft.highcharts4gwt.model.array.api.ArrayString;
 
-public class FieldArrayStringWriter extends FieldWriter implements OutputTypeVisitor<String, Void>
+public class FieldArrayStringWriter extends FieldWriter implements OutputTypeVisitor<Void, Void>
 {
     private final String defaultValue;
 
-    public FieldArrayStringWriter(JCodeModel codeModel, JDefinedClass jClass, String className, String defaultValue, boolean pipe)
+    public FieldArrayStringWriter(JCodeModel codeModel, JDefinedClass jClass, String className, String defaultValue, boolean pipe, String fieldName)
     {
-        super(codeModel, className, jClass, pipe);
+        super(codeModel, className, jClass, pipe, fieldName);
         this.defaultValue = defaultValue;
     }
 
     @Override
     @CheckForNull
-    public Void visitInterface(String fieldName)
+    public Void visitInterface(Void in)
     {
-        InterfaceFieldHelper.addGetterSetterDeclaration(fieldName, fieldName, ArrayString.class, getJclass());
+        InterfaceFieldHelper.addGetterSetterDeclaration(getNames(), ArrayString.class, getJclass());
         return null;
     }
 
     @Override
     @CheckForNull
-    public Void visitJso(String fieldName)
+    public Void visitJso(Void in)
     {
         JsoFieldHelper.writeGetterNativeCodeArrayString(fieldName, ArrayString.class, getJclass(), getCodeModel(), defaultValue);
         JsoFieldHelper.writeSetterNativeCode(fieldName, ArrayString.class, getJclass(), getCodeModel());
@@ -36,7 +36,7 @@ public class FieldArrayStringWriter extends FieldWriter implements OutputTypeVis
 
     @Override
     @CheckForNull
-    public Void visitMock(String fieldName)
+    public Void visitMock(Void in)
     {
         MockFieldHelper.addGetterSetterDeclaration(fieldName, computeFieldName(fieldName), fieldName, ArrayString.class, getJclass());
         return null;
@@ -45,5 +45,11 @@ public class FieldArrayStringWriter extends FieldWriter implements OutputTypeVis
     private String computeFieldName(String fieldName)
     {
         return fieldName + "AsArrayString";
+    }
+
+    @Override
+    protected String getNameExtension()
+    {
+        return "AsArrayString";
     }
 }

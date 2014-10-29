@@ -6,30 +6,27 @@ import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JDefinedClass;
 import com.usesoft.highcharts4gwt.generator.codemodel.OutputTypeVisitor;
 
-public class FieldNumberWriter extends FieldWriter implements OutputTypeVisitor<String, Void>
+public class FieldNumberWriter extends FieldWriter implements OutputTypeVisitor<Void, Void>
 {
     private final String defaultValue;
 
-    public FieldNumberWriter(JCodeModel codeModel, JDefinedClass jClass, String className, String defaultValue, boolean pipe)
+    public FieldNumberWriter(JCodeModel codeModel, JDefinedClass jClass, String className, String defaultValue, boolean pipe, String fieldName)
     {
-        super(codeModel, className, jClass, pipe);
+        super(codeModel, className, jClass, pipe, fieldName);
         this.defaultValue = defaultValue;
     }
 
     @Override
     @CheckForNull
-    public Void visitInterface(String fieldName)
+    public Void visitInterface(Void in)
     {
-       blabla do the same for all
-        if (hasPipe())
-            InterfaceFieldHelper.addGetterSetterDeclaration(fieldName, computeFieldName(fieldName), Number.class, getJclass());
-        InterfaceFieldHelper.addGetterSetterDeclaration(fieldName, Number.class, getJclass());
+        InterfaceFieldHelper.addGetterSetterDeclaration(getNames(), Number.class, getJclass());
         return null;
     }
 
     @Override
     @CheckForNull
-    public Void visitJso(String fieldName)
+    public Void visitJso(Void in)
     {
         JsoFieldHelper.writeGetterNativeCodeNumber(fieldName, Number.class, getJclass(), getCodeModel(), defaultValue);
         JsoFieldHelper.writeSetterNativeCode(fieldName, Number.class, getJclass(), getCodeModel());
@@ -38,7 +35,7 @@ public class FieldNumberWriter extends FieldWriter implements OutputTypeVisitor<
 
     @Override
     @CheckForNull
-    public Void visitMock(String fieldName)
+    public Void visitMock(Void in)
     {
         MockFieldHelper.addGetterSetterDeclaration(fieldName, computeFieldName(fieldName), fieldName, Number.class, getJclass());
         return null;
@@ -47,6 +44,12 @@ public class FieldNumberWriter extends FieldWriter implements OutputTypeVisitor<
     private String computeFieldName(String fieldName)
     {
         return fieldName + "AsNumber";
+    }
+
+    @Override
+    protected String getNameExtension()
+    {
+        return "AsNumber";
     }
 
 }

@@ -45,19 +45,19 @@ public class FieldWriterVisitor implements FieldTypeVisitor<OutputType, Void>
     {
         String defaultValue = option.getDefaults();
 
-        return in.accept(new FieldNumberWriter(codeModel, jClass, className, defaultValue, pipe), fieldName);
+        return in.accept(new FieldNumberWriter(codeModel, jClass, className, defaultValue, pipe, fieldName), null);
     }
 
     @Override
     public Void visitBoolean(OutputType in)
     {
-        return in.accept(new FieldBooleanWriter(codeModel, jClass, className, Boolean.parseBoolean(option.getDefaults()), pipe), fieldName);
+        return in.accept(new FieldBooleanWriter(codeModel, jClass, className, Boolean.parseBoolean(option.getDefaults()), pipe, fieldName), null);
     }
 
     @Override
     public Void visitString(OutputType in)
     {
-        return in.accept(new FieldStringWriter(codeModel, jClass, className, option.getDefaults(), pipe), fieldName);
+        return in.accept(new FieldStringWriter(codeModel, jClass, className, option.getDefaults(), pipe, fieldName), null);
     }
 
     @Override
@@ -69,50 +69,50 @@ public class FieldWriterVisitor implements FieldTypeVisitor<OutputType, Void>
     @Override
     public Void visitArrayString(OutputType in)
     {
-        return in.accept(new FieldArrayStringWriter(codeModel, jClass, className, option.getDefaults(), pipe), fieldName);
+        return in.accept(new FieldArrayStringWriter(codeModel, jClass, className, option.getDefaults(), pipe, fieldName), null);
     }
 
     @Override
     public Void visitArrayNumber(OutputType in)
     {
-        return in.accept(new FieldArrayNumberWriter(codeModel, jClass, className, option.getDefaults(), pipe), fieldName);
+        return in.accept(new FieldArrayNumberWriter(codeModel, jClass, className, option.getDefaults(), pipe, fieldName), null);
     }
 
     @Override
     public Void visitArrayObject(OutputType in)
     {
-        return in.accept(new FieldArrayObjectWriter(codeModel, jClass, className, option, pipe), fieldName);
+        return in.accept(new FieldArrayObjectWriter(codeModel, jClass, className, option, pipe, fieldName), null);
     }
 
     @Override
     public Void visitClass(OutputType in)
     {
-        return in.accept(new FieldObjectWriter(codeModel, jClass, className, option, pipe), fieldName);
+        return in.accept(new FieldObjectWriter(codeModel, jClass, className, option, pipe, fieldName), null);
     }
 
     @Override
     public Void visitData(OutputType in)
     {
-        return in.accept(new FieldDataWriter(codeModel, jClass, className, option.getDefaults(), pipe), fieldName);
+        return in.accept(new FieldDataWriter(codeModel, jClass, className, option.getDefaults(), pipe, fieldName), null);
     }
 
     @Override
     public Void visitJsonObject(OutputType in)
     {
         // TODO should precise that this is an "object" not a string value
-        return in.accept(new FieldJsonObjectWriter(codeModel, jClass, className, option.getDefaults(), pipe), fieldName);
+        return in.accept(new FieldJsonObjectWriter(codeModel, jClass, className, option.getDefaults(), pipe, fieldName), null);
     }
 
     @Override
     public Void visitCssObject(OutputType in)
     {
         // TODO should precise that this is an "object" not a string value
-        return in.accept(new FieldJsonObjectWriter(codeModel, jClass, className, option.getDefaults(), pipe), fieldName);
+        return in.accept(new FieldJsonObjectWriter(codeModel, jClass, className, option.getDefaults(), pipe, fieldName), null);
     }
 
     @Override
     public Void visitArrayJsonObject(OutputType in)
     {
-        return in.accept(new FieldArrayJsonObjectWriter(codeModel, className, jClass, option, pipe), fieldName);
+        return in.accept(new FieldArrayJsonObjectWriter(codeModel, className, jClass, option, pipe, fieldName), null);
     }
 }

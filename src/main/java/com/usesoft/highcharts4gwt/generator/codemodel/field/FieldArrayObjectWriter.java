@@ -14,35 +14,35 @@ import com.usesoft.highcharts4gwt.generator.codemodel.OutputTypeVisitor;
 import com.usesoft.highcharts4gwt.generator.graph.Option;
 import com.usesoft.highcharts4gwt.model.array.api.Array;
 
-public class FieldArrayObjectWriter extends FieldWriter implements OutputTypeVisitor<String, Void>
+public class FieldArrayObjectWriter extends FieldWriter implements OutputTypeVisitor<Void, Void>
 {
     private static final Logger logger = LoggerFactory.getLogger(FieldArrayObjectWriter.class);
 
     private final String defaultValue;
     private final Option optionSpec;
 
-    public FieldArrayObjectWriter(JCodeModel codeModel, JDefinedClass jClass, String className, Option optionSpec, boolean pipe)
+    public FieldArrayObjectWriter(JCodeModel codeModel, JDefinedClass jClass, String className, Option optionSpec, boolean pipe, String fieldName)
     {
-        super(codeModel, className, jClass, pipe);
+        super(codeModel, className, jClass, pipe, fieldName);
         this.optionSpec = optionSpec;
         this.defaultValue = optionSpec.getDefaults();
     }
 
     @Override
     @CheckForNull
-    public Void visitInterface(String fieldName)
+    public Void visitInterface(Void in)
     {
         JClass fieldClazz = getRealClass();
         if (fieldClazz == null)
             return null;
 
-        InterfaceFieldHelper.addGetterSetterDeclaration(fieldName, fieldClazz, getJclass());
+        InterfaceFieldHelper.addGetterSetterDeclaration(getNames(), fieldClazz, getJclass());
         return null;
     }
 
     @Override
     @CheckForNull
-    public Void visitJso(String fieldName)
+    public Void visitJso(Void in)
     {
         JClass fieldClazz = getRealClass();
         if (fieldClazz == null)
@@ -55,7 +55,7 @@ public class FieldArrayObjectWriter extends FieldWriter implements OutputTypeVis
 
     @Override
     @CheckForNull
-    public Void visitMock(String fieldName)
+    public Void visitMock(Void in)
     {
         JClass fieldClazz = getRealClass();
         if (fieldClazz == null)
@@ -84,5 +84,11 @@ public class FieldArrayObjectWriter extends FieldWriter implements OutputTypeVis
     private String computeFieldName(String fieldName)
     {
         return fieldName + "AsArrayObject";
+    }
+
+    @Override
+    protected String getNameExtension()
+    {
+        return "AsArrayObject";
     }
 }

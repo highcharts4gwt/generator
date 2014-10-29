@@ -5,13 +5,26 @@ import com.sun.codemodel.JDefinedClass;
 
 public abstract class FieldWriter
 {
-    public FieldWriter(JCodeModel codeModel, String className, JDefinedClass jClass, boolean pipe)
+    // TODO BE REMOVED used only names
+    protected final String fieldName;
+
+    public FieldWriter(JCodeModel codeModel, String className, JDefinedClass jClass, boolean pipe, String fieldName)
     {
         this.codeModel = codeModel;
         this.className = className;
         this.jClass = jClass;
         this.pipe = pipe;
+        this.fieldName = fieldName;
+
+        this.names = Names.create(fieldName, getNameExtension(), pipe, isParamNameSpecial());
     }
+
+    protected boolean isParamNameSpecial()
+    {
+        return false;
+    }
+
+    protected abstract String getNameExtension();
 
     protected JCodeModel getCodeModel()
     {
@@ -33,8 +46,14 @@ public abstract class FieldWriter
         return pipe;
     }
 
+    public Names getNames()
+    {
+        return names;
+    }
+
     private final boolean pipe;
     private final JCodeModel codeModel;
     private final JDefinedClass jClass;
     private final String className;
+    private final Names names;
 }
