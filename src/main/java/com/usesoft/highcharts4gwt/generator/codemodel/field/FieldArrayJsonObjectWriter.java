@@ -37,27 +37,17 @@ public class FieldArrayJsonObjectWriter extends FieldWriter implements OutputTyp
     @Override
     public Void visitJso(Void in)
     {
-        String paramName = computeParamName(fieldName);
 
-        JsoFieldHelper.writeGetterNativeCodeArrayJsonObject(fieldName, String.class, getJclass(), getCodeModel(), defaultValue);
-        JsoFieldHelper.writeSetterNativeCodeWithParse(fieldName, paramName, String.class, getJclass(), getCodeModel());
+        JsoFieldHelper.writeGetterNativeCodeArrayJsonObject(getNames(), String.class, getJclass(), getCodeModel(), defaultValue);
+        JsoFieldHelper.writeSetterNativeCodeWithParse(getNames(), String.class, getJclass(), getCodeModel());
         return null;
     }
 
     @Override
     public Void visitMock(Void in)
     {
-        // TODO remove this go to NAME
-        String paramName = computeParamName(fieldName);
-
-        MockFieldHelper.addGetterSetterDeclaration(fieldName, paramName, paramName, String.class, getJclass());
+        MockFieldHelper.addGetterSetterDeclaration(getNames(), String.class, getJclass());
         return null;
-    }
-
-    // TODO remove this go to NAME
-    private String computeParamName(String fieldName)
-    {
-        return fieldName + "AsJsonStringArray";
     }
 
     @Override

@@ -29,10 +29,9 @@ public class FieldJsonObjectWriter extends FieldWriter implements OutputTypeVisi
     @CheckForNull
     public Void visitJso(Void in)
     {
-        String paramName = computeParamName(fieldName);
 
-        JsoFieldHelper.writeGetterNativeCodeStringWithStringify(fieldName, String.class, getJclass(), getCodeModel(), defaultValue);
-        JsoFieldHelper.writeSetterNativeCodeWithParse(fieldName, paramName, String.class, getJclass(), getCodeModel());
+        JsoFieldHelper.writeGetterNativeCodeStringWithStringify(getNames(), String.class, getJclass(), getCodeModel(), defaultValue);
+        JsoFieldHelper.writeSetterNativeCodeWithParse(getNames(), String.class, getJclass(), getCodeModel());
         return null;
     }
 
@@ -40,16 +39,8 @@ public class FieldJsonObjectWriter extends FieldWriter implements OutputTypeVisi
     @CheckForNull
     public Void visitMock(Void in)
     {
-        String paramName = computeParamName(fieldName);
-
-        MockFieldHelper.addGetterSetterDeclaration(fieldName, paramName, paramName, String.class, getJclass());
+        MockFieldHelper.addGetterSetterDeclaration(getNames(), String.class, getJclass());
         return null;
-    }
-
-    // TODO remove this
-    private String computeParamName(String fieldName)
-    {
-        return fieldName + "AsJsonString";
     }
 
     @Override

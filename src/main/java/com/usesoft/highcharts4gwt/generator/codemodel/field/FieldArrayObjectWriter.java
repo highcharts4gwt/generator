@@ -48,8 +48,8 @@ public class FieldArrayObjectWriter extends FieldWriter implements OutputTypeVis
         if (fieldClazz == null)
             return null;
 
-        JsoFieldHelper.writeGetterNativeCodeArrayObject(fieldName, fieldClazz, getJclass(), getCodeModel(), defaultValue);
-        JsoFieldHelper.writeSetterNativeCode(fieldName, fieldClazz, getJclass(), getCodeModel());
+        JsoFieldHelper.writeGetterNativeCodeArrayObject(getNames(), fieldClazz, getJclass(), getCodeModel(), defaultValue);
+        JsoFieldHelper.writeSetterNativeCode(getNames(), fieldClazz, getJclass(), getCodeModel());
         return null;
     }
 
@@ -61,7 +61,7 @@ public class FieldArrayObjectWriter extends FieldWriter implements OutputTypeVis
         if (fieldClazz == null)
             return null;
 
-        MockFieldHelper.addGetterSetterDeclaration(fieldName, computeFieldName(fieldName), fieldName, fieldClazz, getJclass());
+        MockFieldHelper.addGetterSetterDeclaration(getNames(), fieldClazz, getJclass());
         return null;
     }
 
@@ -79,11 +79,6 @@ public class FieldArrayObjectWriter extends FieldWriter implements OutputTypeVis
         JClass rawLLclazz = getCodeModel().ref(Array.class);
         JClass fieldClazz = rawLLclazz.narrow(jClass);
         return fieldClazz;
-    }
-
-    private String computeFieldName(String fieldName)
-    {
-        return fieldName + "AsArrayObject";
     }
 
     @Override

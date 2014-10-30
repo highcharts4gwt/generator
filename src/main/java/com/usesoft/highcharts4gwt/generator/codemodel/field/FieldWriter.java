@@ -6,7 +6,7 @@ import com.sun.codemodel.JDefinedClass;
 public abstract class FieldWriter
 {
     // TODO BE REMOVED used only names
-    protected final String fieldName;
+    private final String fieldName;
 
     public FieldWriter(JCodeModel codeModel, String className, JDefinedClass jClass, boolean pipe, String fieldName)
     {

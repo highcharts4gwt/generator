@@ -29,8 +29,8 @@ public class FieldArrayStringWriter extends FieldWriter implements OutputTypeVis
     @CheckForNull
     public Void visitJso(Void in)
     {
-        JsoFieldHelper.writeGetterNativeCodeArrayString(fieldName, ArrayString.class, getJclass(), getCodeModel(), defaultValue);
-        JsoFieldHelper.writeSetterNativeCode(fieldName, ArrayString.class, getJclass(), getCodeModel());
+        JsoFieldHelper.writeGetterNativeCodeArrayString(getNames(), ArrayString.class, getJclass(), getCodeModel(), defaultValue);
+        JsoFieldHelper.writeSetterNativeCode(getNames(), ArrayString.class, getJclass(), getCodeModel());
         return null;
     }
 
@@ -38,13 +38,8 @@ public class FieldArrayStringWriter extends FieldWriter implements OutputTypeVis
     @CheckForNull
     public Void visitMock(Void in)
     {
-        MockFieldHelper.addGetterSetterDeclaration(fieldName, computeFieldName(fieldName), fieldName, ArrayString.class, getJclass());
+        MockFieldHelper.addGetterSetterDeclaration(getNames(), ArrayString.class, getJclass());
         return null;
-    }
-
-    private String computeFieldName(String fieldName)
-    {
-        return fieldName + "AsArrayString";
     }
 
     @Override

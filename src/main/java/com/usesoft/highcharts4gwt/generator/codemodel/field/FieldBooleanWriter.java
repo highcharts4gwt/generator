@@ -29,8 +29,8 @@ public class FieldBooleanWriter extends FieldWriter implements OutputTypeVisitor
     @CheckForNull
     public Void visitJso(Void in)
     {
-        JsoFieldHelper.writeGetterNativeCodeBoolean(fieldName, boolean.class, getJclass(), getCodeModel(), defaultValue);
-        JsoFieldHelper.writeSetterNativeCode(fieldName, boolean.class, getJclass(), getCodeModel());
+        JsoFieldHelper.writeGetterNativeCodeBoolean(getNames(), boolean.class, getJclass(), getCodeModel(), defaultValue);
+        JsoFieldHelper.writeSetterNativeCode(getNames(), boolean.class, getJclass(), getCodeModel());
         return null;
     }
 
@@ -38,13 +38,8 @@ public class FieldBooleanWriter extends FieldWriter implements OutputTypeVisitor
     @CheckForNull
     public Void visitMock(Void in)
     {
-        MockFieldHelper.addGetterSetterDeclaration(fieldName, computeFieldName(fieldName), fieldName, boolean.class, getJclass());
+        MockFieldHelper.addGetterSetterDeclaration(getNames(), boolean.class, getJclass());
         return null;
-    }
-
-    private String computeFieldName(String fieldName)
-    {
-        return fieldName + "AsBoolean";
     }
 
     @Override

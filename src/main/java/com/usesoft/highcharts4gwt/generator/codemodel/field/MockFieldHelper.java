@@ -15,30 +15,30 @@ public class MockFieldHelper
     {
     }
 
-    public static void addGetterSetterDeclaration(String methodName, String fieldName, String paramName, Class<?> type, JDefinedClass jDefinedClass)
+    public static void addGetterSetterDeclaration(Names names, Class<?> type, JDefinedClass jDefinedClass)
     {
-        JFieldVar field = jDefinedClass.field(JMod.PRIVATE, type, fieldName);
+        JFieldVar field = jDefinedClass.field(JMod.PRIVATE, type, names.getFieldName());
 
-        JMethod getter = jDefinedClass.method(JMod.PUBLIC, type, methodName);
+        JMethod getter = jDefinedClass.method(JMod.PUBLIC, type, names.getGetterName());
         JBlock block = getter.body();
         block._return(field);
 
-        JMethod setter = jDefinedClass.method(JMod.PUBLIC, jDefinedClass, methodName);
-        JVar setterParam = setter.param(type, paramName);
+        JMethod setter = jDefinedClass.method(JMod.PUBLIC, jDefinedClass, names.getSetterName());
+        JVar setterParam = setter.param(type, names.getParamName());
 
         setter.body().assign(JExpr._this().ref(field), setterParam)._return(JExpr._this());
     }
 
-    public static void addGetterSetterDeclaration(String methodName, String fieldName, String paramName, JClass type, JDefinedClass jDefinedClass)
+    public static void addGetterSetterDeclaration(Names names, JClass type, JDefinedClass jDefinedClass)
     {
-        JFieldVar field = jDefinedClass.field(JMod.PRIVATE, type, fieldName);
+        JFieldVar field = jDefinedClass.field(JMod.PRIVATE, type, names.getFieldName());
 
-        JMethod getter = jDefinedClass.method(JMod.PUBLIC, type, fieldName);
+        JMethod getter = jDefinedClass.method(JMod.PUBLIC, type, names.getFieldName());
         JBlock block = getter.body();
         block._return(field);
 
-        JMethod setter = jDefinedClass.method(JMod.PUBLIC, jDefinedClass, fieldName);
-        JVar setterParam = setter.param(type, paramName);
+        JMethod setter = jDefinedClass.method(JMod.PUBLIC, jDefinedClass, names.getFieldName());
+        JVar setterParam = setter.param(type, names.getParamName());
 
         setter.body().assign(JExpr._this().ref(field), setterParam)._return(JExpr._this());
     }

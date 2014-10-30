@@ -31,8 +31,8 @@ public class FieldDataWriter extends FieldWriter implements OutputTypeVisitor<Vo
     @CheckForNull
     public Void visitJso(Void in)
     {
-        JsoFieldHelper.writeGetterNativeCodeArrayString(fieldName, ArrayNumber.class, getJclass(), getCodeModel(), defaultValue);
-        JsoFieldHelper.writeSetterNativeCode(fieldName, ArrayNumber.class, getJclass(), getCodeModel());
+        JsoFieldHelper.writeGetterNativeCodeArrayString(getNames(), ArrayNumber.class, getJclass(), getCodeModel(), defaultValue);
+        JsoFieldHelper.writeSetterNativeCode(getNames(), ArrayNumber.class, getJclass(), getCodeModel());
         return null;
     }
 
@@ -40,7 +40,7 @@ public class FieldDataWriter extends FieldWriter implements OutputTypeVisitor<Vo
     @CheckForNull
     public Void visitMock(Void in)
     {
-        MockFieldHelper.addGetterSetterDeclaration(fieldName, fieldName, fieldName, ArrayNumber.class, getJclass());
+        MockFieldHelper.addGetterSetterDeclaration(getNames(), ArrayNumber.class, getJclass());
         return null;
     }
 

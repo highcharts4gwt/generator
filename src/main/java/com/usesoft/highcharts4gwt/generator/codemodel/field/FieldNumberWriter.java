@@ -28,8 +28,8 @@ public class FieldNumberWriter extends FieldWriter implements OutputTypeVisitor<
     @CheckForNull
     public Void visitJso(Void in)
     {
-        JsoFieldHelper.writeGetterNativeCodeNumber(fieldName, Number.class, getJclass(), getCodeModel(), defaultValue);
-        JsoFieldHelper.writeSetterNativeCode(fieldName, Number.class, getJclass(), getCodeModel());
+        JsoFieldHelper.writeGetterNativeCodeNumber(getNames(), Number.class, getJclass(), getCodeModel(), defaultValue);
+        JsoFieldHelper.writeSetterNativeCode(getNames(), Number.class, getJclass(), getCodeModel());
         return null;
     }
 
@@ -37,13 +37,8 @@ public class FieldNumberWriter extends FieldWriter implements OutputTypeVisitor<
     @CheckForNull
     public Void visitMock(Void in)
     {
-        MockFieldHelper.addGetterSetterDeclaration(fieldName, computeFieldName(fieldName), fieldName, Number.class, getJclass());
+        MockFieldHelper.addGetterSetterDeclaration(getNames(), Number.class, getJclass());
         return null;
-    }
-
-    private String computeFieldName(String fieldName)
-    {
-        return fieldName + "AsNumber";
     }
 
     @Override
