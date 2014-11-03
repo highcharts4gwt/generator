@@ -20,7 +20,7 @@ public class FieldNumberWriter extends FieldWriter implements OutputTypeVisitor<
     @CheckForNull
     public Void visitInterface(Void in)
     {
-        InterfaceFieldHelper.addGetterSetterDeclaration(getNames(), Number.class, getJclass());
+        InterfaceFieldHelper.addGetterSetterDeclaration(getNames(), double.class, getJclass());
         return null;
     }
 
@@ -28,8 +28,8 @@ public class FieldNumberWriter extends FieldWriter implements OutputTypeVisitor<
     @CheckForNull
     public Void visitJso(Void in)
     {
-        JsoFieldHelper.writeGetterNativeCodeNumber(getNames(), Number.class, getJclass(), getCodeModel(), defaultValue);
-        JsoFieldHelper.writeSetterNativeCode(getNames(), Number.class, getJclass(), getCodeModel());
+        JsoFieldHelper.writeGetterNativeCodeNumber(getNames(), double.class, getJclass(), getCodeModel(), defaultValue);
+        JsoFieldHelper.writeSetterNativeCode(getNames(), double.class, getJclass(), getCodeModel());
         return null;
     }
 
@@ -37,7 +37,7 @@ public class FieldNumberWriter extends FieldWriter implements OutputTypeVisitor<
     @CheckForNull
     public Void visitMock(Void in)
     {
-        MockFieldHelper.addGetterSetterDeclaration(getNames(), Number.class, getJclass());
+        MockFieldHelper.addGetterSetterDeclaration(getNames(), double.class, getJclass());
         return null;
     }
 
