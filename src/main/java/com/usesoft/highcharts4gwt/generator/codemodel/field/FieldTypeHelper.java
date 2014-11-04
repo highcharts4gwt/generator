@@ -77,6 +77,8 @@ public class FieldTypeHelper
             out.add(FieldType.ArrayString);
         else if (returnType.equals("Array<Number>"))
             out.add(FieldType.ArrayNumber);
+        else if (returnType.equals("Array<Color>"))
+            out.add(FieldType.ArrayString);
         else if (returnType.equals(ARRAY))
         {
             if (option.getFullname().equals("xAxis.categories") || option.getFullname().equals("yAxis.categories"))
