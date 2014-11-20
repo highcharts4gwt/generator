@@ -84,7 +84,8 @@ public class JsoFieldHelper
 
     private static String getJsniDefaultValueForString(String defaultValue)
     {
-        return "\"" + defaultValue + "\"";
+        String value = defaultValue != null ? defaultValue.replace("\"", "\\\"") : defaultValue;
+        return "\"" + value + "\"";
     }
 
     private static String getJsniDefaultValueForBoolean(boolean defaultValue)
