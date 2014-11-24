@@ -11,9 +11,6 @@ import org.json.JSONArray;
 import org.junit.Test;
 
 import com.usesoft.highcharts4gwt.generator.JsonUtils;
-import com.usesoft.highcharts4gwt.generator.graph.Option;
-import com.usesoft.highcharts4gwt.generator.graph.OptionTree;
-import com.usesoft.highcharts4gwt.generator.graph.OptionsData;
 
 public class TestJsonUtils
 {
