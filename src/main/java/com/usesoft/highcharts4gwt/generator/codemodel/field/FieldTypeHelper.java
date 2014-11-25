@@ -13,6 +13,7 @@ import com.usesoft.highcharts4gwt.generator.graph.Option;
 
 public class FieldTypeHelper
 {
+    private static final String COLOR = "Color";
     private static final String ARRAY = "Array";
     private static final String LT = "<";
     private static final String GT = ">";
@@ -20,13 +21,13 @@ public class FieldTypeHelper
     private static final String NUMBER = "Number";
     private static final String OBJECT = "Object";
     private static final String BOOLEAN = "Boolean";
-    private static final String CSSObject = "CSSObject";
+    private static final String CSSOBJECT = "CSSObject";
 
     private static final Logger logger = LoggerFactory.getLogger(FieldTypeHelper.class);
 
     private static final Pattern PIPE_REGEXP = Pattern.compile("(\\w+)\\s*(?:\\|\\s*(\\w+))+");
     private static final Pattern ARRAY_REGEXP = Pattern.compile("Array(\\s)*<\\s*(\\w+)\\s*>");
-    private static final Pattern ARRAY_PIPE_REGEXP = Pattern.compile("Array(\\s)*<\\s*(\\w+)\\s*(?:\\|\\s*(\\w+)\\s*)+>");
+    private static final Pattern ARRAY_PIPE_REGEXP = Pattern.compile("Array\\s*<\\s*(\\w+)\\s*(?:\\|\\s*(\\w+)\\s*)+>");
 
     private FieldTypeHelper()
     {
@@ -40,7 +41,7 @@ public class FieldTypeHelper
         {
             Matcher matcherArrayPipe = ARRAY_PIPE_REGEXP.matcher(returnType);
             if (matcherArrayPipe.matches())
-                return findFieldTypesForArrayPipe(option);
+                return findFieldTypesForArrayPipe(option, matcherArrayPipe);
 
             Matcher matcherArray = ARRAY_REGEXP.matcher(returnType);
             if (matcherArray.matches())
@@ -53,19 +54,31 @@ public class FieldTypeHelper
         return findFieldTypeSimple(option);
     }
 
-    private static List<FieldType> findFieldTypesForArrayPipe(Option option)
+    private static List<FieldType> findFieldTypesForArrayPipe(Option option, Matcher matcher)
     {
         List<FieldType> out = Lists.newArrayList();
         String returnType = option.getReturnType();
-        if (returnType.equals("Array<Object|Array|Number>"))
+
+        for (int i = 1; i <= matcher.groupCount(); i++)
         {
-            out.add(FieldType.Data);
+            String type = matcher.group(i);
+            if (type.equalsIgnoreCase(OBJECT))
+                out.add(FieldType.ArrayObject);
+            else if (type.equalsIgnoreCase(NUMBER))
+                out.add(FieldType.ArrayNumber);
+            else if (type.equalsIgnoreCase(STRING))
+                out.add(FieldType.ArrayString);
+            else if (returnType.equalsIgnoreCase(COLOR))
+                out.add(FieldType.ArrayString);
+            else
+            {
+                out.add(FieldType.Other);
+                logger.warn("array type not supported with pipe;" + returnType + ";option;" + option);
+            }
+
+            logger.info("field possible type;array<" + type + ">;option;" + option);
         }
-        else
-        {
-            logger.warn("field type array with pipe not supported yet;" + option.getReturnType() + ";option;" + option);
-            out.add(FieldType.Other);
-        }
+
         return out;
     }
 
@@ -130,17 +143,17 @@ public class FieldTypeHelper
                 out.add(FieldType.Object);
             }
         }
-        else if (returnType.equalsIgnoreCase("Object") && !option.isParent())
+        else if (returnType.equalsIgnoreCase(OBJECT) && !option.isParent())
             out.add(FieldType.JsonObject);
-        else if (returnType.equalsIgnoreCase("Object"))
+        else if (returnType.equalsIgnoreCase(OBJECT))
             out.add(FieldType.Object);
-        else if (returnType.equalsIgnoreCase("Number"))
+        else if (returnType.equalsIgnoreCase(NUMBER))
             out.add(FieldType.Number);
-        else if (returnType.equalsIgnoreCase("String"))
+        else if (returnType.equalsIgnoreCase(STRING))
             out.add(FieldType.String);
-        else if (returnType.equalsIgnoreCase("Boolean"))
+        else if (returnType.equalsIgnoreCase(BOOLEAN))
             out.add(FieldType.Boolean);
-        else if (returnType.equalsIgnoreCase("CSSObject"))
+        else if (returnType.equalsIgnoreCase(CSSOBJECT))
             out.add(FieldType.CssObject);
         else if (returnType.equalsIgnoreCase(ARRAY))
         {
@@ -150,7 +163,7 @@ public class FieldTypeHelper
             else
                 out.add(FieldType.ArrayNumber);
         }
-        else if (returnType.equalsIgnoreCase("Color"))
+        else if (returnType.equalsIgnoreCase(COLOR))
             out.add(FieldType.String);
         else
         {
@@ -177,9 +190,9 @@ public class FieldTypeHelper
                 out.add(FieldType.String);
             else if (type.equalsIgnoreCase(BOOLEAN))
                 out.add(FieldType.Boolean);
-            else if (type.equalsIgnoreCase(CSSObject))
+            else if (type.equalsIgnoreCase(CSSOBJECT))
                 out.add(FieldType.CssObject);
-            else if (returnType.equalsIgnoreCase("Color"))
+            else if (returnType.equalsIgnoreCase(COLOR))
                 out.add(FieldType.String);
             else if (type.equalsIgnoreCase(ARRAY))
                 logger.warn("field type not supported with simple pipe;" + returnType + ";option;" + option);

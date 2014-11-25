@@ -64,7 +64,7 @@ public class NativeContentHack extends JClass
     @Override
     public String fullName()
     {
-        return "";
+        return "RuntimeException " + nativeContent;
     }
 
 }

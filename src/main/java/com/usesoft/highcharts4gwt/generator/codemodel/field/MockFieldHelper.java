@@ -33,11 +33,11 @@ public class MockFieldHelper
     {
         JFieldVar field = jDefinedClass.field(JMod.PRIVATE, type, names.getMockFieldName());
 
-        JMethod getter = jDefinedClass.method(JMod.PUBLIC, type, names.getOriginalFieldName());
+        JMethod getter = jDefinedClass.method(JMod.PUBLIC, type, names.getGetterName());
         JBlock block = getter.body();
         block._return(field);
 
-        JMethod setter = jDefinedClass.method(JMod.PUBLIC, jDefinedClass, names.getOriginalFieldName());
+        JMethod setter = jDefinedClass.method(JMod.PUBLIC, jDefinedClass, names.getSetterName());
         JVar setterParam = setter.param(type, names.getParamName());
 
         setter.body().assign(JExpr._this().ref(field), setterParam)._return(JExpr._this());
