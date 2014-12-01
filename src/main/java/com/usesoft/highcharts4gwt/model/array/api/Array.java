@@ -8,6 +8,14 @@ public interface Array<T>
 
     void addToEnd(T value); // Cannot use JsArray method name otherwise error
                             // overload using erasure
-
-    void insert(int index, T value);
+    
+    /**
+     * Replacement for native set method
+     * 
+     * @param index
+     * @param value 
+     */
+    void setValue(int index, T value);
+    
+    void setLength(int newLength);
 }

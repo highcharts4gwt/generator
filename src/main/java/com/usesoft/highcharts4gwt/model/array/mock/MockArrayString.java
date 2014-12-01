@@ -15,7 +15,7 @@ public class MockArrayString extends ArrayList<String> implements ArrayString
     }
 
     @Override
-    public void insert(int index, String element)
+    public void setValue(int index, String element)
     {
         super.set(index, element);
     }
@@ -24,6 +24,11 @@ public class MockArrayString extends ArrayList<String> implements ArrayString
     public void push(String value)
     {
         add(value);
+    }
+
+    @Override
+    public void setLength(int newLength)
+    {
     }
 
 }

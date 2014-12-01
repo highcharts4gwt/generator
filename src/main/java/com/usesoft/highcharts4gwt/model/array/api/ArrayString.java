@@ -7,7 +7,16 @@ public interface ArrayString
     int length();
 
     void push(String value);
+    
 
-    void insert(int index, String value);
+    /**
+     * Replacement for native set method
+     * 
+     * @param index
+     * @param value 
+     */
+    void setValue(int index, String value);
+    
+    void setLength(int newLength);
 
 }

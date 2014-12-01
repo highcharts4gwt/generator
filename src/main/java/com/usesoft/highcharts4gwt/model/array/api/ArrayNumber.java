@@ -7,7 +7,15 @@ public interface ArrayNumber
     int length();
 
     void push(double value);
-
-    void insert(int index, double value);
+    
+    /**
+     * Replacement for native set method
+     * 
+     * @param index
+     * @param value 
+     */
+    void setValue(int index, double value);
+    
+    void setLength(int newLength);
 
 }

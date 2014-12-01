@@ -11,7 +11,7 @@ public class JsoArrayString extends JsArrayString implements ArrayString
     }
 
     @Override
-    final public void insert(int index, String value)
+    final public void setValue(int index, String value)
     {
         set(index, value);
     }

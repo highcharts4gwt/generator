@@ -21,7 +21,7 @@ public class MockArray<T> extends ArrayList<T> implements Array<T>
     }
 
     @Override
-    public void insert(int index, T element)
+    public void setValue(int index, T element)
     {
         super.set(index, element);
     }
@@ -30,6 +30,11 @@ public class MockArray<T> extends ArrayList<T> implements Array<T>
     public void addToEnd(T value)
     {
         add(value);
+    }
+
+    @Override
+    public void setLength(int newLength)
+    {
     }
 
 }

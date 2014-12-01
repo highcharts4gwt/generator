@@ -11,7 +11,7 @@ public class JsoArrayNumber extends JsArrayNumber implements ArrayNumber
     }
 
     @Override
-    final public void insert(int index, double value)
+    final public void setValue(int index, double value)
     {
         set(index, value);
     }

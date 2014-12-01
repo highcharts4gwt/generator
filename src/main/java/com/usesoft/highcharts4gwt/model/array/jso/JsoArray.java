@@ -19,7 +19,7 @@ public class JsoArray<T> extends JsArray<JavaScriptObject> implements Array<T>
     }
 
     @Override
-    final public void insert(int index, T value)
+    final public void setValue(int index, T value)
     {
         set(index, (JavaScriptObject) value);
     }

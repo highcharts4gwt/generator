@@ -21,7 +21,7 @@ public class MockArrayNumber implements ArrayNumber
     }
 
     @Override
-    public void insert(int index, double element)
+    public void setValue(int index, double element)
     {
         list.set(index, element);
     }
@@ -30,6 +30,11 @@ public class MockArrayNumber implements ArrayNumber
     public void push(double value)
     {
         list.add(value);
+    }
+
+    @Override
+    public void setLength(int newLength)
+    {
     }
 
 }
