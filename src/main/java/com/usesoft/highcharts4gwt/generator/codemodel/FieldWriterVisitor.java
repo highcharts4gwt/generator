@@ -61,12 +61,6 @@ public class FieldWriterVisitor implements FieldTypeVisitor<OutputType, Void>
     }
 
     @Override
-    public Void visitOther(OutputType in)
-    {
-        return null;
-    }
-
-    @Override
     public Void visitArrayString(OutputType in)
     {
         return in.accept(new FieldArrayStringWriter(codeModel, jClass, className, option.getDefaults(), pipe, fieldName), null);
@@ -99,14 +93,6 @@ public class FieldWriterVisitor implements FieldTypeVisitor<OutputType, Void>
     @Override
     public Void visitJsonObject(OutputType in)
     {
-        // TODO should precise that this is an "object" not a string value
-        return in.accept(new FieldJsonObjectWriter(codeModel, jClass, className, option.getDefaults(), pipe, fieldName), null);
-    }
-
-    @Override
-    public Void visitCssObject(OutputType in)
-    {
-        // TODO should precise that this is an "object" not a string value
         return in.accept(new FieldJsonObjectWriter(codeModel, jClass, className, option.getDefaults(), pipe, fieldName), null);
     }
 

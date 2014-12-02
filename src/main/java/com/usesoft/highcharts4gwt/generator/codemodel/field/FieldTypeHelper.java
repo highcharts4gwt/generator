@@ -22,6 +22,7 @@ public class FieldTypeHelper
     private static final String OBJECT = "Object";
     private static final String BOOLEAN = "Boolean";
     private static final String CSSOBJECT = "CSSObject";
+    private static final String SERIES_STATES = "plotOptions.series.states";
 
     private static final Logger logger = LoggerFactory.getLogger(FieldTypeHelper.class);
 
@@ -72,7 +73,7 @@ public class FieldTypeHelper
                 out.add(FieldType.ArrayString);
             else
             {
-                out.add(FieldType.Other);
+                out.add(FieldType.DoNotTreat);
                 logger.warn("array type not supported with pipe;" + returnType + ";option;" + option);
             }
 
@@ -105,7 +106,7 @@ public class FieldTypeHelper
             {
                 // TODO treat that pseudo inheritance case
                 logger.warn("drilldown.series not treated yet;");
-                out.add(FieldType.Other);
+                out.add(FieldType.DoNotTreat);
             }
             else if (!option.isParent())
             {
@@ -119,7 +120,7 @@ public class FieldTypeHelper
         else
         {
             logger.warn("field type not supported yet;" + option.getReturnType() + ";option;" + option);
-            out.add(FieldType.Other);
+            out.add(FieldType.DoNotTreat);
         }
 
         return out;
@@ -154,7 +155,7 @@ public class FieldTypeHelper
         else if (returnType.equalsIgnoreCase(BOOLEAN))
             out.add(FieldType.Boolean);
         else if (returnType.equalsIgnoreCase(CSSOBJECT))
-            out.add(FieldType.CssObject);
+            out.add(FieldType.JsonObject);
         else if (returnType.equalsIgnoreCase(ARRAY))
         {
             // TODO ask highcharts to improve doc for those
@@ -165,10 +166,12 @@ public class FieldTypeHelper
         }
         else if (returnType.equalsIgnoreCase(COLOR))
             out.add(FieldType.String);
+        else if (returnType.equalsIgnoreCase(SERIES_STATES))
+            out.add(FieldType.Object);
         else
         {
             logger.warn("field type not supported yet;" + option.getReturnType() + ";option;" + option);
-            out.add(FieldType.Other);
+            out.add(FieldType.DoNotTreat);
         }
 
         return out;
@@ -191,7 +194,7 @@ public class FieldTypeHelper
             else if (type.equalsIgnoreCase(BOOLEAN))
                 out.add(FieldType.Boolean);
             else if (type.equalsIgnoreCase(CSSOBJECT))
-                out.add(FieldType.CssObject);
+                out.add(FieldType.JsonObject);
             else if (returnType.equalsIgnoreCase(COLOR))
                 out.add(FieldType.String);
             else if (type.equalsIgnoreCase(ARRAY))

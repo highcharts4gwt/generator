@@ -14,8 +14,6 @@ public interface FieldTypeVisitor<IN, OUT>
 
     OUT visitJsonObject(IN in);
 
-    OUT visitCssObject(IN in);
-
     OUT visitArrayString(IN in);
 
     OUT visitArrayNumber(IN in);
@@ -23,6 +21,4 @@ public interface FieldTypeVisitor<IN, OUT>
     OUT visitArrayObject(IN in);
 
     OUT visitArrayJsonObject(IN in);
-
-    OUT visitOther(IN in); // not implemented cases
 }

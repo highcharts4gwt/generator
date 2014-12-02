@@ -117,21 +117,6 @@ public enum FieldType
             return true;
         }
     },
-    Other
-    {
-        @Override
-        @CheckForNull
-        public <IN, OUT> OUT accept(FieldTypeVisitor<IN, OUT> visitor, IN in)
-        {
-            return visitor.visitOther(in);
-        }
-
-        @Override
-        public boolean isArray()
-        {
-            return false;
-        }
-    },
     Data
     {
         @Override
@@ -154,21 +139,6 @@ public enum FieldType
         public <IN, OUT> OUT accept(FieldTypeVisitor<IN, OUT> visitor, IN in)
         {
             return visitor.visitJsonObject(in);
-        }
-
-        @Override
-        public boolean isArray()
-        {
-            return false;
-        }
-    },
-    CssObject
-    {
-        @Override
-        @CheckForNull
-        public <IN, OUT> OUT accept(FieldTypeVisitor<IN, OUT> visitor, IN in)
-        {
-            return visitor.visitCssObject(in);
         }
 
         @Override
