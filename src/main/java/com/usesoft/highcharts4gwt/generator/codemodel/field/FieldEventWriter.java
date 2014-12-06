@@ -7,14 +7,18 @@ import com.sun.codemodel.JDefinedClass;
 import com.usesoft.highcharts4gwt.generator.codemodel.OutputTypeVisitor;
 import com.usesoft.highcharts4gwt.generator.graph.Option;
 
-public class FieldJsonObjectWriter extends FieldWriter implements OutputTypeVisitor<Void, Void>
+public class FieldEventWriter extends FieldWriter implements OutputTypeVisitor<Void, Void>
 {
-
     private final String defaultValue;
+    private final Option option;
+    private final String rootDirectoryPath;
 
-    public FieldJsonObjectWriter(JCodeModel codeModel, JDefinedClass jClass, String className, Option option, boolean pipe, String fieldName)
+    public FieldEventWriter(JCodeModel codeModel, JDefinedClass jClass, String className, Option option, boolean pipe, String fieldName,
+            String rootDirectoryPath)
     {
         super(codeModel, className, jClass, pipe, fieldName);
+        this.option = option;
+        this.rootDirectoryPath = rootDirectoryPath;
         this.defaultValue = option.getDefaults();
     }
 
@@ -22,7 +26,9 @@ public class FieldJsonObjectWriter extends FieldWriter implements OutputTypeVisi
     @CheckForNull
     public Void visitInterface(Void in)
     {
-        InterfaceFieldHelper.addGetterSetterDeclaration(getNames(), String.class, getJclass());
+        InterfaceFieldHelper.createEventInterface(option, getJclass()._package().name(), rootDirectoryPath);
+        InterfaceFieldHelper.createEventHandlerInterface(option, getJclass()._package().name(), rootDirectoryPath);
+
         return null;
     }
 
@@ -31,8 +37,6 @@ public class FieldJsonObjectWriter extends FieldWriter implements OutputTypeVisi
     public Void visitJso(Void in)
     {
 
-        JsoFieldHelper.writeGetterNativeCodeStringWithStringify(getNames(), String.class, getJclass(), getCodeModel(), defaultValue);
-        JsoFieldHelper.writeSetterNativeCodeWithParse(getNames(), String.class, getJclass(), getCodeModel());
         return null;
     }
 
@@ -40,20 +44,14 @@ public class FieldJsonObjectWriter extends FieldWriter implements OutputTypeVisi
     @CheckForNull
     public Void visitMock(Void in)
     {
-        MockFieldHelper.addGetterSetterDeclaration(getNames(), String.class, getJclass());
+
         return null;
     }
 
     @Override
     protected String getNameExtension()
     {
-        return "AsJsonString";
-    }
-
-    @Override
-    protected boolean isParamNameSpecial()
-    {
-        return true;
+        return "";
     }
 
 }

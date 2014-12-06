@@ -139,7 +139,7 @@ public abstract class BaseClassBuilder implements ClassBuilder
         {
             if (extendedOption != null)
                 logger.info("Adding field;" + child + "for class;" + option + ";not present in extended class;" + extendedOption);
-            fieldBuilder.addField(child, getOutputType());
+            fieldBuilder.addField(child, getOutputType(), rootDirectory);
         }
     }
 

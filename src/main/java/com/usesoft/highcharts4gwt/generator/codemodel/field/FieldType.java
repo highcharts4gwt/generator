@@ -61,7 +61,7 @@ public enum FieldType
         @CheckForNull
         public <IN, OUT> OUT accept(FieldTypeVisitor<IN, OUT> visitor, IN in)
         {
-            return visitor.visitClass(in);
+            return visitor.visitObject(in);
         }
 
         @Override
@@ -117,21 +117,6 @@ public enum FieldType
             return true;
         }
     },
-    Data
-    {
-        @Override
-        @CheckForNull
-        public <IN, OUT> OUT accept(FieldTypeVisitor<IN, OUT> visitor, IN in)
-        {
-            return visitor.visitData(in);
-        }
-
-        @Override
-        public boolean isArray()
-        {
-            return true;
-        }
-    },
     JsonObject
     {
         @Override
@@ -173,6 +158,34 @@ public enum FieldType
         public boolean isArray()
         {
             return true;
+        }
+    },
+    Function
+    {
+        @Override
+        public <IN, OUT> OUT accept(FieldTypeVisitor<IN, OUT> visitor, IN in)
+        {
+            return visitor.visitFunction(in);
+        }
+
+        @Override
+        public boolean isArray()
+        {
+            return false;
+        }
+    },
+    Event
+    {
+        @Override
+        public <IN, OUT> OUT accept(FieldTypeVisitor<IN, OUT> visitor, IN in)
+        {
+            return visitor.visitEvent(in);
+        }
+
+        @Override
+        public boolean isArray()
+        {
+            return false;
         }
     };
 

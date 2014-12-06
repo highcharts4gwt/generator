@@ -12,7 +12,20 @@ import com.usesoft.highcharts4gwt.generator.graph.Option;
 public class FieldTypesVisitor implements ReturnTypeCategoryVisitor<Option, List<FieldType>>
 {
     private static final Logger logger = LoggerFactory.getLogger(FieldTypesVisitor.class);
-    private Matcher matcher;
+    private final Matcher matcher;
+
+    public static final String COLOR = "Color";
+    public static final String ARRAY = "Array";
+    public static final String LT = "<";
+    public static final String GT = ">";
+    public static final String STRING = "String";
+    public static final String NUMBER = "Number";
+    public static final String OBJECT = "Object";
+    public static final String BOOLEAN = "Boolean";
+    public static final String CSSOBJECT = "CSSObject";
+    public static final String MIXED = "Mixed";
+    public static final String FUNCTION = "Function";
+    public static final String SERIES_STATES = "plotOptions.series.states";
 
     public FieldTypesVisitor(Matcher matcher)
     {
@@ -38,19 +51,19 @@ public class FieldTypesVisitor implements ReturnTypeCategoryVisitor<Option, List
                 out.add(FieldType.Object);
             }
         }
-        else if (returnType.equalsIgnoreCase(FieldTypeHelper.OBJECT) && !in.isParent())
+        else if (returnType.equalsIgnoreCase(OBJECT) && !in.isParent())
             out.add(FieldType.JsonObject);
-        else if (returnType.equalsIgnoreCase(FieldTypeHelper.OBJECT))
+        else if (returnType.equalsIgnoreCase(OBJECT))
             out.add(FieldType.Object);
-        else if (returnType.equalsIgnoreCase(FieldTypeHelper.NUMBER))
+        else if (returnType.equalsIgnoreCase(NUMBER))
             out.add(FieldType.Number);
-        else if (returnType.equalsIgnoreCase(FieldTypeHelper.STRING))
+        else if (returnType.equalsIgnoreCase(STRING))
             out.add(FieldType.String);
-        else if (returnType.equalsIgnoreCase(FieldTypeHelper.BOOLEAN))
+        else if (returnType.equalsIgnoreCase(BOOLEAN))
             out.add(FieldType.Boolean);
-        else if (returnType.equalsIgnoreCase(FieldTypeHelper.CSSOBJECT))
+        else if (returnType.equalsIgnoreCase(CSSOBJECT))
             out.add(FieldType.JsonObject);
-        else if (returnType.equalsIgnoreCase(FieldTypeHelper.ARRAY))
+        else if (returnType.equalsIgnoreCase(ARRAY))
         {
             // TODO ask highcharts to improve doc for those
             if (in.getFullname().equals("xAxis.categories") || in.getFullname().equals("yAxis.categories"))
@@ -58,13 +71,17 @@ public class FieldTypesVisitor implements ReturnTypeCategoryVisitor<Option, List
             else
                 out.add(FieldType.ArrayNumber);
         }
-        else if (returnType.equalsIgnoreCase(FieldTypeHelper.COLOR))
+        else if (returnType.equalsIgnoreCase(COLOR))
             out.add(FieldType.String);
-        else if (returnType.equalsIgnoreCase(FieldTypeHelper.SERIES_STATES))
+        else if (returnType.equalsIgnoreCase(SERIES_STATES))
             out.add(FieldType.Object);
-        else if (returnType.equalsIgnoreCase(FieldTypeHelper.MIXED))
+        else if (returnType.equalsIgnoreCase(MIXED))
         {
-            treatMixedCase(in, out);
+            fieldMixedCase(in, out);
+        }
+        else if (returnType.equalsIgnoreCase(FUNCTION))
+        {
+            fieldFunctionCase(in, out);
         }
         else
         {
@@ -75,7 +92,7 @@ public class FieldTypesVisitor implements ReturnTypeCategoryVisitor<Option, List
         return out;
     }
 
-    private void treatMixedCase(Option in, List<FieldType> out)
+    private void fieldMixedCase(Option in, List<FieldType> out)
     {
         if (in.getTitle().equals("stack"))
         {
@@ -90,6 +107,20 @@ public class FieldTypesVisitor implements ReturnTypeCategoryVisitor<Option, List
         }
     }
 
+    private void fieldFunctionCase(Option in, List<FieldType> out)
+    {
+        if (in.getFullname().contains("events"))
+        {
+            out.add(FieldType.Event);
+        }
+        else
+        {
+            // TODO support function case
+            logger.warn("field type not supported yet;" + in.getReturnType() + ";option;" + in);
+            out.add(FieldType.DoNotTreat);
+        }
+    }
+
     @Override
     public List<FieldType> visitSimpleWithPipe(Option in)
     {
@@ -99,19 +130,19 @@ public class FieldTypesVisitor implements ReturnTypeCategoryVisitor<Option, List
         for (int i = 1; i <= matcher.groupCount(); i++)
         {
             String type = matcher.group(i);
-            if (type.equalsIgnoreCase(FieldTypeHelper.OBJECT))
+            if (type.equalsIgnoreCase(OBJECT))
                 out.add(FieldType.JsonObject);
-            else if (type.equalsIgnoreCase(FieldTypeHelper.NUMBER))
+            else if (type.equalsIgnoreCase(NUMBER))
                 out.add(FieldType.Number);
-            else if (type.equalsIgnoreCase(FieldTypeHelper.STRING))
+            else if (type.equalsIgnoreCase(STRING))
                 out.add(FieldType.String);
-            else if (type.equalsIgnoreCase(FieldTypeHelper.BOOLEAN))
+            else if (type.equalsIgnoreCase(BOOLEAN))
                 out.add(FieldType.Boolean);
-            else if (type.equalsIgnoreCase(FieldTypeHelper.CSSOBJECT))
+            else if (type.equalsIgnoreCase(CSSOBJECT))
                 out.add(FieldType.JsonObject);
-            else if (returnType.equalsIgnoreCase(FieldTypeHelper.COLOR))
+            else if (returnType.equalsIgnoreCase(COLOR))
                 out.add(FieldType.String);
-            else if (type.equalsIgnoreCase(FieldTypeHelper.ARRAY))
+            else if (type.equalsIgnoreCase(ARRAY))
                 logger.warn("field type not supported with simple pipe;" + returnType + ";option;" + in);
             else
             {
@@ -138,20 +169,20 @@ public class FieldTypesVisitor implements ReturnTypeCategoryVisitor<Option, List
         String matching = matcher.group(0);
 
         List<FieldType> out = Lists.newArrayList();
-        if (matching.equals(FieldTypeHelper.ARRAY))
+        if (matching.equals(ARRAY))
         {
             if (in.getFullname().equals("xAxis.categories") || in.getFullname().equals("yAxis.categories"))
                 out.add(FieldType.ArrayString);
             else
                 out.add(FieldType.ArrayNumber);
         }
-        else if (arrayType.equals(FieldTypeHelper.STRING))
+        else if (arrayType.equals(STRING))
             out.add(FieldType.ArrayString);
-        else if (arrayType.equals(FieldTypeHelper.NUMBER))
+        else if (arrayType.equals(NUMBER))
             out.add(FieldType.ArrayNumber);
-        else if (arrayType.equals(FieldTypeHelper.COLOR))
+        else if (arrayType.equals(COLOR))
             out.add(FieldType.ArrayString);
-        else if (arrayType.equals(FieldTypeHelper.OBJECT))
+        else if (arrayType.equals(OBJECT))
         {
             if (in.getFullname().equals("drilldown.series"))
             {
@@ -187,13 +218,13 @@ public class FieldTypesVisitor implements ReturnTypeCategoryVisitor<Option, List
         for (int i = 1; i <= matcher.groupCount(); i++)
         {
             String type = matcher.group(i);
-            if (type.equalsIgnoreCase(FieldTypeHelper.OBJECT))
+            if (type.equalsIgnoreCase(OBJECT))
                 out.add(FieldType.ArrayObject);
-            else if (type.equalsIgnoreCase(FieldTypeHelper.NUMBER))
+            else if (type.equalsIgnoreCase(NUMBER))
                 out.add(FieldType.ArrayNumber);
-            else if (type.equalsIgnoreCase(FieldTypeHelper.STRING))
+            else if (type.equalsIgnoreCase(STRING))
                 out.add(FieldType.ArrayString);
-            else if (type.equalsIgnoreCase(FieldTypeHelper.COLOR))
+            else if (type.equalsIgnoreCase(COLOR))
                 out.add(FieldType.ArrayString);
             else
             {

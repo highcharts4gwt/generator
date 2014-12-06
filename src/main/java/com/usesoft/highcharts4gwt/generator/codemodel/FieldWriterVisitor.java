@@ -10,7 +10,7 @@ import com.usesoft.highcharts4gwt.generator.codemodel.field.FieldArrayNumberWrit
 import com.usesoft.highcharts4gwt.generator.codemodel.field.FieldArrayObjectWriter;
 import com.usesoft.highcharts4gwt.generator.codemodel.field.FieldArrayStringWriter;
 import com.usesoft.highcharts4gwt.generator.codemodel.field.FieldBooleanWriter;
-import com.usesoft.highcharts4gwt.generator.codemodel.field.FieldDataWriter;
+import com.usesoft.highcharts4gwt.generator.codemodel.field.FieldEventWriter;
 import com.usesoft.highcharts4gwt.generator.codemodel.field.FieldJsonObjectWriter;
 import com.usesoft.highcharts4gwt.generator.codemodel.field.FieldNumberWriter;
 import com.usesoft.highcharts4gwt.generator.codemodel.field.FieldObjectWriter;
@@ -30,11 +30,14 @@ public class FieldWriterVisitor implements FieldTypeVisitor<OutputType, Void>
 
     private final boolean pipe;
 
-    public FieldWriterVisitor(Option optionSpec, JCodeModel codeModel, JDefinedClass jClass, String className, boolean pipe)
+    private final String rootDirectoryPath;
+
+    public FieldWriterVisitor(Option option, JCodeModel codeModel, JDefinedClass jClass, String className, boolean pipe, String rootDirectoryPath)
     {
-        this.option = optionSpec;
+        this.option = option;
         this.pipe = pipe;
-        this.fieldName = optionSpec.getTitle();
+        this.rootDirectoryPath = rootDirectoryPath;
+        this.fieldName = option.getTitle();
         this.codeModel = codeModel;
         this.jClass = jClass;
         this.className = className;
@@ -43,33 +46,31 @@ public class FieldWriterVisitor implements FieldTypeVisitor<OutputType, Void>
     @Override
     public Void visitNumber(OutputType in)
     {
-        String defaultValue = option.getDefaults();
-
-        return in.accept(new FieldNumberWriter(codeModel, jClass, className, defaultValue, pipe, fieldName), null);
+        return in.accept(new FieldNumberWriter(codeModel, jClass, className, option, pipe, fieldName), null);
     }
 
     @Override
     public Void visitBoolean(OutputType in)
     {
-        return in.accept(new FieldBooleanWriter(codeModel, jClass, className, Boolean.parseBoolean(option.getDefaults()), pipe, fieldName), null);
+        return in.accept(new FieldBooleanWriter(codeModel, jClass, className, option, pipe, fieldName), null);
     }
 
     @Override
     public Void visitString(OutputType in)
     {
-        return in.accept(new FieldStringWriter(codeModel, jClass, className, option.getDefaults(), pipe, fieldName), null);
+        return in.accept(new FieldStringWriter(codeModel, jClass, className, option, pipe, fieldName), null);
     }
 
     @Override
     public Void visitArrayString(OutputType in)
     {
-        return in.accept(new FieldArrayStringWriter(codeModel, jClass, className, option.getDefaults(), pipe, fieldName), null);
+        return in.accept(new FieldArrayStringWriter(codeModel, jClass, className, option, pipe, fieldName), null);
     }
 
     @Override
     public Void visitArrayNumber(OutputType in)
     {
-        return in.accept(new FieldArrayNumberWriter(codeModel, jClass, className, option.getDefaults(), pipe, fieldName), null);
+        return in.accept(new FieldArrayNumberWriter(codeModel, jClass, className, option, pipe, fieldName), null);
     }
 
     @Override
@@ -79,26 +80,33 @@ public class FieldWriterVisitor implements FieldTypeVisitor<OutputType, Void>
     }
 
     @Override
-    public Void visitClass(OutputType in)
+    public Void visitObject(OutputType in)
     {
         return in.accept(new FieldObjectWriter(codeModel, jClass, className, option, pipe, fieldName), null);
     }
 
     @Override
-    public Void visitData(OutputType in)
-    {
-        return in.accept(new FieldDataWriter(codeModel, jClass, className, option.getDefaults(), pipe, fieldName), null);
-    }
-
-    @Override
     public Void visitJsonObject(OutputType in)
     {
-        return in.accept(new FieldJsonObjectWriter(codeModel, jClass, className, option.getDefaults(), pipe, fieldName), null);
+        return in.accept(new FieldJsonObjectWriter(codeModel, jClass, className, option, pipe, fieldName), null);
     }
 
     @Override
     public Void visitArrayJsonObject(OutputType in)
     {
-        return in.accept(new FieldArrayJsonObjectWriter(codeModel, className, jClass, option, pipe, fieldName), null);
+        return in.accept(new FieldArrayJsonObjectWriter(codeModel, jClass, className, option, pipe, fieldName), null);
+    }
+
+    @Override
+    public Void visitFunction(OutputType in)
+    {
+        // TODO support function
+        return null;
+    }
+
+    @Override
+    public Void visitEvent(OutputType in)
+    {
+        return in.accept(new FieldEventWriter(codeModel, jClass, className, option, pipe, fieldName, rootDirectoryPath), null);
     }
 }

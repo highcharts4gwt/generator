@@ -19,9 +19,9 @@ public class ClassRegistry
         return registry;
     }
 
-    public void put(Option optionSpec, OutputType type, JClass jClass)
+    public void put(Option option, OutputType type, JClass jClass)
     {
-        registry.put(new RegistryKey(optionSpec, type), jClass);
+        registry.put(new RegistryKey(option, type), jClass);
     }
 
     public static final ClassRegistry INSTANCE = new ClassRegistry();

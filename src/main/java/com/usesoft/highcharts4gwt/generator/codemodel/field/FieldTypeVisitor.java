@@ -8,9 +8,7 @@ public interface FieldTypeVisitor<IN, OUT>
 
     OUT visitString(IN in);
 
-    OUT visitClass(IN in);
-
-    OUT visitData(IN in);
+    OUT visitObject(IN in);
 
     OUT visitJsonObject(IN in);
 
@@ -21,4 +19,8 @@ public interface FieldTypeVisitor<IN, OUT>
     OUT visitArrayObject(IN in);
 
     OUT visitArrayJsonObject(IN in);
+
+    OUT visitFunction(IN in);
+
+    OUT visitEvent(IN in);
 }

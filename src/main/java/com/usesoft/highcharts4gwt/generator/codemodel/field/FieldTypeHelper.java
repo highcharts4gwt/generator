@@ -9,18 +9,6 @@ import com.usesoft.highcharts4gwt.generator.graph.Option;
 
 public class FieldTypeHelper
 {
-    public static final String COLOR = "Color";
-    public static final String ARRAY = "Array";
-    public static final String LT = "<";
-    public static final String GT = ">";
-    public static final String STRING = "String";
-    public static final String NUMBER = "Number";
-    public static final String OBJECT = "Object";
-    public static final String BOOLEAN = "Boolean";
-    public static final String CSSOBJECT = "CSSObject";
-    public static final String MIXED = "Mixed";
-    public static final String SERIES_STATES = "plotOptions.series.states";
-
     public static final Pattern SIMPLE_REGEXP = Pattern.compile("(\\w+)");
     public static final Pattern PIPE_REGEXP = Pattern.compile("(\\w+)\\s*(?:\\|\\s*(\\w+))+");
     public static final Pattern ARRAY_REGEXP = Pattern.compile("Array\\s*<\\s*(\\w+)\\s*>");

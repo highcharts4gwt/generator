@@ -19,13 +19,13 @@ public class FieldArrayObjectWriter extends FieldWriter implements OutputTypeVis
     private static final Logger logger = LoggerFactory.getLogger(FieldArrayObjectWriter.class);
 
     private final String defaultValue;
-    private final Option optionSpec;
+    private final Option option;
 
-    public FieldArrayObjectWriter(JCodeModel codeModel, JDefinedClass jClass, String className, Option optionSpec, boolean pipe, String fieldName)
+    public FieldArrayObjectWriter(JCodeModel codeModel, JDefinedClass jClass, String className, Option option, boolean pipe, String fieldName)
     {
         super(codeModel, className, jClass, pipe, fieldName);
-        this.optionSpec = optionSpec;
-        this.defaultValue = optionSpec.getDefaults();
+        this.option = option;
+        this.defaultValue = option.getDefaults();
     }
 
     @Override
@@ -68,11 +68,11 @@ public class FieldArrayObjectWriter extends FieldWriter implements OutputTypeVis
     private JClass getRealClass()
     {
         // use interface type
-        JClass jClass = ClassRegistry.INSTANCE.getRegistry().get(new ClassRegistry.RegistryKey(optionSpec, OutputType.Interface));
+        JClass jClass = ClassRegistry.INSTANCE.getRegistry().get(new ClassRegistry.RegistryKey(option, OutputType.Interface));
 
         if (jClass == null)
         {
-            logger.error("Could not create Array<Object> for type " + optionSpec.getFullname());
+            logger.error("Could not create Array<Object> for type " + option.getFullname());
             return null;
         }
 

@@ -5,16 +5,17 @@ import javax.annotation.CheckForNull;
 import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JDefinedClass;
 import com.usesoft.highcharts4gwt.generator.codemodel.OutputTypeVisitor;
+import com.usesoft.highcharts4gwt.generator.graph.Option;
 import com.usesoft.highcharts4gwt.model.array.api.ArrayString;
 
 public class FieldArrayStringWriter extends FieldWriter implements OutputTypeVisitor<Void, Void>
 {
     private final String defaultValue;
 
-    public FieldArrayStringWriter(JCodeModel codeModel, JDefinedClass jClass, String className, String defaultValue, boolean pipe, String fieldName)
+    public FieldArrayStringWriter(JCodeModel codeModel, JDefinedClass jClass, String className, Option option, boolean pipe, String fieldName)
     {
         super(codeModel, className, jClass, pipe, fieldName);
-        this.defaultValue = defaultValue;
+        this.defaultValue = option.getDefaults();
     }
 
     @Override

@@ -14,7 +14,7 @@ public class FieldArrayJsonObjectWriter extends FieldWriter implements OutputTyp
     private final Option option;
     private final String defaultValue;
 
-    public FieldArrayJsonObjectWriter(JCodeModel codeModel, String className, JDefinedClass jClass, Option option, boolean pipe, String fieldName)
+    public FieldArrayJsonObjectWriter(JCodeModel codeModel, JDefinedClass jClass, String className, Option option, boolean pipe, String fieldName)
     {
         super(codeModel, className, jClass, pipe, fieldName);
         this.option = option;
