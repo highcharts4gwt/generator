@@ -1,16 +1,25 @@
 package com.usesoft.highcharts4gwt.generator.codemodel.field;
 
+import java.io.File;
+import java.io.IOException;
+
 import javax.annotation.CheckForNull;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.common.base.Strings;
+import com.google.gwt.dom.client.NativeEvent;
+import com.sun.codemodel.ClassType;
 import com.sun.codemodel.JClass;
+import com.sun.codemodel.JClassAlreadyExistsException;
 import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JDefinedClass;
 import com.sun.codemodel.JMod;
+import com.usesoft.highcharts4gwt.generator.codemodel.ClassRegistry;
+import com.usesoft.highcharts4gwt.generator.codemodel.OutputType;
 import com.usesoft.highcharts4gwt.generator.codemodel.klass.NativeContentHack;
+import com.usesoft.highcharts4gwt.generator.graph.Option;
 
 public class JsoFieldHelper
 {
@@ -190,5 +199,54 @@ public class JsoFieldHelper
                 names.getParamName()));
         jDefinedClass.method(JMod.NATIVE + JMod.FINAL + JMod.PUBLIC, jDefinedClass, names.getSetterName())._throws(setterContentHack)
                 .param(type, names.getParamName());
+    }
+
+    private static String getJsniSeriesEventGetter()
+    {
+        return "/*-{\n        return this.source.chart.options.series[this.source.index];\n    }-*/";
+    }
+
+    public static void createEventJso(Option option, String packageName, String rootDirectoryPathName)
+    {
+        JCodeModel model = new JCodeModel();
+
+        try
+        {
+            JDefinedClass jClass = model._class(packageName + "." + OutputType.Jso.toString() + EventHelper.getEventNamePrefix(option)
+                    + EventHelper.EVENT_SUFFIX, ClassType.CLASS);
+
+            JClass eventClass = ClassRegistry.INSTANCE.getRegistry().get(new ClassRegistry.RegistryKey(option, OutputType.Interface));
+
+            jClass._implements(eventClass);
+            jClass._extends(NativeEvent.class);
+
+            createEventGetters(option, model, jClass);
+
+            ClassRegistry.INSTANCE.put(option, OutputType.Jso, jClass);
+
+        }
+        catch (JClassAlreadyExistsException e)
+        {
+            throw new RuntimeException(e);
+        }
+
+        try
+        {
+            model.build(new File(rootDirectoryPathName));
+        }
+        catch (IOException e)
+        {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    private static void createEventGetters(Option option, JCodeModel jCodeModel, JDefinedClass jDefinedClass)
+    {
+        NativeContentHack getterContentHack = new NativeContentHack(jCodeModel, getJsniSeriesEventGetter());
+        JClass series = ClassRegistry.INSTANCE.getRegistry().get(new ClassRegistry.RegistryKey(new Option("series", "", ""), OutputType.Interface));
+
+        jDefinedClass.method(JMod.NATIVE + JMod.FINAL + JMod.PUBLIC, series, EventHelper.GET_SERIES_METHOD_NAME)._throws(getterContentHack);
+
     }
 }

@@ -36,7 +36,7 @@ public class FieldEventWriter extends FieldWriter implements OutputTypeVisitor<V
     @CheckForNull
     public Void visitJso(Void in)
     {
-
+        JsoFieldHelper.createEventJso(option, getJclass()._package().name(), rootDirectoryPath);
         return null;
     }
 

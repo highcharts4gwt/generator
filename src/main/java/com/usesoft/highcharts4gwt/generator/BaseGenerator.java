@@ -65,73 +65,68 @@ public abstract class BaseGenerator implements Generator
         return getPropertyValue(GENERATOR_OUTPUT_ROOTDIR);
     }
 
-    private void generateClasses(OptionsData options) throws JClassAlreadyExistsException, IOException
+    private void generateClasses(OptionsData optionsData) throws JClassAlreadyExistsException, IOException
     {
-        for (OptionTree tree : options.getTrees())
+
+        List<OptionTree> trees = optionsData.getTrees();
+        if (product == Product.Highcharts)
         {
-            writeSubTree(tree.getRoot(), options);
+            // we want to build series first so that we can use this class
+            // inside events
+            trees = OptionUtils.getTreesInOrder(optionsData, "series");
         }
 
-        writeTopClass(options);
+        for (OptionTree tree : trees)
+        {
+            exploreSubTree(tree.getRoot(), optionsData);
+        }
+
+        writeTopClass(optionsData);
     }
 
-    private void writeSubTree(Option option, OptionsData options) throws IOException, JClassAlreadyExistsException
+    private void exploreSubTree(Option option, OptionsData options) throws IOException, JClassAlreadyExistsException
     {
         if (!option.isParent())
         {
-            getLogger().warn("Node but not parent ?!;" + option);
+            getLogger().warn("Not a node, cannot explore subtree;" + option);
             return;
-            // throw new RuntimeException("Not a node;" + option.getFullname());
         }
 
-        writeExtendingOptionFirst(option, options);
+        exploreExtendingOptionFirst(option, options);
 
         OptionTree tree = options.findTree(option);
 
         List<Option> children = tree.getChildren(option);
         if (children == null)
-            throw new RuntimeException("Children is null for parent option;" + option.getFullname());
+            throw new RuntimeException("No children whereas isParent" + ";" + option);
 
         for (Option child : children)
         {
-            writeChild(child, options);
+            exploreChild(child, options);
         }
 
-        writeClassForAllTypes(tree, option);
-
-        // getLogger().info("Node written;" + option);
+        writeClasses(option, tree);
     }
 
-    private void writeExtendingOptionFirst(Option option, OptionsData options) throws IOException, JClassAlreadyExistsException
+    private void exploreExtendingOptionFirst(Option option, OptionsData options) throws IOException, JClassAlreadyExistsException
     {
         Option extendedOption = options.findExtendedOption(option, optionsData);
         if (extendedOption != null)
         {
-            getLogger().info("Node;" + option + ";extends;" + extendedOption);
+            getLogger().trace("Node;" + option + ";extends;" + extendedOption);
             if (extendedOption.isParent())
-                writeSubTree(extendedOption, options);
+                exploreSubTree(extendedOption, options);
             else
-            {
                 getLogger().warn("Extended option is a leaf ?!" + extendedOption);
-                writeLeaf(extendedOption, options);
-            }
         }
     }
 
-    private void writeChild(Option option, OptionsData options) throws IOException, JClassAlreadyExistsException
+    private void exploreChild(Option option, OptionsData options) throws IOException, JClassAlreadyExistsException
     {
         if (option.isParent())
-            writeSubTree(option, options);
+            exploreSubTree(option, options);
         else
-            writeLeaf(option, options);
-    }
-
-    private void writeLeaf(Option option, OptionsData options)
-    {
-        if (option.isParent())
-            throw new RuntimeException("Leaf cannot be parent;" + option.getFullname());
-
-        // getLogger().info("Leaf written;" + option);
+            getLogger().trace("Option is a leaf, no need to create class;" + option);
     }
 
     private void writeTopClass(OptionsData options) throws IOException, JClassAlreadyExistsException
@@ -156,7 +151,7 @@ public abstract class BaseGenerator implements Generator
         }
     }
 
-    private void writeClassForAllTypes(OptionTree tree, Option option) throws IOException, JClassAlreadyExistsException
+    private void writeClasses(Option option, OptionTree tree) throws IOException, JClassAlreadyExistsException
     {
         if (!option.isParent())
             return;
@@ -164,11 +159,11 @@ public abstract class BaseGenerator implements Generator
         for (OutputType outputType : OutputType.values())
         {
             ClassBuilder builder = outputType.accept(new ClassWritterVisitor(), getRootDirectory());
-            writeClass(tree, option, builder, outputType);
+            writeClass(option, tree, builder, outputType);
         }
     }
 
-    private void writeClass(OptionTree tree, Option option, ClassBuilder builder, OutputType outputType) throws IOException, JClassAlreadyExistsException
+    private void writeClass(Option option, OptionTree tree, ClassBuilder builder, OutputType outputType) throws IOException, JClassAlreadyExistsException
     {
         if (builder != null)
         {

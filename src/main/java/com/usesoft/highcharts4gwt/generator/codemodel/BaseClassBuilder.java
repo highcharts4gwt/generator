@@ -62,7 +62,7 @@ public abstract class BaseClassBuilder implements ClassBuilder
         JClass found = ClassRegistry.INSTANCE.getRegistry().get(new ClassRegistry.RegistryKey(option, getOutputType()));
         if (found != null)
         {
-            logger.info("Already written;" + option);
+            logger.trace("Class already written;" + option);
             return;
         }
 

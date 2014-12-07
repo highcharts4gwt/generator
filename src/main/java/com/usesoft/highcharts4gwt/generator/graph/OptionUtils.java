@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.CheckForNull;
 
+import com.google.common.collect.Lists;
 import com.usesoft.highcharts4gwt.generator.codemodel.field.FieldType;
 import com.usesoft.highcharts4gwt.generator.codemodel.field.FieldTypeHelper;
 
@@ -99,6 +100,41 @@ public class OptionUtils
         if (index != -1)
             return fullName.substring(0, index).toLowerCase();
         return "";
+    }
+
+    public static List<OptionTree> getTreesInOrder(OptionsData optionData, String... rootsInOrder)
+    {
+        List<OptionTree> trees = Lists.newArrayList(optionData.getTrees());
+
+        List<OptionTree> out = Lists.newArrayList();
+
+        for (int i = 0; i < rootsInOrder.length; i++)
+        {
+            findMatchingTree(trees, out, rootsInOrder[i]);
+        }
+
+        for (OptionTree optionTree : trees)
+        {
+            out.add(optionTree);
+        }
+
+        assert (out.size() == optionData.getTrees().size());
+
+        return out;
+    }
+
+    private static void findMatchingTree(List<OptionTree> trees, List<OptionTree> out, String rootTitle)
+    {
+        for (OptionTree optionTree : trees)
+        {
+            if (optionTree.getRoot().getTitle().equals(rootTitle))
+            {
+                out.add(optionTree);
+                trees.remove(optionTree);
+                break;
+            }
+
+        }
     }
 
 }

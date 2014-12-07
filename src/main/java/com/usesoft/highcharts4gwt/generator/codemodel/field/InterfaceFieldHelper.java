@@ -12,12 +12,10 @@ import com.sun.codemodel.JMod;
 import com.usesoft.highcharts4gwt.generator.codemodel.ClassRegistry;
 import com.usesoft.highcharts4gwt.generator.codemodel.OutputType;
 import com.usesoft.highcharts4gwt.generator.graph.Option;
+import com.usesoft.highcharts4gwt.model.event.NativeEvent;
 
 public class InterfaceFieldHelper
 {
-    private static final String HANDLER_SUFFIX = "Handler";
-    private static final String EVENT_SUFFIX = "Event";
-    private static final String ON_PREFIX = "on";
 
     private InterfaceFieldHelper()
     {
@@ -43,8 +41,12 @@ public class InterfaceFieldHelper
 
         try
         {
-            JDefinedClass jClass = model._class(packageName + "." + getEventNamePrefix(option) + EVENT_SUFFIX, ClassType.INTERFACE);
+            JDefinedClass jClass = model._class(packageName + "." + EventHelper.getEventNamePrefix(option) + EventHelper.EVENT_SUFFIX, ClassType.INTERFACE);
+
+            createEventGetters(option, jClass);
+
             ClassRegistry.INSTANCE.put(option, OutputType.Interface, jClass);
+
         }
         catch (JClassAlreadyExistsException e)
         {
@@ -62,32 +64,18 @@ public class InterfaceFieldHelper
 
     }
 
-    public static String getEventNamePrefix(Option option)
+    // TODO create a specific visitor when we will have all cases ready
+    private static void createEventGetters(Option option, JDefinedClass jClass)
     {
-        // plotOptions.gauge.events.afterAnimate
-        String fullname = option.getFullname();
-
-        int i = fullname.indexOf(".events");
-
-        // plotOptions.gauge
-        String v1 = fullname.substring(0, i);
-
-        // gauge
-        int i2 = v1.lastIndexOf(".");
-        String v2 = "";
-        if (i2 != -1)
+        if (EventHelper.getType(option.getFullname()) == EventType.Series)
         {
-            v2 = v1.substring(i2 + 1, v1.length());
-            v2 = v2.substring(0, 1).toUpperCase() + v2.substring(1);
+            // equals based on fullname
+            JClass series = ClassRegistry.INSTANCE.getRegistry().get(new ClassRegistry.RegistryKey(new Option("series", "", ""), OutputType.Interface));
+            jClass._extends(NativeEvent.class);
+            jClass.method(JMod.NONE, series, EventHelper.GET_SERIES_METHOD_NAME);
         }
-        else
-        {
-            v2 = v1.substring(0, 1).toUpperCase() + v1.substring(1);
-        }
+        // TODO add point case
 
-        // GaugeClickEvent
-        String eventName = v2 + option.getTitle().substring(0, 1).toUpperCase() + option.getTitle().substring(1);
-        return eventName;
     }
 
     public static void createEventHandlerInterface(Option option, String packageName, String rootDirectoryPathName)
@@ -96,15 +84,15 @@ public class InterfaceFieldHelper
 
         try
         {
-            String eventName = getEventNamePrefix(option);
-            String fullyqualifiedName = packageName + "." + eventName + HANDLER_SUFFIX;
+            String eventName = EventHelper.getEventNamePrefix(option);
+            String fullyqualifiedName = packageName + "." + eventName + EventHelper.HANDLER_SUFFIX;
             JDefinedClass jClass = model._class(fullyqualifiedName, ClassType.INTERFACE);
 
             JClass eventClass = ClassRegistry.INSTANCE.getRegistry().get(new ClassRegistry.RegistryKey(option, OutputType.Interface));
 
-            jClass.method(JMod.NONE, void.class, ON_PREFIX + eventName).param(eventClass, paramName(eventName));
+            jClass.method(JMod.NONE, void.class, EventHelper.ON_PREFIX + eventName).param(eventClass, paramName(eventName));
 
-            ClassRegistry.INSTANCE.put(option, OutputType.Interface, jClass);
+            // ClassRegistry.INSTANCE.put(option, OutputType.Interface, jClass);
         }
         catch (JClassAlreadyExistsException e)
         {
@@ -124,6 +112,6 @@ public class InterfaceFieldHelper
 
     private static String paramName(String eventName)
     {
-        return eventName.substring(0, 1).toLowerCase() + eventName.substring(1) + EVENT_SUFFIX;
+        return eventName.substring(0, 1).toLowerCase() + eventName.substring(1) + EventHelper.EVENT_SUFFIX;
     }
 }
