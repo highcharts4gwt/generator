@@ -243,10 +243,13 @@ public class JsoFieldHelper
 
     private static void createEventGetters(Option option, JCodeModel jCodeModel, JDefinedClass jDefinedClass)
     {
-        NativeContentHack getterContentHack = new NativeContentHack(jCodeModel, getJsniSeriesEventGetter());
-        JClass series = ClassRegistry.INSTANCE.getRegistry().get(new ClassRegistry.RegistryKey(new Option("series", "", ""), OutputType.Interface));
+        if (EventHelper.getType(option.getFullname()) == EventType.Series)
+        {
+            NativeContentHack getterContentHack = new NativeContentHack(jCodeModel, getJsniSeriesEventGetter());
+            JClass series = ClassRegistry.INSTANCE.getRegistry().get(new ClassRegistry.RegistryKey(new Option("series", "", ""), OutputType.Interface));
 
-        jDefinedClass.method(JMod.NATIVE + JMod.FINAL + JMod.PUBLIC, series, EventHelper.GET_SERIES_METHOD_NAME)._throws(getterContentHack);
+            jDefinedClass.method(JMod.NATIVE + JMod.FINAL + JMod.PUBLIC, series, EventHelper.GET_SERIES_METHOD_NAME)._throws(getterContentHack);
+        }
 
     }
 }
