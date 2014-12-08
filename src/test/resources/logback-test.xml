@@ -3,7 +3,7 @@
 <configuration>
 	
  <appender name="FILE" class="ch.qos.logback.core.FileAppender">
-    <file>generator.log</file>
+    <file>C:\GitHub\highcharts4gwtorg\highcharts4gwt\generator.log</file>
 
     <encoder>
       <pattern>%d{HH:mm:ss.SSS} %-5level %logger{10} - %msg%n</pattern>

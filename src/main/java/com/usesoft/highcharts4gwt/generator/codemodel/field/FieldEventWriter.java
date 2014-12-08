@@ -27,7 +27,8 @@ public class FieldEventWriter extends FieldWriter implements OutputTypeVisitor<V
     public Void visitInterface(Void in)
     {
         InterfaceFieldHelper.createEventInterface(option, getJclass()._package().name(), rootDirectoryPath);
-        InterfaceFieldHelper.createEventHandlerInterface(option, getJclass()._package().name(), rootDirectoryPath);
+        JDefinedClass eventHandlerInterface = InterfaceFieldHelper.createEventHandlerInterface(option, getJclass()._package().name(), rootDirectoryPath);
+        InterfaceFieldHelper.addHandlerRegistrationMethods(option, getJclass(),eventHandlerInterface);
 
         return null;
     }

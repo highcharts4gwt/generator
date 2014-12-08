@@ -11,6 +11,7 @@ public class EventHelper
     public static final String EVENT_SUFFIX = "Event";
     public static final String ON_PREFIX = "on";
     public static final String GET_SERIES_METHOD_NAME = "getSeries";
+    public static final String ADD_HANDLER_METHOD_PREFIX = "add";
 
     public static final Pattern SERIES_EVENTS_PATTERN = Pattern.compile(".*plotOptions\\.\\w+\\.events.*");
 

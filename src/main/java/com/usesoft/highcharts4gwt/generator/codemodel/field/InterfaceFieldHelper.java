@@ -42,7 +42,7 @@ public class InterfaceFieldHelper
         try
         {
             JDefinedClass jClass = model._class(packageName + "." + EventHelper.getEventNamePrefix(option) + EventHelper.EVENT_SUFFIX, ClassType.INTERFACE);
-            //jClass._extends(NativeEvent.class);
+            // jClass._extends(NativeEvent.class);
             createEventGetters(option, jClass);
 
             ClassRegistry.INSTANCE.put(option, OutputType.Interface, jClass);
@@ -77,15 +77,18 @@ public class InterfaceFieldHelper
 
     }
 
-    public static void createEventHandlerInterface(Option option, String packageName, String rootDirectoryPathName)
+    public static JDefinedClass createEventHandlerInterface(Option option, String packageName, String rootDirectoryPathName)
     {
         JCodeModel model = new JCodeModel();
+
+        JDefinedClass jClass = null;
 
         try
         {
             String eventName = EventHelper.getEventNamePrefix(option);
-            String fullyqualifiedName = packageName + "." + eventName + EventHelper.HANDLER_SUFFIX;
-            JDefinedClass jClass = model._class(fullyqualifiedName, ClassType.INTERFACE);
+            String handlerName = eventName + EventHelper.HANDLER_SUFFIX;
+            String fullyqualifiedName = packageName + "." + handlerName;
+            jClass = model._class(fullyqualifiedName, ClassType.INTERFACE);
 
             JClass eventClass = ClassRegistry.INSTANCE.getRegistry().get(new ClassRegistry.RegistryKey(option, OutputType.Interface));
 
@@ -107,10 +110,21 @@ public class InterfaceFieldHelper
             throw new RuntimeException(e);
         }
 
+        return jClass;
+
     }
 
     private static String paramName(String eventName)
     {
         return eventName.substring(0, 1).toLowerCase() + eventName.substring(1) + EventHelper.EVENT_SUFFIX;
+    }
+
+    public static void addHandlerRegistrationMethods(Option option, JDefinedClass jClass, JDefinedClass eventHandlerInterface)
+    {
+        
+        //http://jsfiddle.net/gv2yp218/
+        String className = eventHandlerInterface.name();
+        String paramName = className.substring(0, 1).toLowerCase() + className.substring(1);
+        jClass.method(JMod.NONE, void.class, EventHelper.ADD_HANDLER_METHOD_PREFIX + className).param(eventHandlerInterface, paramName(paramName));
     }
 }
