@@ -42,7 +42,7 @@ public class InterfaceFieldHelper
         try
         {
             JDefinedClass jClass = model._class(packageName + "." + EventHelper.getEventNamePrefix(option) + EventHelper.EVENT_SUFFIX, ClassType.INTERFACE);
-
+            //jClass._extends(NativeEvent.class);
             createEventGetters(option, jClass);
 
             ClassRegistry.INSTANCE.put(option, OutputType.Interface, jClass);
@@ -71,7 +71,6 @@ public class InterfaceFieldHelper
         {
             // equals based on fullname
             JClass series = ClassRegistry.INSTANCE.getRegistry().get(new ClassRegistry.RegistryKey(new Option("series", "", ""), OutputType.Interface));
-            jClass._extends(NativeEvent.class);
             jClass.method(JMod.NONE, series, EventHelper.GET_SERIES_METHOD_NAME);
         }
         // TODO add point case
