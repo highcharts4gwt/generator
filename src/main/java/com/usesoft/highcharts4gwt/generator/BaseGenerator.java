@@ -15,7 +15,7 @@ import org.json.JSONArray;
 import org.slf4j.Logger;
 
 import com.sun.codemodel.JClassAlreadyExistsException;
-import com.usesoft.highcharts4gwt.generator.codemodel.ClassBuilder;
+import com.usesoft.highcharts4gwt.generator.codemodel.ClassWriter;
 import com.usesoft.highcharts4gwt.generator.codemodel.OutputType;
 import com.usesoft.highcharts4gwt.generator.graph.Option;
 import com.usesoft.highcharts4gwt.generator.graph.OptionTree;
@@ -133,7 +133,7 @@ public abstract class BaseGenerator implements Generator
     {
         for (OutputType outputType : OutputType.values())
         {
-            ClassBuilder builder = outputType.accept(new ClassWritterVisitor(), getRootDirectory());
+            ClassWriter builder = outputType.accept(new ClassWritterVisitor(), getRootDirectory());
             if (builder != null)
             {
                 String fullname = "chartOptions";
@@ -146,7 +146,7 @@ public abstract class BaseGenerator implements Generator
                 }
                 topOptionTree.addParentChildren(option, children);
                 builder.setPackageName(computePackageName(option, outputType)).setOption(option, options).setTree(topOptionTree);
-                builder.build();
+                builder.write();
             }
         }
     }
@@ -158,12 +158,12 @@ public abstract class BaseGenerator implements Generator
 
         for (OutputType outputType : OutputType.values())
         {
-            ClassBuilder builder = outputType.accept(new ClassWritterVisitor(), getRootDirectory());
+            ClassWriter builder = outputType.accept(new ClassWritterVisitor(), getRootDirectory());
             writeClass(option, tree, builder, outputType);
         }
     }
 
-    private void writeClass(Option option, OptionTree tree, ClassBuilder builder, OutputType outputType) throws IOException, JClassAlreadyExistsException
+    private void writeClass(Option option, OptionTree tree, ClassWriter builder, OutputType outputType) throws IOException, JClassAlreadyExistsException
     {
         if (builder != null)
         {
@@ -173,7 +173,7 @@ public abstract class BaseGenerator implements Generator
             Option extendedOption = optionsData.findExtendedOption(option, optionsData);
             if (extendedOption != null)
                 builder.setExtendedOption(extendedOption);
-            builder.build();
+            builder.write();
         }
     }
 

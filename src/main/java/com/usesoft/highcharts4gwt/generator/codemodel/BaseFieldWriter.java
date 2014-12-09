@@ -11,9 +11,9 @@ import com.usesoft.highcharts4gwt.generator.codemodel.field.FieldType;
 import com.usesoft.highcharts4gwt.generator.codemodel.field.FieldTypeHelper;
 import com.usesoft.highcharts4gwt.generator.graph.Option;
 
-public final class BaseFieldBuilder implements FieldBuilder
+public final class BaseFieldWriter implements FieldWriter
 {
-    private static final Logger logger = LoggerFactory.getLogger(BaseClassBuilder.class);
+    private static final Logger logger = LoggerFactory.getLogger(BaseClassWriter.class);
 
     private JCodeModel codeModel;
     private JDefinedClass jClass;
@@ -42,7 +42,7 @@ public final class BaseFieldBuilder implements FieldBuilder
     }
 
     @Override
-    public void addField(Option option, OutputType outputType, String rootDirectoryPath)
+    public void writeField(Option option, OutputType outputType, String rootDirectoryPath)
     {
         List<FieldType> types = FieldTypeHelper.findTypes(option);
         boolean pipe = false;
@@ -51,7 +51,6 @@ public final class BaseFieldBuilder implements FieldBuilder
 
         for (FieldType fieldType : types)
         {
-
             fieldType.accept(new FieldWriterVisitor(option, codeModel, jClass, className, pipe, rootDirectoryPath), outputType);
         }
     }

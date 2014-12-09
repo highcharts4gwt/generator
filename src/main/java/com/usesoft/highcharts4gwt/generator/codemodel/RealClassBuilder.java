@@ -5,7 +5,7 @@ import com.sun.codemodel.JClass;
 import com.sun.codemodel.JClassAlreadyExistsException;
 import com.sun.codemodel.JDefinedClass;
 
-public abstract class RealClassBuilder extends BaseClassBuilder
+public abstract class RealClassBuilder extends BaseClassWriter
 {
     public RealClassBuilder(String rootDirectory) throws JClassAlreadyExistsException
     {

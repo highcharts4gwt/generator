@@ -1,17 +1,17 @@
 package com.usesoft.highcharts4gwt.generator;
 
 import com.sun.codemodel.JClassAlreadyExistsException;
-import com.usesoft.highcharts4gwt.generator.codemodel.ClassBuilder;
+import com.usesoft.highcharts4gwt.generator.codemodel.ClassWriter;
 import com.usesoft.highcharts4gwt.generator.codemodel.OutputTypeVisitor;
 import com.usesoft.highcharts4gwt.generator.codemodel.klass.InterfaceClassBuilder;
 import com.usesoft.highcharts4gwt.generator.codemodel.klass.JsoClassBuilder;
 import com.usesoft.highcharts4gwt.generator.codemodel.klass.MockClassBuilder;
 
-public class ClassWritterVisitor implements OutputTypeVisitor<String, ClassBuilder>
+public class ClassWritterVisitor implements OutputTypeVisitor<String, ClassWriter>
 {
 
     @Override
-    public ClassBuilder visitInterface(String in)
+    public ClassWriter visitInterface(String in)
     {
         try
         {
@@ -24,7 +24,7 @@ public class ClassWritterVisitor implements OutputTypeVisitor<String, ClassBuild
     }
 
     @Override
-    public ClassBuilder visitJso(String in)
+    public ClassWriter visitJso(String in)
     {
         try
         {
@@ -37,7 +37,7 @@ public class ClassWritterVisitor implements OutputTypeVisitor<String, ClassBuild
     }
 
     @Override
-    public ClassBuilder visitMock(String in)
+    public ClassWriter visitMock(String in)
     {
         try
         {

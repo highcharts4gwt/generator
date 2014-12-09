@@ -31,6 +31,12 @@ public class FieldObjectWriter extends FieldWriter implements OutputTypeVisitor<
     {
 
         InterfaceFieldHelper.addGetterSetterDeclaration(getNames(), interfaceJClass, getJclass());
+
+        // For events, need to add handler on series object which are below
+        String fullName = option.getFullname();
+        JDefinedClass jClass = (JDefinedClass) ClassRegistry.INSTANCE.getRegistry().get(
+                        new ClassRegistry.RegistryKey(new Option(fullName, "", ""), OutputType.Interface));
+        InterfaceFieldHelper.addEventHandlerRegistrationMethods(option, jClass);
         return null;
     }
 

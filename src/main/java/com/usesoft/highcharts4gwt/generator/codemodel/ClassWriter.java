@@ -7,15 +7,15 @@ import com.usesoft.highcharts4gwt.generator.graph.Option;
 import com.usesoft.highcharts4gwt.generator.graph.OptionTree;
 import com.usesoft.highcharts4gwt.generator.graph.OptionsData;
 
-public interface ClassBuilder
+public interface ClassWriter
 {
-    ClassBuilder setPackageName(String packageName);
+    ClassWriter setPackageName(String packageName);
 
-    void build() throws IOException, JClassAlreadyExistsException;
+    void write() throws IOException, JClassAlreadyExistsException;
 
-    ClassBuilder setOption(Option optionSpec, OptionsData optionsData);
+    ClassWriter setOption(Option optionSpec, OptionsData optionsData);
 
-    ClassBuilder setTree(OptionTree tree);
+    ClassWriter setTree(OptionTree tree);
 
     void setExtendedOption(Option extendedOption);
 

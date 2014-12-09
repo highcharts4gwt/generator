@@ -57,4 +57,18 @@ public class EventHelper
         String eventName = v2 + option.getTitle().substring(0, 1).toUpperCase() + option.getTitle().substring(1);
         return eventName;
     }
+
+    public static String paramName(String eventName)
+    {
+        return eventName.substring(0, 1).toLowerCase() + eventName.substring(1) + EventHelper.EVENT_SUFFIX;
+    }
+
+    public static String getRegistryKey(Option option)
+    {
+        int i1 = option.getFullname().lastIndexOf(".");
+        String sub1 = option.getFullname().substring(0, i1);
+        int i2 = sub1.lastIndexOf(".");
+        String sub2 = sub1.substring(0, i2);
+        return sub2;
+    }
 }

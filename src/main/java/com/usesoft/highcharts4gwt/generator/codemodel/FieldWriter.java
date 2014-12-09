@@ -4,9 +4,9 @@ import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JDefinedClass;
 import com.usesoft.highcharts4gwt.generator.graph.Option;
 
-public interface FieldBuilder
+public interface FieldWriter
 {
-    void addField(Option optionSpec, OutputType outputType, String rootDirectoryPath);
+    void writeField(Option option, OutputType outputType, String rootDirectoryPath);
 
     void setCodeModel(JCodeModel codeModel);
 

@@ -3,10 +3,10 @@ package com.usesoft.highcharts4gwt.generator.codemodel.klass;
 import com.sun.codemodel.ClassType;
 import com.sun.codemodel.JClassAlreadyExistsException;
 import com.sun.codemodel.JDefinedClass;
-import com.usesoft.highcharts4gwt.generator.codemodel.BaseClassBuilder;
+import com.usesoft.highcharts4gwt.generator.codemodel.BaseClassWriter;
 import com.usesoft.highcharts4gwt.generator.codemodel.OutputType;
 
-public class InterfaceClassBuilder extends BaseClassBuilder
+public class InterfaceClassBuilder extends BaseClassWriter
 {
     // private static final String CLASS_PREFIX = "api";
 

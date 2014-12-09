@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.common.base.Strings;
+import com.google.common.collect.Lists;
 import com.sun.codemodel.ClassType;
 import com.sun.codemodel.JClass;
 import com.sun.codemodel.JClassAlreadyExistsException;
@@ -21,9 +22,9 @@ import com.usesoft.highcharts4gwt.generator.graph.OptionTree;
 import com.usesoft.highcharts4gwt.generator.graph.OptionUtils;
 import com.usesoft.highcharts4gwt.generator.graph.OptionsData;
 
-public abstract class BaseClassBuilder implements ClassBuilder
+public abstract class BaseClassWriter implements ClassWriter
 {
-    private static final Logger logger = LoggerFactory.getLogger(BaseClassBuilder.class);
+    private static final Logger logger = LoggerFactory.getLogger(BaseClassWriter.class);
 
     @CheckForNull
     private JCodeModel codeModel;
@@ -44,20 +45,20 @@ public abstract class BaseClassBuilder implements ClassBuilder
     @CheckForNull
     private OptionTree tree;
 
-    private final BaseFieldBuilder fieldBuilder;
+    private final BaseFieldWriter fieldWriter;
 
     private Option extendedOption;
 
     private OptionsData optionsData;
 
-    public BaseClassBuilder(String rootDirectory) throws JClassAlreadyExistsException
+    public BaseClassWriter(String rootDirectory) throws JClassAlreadyExistsException
     {
         this.rootDirectory = rootDirectory;
-        fieldBuilder = new BaseFieldBuilder();
+        fieldWriter = new BaseFieldWriter();
     }
 
     @Override
-    public void build() throws IOException, JClassAlreadyExistsException
+    public void write() throws IOException, JClassAlreadyExistsException
     {
         JClass found = ClassRegistry.INSTANCE.getRegistry().get(new ClassRegistry.RegistryKey(option, getOutputType()));
         if (found != null)
@@ -74,7 +75,7 @@ public abstract class BaseClassBuilder implements ClassBuilder
         if (tree == null)
             throw new RuntimeException("Need to set the tree to build a class");
 
-        buildFields();
+        writeFields();
 
         writeClassToFileSystem();
 
@@ -105,49 +106,62 @@ public abstract class BaseClassBuilder implements ClassBuilder
             codeModel.build(new File(rootDirectory));
     }
 
-    private void buildFields()
+    private void writeFields()
     {
         initFieldBuilder();
-
-        List<Option> existingChildren = getFieldFromExtendedOptionRecursive(extendedOption, optionsData);
 
         if (tree == null || option == null)
             throw new RuntimeException("tree/option should not be null");
 
-        List<Option> children = tree.getChildren(option);
+        List<Option> fieldToAdd = findFieldToReallyAdd(tree.getChildren(option), getFieldFromExtendedOptionRecursive(extendedOption, optionsData));
 
+        for (Option option : fieldToAdd)
+        {
+            fieldWriter.writeField(option, getOutputType(), rootDirectory);
+        }
+    }
+
+    private List<Option> findFieldToReallyAdd(List<Option> children, List<Option> extendingChildren)
+    {
+        List<Option> options = Lists.newArrayList();
         if (children != null)
         {
             for (Option child : children)
             {
-                addField(existingChildren, child);
+                if(isFieldNeeded(extendingChildren, child, options))
+                    options.add(child);
             }
         }
+        return options;
     }
 
-    private void addField(List<Option> existingChildren, Option child)
+    private boolean isFieldNeeded(List<Option> existingChildren, Option child, List<Option> out)
     {
         String optionName = child.getTitle();
         boolean alreadyInExtended = false;
         for (Option existingChild : existingChildren)
         {
             if (existingChild.getTitle().equals(optionName))
+            {
                 alreadyInExtended = true;
+                break;
+            }
         }
 
         if (!alreadyInExtended)
         {
             if (extendedOption != null)
                 logger.info("Adding field;" + child + "for class;" + option + ";not present in extended class;" + extendedOption);
-            fieldBuilder.addField(child, getOutputType(), rootDirectory);
+            return true;
         }
+        return false;
     }
 
     private void initFieldBuilder()
     {
-        fieldBuilder.setJclass(jClass);
-        fieldBuilder.setCodeModel(codeModel);
-        fieldBuilder.setClassName(getPrefix() + className);
+        fieldWriter.setJclass(jClass);
+        fieldWriter.setCodeModel(codeModel);
+        fieldWriter.setClassName(getPrefix() + className);
     }
 
     private static List<Option> getFieldFromExtendedOptionRecursive(Option extendedOption, OptionsData optionsData)
@@ -170,14 +184,14 @@ public abstract class BaseClassBuilder implements ClassBuilder
     }
 
     @Override
-    public ClassBuilder setPackageName(String packageName)
+    public ClassWriter setPackageName(String packageName)
     {
         this.packageName = packageName;
         return this;
     }
 
     @Override
-    public ClassBuilder setOption(Option optionSpec, OptionsData optionsData)
+    public ClassWriter setOption(Option optionSpec, OptionsData optionsData)
     {
         this.option = optionSpec;
         this.optionsData = optionsData;
@@ -186,7 +200,7 @@ public abstract class BaseClassBuilder implements ClassBuilder
     }
 
     @Override
-    public ClassBuilder setTree(OptionTree tree)
+    public ClassWriter setTree(OptionTree tree)
     {
         this.tree = tree;
         return this;

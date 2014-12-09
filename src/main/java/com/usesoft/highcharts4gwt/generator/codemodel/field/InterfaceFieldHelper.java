@@ -2,6 +2,7 @@ package com.usesoft.highcharts4gwt.generator.codemodel.field;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import com.sun.codemodel.ClassType;
 import com.sun.codemodel.JClass;
@@ -10,6 +11,7 @@ import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JDefinedClass;
 import com.sun.codemodel.JMod;
 import com.usesoft.highcharts4gwt.generator.codemodel.ClassRegistry;
+import com.usesoft.highcharts4gwt.generator.codemodel.EventRegistry;
 import com.usesoft.highcharts4gwt.generator.codemodel.OutputType;
 import com.usesoft.highcharts4gwt.generator.graph.Option;
 import com.usesoft.highcharts4gwt.model.event.NativeEvent;
@@ -92,9 +94,10 @@ public class InterfaceFieldHelper
 
             JClass eventClass = ClassRegistry.INSTANCE.getRegistry().get(new ClassRegistry.RegistryKey(option, OutputType.Interface));
 
-            jClass.method(JMod.NONE, void.class, EventHelper.ON_PREFIX + eventName).param(eventClass, paramName(eventName));
+            jClass.method(JMod.NONE, void.class, EventHelper.ON_PREFIX + eventName).param(eventClass, EventHelper.paramName(eventName));
 
-            // ClassRegistry.INSTANCE.put(option, OutputType.Interface, jClass);
+            EventRegistry.INSTANCE.put(EventHelper.getRegistryKey(option), jClass);
+
         }
         catch (JClassAlreadyExistsException e)
         {
@@ -114,17 +117,20 @@ public class InterfaceFieldHelper
 
     }
 
-    private static String paramName(String eventName)
+    public static void addEventHandlerRegistrationMethods(Option option, JDefinedClass jClass)
     {
-        return eventName.substring(0, 1).toLowerCase() + eventName.substring(1) + EventHelper.EVENT_SUFFIX;
-    }
 
-    public static void addHandlerRegistrationMethods(Option option, JDefinedClass jClass, JDefinedClass eventHandlerInterface)
-    {
-        
-        //http://jsfiddle.net/gv2yp218/
-        String className = eventHandlerInterface.name();
-        String paramName = className.substring(0, 1).toLowerCase() + className.substring(1);
-        jClass.method(JMod.NONE, void.class, EventHelper.ADD_HANDLER_METHOD_PREFIX + className).param(eventHandlerInterface, paramName(paramName));
+        List<JClass> list = EventRegistry.INSTANCE.getRegistry().get(option.getFullname());
+        if (list != null)
+        {
+            for (JClass handlerClass : list)
+            {
+                String handlerClassName = handlerClass.name();
+                String paramName = handlerClassName.substring(0, 1).toLowerCase() + handlerClassName.substring(1);
+                jClass.method(JMod.NONE, void.class, EventHelper.ADD_HANDLER_METHOD_PREFIX + handlerClassName).param(handlerClass,
+                                EventHelper.paramName(paramName));
+            }
+        }
+
     }
 }
