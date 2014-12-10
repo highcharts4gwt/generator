@@ -138,6 +138,9 @@ public abstract class BaseClassWriter implements ClassWriter
     private boolean isFieldNeeded(List<Option> existingChildren, Option child, List<Option> out)
     {
         String optionName = child.getTitle();
+        //special case for events
+        if (child.getFullname().endsWith("events." + optionName) || child.getFullname().endsWith("events"))
+            return true;
         boolean alreadyInExtended = false;
         for (Option existingChild : existingChildren)
         {

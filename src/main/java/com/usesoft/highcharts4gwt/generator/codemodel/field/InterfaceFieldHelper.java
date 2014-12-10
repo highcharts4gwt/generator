@@ -4,12 +4,16 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.sun.codemodel.ClassType;
 import com.sun.codemodel.JClass;
 import com.sun.codemodel.JClassAlreadyExistsException;
 import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JDefinedClass;
 import com.sun.codemodel.JMod;
+import com.usesoft.highcharts4gwt.generator.codemodel.BaseClassWriter;
 import com.usesoft.highcharts4gwt.generator.codemodel.ClassRegistry;
 import com.usesoft.highcharts4gwt.generator.codemodel.EventRegistry;
 import com.usesoft.highcharts4gwt.generator.codemodel.OutputType;
@@ -18,6 +22,7 @@ import com.usesoft.highcharts4gwt.model.event.NativeEvent;
 
 public class InterfaceFieldHelper
 {
+    private static final Logger logger = LoggerFactory.getLogger(InterfaceFieldHelper.class);
 
     private InterfaceFieldHelper()
     {
@@ -97,6 +102,7 @@ public class InterfaceFieldHelper
             jClass.method(JMod.NONE, void.class, EventHelper.ON_PREFIX + eventName).param(eventClass, EventHelper.paramName(eventName));
 
             EventRegistry.INSTANCE.put(EventHelper.getRegistryKey(option), jClass);
+            logger.info("Handler created;" + handlerName);
 
         }
         catch (JClassAlreadyExistsException e)
@@ -127,8 +133,7 @@ public class InterfaceFieldHelper
             {
                 String handlerClassName = handlerClass.name();
                 String paramName = handlerClassName.substring(0, 1).toLowerCase() + handlerClassName.substring(1);
-                jClass.method(JMod.NONE, void.class, EventHelper.ADD_HANDLER_METHOD_PREFIX + handlerClassName).param(handlerClass,
-                                EventHelper.paramName(paramName));
+                jClass.method(JMod.NONE, void.class, EventHelper.ADD_HANDLER_METHOD_PREFIX + handlerClassName).param(handlerClass, paramName);
             }
         }
 

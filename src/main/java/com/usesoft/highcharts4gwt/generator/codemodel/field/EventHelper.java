@@ -67,8 +67,8 @@ public class EventHelper
     {
         int i1 = option.getFullname().lastIndexOf(".");
         String sub1 = option.getFullname().substring(0, i1);
-        int i2 = sub1.lastIndexOf(".");
-        String sub2 = sub1.substring(0, i2);
-        return sub2;
+//        int i2 = sub1.lastIndexOf(".");
+//        String sub2 = sub1.substring(0, i2);
+        return sub1;
     }
 }

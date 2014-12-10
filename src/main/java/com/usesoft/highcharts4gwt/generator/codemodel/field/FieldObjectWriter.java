@@ -30,13 +30,17 @@ public class FieldObjectWriter extends FieldWriter implements OutputTypeVisitor<
     public Void visitInterface(Void in)
     {
 
-        InterfaceFieldHelper.addGetterSetterDeclaration(getNames(), interfaceJClass, getJclass());
-
-        // For events, need to add handler on series object which are below
+        // For events, need to add handler on series object
         String fullName = option.getFullname();
-        JDefinedClass jClass = (JDefinedClass) ClassRegistry.INSTANCE.getRegistry().get(
-                        new ClassRegistry.RegistryKey(new Option(fullName, "", ""), OutputType.Interface));
-        InterfaceFieldHelper.addEventHandlerRegistrationMethods(option, jClass);
+        if (fullName.endsWith("events"))
+        {
+            InterfaceFieldHelper.addEventHandlerRegistrationMethods(option, getJclass());
+        }
+        else
+        {
+            InterfaceFieldHelper.addGetterSetterDeclaration(getNames(), interfaceJClass, getJclass());
+        }
+
         return null;
     }
 
@@ -44,8 +48,16 @@ public class FieldObjectWriter extends FieldWriter implements OutputTypeVisitor<
     @CheckForNull
     public Void visitJso(Void in)
     {
-        JsoFieldHelper.writeGetterNativeCodeObject(getNames(), interfaceJClass, getJclass(), getCodeModel(), defaultValue);
-        JsoFieldHelper.writeSetterNativeCode(getNames(), interfaceJClass, getJclass(), getCodeModel());
+        String fullName = option.getFullname();
+        if (fullName.endsWith("events"))
+        {
+
+        }
+        else
+        {
+            JsoFieldHelper.writeGetterNativeCodeObject(getNames(), interfaceJClass, getJclass(), getCodeModel(), defaultValue);
+            JsoFieldHelper.writeSetterNativeCode(getNames(), interfaceJClass, getJclass(), getCodeModel());
+        }
         return null;
     }
 
@@ -53,7 +65,16 @@ public class FieldObjectWriter extends FieldWriter implements OutputTypeVisitor<
     @CheckForNull
     public Void visitMock(Void in)
     {
-        MockFieldHelper.addGetterSetterDeclaration(getNames(), interfaceJClass, getJclass());
+        String fullName = option.getFullname();
+        if (fullName.endsWith("events"))
+        {
+
+        }
+        else
+        {
+
+            MockFieldHelper.addGetterSetterDeclaration(getNames(), interfaceJClass, getJclass());
+        }
         return null;
     }
 
