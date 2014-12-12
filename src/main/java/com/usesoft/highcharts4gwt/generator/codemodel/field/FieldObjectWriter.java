@@ -16,11 +16,13 @@ public class FieldObjectWriter extends FieldWriter implements OutputTypeVisitor<
     private final String defaultValue;
     private final Option option;
     private final JClass interfaceJClass;
+    private String fullName;
 
     public FieldObjectWriter(JCodeModel codeModel, JDefinedClass jClass, String className, Option option, boolean pipe, String fieldName)
     {
         super(codeModel, className, jClass, pipe, fieldName);
         this.option = option;
+        fullName = option.getFullname();
         this.defaultValue = option.getDefaults();
         interfaceJClass = ClassRegistry.INSTANCE.getRegistry().get(new ClassRegistry.RegistryKey(this.option, OutputType.Interface));
     }
@@ -29,9 +31,6 @@ public class FieldObjectWriter extends FieldWriter implements OutputTypeVisitor<
     @CheckForNull
     public Void visitInterface(Void in)
     {
-
-        // For events, need to add handler on series object
-        String fullName = option.getFullname();
         if (fullName.endsWith("events"))
         {
             InterfaceFieldHelper.addEventHandlerRegistrationMethods(option, getJclass());
@@ -48,10 +47,9 @@ public class FieldObjectWriter extends FieldWriter implements OutputTypeVisitor<
     @CheckForNull
     public Void visitJso(Void in)
     {
-        String fullName = option.getFullname();
         if (fullName.endsWith("events"))
         {
-
+            JsoFieldHelper.addEventHandlerRegistrationMethods(option, getJclass(), getCodeModel());
         }
         else
         {
@@ -65,10 +63,9 @@ public class FieldObjectWriter extends FieldWriter implements OutputTypeVisitor<
     @CheckForNull
     public Void visitMock(Void in)
     {
-        String fullName = option.getFullname();
         if (fullName.endsWith("events"))
         {
-
+            MockFieldHelper.addEventHandlerRegistrationMethods(option, getJclass(), getCodeModel());
         }
         else
         {

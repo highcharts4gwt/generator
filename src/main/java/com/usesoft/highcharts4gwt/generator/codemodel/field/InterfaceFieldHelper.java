@@ -13,12 +13,10 @@ import com.sun.codemodel.JClassAlreadyExistsException;
 import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JDefinedClass;
 import com.sun.codemodel.JMod;
-import com.usesoft.highcharts4gwt.generator.codemodel.BaseClassWriter;
 import com.usesoft.highcharts4gwt.generator.codemodel.ClassRegistry;
 import com.usesoft.highcharts4gwt.generator.codemodel.EventRegistry;
 import com.usesoft.highcharts4gwt.generator.codemodel.OutputType;
 import com.usesoft.highcharts4gwt.generator.graph.Option;
-import com.usesoft.highcharts4gwt.model.event.NativeEvent;
 
 public class InterfaceFieldHelper
 {

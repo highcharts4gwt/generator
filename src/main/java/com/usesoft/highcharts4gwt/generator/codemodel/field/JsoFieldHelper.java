@@ -2,6 +2,7 @@ package com.usesoft.highcharts4gwt.generator.codemodel.field;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import javax.annotation.CheckForNull;
 
@@ -15,8 +16,11 @@ import com.sun.codemodel.JClass;
 import com.sun.codemodel.JClassAlreadyExistsException;
 import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JDefinedClass;
+import com.sun.codemodel.JMethod;
 import com.sun.codemodel.JMod;
+import com.sun.codemodel.JVar;
 import com.usesoft.highcharts4gwt.generator.codemodel.ClassRegistry;
+import com.usesoft.highcharts4gwt.generator.codemodel.EventRegistry;
 import com.usesoft.highcharts4gwt.generator.codemodel.OutputType;
 import com.usesoft.highcharts4gwt.generator.codemodel.klass.NativeContentHack;
 import com.usesoft.highcharts4gwt.generator.graph.Option;
@@ -213,6 +217,25 @@ public class JsoFieldHelper
         return "/*-{\n        return this.source.chart.options.series[this.source.index];\n    }-*/";
     }
 
+    private static String getJsniEventHandler(String eventName, String handlerMethodName, String handlerClassFqn, String eventTypeFqn)
+    {
+        String paramName = "this";
+
+        return
+              "\n        " + "/*-{"
+            + "\n            " + "return $wnd.jQuery.extend(true, "+paramName+", "
+            + "\n            " + "{"
+            + "\n                " + "events: {"
+            + "\n                    " + eventName +": function(event) {"
+            + "\n                        " + "handler.@"+handlerClassFqn+"::"+handlerMethodName+"(L"+eventTypeFqn+";)("
+            + "\n                            " + "$wnd.jQuery.extend(true, event, {source:this})"
+            + "\n                         "+ ");"
+            + "\n                     "+ "}"
+            + "\n                 "+ "}"
+            + "\n             "+ "});"
+            + "\n        " + "}-*/;";
+    }
+
     public static void createEventJso(Option option, String packageName, String rootDirectoryPathName)
     {
         JCodeModel model = new JCodeModel();
@@ -260,5 +283,68 @@ public class JsoFieldHelper
             jDefinedClass.method(JMod.NATIVE + JMod.FINAL + JMod.PUBLIC, series, EventHelper.GET_SERIES_METHOD_NAME)._throws(getterContentHack);
         }
 
+    }
+
+    public static void addEventHandlerRegistrationMethods(Option option, JDefinedClass jClass, JCodeModel jCodeModel)
+    {
+        List<JClass> list = EventRegistry.INSTANCE.getRegistry().get(option.getFullname());
+        if (list != null)
+        {
+            for (JClass handlerClass : list)
+            {
+                String eventName = computeEventName(handlerClass);
+                String handlerMethodName = computeHandlerMethodName(handlerClass);
+                String eventFqn = computeEventFqn(handlerClass);
+                String handlerClassName = handlerClass.name();
+                String paramName = "handler";
+
+                String jsniEventHandlerContent = getJsniEventHandler(eventName, handlerMethodName, handlerClass.fullName(), eventFqn);
+                NativeContentHack addHandlerMethodContent = new NativeContentHack(jCodeModel, jsniEventHandlerContent);
+
+                jClass.method(JMod.NATIVE + JMod.FINAL + JMod.PUBLIC, void.class, EventHelper.ADD_HANDLER_METHOD_PREFIX + handlerClassName)
+                    ._throws(addHandlerMethodContent)
+                    .param(handlerClass, paramName);
+            }
+        }
+    }
+
+    private static String computeEventName(JClass handlerClass)
+    {
+        JMethod method = ((JDefinedClass) handlerClass).methods().iterator().next();
+        String eventName = method.name().substring(2);
+        eventName = eventName.substring(0, 1).toLowerCase() + eventName.substring(1);
+        int iCap = firstIndexOfUcl(eventName);
+        eventName = eventName.substring(iCap);
+        eventName = eventName.substring(0, 1).toLowerCase() + eventName.substring(1);
+        return eventName;
+    }
+
+    private static String computeEventFqn(JClass handlerClass)
+    {
+        JMethod method = ((JDefinedClass) handlerClass).methods().iterator().next();
+        JVar param = method.params().iterator().next();
+        String fullName = param.type().fullName();
+        fullName = fullName.replace(".", "/");
+        return fullName;
+    }
+
+    private static String computeHandlerMethodName(JClass handlerClass)
+    {
+        JMethod method = ((JDefinedClass) handlerClass).methods().iterator().next();
+        String methodName = method.name();
+
+        return methodName;
+    }
+
+    private static int firstIndexOfUcl(String str)
+    {
+        for (int i = 0; i < str.length(); i++)
+        {
+            if (Character.isUpperCase(str.charAt(i)))
+            {
+                return i;
+            }
+        }
+        return -1;
     }
 }

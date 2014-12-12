@@ -11,10 +11,14 @@ public class FieldJsonObjectWriter extends FieldWriter implements OutputTypeVisi
 {
 
     private final String defaultValue;
+    private Option option;
+    private final String fullName;
 
     public FieldJsonObjectWriter(JCodeModel codeModel, JDefinedClass jClass, String className, Option option, boolean pipe, String fieldName)
     {
         super(codeModel, className, jClass, pipe, fieldName);
+        this.option = option;
+        this.fullName = option.getFullname();
         this.defaultValue = option.getDefaults();
     }
 
@@ -22,7 +26,14 @@ public class FieldJsonObjectWriter extends FieldWriter implements OutputTypeVisi
     @CheckForNull
     public Void visitInterface(Void in)
     {
-        InterfaceFieldHelper.addGetterSetterDeclaration(getNames(), String.class, getJclass());
+        if (fullName.endsWith("events"))
+        {
+            InterfaceFieldHelper.addEventHandlerRegistrationMethods(option, getJclass());
+        }
+        else
+        {
+            InterfaceFieldHelper.addGetterSetterDeclaration(getNames(), String.class, getJclass());
+        }
         return null;
     }
 
@@ -30,9 +41,16 @@ public class FieldJsonObjectWriter extends FieldWriter implements OutputTypeVisi
     @CheckForNull
     public Void visitJso(Void in)
     {
+        //TODO need to handle the weird case of the plotbands & plotline cases
+        if (fullName.endsWith("events"))
+        {
 
-        JsoFieldHelper.writeGetterNativeCodeStringWithStringify(getNames(), String.class, getJclass(), getCodeModel(), defaultValue);
-        JsoFieldHelper.writeSetterNativeCodeWithParse(getNames(), String.class, getJclass(), getCodeModel());
+        }
+        else
+        {
+            JsoFieldHelper.writeGetterNativeCodeStringWithStringify(getNames(), String.class, getJclass(), getCodeModel(), defaultValue);
+            JsoFieldHelper.writeSetterNativeCodeWithParse(getNames(), String.class, getJclass(), getCodeModel());
+        }
         return null;
     }
 
@@ -40,7 +58,14 @@ public class FieldJsonObjectWriter extends FieldWriter implements OutputTypeVisi
     @CheckForNull
     public Void visitMock(Void in)
     {
-        MockFieldHelper.addGetterSetterDeclaration(getNames(), String.class, getJclass());
+        if (fullName.endsWith("events"))
+        {
+
+        }
+        else
+        {
+            MockFieldHelper.addGetterSetterDeclaration(getNames(), String.class, getJclass());
+        }
         return null;
     }
 
