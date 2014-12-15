@@ -48,7 +48,9 @@ public class InterfaceFieldHelper
         {
             JDefinedClass jClass = model._class(packageName + "." + EventHelper.getEventNamePrefix(option) + EventHelper.EVENT_SUFFIX, ClassType.INTERFACE);
             // jClass._extends(NativeEvent.class);
-            createEventGetters(option, jClass);
+
+            // write getter for Series / Point or Chart inside event
+            EventHelper.getType(option).accept(new EventGetterWriterVisitor(option, jClass, model), OutputType.Interface);
 
             ClassRegistry.INSTANCE.put(option, OutputType.Interface, jClass);
 
@@ -66,19 +68,6 @@ public class InterfaceFieldHelper
         {
             throw new RuntimeException(e);
         }
-
-    }
-
-    // TODO create a specific visitor when we will have all cases ready
-    private static void createEventGetters(Option option, JDefinedClass jClass)
-    {
-        if (EventHelper.getType(option.getFullname()) == EventType.Series)
-        {
-            // equals based on fullname
-            JClass series = ClassRegistry.INSTANCE.getRegistry().get(new ClassRegistry.RegistryKey(new Option("series", "", ""), OutputType.Interface));
-            jClass.method(JMod.NONE, series, EventHelper.GET_SERIES_METHOD_NAME);
-        }
-        // TODO add point case
 
     }
 

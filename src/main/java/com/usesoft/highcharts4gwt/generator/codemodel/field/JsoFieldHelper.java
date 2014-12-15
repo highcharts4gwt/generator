@@ -42,7 +42,7 @@ public class JsoFieldHelper
     private static String getJsniGetterCodeWithStringify(String fieldName, String jsniDefaultValue)
     {
         return "/*-{\n" + "        this[\"" + fieldName + "\"] = (this[\"" + fieldName + "\"] || " + jsniDefaultValue + ");\n"
-                        + "        return JSON.stringify(this[\"" + fieldName + "\"]);\n" + "    }-*/";
+                + "        return JSON.stringify(this[\"" + fieldName + "\"]);\n" + "    }-*/";
     }
 
     // Setter
@@ -138,11 +138,8 @@ public class JsoFieldHelper
         writeGetterNativeCode(names, type, jDefinedClass, jCodeModel, getterCode);
     }
 
-    public static void writeGetterNativeCodeStringWithStringify(Names names,
-                    Class<?> type,
-                    JDefinedClass jDefinedClass,
-                    JCodeModel jCodeModel,
-                    String defaultValue)
+    public static void writeGetterNativeCodeStringWithStringify(Names names, Class<?> type, JDefinedClass jDefinedClass, JCodeModel jCodeModel,
+            String defaultValue)
     {
         String getterCode = getJsniGetterCodeWithStringify(names.getOriginalFieldName(), getJsniDefaultValueForJsonObject(defaultValue));
         writeGetterNativeCode(names, type, jDefinedClass, jCodeModel, getterCode);
@@ -178,11 +175,7 @@ public class JsoFieldHelper
         writeGetterNativeCode(names, type, jDefinedClass, jCodeModel, getterCode);
     }
 
-    public static void writeGetterNativeCodeArrayJsonObject(Names names,
-                    Class<?> type,
-                    JDefinedClass jDefinedClass,
-                    JCodeModel jCodeModel,
-                    String defaultValue)
+    public static void writeGetterNativeCodeArrayJsonObject(Names names, Class<?> type, JDefinedClass jDefinedClass, JCodeModel jCodeModel, String defaultValue)
     {
         String getterCode = getJsniGetterCodeWithStringify(names.getOriginalFieldName(), getJsniDefaultValueForArray(defaultValue));
         writeGetterNativeCode(names, type, jDefinedClass, jCodeModel, getterCode);
@@ -191,28 +184,28 @@ public class JsoFieldHelper
     public static void writeSetterNativeCode(Names names, Class<?> type, JDefinedClass jDefinedClass, JCodeModel jCodeModel)
     {
         NativeContentHack setterContentHack = new NativeContentHack(jCodeModel, JsoFieldHelper.getJsniSetterCode(names.getOriginalFieldName(),
-                        names.getParamName()));
+                names.getParamName()));
         jDefinedClass.method(JMod.NATIVE + JMod.FINAL + JMod.PUBLIC, jDefinedClass, names.getSetterName())._throws(setterContentHack)
-                        .param(type, names.getParamName());
+                .param(type, names.getParamName());
     }
 
     public static void writeSetterNativeCodeWithParse(Names names, Class<?> type, JDefinedClass jDefinedClass, JCodeModel jCodeModel)
     {
         NativeContentHack setterContentHack = new NativeContentHack(jCodeModel, JsoFieldHelper.getJsniSetterCodeWithParse(names.getOriginalFieldName(),
-                        names.getParamName()));
+                names.getParamName()));
         jDefinedClass.method(JMod.NATIVE + JMod.FINAL + JMod.PUBLIC, jDefinedClass, names.getSetterName())._throws(setterContentHack)
-                        .param(type, names.getParamName());
+                .param(type, names.getParamName());
     }
 
     public static void writeSetterNativeCode(Names names, JClass type, JDefinedClass jDefinedClass, JCodeModel jCodeModel)
     {
         NativeContentHack setterContentHack = new NativeContentHack(jCodeModel, JsoFieldHelper.getJsniSetterCode(names.getOriginalFieldName(),
-                        names.getParamName()));
+                names.getParamName()));
         jDefinedClass.method(JMod.NATIVE + JMod.FINAL + JMod.PUBLIC, jDefinedClass, names.getSetterName())._throws(setterContentHack)
-                        .param(type, names.getParamName());
+                .param(type, names.getParamName());
     }
 
-    private static String getJsniSeriesEventGetter()
+    public static String getJsniSeriesEventGetter()
     {
         return "/*-{\n        return this.source.chart.options.series[this.source.index];\n    }-*/";
     }
@@ -221,19 +214,11 @@ public class JsoFieldHelper
     {
         String paramName = "this";
 
-        return
-              "\n        " + "/*-{"
-            + "\n            " + "return $wnd.jQuery.extend(true, "+paramName+", "
-            + "\n            " + "{"
-            + "\n                " + "events: {"
-            + "\n                    " + eventName +": function(event) {"
-            + "\n                        " + "handler.@"+handlerClassFqn+"::"+handlerMethodName+"(L"+eventTypeFqn+";)("
-            + "\n                            " + "$wnd.jQuery.extend(true, event, {source:this})"
-            + "\n                         "+ ");"
-            + "\n                     "+ "}"
-            + "\n                 "+ "}"
-            + "\n             "+ "});"
-            + "\n        " + "}-*/;";
+        return "\n        " + "/*-{" + "\n            " + "return $wnd.jQuery.extend(true, " + paramName + ", " + "\n            " + "{" + "\n                "
+                + "events: {" + "\n                    " + eventName + ": function(event) {" + "\n                        " + "handler.@" + handlerClassFqn
+                + "::" + handlerMethodName + "(L" + eventTypeFqn + ";)(" + "\n                            " + "$wnd.jQuery.extend(true, event, {source:this})"
+                + "\n                         " + ");" + "\n                     " + "}" + "\n                 " + "}" + "\n             " + "});"
+                + "\n        " + "}-*/;";
     }
 
     public static void createEventJso(Option option, String packageName, String rootDirectoryPathName)
@@ -243,7 +228,7 @@ public class JsoFieldHelper
         try
         {
             JDefinedClass jClass = model._class(packageName + "." + OutputType.Jso.toString() + EventHelper.getEventNamePrefix(option)
-                            + EventHelper.EVENT_SUFFIX, ClassType.CLASS);
+                    + EventHelper.EVENT_SUFFIX, ClassType.CLASS);
 
             JClass eventClass = ClassRegistry.INSTANCE.getRegistry().get(new ClassRegistry.RegistryKey(option, OutputType.Interface));
 
@@ -252,7 +237,8 @@ public class JsoFieldHelper
 
             jClass.constructor(JMod.PROTECTED);
 
-            createEventGetters(option, model, jClass);
+            // write getter for Series / Point or Chart inside event
+            EventHelper.getType(option).accept(new EventGetterWriterVisitor(option, jClass, model), OutputType.Jso);
 
             ClassRegistry.INSTANCE.put(option, OutputType.Jso, jClass);
 
@@ -269,18 +255,6 @@ public class JsoFieldHelper
         catch (IOException e)
         {
             throw new RuntimeException(e);
-        }
-
-    }
-
-    private static void createEventGetters(Option option, JCodeModel jCodeModel, JDefinedClass jDefinedClass)
-    {
-        if (EventHelper.getType(option.getFullname()) == EventType.Series)
-        {
-            NativeContentHack getterContentHack = new NativeContentHack(jCodeModel, getJsniSeriesEventGetter());
-            JClass series = ClassRegistry.INSTANCE.getRegistry().get(new ClassRegistry.RegistryKey(new Option("series", "", ""), OutputType.Interface));
-
-            jDefinedClass.method(JMod.NATIVE + JMod.FINAL + JMod.PUBLIC, series, EventHelper.GET_SERIES_METHOD_NAME)._throws(getterContentHack);
         }
 
     }
@@ -302,8 +276,7 @@ public class JsoFieldHelper
                 NativeContentHack addHandlerMethodContent = new NativeContentHack(jCodeModel, jsniEventHandlerContent);
 
                 jClass.method(JMod.NATIVE + JMod.FINAL + JMod.PUBLIC, void.class, EventHelper.ADD_HANDLER_METHOD_PREFIX + handlerClassName)
-                    ._throws(addHandlerMethodContent)
-                    .param(handlerClass, paramName);
+                        ._throws(addHandlerMethodContent).param(handlerClass, paramName);
             }
         }
     }
