@@ -44,7 +44,7 @@ public class FieldEventWriter extends FieldWriter implements OutputTypeVisitor<V
     @CheckForNull
     public Void visitMock(Void in)
     {
-
+        MockFieldHelper.createEventMock(option, getJclass()._package().name(), rootDirectoryPath);
         return null;
     }
 

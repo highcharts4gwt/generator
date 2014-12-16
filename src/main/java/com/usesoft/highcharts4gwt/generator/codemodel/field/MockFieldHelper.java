@@ -1,9 +1,13 @@
 package com.usesoft.highcharts4gwt.generator.codemodel.field;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
+import com.sun.codemodel.ClassType;
 import com.sun.codemodel.JBlock;
 import com.sun.codemodel.JClass;
+import com.sun.codemodel.JClassAlreadyExistsException;
 import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JDefinedClass;
 import com.sun.codemodel.JExpr;
@@ -11,8 +15,9 @@ import com.sun.codemodel.JFieldVar;
 import com.sun.codemodel.JMethod;
 import com.sun.codemodel.JMod;
 import com.sun.codemodel.JVar;
+import com.usesoft.highcharts4gwt.generator.codemodel.ClassRegistry;
 import com.usesoft.highcharts4gwt.generator.codemodel.EventRegistry;
-import com.usesoft.highcharts4gwt.generator.codemodel.klass.NativeContentHack;
+import com.usesoft.highcharts4gwt.generator.codemodel.OutputType;
 import com.usesoft.highcharts4gwt.generator.graph.Option;
 
 public class MockFieldHelper
@@ -61,6 +66,41 @@ public class MockFieldHelper
                 JMethod method = jClass.method(JMod.PUBLIC, void.class, EventHelper.ADD_HANDLER_METHOD_PREFIX + handlerClassName);
                 method.param(handlerClass, paramName);
             }
+        }
+
+    }
+
+    public static void createEventMock(Option option, String packageName, String rootDirectoryPath)
+    {
+        JCodeModel model = new JCodeModel();
+
+        try
+        {
+            JDefinedClass jClass = model._class(packageName + "." + OutputType.Mock.toString() + EventHelper.getEventNamePrefix(option)
+                    + EventHelper.EVENT_SUFFIX, ClassType.CLASS);
+
+            JClass eventClass = ClassRegistry.INSTANCE.getRegistry().get(new ClassRegistry.RegistryKey(option, OutputType.Interface));
+
+            jClass._implements(eventClass);
+
+            // write getter for Series / Point or Chart inside event
+            EventHelper.getType(option).accept(new EventGetterWriterVisitor(option, jClass, model), OutputType.Mock);
+
+            ClassRegistry.INSTANCE.put(option, OutputType.Mock, jClass);
+
+        }
+        catch (JClassAlreadyExistsException e)
+        {
+            throw new RuntimeException(e);
+        }
+
+        try
+        {
+            model.build(new File(rootDirectoryPath));
+        }
+        catch (IOException e)
+        {
+            throw new RuntimeException(e);
         }
 
     }
