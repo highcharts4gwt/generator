@@ -4,8 +4,8 @@
 
 	<!-- POM file generated with GWT webAppCreator -->
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.usesoft.highcharts4gwt</groupId>
-	<artifactId>highcharts4gwt</artifactId>
+	<groupId>com.github.highcharts4gwt</groupId>
+	<artifactId>generator</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>highcharts4gwt</name>
 	<packaging>jar</packaging>
