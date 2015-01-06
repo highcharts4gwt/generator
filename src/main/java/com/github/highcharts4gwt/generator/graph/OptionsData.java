@@ -43,11 +43,11 @@ public class OptionsData
     public OptionTree findTree(Option option)
     {
         String optionRootFullName = OptionUtils.extractRootFullName(option);
-        return findTree(optionRootFullName);
+        return findTreeWithRootFullName(optionRootFullName);
     }
 
     /**
-     * Find the {@link OptionTree} in which this option belongs.
+     * Find the {@link OptionTree} whose root has the given rootFullName.
      * 
      * @param option
      *            an {@link Option}.
@@ -55,7 +55,7 @@ public class OptionsData
      */
     @CheckForNull
     @VisibleForTesting
-    OptionTree findTree(String rootFullName)
+    public OptionTree findTreeWithRootFullName(String rootFullName)
     {
         for (OptionTree tree : trees)
         {

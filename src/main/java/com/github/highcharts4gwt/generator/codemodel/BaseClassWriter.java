@@ -12,7 +12,6 @@ import org.slf4j.LoggerFactory;
 import com.github.highcharts4gwt.generator.graph.Option;
 import com.github.highcharts4gwt.generator.graph.OptionTree;
 import com.github.highcharts4gwt.generator.graph.OptionUtils;
-import com.github.highcharts4gwt.generator.graph.OptionsData;
 import com.sun.codemodel.ClassType;
 import com.sun.codemodel.JClass;
 import com.sun.codemodel.JClassAlreadyExistsException;
@@ -43,8 +42,6 @@ public abstract class BaseClassWriter implements ClassWriter
     private OptionTree tree;
 
     private final BaseFieldWriter fieldWriter;
-
-    private OptionsData optionsData;
 
     public BaseClassWriter(String rootDirectory) throws JClassAlreadyExistsException
     {
@@ -111,11 +108,10 @@ public abstract class BaseClassWriter implements ClassWriter
     }
 
     @Override
-    public ClassWriter setOption(Option optionSpec, OptionsData optionsData)
+    public ClassWriter setOption(Option option)
     {
-        this.option = optionSpec;
-        this.optionsData = optionsData;
-        this.className = OptionUtils.getClassName(optionSpec);
+        this.option = option;
+        this.className = OptionUtils.getClassName(option);
         return this;
     }
 

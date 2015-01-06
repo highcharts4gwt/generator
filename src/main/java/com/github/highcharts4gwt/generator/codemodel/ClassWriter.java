@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import com.github.highcharts4gwt.generator.graph.Option;
 import com.github.highcharts4gwt.generator.graph.OptionTree;
-import com.github.highcharts4gwt.generator.graph.OptionsData;
 import com.sun.codemodel.JClassAlreadyExistsException;
 
 public interface ClassWriter
@@ -13,7 +12,7 @@ public interface ClassWriter
 
     void write() throws IOException, JClassAlreadyExistsException;
 
-    ClassWriter setOption(Option optionSpec, OptionsData optionsData);
+    ClassWriter setOption(Option optionSpec);
 
     ClassWriter setTree(OptionTree tree);
 

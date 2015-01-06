@@ -5,9 +5,12 @@ import java.util.List;
 
 import javax.annotation.CheckForNull;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.github.highcharts4gwt.generator.graph.Option;
+import com.github.highcharts4gwt.generator.graph.OptionsData;
+import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Splitter;
 import com.google.common.base.Strings;
 
@@ -32,12 +35,49 @@ public class OptionParser
     private static final String FIELD_RETURNTYPE = "returnType";
     private static final String FIELD_DESCRIPTION = "description";
 
+    private static final String FIELD_OBJECT_TYPE = "type";
+    private static final String FIELD_OBJECT_PARAMS = "params";
+    private static final String FIELD_OBJECT_PARAMSDESCRIPTION = "paramsDescription";
+
     private OptionParser()
     {
     }
 
+    public static OptionsData parse(String optionsAsString)
+    {
+        JSONArray jsonArray = new JSONArray(optionsAsString);
+
+        List<Option> options = readOptions(jsonArray);
+
+        OptionsData optionsData = new OptionsData();
+
+        for (Option option : options)
+        {
+            optionsData.add(option, options);
+        }
+
+        return optionsData;
+    }
+
+    @VisibleForTesting
+    private static List<Option> readOptions(JSONArray jsonArray)
+    {
+        List<Option> options = new ArrayList<Option>();
+
+        for (int i = 0; i < jsonArray.length(); i++)
+        {
+            JSONObject jsonOption = (JSONObject) jsonArray.get(i);
+            Option option = OptionParser.parseOption(jsonOption);
+            if (option != null)
+                options.add(option);
+        }
+
+        return options;
+    }
+
     @CheckForNull
-    public static Option parse(JSONObject jsonOption)
+    @VisibleForTesting
+    public static Option parseOption(JSONObject jsonOption)
     {
         String fullName = getNonNullFieldAsString(jsonOption, FIELD_FULLNAME);
 
@@ -49,12 +89,12 @@ public class OptionParser
         List<String> excluding = getFieldAsListString(jsonOption, FIELD_EXCLUDING);
 
         return new Option(fullName, name, title).setValues(values).setDefaults(getFieldAsString(jsonOption, FIELD_DEFAULTS))
-                        .setExtending(getFieldAsString(jsonOption, FIELD_EXTENDING)).setExcluding(excluding)
-                        .setIsParent(Boolean.parseBoolean(getFieldAsString(jsonOption, FIELD_ISPARENT))).setSince(getFieldAsString(jsonOption, FIELD_SINCE))
-                        .setDemo(getFieldAsString(jsonOption, FIELD_DEMO)).setSeeAlso(getFieldAsString(jsonOption, FIELD_SEEALSO))
-                        .setParent(getFieldAsString(jsonOption, FIELD_PARENT)).setReturnType(getFieldAsString(jsonOption, FIELD_RETURNTYPE))
-                        .setDescription(getFieldAsString(jsonOption, FIELD_DESCRIPTION))
-                        .setDeprecated(Boolean.parseBoolean(getFieldAsString(jsonOption, FIELD_DEPRECATED)));
+                .setExtending(getFieldAsString(jsonOption, FIELD_EXTENDING)).setExcluding(excluding)
+                .setIsParent(Boolean.parseBoolean(getFieldAsString(jsonOption, FIELD_ISPARENT))).setSince(getFieldAsString(jsonOption, FIELD_SINCE))
+                .setDemo(getFieldAsString(jsonOption, FIELD_DEMO)).setSeeAlso(getFieldAsString(jsonOption, FIELD_SEEALSO))
+                .setParent(getFieldAsString(jsonOption, FIELD_PARENT)).setReturnType(getFieldAsString(jsonOption, FIELD_RETURNTYPE))
+                .setDescription(getFieldAsString(jsonOption, FIELD_DESCRIPTION))
+                .setDeprecated(Boolean.parseBoolean(getFieldAsString(jsonOption, FIELD_DEPRECATED)));
     }
 
     @CheckForNull

@@ -1,4 +1,4 @@
-package com.github.highcharts4gwt.generator;
+package com.github.highcharts4gwt.generator.jsonparser;
 
 import static org.fest.assertions.api.Assertions.assertThat;
 
@@ -6,11 +6,13 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import org.apache.commons.io.IOUtils;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.Test;
 
 import com.github.highcharts4gwt.generator.graph.Option;
-import com.github.highcharts4gwt.generator.jsonparser.OptionParser;
+import com.github.highcharts4gwt.generator.graph.OptionTree;
+import com.github.highcharts4gwt.generator.graph.OptionsData;
 
 public class TestOptionParser
 {
@@ -19,12 +21,17 @@ public class TestOptionParser
     private static final String Option2 = "option2.json";
     private static final String Option3 = "option3.json";
 
+    private static final String DUMP_JSON = "dump.json";
+
+    private static final int ROOT_NUMBER = 20;
+
     @Test
     public void testReadOptionSpec1_mostlyNull() throws Exception
     {
-        JSONObject optionAsJson = extractOption(Option1);
+        String optionAsString = readFileAsString(Option1);
+        JSONObject optionAsJson = new JSONObject(optionAsString);
 
-        Option option = OptionParser.parse(optionAsJson);
+        Option option = OptionParser.parseOption(optionAsJson);
 
         assertThat(option.getFullname()).isEqualTo("drilldown.activeAxisLabelStyle");
         assertThat(option.getName()).isEqualTo("drilldown--activeAxisLabelStyle");
@@ -46,9 +53,10 @@ public class TestOptionParser
     @Test
     public void testReadOptionSpec2_mostlyEmpty() throws Exception
     {
-        JSONObject optionAsJson = extractOption(Option2);
+        String optionAsString = readFileAsString(Option2);
+        JSONObject optionAsJson = new JSONObject(optionAsString);
 
-        Option option = OptionParser.parse(optionAsJson);
+        Option option = OptionParser.parseOption(optionAsJson);
 
         assertThat(option.getFullname()).isEqualTo("global.VMLRadialGradientURL");
         assertThat(option.getName()).isEqualTo("global--VMLRadialGradientURL");
@@ -70,9 +78,10 @@ public class TestOptionParser
     @Test
     public void testReadOptionSpec3() throws Exception
     {
-        JSONObject optionAsJson = extractOption(Option3);
+        String optionAsString = readFileAsString(Option3);
+        JSONObject optionAsJson = new JSONObject(optionAsString);
 
-        Option option = OptionParser.parse(optionAsJson);
+        Option option = OptionParser.parseOption(optionAsJson);
 
         assertThat(option.getFullname()).isEqualTo("legend.align");
         assertThat(option.getName()).isEqualTo("legend--align");
@@ -95,17 +104,47 @@ public class TestOptionParser
                         "The horizontal alignment of the legend box within the chart area. Valid values are <code>\"left\"</code>, <code>\"center\"</code> and <code>\"right\"</code>.");
     }
 
-    private JSONObject extractOption(String filename) throws IOException
+    @Test
+    public void testCreateOptions() throws Exception
+    {
+        // Given
+        String optionsAsString = readFileAsString(DUMP_JSON);
+        new JSONArray(optionsAsString);
+
+        // When
+        OptionsData options = OptionParser.parse(optionsAsString);
+
+        // Then
+        assertThat(options.getTrees().size()).isEqualTo(ROOT_NUMBER);
+        assertThat(options.getTrees()).contains(new OptionTree(new Option("global", "", "")), new OptionTree(new Option("lang", "", "")),
+                new OptionTree(new Option("chart", "", "")), new OptionTree(new Option("colors", "", "")), new OptionTree(new Option("credits", "", "")),
+                new OptionTree(new Option("drilldown", "", "")), new OptionTree(new Option("exporting", "", "")), new OptionTree(new Option("labels", "", "")),
+                new OptionTree(new Option("legend", "", "")), new OptionTree(new Option("loading", "", "")), new OptionTree(new Option("navigation", "", "")),
+                new OptionTree(new Option("noData", "", "")), new OptionTree(new Option("pane", "", "")), new OptionTree(new Option("plotOptions", "", "")),
+                new OptionTree(new Option("series", "", "")), new OptionTree(new Option("subtitle", "", "")), new OptionTree(new Option("title", "", "")),
+                new OptionTree(new Option("tooltip", "", "")), new OptionTree(new Option("xAxis", "", "")), new OptionTree(new Option("yAxis", "", "")));
+
+        assertThat(options.findTreeWithRootFullName("colors").getParentToChildrenRelations().size()).isEqualTo(0);
+        assertThat(options.findTreeWithRootFullName("global").getParentToChildrenRelations().size()).isEqualTo(1);
+        assertThat(options.findTreeWithRootFullName("chart").getParentToChildrenRelations().size()).isEqualTo(8);
+        assertThat(options.findTreeWithRootFullName("xAxis").getParentToChildrenRelations().size()).isEqualTo(8);
+        assertThat(options.findTreeWithRootFullName("yAxis").getParentToChildrenRelations().size()).isEqualTo(5); // ->
+        // yAxis.plotLines
+        // extending
+        // xAxis-plotLines
+        // etc.
+    }
+
+    private String readFileAsString(String filename) throws IOException
     {
         InputStream resourceAsStream = null;
         try
         {
             resourceAsStream = this.getClass().getResourceAsStream(filename);
             String optionsAsString = IOUtils.toString(resourceAsStream);
-            JSONObject option = new JSONObject(optionsAsString);
-            return option;
-
-        } finally
+            return optionsAsString;
+        }
+        finally
         {
             if (resourceAsStream != null)
                 resourceAsStream.close();

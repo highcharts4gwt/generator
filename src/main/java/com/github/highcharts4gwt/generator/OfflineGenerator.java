@@ -9,6 +9,7 @@ import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.github.highcharts4gwt.generator.highsoft.ConfigurationType;
 import com.github.highcharts4gwt.generator.highsoft.Product;
 
 public class OfflineGenerator extends BaseGenerator
@@ -17,7 +18,7 @@ public class OfflineGenerator extends BaseGenerator
 
     public OfflineGenerator(Product product) throws IOException
     {
-        super(product);
+        super(product, ConfigurationType.Option);
     }
 
     /**
@@ -27,20 +28,39 @@ public class OfflineGenerator extends BaseGenerator
     @Override
     public String readProductOptionsFile() throws IOException
     {
-        InputStream optionsInputStream = null;
-        String optionsAsString;
+        String fileName = "highchartsOptions.json";
+
+        return fetchFileFromFileName(fileName);
+    }
+
+    /**
+     * Read files from Highcharts json file
+     */
+    @CheckForNull
+    @Override
+    public String readProductObjectFile() throws IOException
+    {
+        String fileName = "highchartsObjects.json";
+
+        return fetchFileFromFileName(fileName);
+    }
+
+    private String fetchFileFromFileName(String fileName) throws IOException
+    {
+        InputStream inputStream = null;
+        String streamAsString;
 
         try
         {
-            optionsInputStream = this.getClass().getResourceAsStream("highchartsOptions.json");
-            optionsAsString = IOUtils.toString(optionsInputStream);
-            return optionsAsString;
+            inputStream = this.getClass().getResourceAsStream(fileName);
+            streamAsString = IOUtils.toString(inputStream);
+            return streamAsString;
 
         }
         finally
         {
-            if (optionsInputStream != null)
-                optionsInputStream.close();
+            if (inputStream != null)
+                inputStream.close();
         }
     }
 

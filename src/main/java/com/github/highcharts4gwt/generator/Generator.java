@@ -12,4 +12,7 @@ public interface Generator
 
     @CheckForNull
     String readProductOptionsFile() throws IOException;
+
+    @CheckForNull
+    String readProductObjectFile() throws IOException;
 }

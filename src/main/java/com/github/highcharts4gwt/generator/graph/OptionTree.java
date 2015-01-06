@@ -15,7 +15,9 @@ import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 
 /**
- * A tree of options. It contains a root and different maps and lists to be able to generate the classes (from leaves to root of the tree). Leaves are fields.
+ * A tree of options. It contains a root and different maps and lists to be able
+ * to generate the classes (from leaves to root of the tree). Leaves are fields.
+ * 
  * @author rquillevere
  */
 public class OptionTree
@@ -104,7 +106,7 @@ public class OptionTree
     }
 
     @VisibleForTesting
-    Map<Option, List<Option>> getParentToChildrenRelations()
+    public Map<Option, List<Option>> getParentToChildrenRelations()
     {
         return parentToChildrenRelations;
     }

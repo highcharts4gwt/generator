@@ -2,6 +2,7 @@ package com.github.highcharts4gwt.generator;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 import javax.annotation.CheckForNull;
@@ -10,6 +11,7 @@ import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.github.highcharts4gwt.generator.highsoft.ConfigurationType;
 import com.github.highcharts4gwt.generator.highsoft.Product;
 
 public class OnlineGenerator extends BaseGenerator
@@ -18,35 +20,43 @@ public class OnlineGenerator extends BaseGenerator
 
     public OnlineGenerator(Product product) throws IOException
     {
-        super(product);
+        super(product, ConfigurationType.Option);
     }
 
-    private static final String GENERATOR_INPUT_FILENAME = "highcharts.url.options";
+    private static final String OPTIONS_FILE_PROPERTY = "highcharts.url.options";
+    private static final String OBJECTS_FILE_PROPERTY = "highcharts.url.objects";
 
-    /**
-     * Read files from Highcharts web site
-     */
     @CheckForNull
     @Override
     public String readProductOptionsFile() throws IOException
     {
-        String highchartOptionsUrl = getPropertyValue(GENERATOR_INPUT_FILENAME);
+        return FetchFileFromUrl(getPropertyValue(OPTIONS_FILE_PROPERTY));
+    }
 
-        InputStream optionsInputStream = null;
-        String optionsAsString;
+    @CheckForNull
+    @Override
+    public String readProductObjectFile() throws IOException
+    {
+        return FetchFileFromUrl(getPropertyValue(OBJECTS_FILE_PROPERTY));
+    }
+
+    private String FetchFileFromUrl(String url) throws IOException, MalformedURLException
+    {
+        InputStream inputStream = null;
+        String streamAsString;
 
         try
         {
-            optionsInputStream = new URL(highchartOptionsUrl).openStream();
-            optionsAsString = IOUtils.toString(optionsInputStream);
+            inputStream = new URL(url).openStream();
+            streamAsString = IOUtils.toString(inputStream);
         }
         finally
         {
-            if (optionsInputStream != null)
-                optionsInputStream.close();
+            if (inputStream != null)
+                inputStream.close();
         }
 
-        return optionsAsString;
+        return streamAsString;
     }
 
     @Override

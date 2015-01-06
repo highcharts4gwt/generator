@@ -8,10 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import javax.annotation.CheckForNull;
-
 import org.apache.commons.io.FileUtils;
-import org.json.JSONArray;
 import org.slf4j.Logger;
 
 import com.github.highcharts4gwt.generator.codemodel.ClassWriter;
@@ -20,7 +17,9 @@ import com.github.highcharts4gwt.generator.graph.Option;
 import com.github.highcharts4gwt.generator.graph.OptionTree;
 import com.github.highcharts4gwt.generator.graph.OptionUtils;
 import com.github.highcharts4gwt.generator.graph.OptionsData;
+import com.github.highcharts4gwt.generator.highsoft.ConfigurationType;
 import com.github.highcharts4gwt.generator.highsoft.Product;
+import com.github.highcharts4gwt.generator.jsonparser.OptionParser;
 import com.sun.codemodel.JClassAlreadyExistsException;
 
 public abstract class BaseGenerator implements Generator
@@ -28,19 +27,33 @@ public abstract class BaseGenerator implements Generator
 
     private final Product product;
 
-    public BaseGenerator(Product product) throws IOException
+    private final static String CHART_OPTIONS_FULLNAME = "chartOptions";
+
+    public BaseGenerator(Product product, ConfigurationType configurationType) throws IOException
     {
         this.product = product;
         properties = loadProperties();
-        packageName = getOutputPackagePrefix() + getProductPackageName();
+        packageName = getOutputPackagePrefix() + getProductPackageName() + "." + configurationType.getPackageName();
         cleanDirectory(getRootDirectory() + "/" + packageToPath(packageName));
     }
 
     @Override
     public void generate() throws IOException, JClassAlreadyExistsException
     {
-        optionsData = createOptions();
+        OptionsData optionsData = readOptions();
+
         generateClasses(optionsData);
+    }
+
+    private OptionsData readOptions() throws IOException
+    {
+        String optionsAsString = readProductOptionsFile();
+
+        if (optionsAsString == null)
+            throw new RuntimeException("Cannot read options from " + product.getProductPackageName());
+
+        OptionsData optionsData = OptionParser.parse(optionsAsString);
+        return optionsData;
     }
 
     public String getProductPackageName()
@@ -121,16 +134,22 @@ public abstract class BaseGenerator implements Generator
             ClassWriter builder = outputType.accept(new ClassWritterVisitor(), getRootDirectory());
             if (builder != null)
             {
-                String fullname = "chartOptions";
-                Option option = new Option(fullname, fullname, fullname);
+                Option option = new Option(CHART_OPTIONS_FULLNAME, CHART_OPTIONS_FULLNAME, CHART_OPTIONS_FULLNAME);
                 OptionTree topOptionTree = new OptionTree(option);
                 List<Option> children = new ArrayList<Option>();
                 for (OptionTree tree : options.getTrees())
                 {
-                    children.add(tree.getRoot());
+                    Option root = tree.getRoot();
+
+                    // TODO need to be able to set those options on a global
+                    // highcharts wrapper
+                    if (root.getFullname().equals("global") || root.getFullname().equals("lang"))
+                        continue;
+
+                    children.add(root);
                 }
                 topOptionTree.addParentChildren(option, children);
-                builder.setPackageName(computePackageName(option, outputType)).setOption(option, options).setTree(topOptionTree);
+                builder.setPackageName(computePackageName(option, outputType)).setOption(option).setTree(topOptionTree);
                 builder.write();
             }
         }
@@ -152,7 +171,7 @@ public abstract class BaseGenerator implements Generator
     {
         if (builder != null)
         {
-            builder.setPackageName(computePackageName(option, outputType)).setOption(option, optionsData);
+            builder.setPackageName(computePackageName(option, outputType)).setOption(option);
             builder.setTree(tree);
             builder.write();
         }
@@ -182,18 +201,6 @@ public abstract class BaseGenerator implements Generator
         return out;
     }
 
-    private OptionsData createOptions() throws IOException
-    {
-        String optionsAsString = readProductOptionsFile();
-
-        if (optionsAsString == null)
-            throw new RuntimeException("Cannot read options from " + product.getProductPackageName());
-
-        JSONArray jsonArray = JsonUtils.extractOptions(optionsAsString);
-
-        return JsonUtils.createOptions(jsonArray);
-    }
-
     private void cleanDirectory(String dirPath) throws IOException
     {
         File directory = new File(dirPath);
@@ -213,6 +220,4 @@ public abstract class BaseGenerator implements Generator
     private static final String GENERATOR_OUTPUT_ROOTDIR = "generator.output.rootDir";
     private final Properties properties;
     private final String packageName;
-    @CheckForNull
-    private OptionsData optionsData;
 }
