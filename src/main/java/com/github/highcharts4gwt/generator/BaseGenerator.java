@@ -92,8 +92,6 @@ public abstract class BaseGenerator implements Generator
             return;
         }
 
-        exploreExtendingOptionFirst(option, options);
-
         OptionTree tree = options.findTree(option);
 
         List<Option> children = tree.getChildren(option);
@@ -106,19 +104,6 @@ public abstract class BaseGenerator implements Generator
         }
 
         writeClasses(option, tree);
-    }
-
-    private void exploreExtendingOptionFirst(Option option, OptionsData options) throws IOException, JClassAlreadyExistsException
-    {
-        Option extendedOption = options.findExtendedOption(option, optionsData);
-        if (extendedOption != null)
-        {
-            getLogger().trace("Node;" + option + ";extends;" + extendedOption);
-            if (extendedOption.isParent())
-                exploreSubTree(extendedOption, options);
-            else
-                getLogger().warn("Extended option is a leaf ?!" + extendedOption);
-        }
     }
 
     private void exploreChild(Option option, OptionsData options) throws IOException, JClassAlreadyExistsException
@@ -169,10 +154,6 @@ public abstract class BaseGenerator implements Generator
         {
             builder.setPackageName(computePackageName(option, outputType)).setOption(option, optionsData);
             builder.setTree(tree);
-
-            Option extendedOption = optionsData.findExtendedOption(option, optionsData);
-            if (extendedOption != null)
-                builder.setExtendedOption(extendedOption);
             builder.write();
         }
     }

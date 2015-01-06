@@ -17,6 +17,4 @@ public interface ClassWriter
 
     ClassWriter setTree(OptionTree tree);
 
-    void setExtendedOption(Option extendedOption);
-
 }

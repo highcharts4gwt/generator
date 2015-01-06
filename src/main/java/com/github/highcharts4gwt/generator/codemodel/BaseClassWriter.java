@@ -2,7 +2,6 @@ package com.github.highcharts4gwt.generator.codemodel;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.CheckForNull;
@@ -14,8 +13,6 @@ import com.github.highcharts4gwt.generator.graph.Option;
 import com.github.highcharts4gwt.generator.graph.OptionTree;
 import com.github.highcharts4gwt.generator.graph.OptionUtils;
 import com.github.highcharts4gwt.generator.graph.OptionsData;
-import com.google.common.base.Strings;
-import com.google.common.collect.Lists;
 import com.sun.codemodel.ClassType;
 import com.sun.codemodel.JClass;
 import com.sun.codemodel.JClassAlreadyExistsException;
@@ -47,8 +44,6 @@ public abstract class BaseClassWriter implements ClassWriter
 
     private final BaseFieldWriter fieldWriter;
 
-    private Option extendedOption;
-
     private OptionsData optionsData;
 
     public BaseClassWriter(String rootDirectory) throws JClassAlreadyExistsException
@@ -70,8 +65,6 @@ public abstract class BaseClassWriter implements ClassWriter
         codeModel = new JCodeModel();
         jClass = declareType(packageName, className);
 
-        addExtension();
-
         if (tree == null)
             throw new RuntimeException("Need to set the tree to build a class");
 
@@ -80,24 +73,6 @@ public abstract class BaseClassWriter implements ClassWriter
         writeClassToFileSystem();
 
         ClassRegistry.INSTANCE.put(option, getOutputType(), jClass);
-    }
-
-    private void addExtension()
-    {
-        if (extendedOption != null)
-        {
-            JClass extendedJclass = ClassRegistry.INSTANCE.getRegistry().get(new ClassRegistry.RegistryKey(extendedOption, getOutputType()));
-            if (extendedJclass == null)
-            {
-                logger.error("Missing extendedJClass;" + extendedOption);
-                throw new RuntimeException("Missing extendedJClass;" + extendedOption);
-            }
-
-            if (jClass == null)
-                throw new RuntimeException("jClass should not be null");
-
-            jClass._extends(extendedJclass);
-        }
     }
 
     private void writeClassToFileSystem() throws IOException
@@ -113,7 +88,7 @@ public abstract class BaseClassWriter implements ClassWriter
         if (tree == null || option == null)
             throw new RuntimeException("tree/option should not be null");
 
-        List<Option> fieldToAdd = findFieldToReallyAdd(tree.getChildren(option), getFieldFromExtendedOptionRecursive(extendedOption, optionsData));
+        List<Option> fieldToAdd = tree.getChildren(option);
 
         for (Option option : fieldToAdd)
         {
@@ -121,69 +96,11 @@ public abstract class BaseClassWriter implements ClassWriter
         }
     }
 
-    private List<Option> findFieldToReallyAdd(List<Option> children, List<Option> extendingChildren)
-    {
-        List<Option> options = Lists.newArrayList();
-        if (children != null)
-        {
-            for (Option child : children)
-            {
-                if(isFieldNeeded(extendingChildren, child, options))
-                    options.add(child);
-            }
-        }
-        return options;
-    }
-
-    private boolean isFieldNeeded(List<Option> existingChildren, Option child, List<Option> out)
-    {
-        String optionName = child.getTitle();
-        //special case for events
-        if (child.getFullname().endsWith("events." + optionName) || child.getFullname().endsWith("events"))
-            return true;
-        boolean alreadyInExtended = false;
-        for (Option existingChild : existingChildren)
-        {
-            if (existingChild.getTitle().equals(optionName))
-            {
-                alreadyInExtended = true;
-                break;
-            }
-        }
-
-        if (!alreadyInExtended)
-        {
-            if (extendedOption != null)
-                logger.info("Adding field;" + child + "for class;" + option + ";not present in extended class;" + extendedOption);
-            return true;
-        }
-        return false;
-    }
-
     private void initFieldBuilder()
     {
         fieldWriter.setJclass(jClass);
         fieldWriter.setCodeModel(codeModel);
         fieldWriter.setClassName(getPrefix() + className);
-    }
-
-    private static List<Option> getFieldFromExtendedOptionRecursive(Option extendedOption, OptionsData optionsData)
-    {
-        List<Option> existingChildren = new ArrayList<Option>();
-        if (extendedOption != null)
-        {
-            OptionTree extendedOptionTree = optionsData.findTree(extendedOption);
-            existingChildren = extendedOptionTree.getChildren(extendedOption);
-
-            if (!Strings.isNullOrEmpty(extendedOption.getExtending()))
-            {
-                Option optionRecursive = optionsData.findExtendedOption(extendedOption, optionsData);
-                if (optionRecursive != null)
-                    existingChildren.addAll(getFieldFromExtendedOptionRecursive(optionRecursive, optionsData));
-            }
-
-        }
-        return existingChildren;
     }
 
     @Override
@@ -225,11 +142,5 @@ public abstract class BaseClassWriter implements ClassWriter
     protected Option getOptionSpec()
     {
         return option;
-    }
-
-    @Override
-    public void setExtendedOption(Option extendedOption)
-    {
-        this.extendedOption = extendedOption;
     }
 }
