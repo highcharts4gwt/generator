@@ -28,6 +28,7 @@ public abstract class BaseGenerator implements Generator
     private final Product product;
 
     private final static String CHART_OPTIONS_FULLNAME = "chartOptions";
+    private final static String GLOBAL_OPTIONS_FULLNAME = "globalOptions";
 
     public BaseGenerator(Product product, ConfigurationType configurationType) throws IOException
     {
@@ -129,6 +130,13 @@ public abstract class BaseGenerator implements Generator
 
     private void writeTopClass(OptionsData options) throws IOException, JClassAlreadyExistsException
     {
+        // chartOptions
+        writeChartOptions(options);
+        writeGlobalOptions(options);
+    }
+
+    private void writeChartOptions(OptionsData options) throws IOException, JClassAlreadyExistsException
+    {
         for (OutputType outputType : OutputType.values())
         {
             ClassWriter builder = outputType.accept(new ClassWritterVisitor(), getRootDirectory());
@@ -148,6 +156,27 @@ public abstract class BaseGenerator implements Generator
 
                     children.add(root);
                 }
+                topOptionTree.addParentChildren(option, children);
+                builder.setPackageName(computePackageName(option, outputType)).setOption(option).setTree(topOptionTree);
+                builder.write();
+            }
+        }
+    }
+
+    private void writeGlobalOptions(OptionsData options) throws IOException, JClassAlreadyExistsException
+    {
+        for (OutputType outputType : OutputType.values())
+        {
+            ClassWriter builder = outputType.accept(new ClassWritterVisitor(), getRootDirectory());
+            if (builder != null)
+            {
+                Option option = new Option(GLOBAL_OPTIONS_FULLNAME, GLOBAL_OPTIONS_FULLNAME, GLOBAL_OPTIONS_FULLNAME);
+                OptionTree topOptionTree = new OptionTree(option);
+                List<Option> children = new ArrayList<Option>();
+
+                children.add(options.findTreeWithRootFullName("global").getRoot());
+                children.add(options.findTreeWithRootFullName("lang").getRoot());
+
                 topOptionTree.addParentChildren(option, children);
                 builder.setPackageName(computePackageName(option, outputType)).setOption(option).setTree(topOptionTree);
                 builder.write();
