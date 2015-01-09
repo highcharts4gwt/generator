@@ -4,8 +4,9 @@ import static org.fest.assertions.api.Assertions.assertThat;
 
 import org.junit.Test;
 
-import com.github.highcharts4gwt.generator.graph.Option;
-import com.github.highcharts4gwt.generator.graph.OptionUtils;
+import com.github.highcharts4gwt.generator.HasFullnameUtils;
+import com.github.highcharts4gwt.generator.option.Option;
+import com.github.highcharts4gwt.generator.option.OptionUtils;
 
 public class TestOptionUtils
 {
@@ -16,7 +17,7 @@ public class TestOptionUtils
         Option optionSpec = new Option("global.Date", "global--Date", "Date");
 
         // When
-        String highchartsPackageName = OptionUtils.getHighchartsPackageName(optionSpec);
+        String highchartsPackageName = HasFullnameUtils.getPackageName(optionSpec);
 
         // Then
         assertThat(highchartsPackageName).isEqualTo("global");
@@ -29,7 +30,7 @@ public class TestOptionUtils
         Option optionSpec = new Option("global.Date", "global--Date", "Date");
 
         // When
-        String highchartsPackageName = OptionUtils.getClassName(optionSpec);
+        String highchartsPackageName = OptionUtils.getShortClassName(optionSpec);
 
         // Then
         assertThat(highchartsPackageName).isEqualTo("Date");
@@ -42,7 +43,7 @@ public class TestOptionUtils
         Option optionSpec = new Option("plotOptions.series.events.afterAnimate", "plotOptions-series-events--afterAnimate", "afterAnimate");
 
         // When
-        String highchartsPackageName = OptionUtils.getHighchartsPackageName(optionSpec);
+        String highchartsPackageName = HasFullnameUtils.getPackageName(optionSpec);
 
         // Then
         assertThat(highchartsPackageName).isEqualTo("plotoptions.series.events");
@@ -55,7 +56,7 @@ public class TestOptionUtils
         Option optionSpec = new Option("plotOptions.series.events.afterAnimate", "plotOptions-series-events--afterAnimate", "afterAnimate");
 
         // When
-        String highchartsPackageName = OptionUtils.getClassName(optionSpec);
+        String highchartsPackageName = OptionUtils.getShortClassName(optionSpec);
 
         // Then
         assertThat(highchartsPackageName).isEqualTo("AfterAnimate");
@@ -68,7 +69,7 @@ public class TestOptionUtils
         Option optionSpec = new Option("chart", "chart", "chart");
 
         // When
-        String highchartsPackageName = OptionUtils.getHighchartsPackageName(optionSpec);
+        String highchartsPackageName = HasFullnameUtils.getPackageName(optionSpec);
 
         // Then
         assertThat(highchartsPackageName).isEqualTo("");
@@ -81,7 +82,7 @@ public class TestOptionUtils
         Option optionSpec = new Option("chart", "chart", "chart");
 
         // When
-        String highchartsPackageName = OptionUtils.getClassName(optionSpec);
+        String highchartsPackageName = OptionUtils.getShortClassName(optionSpec);
 
         // Then
         assertThat(highchartsPackageName).isEqualTo("Chart");
@@ -95,8 +96,8 @@ public class TestOptionUtils
         Option optionSpec2 = new Option("global.Date", "global--Date", "Date");
 
         // When
-        boolean isRoot = OptionUtils.isRoot(optionSpec);
-        boolean isRoot2 = OptionUtils.isRoot(optionSpec2);
+        boolean isRoot = HasFullnameUtils.isRoot(optionSpec);
+        boolean isRoot2 = HasFullnameUtils.isRoot(optionSpec2);
 
         // Then
         assertThat(isRoot).isTrue();

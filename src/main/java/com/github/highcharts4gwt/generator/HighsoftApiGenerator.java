@@ -5,8 +5,8 @@ import javax.annotation.CheckForNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.github.highcharts4gwt.generator.highsoft.Product;
-import com.github.highcharts4gwt.generator.highsoft.ProductVisitor;
+import com.github.highcharts4gwt.generator.model.highsoft.Product;
+import com.github.highcharts4gwt.generator.model.highsoft.ProductVisitor;
 
 public class HighsoftApiGenerator implements ProductVisitor<Void, Void>
 {
@@ -22,7 +22,7 @@ public class HighsoftApiGenerator implements ProductVisitor<Void, Void>
             logger.info("Highcharts API generation");
             generator = new OnlineGenerator(Product.Highcharts);
             // generator = new OfflineGenerator(Product.Highcharts);
-            generator.generate();
+            generator.generateClasses();
         }
         catch (Exception e)
         {

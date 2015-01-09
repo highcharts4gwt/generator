@@ -8,11 +8,13 @@ import com.sun.codemodel.JClassAlreadyExistsException;
 
 public interface Generator
 {
-    void generate() throws IOException, JClassAlreadyExistsException;
+    void generateClasses() throws IOException, JClassAlreadyExistsException;
+
+    // void writeGeneratedClassesOnDisk();
 
     @CheckForNull
     String readProductOptionsFile() throws IOException;
 
     @CheckForNull
-    String readProductObjectFile() throws IOException;
+    String readProductObjectsFile() throws IOException;
 }

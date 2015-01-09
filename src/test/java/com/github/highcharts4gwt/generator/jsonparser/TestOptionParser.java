@@ -10,9 +10,10 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.Test;
 
-import com.github.highcharts4gwt.generator.graph.Option;
-import com.github.highcharts4gwt.generator.graph.OptionTree;
-import com.github.highcharts4gwt.generator.graph.OptionsData;
+import com.github.highcharts4gwt.generator.option.Option;
+import com.github.highcharts4gwt.generator.option.OptionTree;
+import com.github.highcharts4gwt.generator.option.OptionsData;
+import com.github.highcharts4gwt.generator.option.jsonparser.OptionParser;
 
 public class TestOptionParser
 {

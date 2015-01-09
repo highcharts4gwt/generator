@@ -1,6 +1,5 @@
 package com.github.highcharts4gwt.generator;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -8,25 +7,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 
-import com.github.highcharts4gwt.generator.codemodel.ClassWriter;
-import com.github.highcharts4gwt.generator.codemodel.OutputType;
-import com.github.highcharts4gwt.generator.graph.Option;
-import com.github.highcharts4gwt.generator.graph.OptionTree;
-import com.github.highcharts4gwt.generator.graph.OptionUtils;
-import com.github.highcharts4gwt.generator.graph.OptionsData;
-import com.github.highcharts4gwt.generator.highsoft.ConfigurationType;
-import com.github.highcharts4gwt.generator.highsoft.Product;
-import com.github.highcharts4gwt.generator.jsonparser.OptionParser;
+import com.github.highcharts4gwt.generator.model.highsoft.ConfigurationType;
+import com.github.highcharts4gwt.generator.model.highsoft.Product;
+import com.github.highcharts4gwt.generator.option.Option;
+import com.github.highcharts4gwt.generator.option.OptionClassWritterVisitor;
+import com.github.highcharts4gwt.generator.option.OptionTree;
+import com.github.highcharts4gwt.generator.option.OptionUtils;
+import com.github.highcharts4gwt.generator.option.OptionsData;
+import com.github.highcharts4gwt.generator.option.jsonparser.OptionParser;
+import com.github.highcharts4gwt.generator.option.klass.OptionClassWriter;
 import com.sun.codemodel.JClassAlreadyExistsException;
 
 public abstract class BaseGenerator implements Generator
 {
-
-    private final Product product;
-
     private final static String CHART_OPTIONS_FULLNAME = "chartOptions";
     private final static String GLOBAL_OPTIONS_FULLNAME = "globalOptions";
 
@@ -34,15 +29,34 @@ public abstract class BaseGenerator implements Generator
     {
         this.product = product;
         properties = loadProperties();
-        packageName = getOutputPackagePrefix() + getProductPackageName() + "." + configurationType.getPackageName();
-        cleanDirectory(getRootDirectory() + "/" + packageToPath(packageName));
+
+        String prePackage = getOutputPackagePrefix() + getProductPackageName() + ".";
+        optionPackageName = prePackage + ConfigurationType.Option.getPackageName();
+        objectPackageName = prePackage + ConfigurationType.Object.getPackageName();
+
+        String prePath = getRootDirectory() + "/";
+        DirectoryUtils.cleanDirectory(prePath + DirectoryUtils.packageToPath(optionPackageName), getLogger());
     }
 
     @Override
-    public void generate() throws IOException, JClassAlreadyExistsException
+    public void generateClasses() throws IOException, JClassAlreadyExistsException
+    {
+        String objectsAsString = readProductObjectsFile();
+        ObjectsGenerator objectGenerator = new ObjectsGenerator(objectsAsString, product, getRootDirectory(), objectPackageName);
+
+        objectGenerator.cleanObjectDirectory();
+
+        objectGenerator.createEmptyObjectClasses();
+
+        generateOptions();
+
+        objectGenerator.enrichObjectClassesWithFields();
+        objectGenerator.writeObjectClassesToDisk();
+    }
+
+    private void generateOptions() throws IOException, JClassAlreadyExistsException
     {
         OptionsData optionsData = readOptions();
-
         generateClasses(optionsData);
     }
 
@@ -95,10 +109,11 @@ public abstract class BaseGenerator implements Generator
             exploreSubTree(tree.getRoot(), optionsData);
         }
 
-        writeTopClass(optionsData);
+        writeTopClasses(optionsData);
     }
 
-    private void exploreSubTree(Option option, OptionsData options) throws IOException, JClassAlreadyExistsException
+    // Write deeper classes first with recurrence
+    private void exploreSubTree(Option option, OptionsData optionsData) throws IOException, JClassAlreadyExistsException
     {
         if (!option.isParent())
         {
@@ -106,7 +121,7 @@ public abstract class BaseGenerator implements Generator
             return;
         }
 
-        OptionTree tree = options.findTree(option);
+        OptionTree tree = optionsData.findTree(option);
 
         List<Option> children = tree.getChildren(option);
         if (children == null)
@@ -114,10 +129,10 @@ public abstract class BaseGenerator implements Generator
 
         for (Option child : children)
         {
-            exploreChild(child, options);
+            exploreChild(child, optionsData);
         }
 
-        writeClasses(option, tree);
+        writeOptionClasses(option, tree);
     }
 
     private void exploreChild(Option option, OptionsData options) throws IOException, JClassAlreadyExistsException
@@ -128,9 +143,8 @@ public abstract class BaseGenerator implements Generator
             getLogger().trace("Option is a leaf, no need to create class;" + option);
     }
 
-    private void writeTopClass(OptionsData options) throws IOException, JClassAlreadyExistsException
+    private void writeTopClasses(OptionsData options) throws IOException, JClassAlreadyExistsException
     {
-        // chartOptions
         writeChartOptions(options);
         writeGlobalOptions(options);
     }
@@ -139,8 +153,8 @@ public abstract class BaseGenerator implements Generator
     {
         for (OutputType outputType : OutputType.values())
         {
-            ClassWriter builder = outputType.accept(new ClassWritterVisitor(), getRootDirectory());
-            if (builder != null)
+            OptionClassWriter classWriter = outputType.accept(new OptionClassWritterVisitor(), getRootDirectory());
+            if (classWriter != null)
             {
                 Option option = new Option(CHART_OPTIONS_FULLNAME, CHART_OPTIONS_FULLNAME, CHART_OPTIONS_FULLNAME);
                 OptionTree topOptionTree = new OptionTree(option);
@@ -157,8 +171,8 @@ public abstract class BaseGenerator implements Generator
                     children.add(root);
                 }
                 topOptionTree.addParentChildren(option, children);
-                builder.setPackageName(computePackageName(option, outputType)).setOption(option).setTree(topOptionTree);
-                builder.write();
+                classWriter.setPackageName(HasFullnameUtils.computePackageName(option, outputType, optionPackageName)).setOption(option).setTree(topOptionTree);
+                classWriter.write();
             }
         }
     }
@@ -167,7 +181,7 @@ public abstract class BaseGenerator implements Generator
     {
         for (OutputType outputType : OutputType.values())
         {
-            ClassWriter builder = outputType.accept(new ClassWritterVisitor(), getRootDirectory());
+            OptionClassWriter builder = outputType.accept(new OptionClassWritterVisitor(), getRootDirectory());
             if (builder != null)
             {
                 Option option = new Option(GLOBAL_OPTIONS_FULLNAME, GLOBAL_OPTIONS_FULLNAME, GLOBAL_OPTIONS_FULLNAME);
@@ -178,43 +192,46 @@ public abstract class BaseGenerator implements Generator
                 children.add(options.findTreeWithRootFullName("lang").getRoot());
 
                 topOptionTree.addParentChildren(option, children);
-                builder.setPackageName(computePackageName(option, outputType)).setOption(option).setTree(topOptionTree);
+                builder.setPackageName(HasFullnameUtils.computePackageName(option, outputType, optionPackageName)).setOption(option).setTree(topOptionTree);
                 builder.write();
             }
         }
     }
 
-    private void writeClasses(Option option, OptionTree tree) throws IOException, JClassAlreadyExistsException
+    private void writeOptionClasses(Option option, OptionTree tree) throws IOException, JClassAlreadyExistsException
     {
         if (!option.isParent())
             return;
 
         for (OutputType outputType : OutputType.values())
         {
-            ClassWriter builder = outputType.accept(new ClassWritterVisitor(), getRootDirectory());
-            writeClass(option, tree, builder, outputType);
+            OptionClassWriter builder = outputType.accept(new OptionClassWritterVisitor(), getRootDirectory());
+            writeOptionClass(option, tree, builder, outputType);
         }
     }
 
-    private void writeClass(Option option, OptionTree tree, ClassWriter builder, OutputType outputType) throws IOException, JClassAlreadyExistsException
-    {
-        if (builder != null)
-        {
-            builder.setPackageName(computePackageName(option, outputType)).setOption(option);
-            builder.setTree(tree);
-            builder.write();
-        }
-    }
+    //
+    // private void writeObjectClass(Object object, ObjectClassWriter writer,
+    // OutputType outputType) throws IOException, JClassAlreadyExistsException
+    // {
+    // if (writer != null)
+    // {
+    // writer.setPackageName(computePackageName(object, outputType,
+    // objectPackageName)).setOject(object);
+    // writer.write();
+    // }
+    // }
 
-    private String computePackageName(Option option, OutputType outputType)
+    private void writeOptionClass(Option option, OptionTree tree, OptionClassWriter writer, OutputType outputType) throws IOException,
+            JClassAlreadyExistsException
     {
-        String pckg = packageName + "." + outputType.getRootPackageName();
-        String highchartsPackageName = OptionUtils.getHighchartsPackageName(option);
-        if (!highchartsPackageName.equalsIgnoreCase(""))
+        if (writer != null)
         {
-            pckg += "." + highchartsPackageName;
+            String pkg = HasFullnameUtils.computePackageName(option, outputType, optionPackageName);
+            writer.setPackageName(pkg).setOption(option);
+            writer.setTree(tree);
+            writer.write();
         }
-        return pckg;
     }
 
     private Properties loadProperties() throws IOException
@@ -230,23 +247,13 @@ public abstract class BaseGenerator implements Generator
         return out;
     }
 
-    private void cleanDirectory(String dirPath) throws IOException
-    {
-        File directory = new File(dirPath);
-
-        if (directory.isDirectory() && directory.exists())
-            FileUtils.cleanDirectory(directory);
-    }
-
-    private String packageToPath(String packageName)
-    {
-        String path = packageName.replace(".", "/");
-        return path;
-    }
-
     private static final String CONFIGURATION_FILENAME = "configuration.properties";
     private static final String GENERATOR_OUTPUT_PACKAGEPREFIX = "generator.output.packagePrefix";
     private static final String GENERATOR_OUTPUT_ROOTDIR = "generator.output.rootDir";
     private final Properties properties;
-    private final String packageName;
+    private final String optionPackageName;
+
+    private final Product product;
+
+    private final String objectPackageName;
 }

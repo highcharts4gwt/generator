@@ -1,6 +1,6 @@
 package com.github.highcharts4gwt.generator;
 
-import com.github.highcharts4gwt.generator.highsoft.Product;
+import com.github.highcharts4gwt.generator.model.highsoft.Product;
 
 public class Main
 {

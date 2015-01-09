@@ -9,8 +9,8 @@ import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.github.highcharts4gwt.generator.highsoft.ConfigurationType;
-import com.github.highcharts4gwt.generator.highsoft.Product;
+import com.github.highcharts4gwt.generator.model.highsoft.ConfigurationType;
+import com.github.highcharts4gwt.generator.model.highsoft.Product;
 
 public class OfflineGenerator extends BaseGenerator
 {
@@ -38,7 +38,7 @@ public class OfflineGenerator extends BaseGenerator
      */
     @CheckForNull
     @Override
-    public String readProductObjectFile() throws IOException
+    public String readProductObjectsFile() throws IOException
     {
         String fileName = "highchartsObjects.json";
 
