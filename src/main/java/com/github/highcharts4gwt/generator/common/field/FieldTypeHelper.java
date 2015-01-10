@@ -1,9 +1,10 @@
-package com.github.highcharts4gwt.generator;
+package com.github.highcharts4gwt.generator.common.field;
 
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.github.highcharts4gwt.generator.common.ObjectOrOption;
 import com.google.common.base.Strings;
 
 public class FieldTypeHelper

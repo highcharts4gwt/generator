@@ -9,6 +9,8 @@ import java.util.Properties;
 
 import org.slf4j.Logger;
 
+import com.github.highcharts4gwt.generator.common.HasFullnameUtils;
+import com.github.highcharts4gwt.generator.common.OutputType;
 import com.github.highcharts4gwt.generator.model.highsoft.ConfigurationType;
 import com.github.highcharts4gwt.generator.model.highsoft.Product;
 import com.github.highcharts4gwt.generator.option.Option;

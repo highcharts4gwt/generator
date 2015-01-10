@@ -10,7 +10,7 @@ import javax.annotation.CheckForNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.github.highcharts4gwt.generator.HasFullnameUtils;
+import com.github.highcharts4gwt.generator.common.HasFullnameUtils;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;

@@ -1,4 +1,4 @@
-package com.github.highcharts4gwt.generator;
+package com.github.highcharts4gwt.generator.common;
 
 import java.util.HashMap;
 import java.util.Map;

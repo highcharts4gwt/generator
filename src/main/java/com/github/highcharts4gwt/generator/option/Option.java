@@ -5,8 +5,8 @@ import java.util.List;
 
 import javax.annotation.CheckForNull;
 
-import com.github.highcharts4gwt.generator.ObjectOrOption;
-import com.github.highcharts4gwt.generator.HasReturnType;
+import com.github.highcharts4gwt.generator.common.HasReturnType;
+import com.github.highcharts4gwt.generator.common.ObjectOrOption;
 
 public class Option extends ObjectOrOption implements HasReturnType
 {

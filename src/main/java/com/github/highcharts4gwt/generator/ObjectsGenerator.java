@@ -6,6 +6,11 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.github.highcharts4gwt.generator.common.ClassRegistry;
+import com.github.highcharts4gwt.generator.common.HasFullnameUtils;
+import com.github.highcharts4gwt.generator.common.OutputType;
+import com.github.highcharts4gwt.generator.common.field.FieldType;
+import com.github.highcharts4gwt.generator.common.field.FieldTypeHelper;
 import com.github.highcharts4gwt.generator.model.highsoft.Product;
 import com.github.highcharts4gwt.generator.object.Object;
 import com.github.highcharts4gwt.generator.object.ObjectFieldType;

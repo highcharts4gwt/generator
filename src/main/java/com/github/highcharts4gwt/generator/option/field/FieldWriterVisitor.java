@@ -3,8 +3,8 @@ package com.github.highcharts4gwt.generator.option.field;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.github.highcharts4gwt.generator.FieldTypeVisitor;
-import com.github.highcharts4gwt.generator.OutputType;
+import com.github.highcharts4gwt.generator.common.OutputType;
+import com.github.highcharts4gwt.generator.common.field.FieldTypeVisitor;
 import com.github.highcharts4gwt.generator.option.Option;
 import com.sun.codemodel.JDefinedClass;
 

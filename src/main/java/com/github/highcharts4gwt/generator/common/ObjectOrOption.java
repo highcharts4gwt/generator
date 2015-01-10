@@ -1,4 +1,4 @@
-package com.github.highcharts4gwt.generator;
+package com.github.highcharts4gwt.generator.common;
 
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;

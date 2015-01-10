@@ -1,7 +1,7 @@
 package com.github.highcharts4gwt.generator.object.klass;
 
-import com.github.highcharts4gwt.generator.ClassRegistry;
-import com.github.highcharts4gwt.generator.OutputType;
+import com.github.highcharts4gwt.generator.common.ClassRegistry;
+import com.github.highcharts4gwt.generator.common.OutputType;
 import com.sun.codemodel.ClassType;
 import com.sun.codemodel.JClass;
 import com.sun.codemodel.JClassAlreadyExistsException;

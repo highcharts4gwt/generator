@@ -5,9 +5,9 @@ import javax.annotation.CheckForNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.github.highcharts4gwt.generator.ClassRegistry;
-import com.github.highcharts4gwt.generator.OutputType;
-import com.github.highcharts4gwt.generator.OutputTypeVisitor;
+import com.github.highcharts4gwt.generator.common.ClassRegistry;
+import com.github.highcharts4gwt.generator.common.OutputType;
+import com.github.highcharts4gwt.generator.common.OutputTypeVisitor;
 import com.github.highcharts4gwt.generator.option.Option;
 import com.github.highcharts4gwt.model.array.api.Array;
 import com.sun.codemodel.JClass;

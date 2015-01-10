@@ -4,9 +4,9 @@ import java.util.List;
 
 import javax.annotation.CheckForNull;
 
-import com.github.highcharts4gwt.generator.FieldType;
-import com.github.highcharts4gwt.generator.FieldTypeHelper;
-import com.github.highcharts4gwt.generator.HasFullnameUtils;
+import com.github.highcharts4gwt.generator.common.HasFullnameUtils;
+import com.github.highcharts4gwt.generator.common.field.FieldType;
+import com.github.highcharts4gwt.generator.common.field.FieldTypeHelper;
 import com.google.common.collect.Lists;
 
 public class OptionUtils

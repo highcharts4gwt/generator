@@ -5,9 +5,9 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.github.highcharts4gwt.generator.FieldType;
-import com.github.highcharts4gwt.generator.FieldTypeHelper;
-import com.github.highcharts4gwt.generator.OutputType;
+import com.github.highcharts4gwt.generator.common.OutputType;
+import com.github.highcharts4gwt.generator.common.field.FieldType;
+import com.github.highcharts4gwt.generator.common.field.FieldTypeHelper;
 import com.github.highcharts4gwt.generator.option.Option;
 import com.github.highcharts4gwt.generator.option.klass.BaseClassWriter;
 import com.sun.codemodel.JCodeModel;

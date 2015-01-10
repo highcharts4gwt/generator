@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.annotation.CheckForNull;
 
-import com.github.highcharts4gwt.generator.HasFullnameUtils;
+import com.github.highcharts4gwt.generator.common.HasFullnameUtils;
 import com.google.common.annotations.VisibleForTesting;
 
 /**

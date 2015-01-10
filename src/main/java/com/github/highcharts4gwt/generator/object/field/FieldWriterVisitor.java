@@ -3,8 +3,8 @@ package com.github.highcharts4gwt.generator.object.field;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.github.highcharts4gwt.generator.FieldTypeVisitor;
-import com.github.highcharts4gwt.generator.OutputType;
+import com.github.highcharts4gwt.generator.common.OutputType;
+import com.github.highcharts4gwt.generator.common.field.FieldTypeVisitor;
 import com.sun.codemodel.JDefinedClass;
 
 public class FieldWriterVisitor implements FieldTypeVisitor<OutputType, Void>
@@ -33,27 +33,25 @@ public class FieldWriterVisitor implements FieldTypeVisitor<OutputType, Void>
     @Override
     public Void visitString(OutputType in)
     {
-        return in.accept(new FieldStringWriter(jClass, object, pipe, fieldName), null);
+        return in.accept(new FieldStringWriter(jClass, pipe, fieldName), null);
+    }
+
+    @Override
+    public Void visitNumber(OutputType in)
+    {
+        return in.accept(new FieldNumberWriter(jClass, pipe, fieldName), null);
+    }
+
+    @Override
+    public Void visitBoolean(OutputType in)
+    {
+        return in.accept(new FieldBooleanWriter(jClass, pipe, fieldName), null);
     }
 
     @Override
     public Void visitElement(OutputType in)
     {
         // TODO implement that case
-        return null;
-    }
-
-    @Override
-    public Void visitNumber(OutputType in)
-    {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public Void visitBoolean(OutputType in)
-    {
-        // TODO Auto-generated method stub
         return null;
     }
 

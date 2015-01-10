@@ -1,6 +1,6 @@
 package com.github.highcharts4gwt.generator.object.klass;
 
-import com.github.highcharts4gwt.generator.OutputTypeVisitor;
+import com.github.highcharts4gwt.generator.common.OutputTypeVisitor;
 
 public class ObjectClassWritterVisitor implements OutputTypeVisitor<String, ObjectClassWriter>
 {

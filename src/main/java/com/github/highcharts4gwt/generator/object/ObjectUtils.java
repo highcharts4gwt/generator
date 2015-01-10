@@ -2,7 +2,7 @@ package com.github.highcharts4gwt.generator.object;
 
 import java.util.List;
 
-import com.github.highcharts4gwt.generator.ObjectOrOption;
+import com.github.highcharts4gwt.generator.common.ObjectOrOption;
 
 public class ObjectUtils
 {

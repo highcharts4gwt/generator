@@ -2,7 +2,7 @@ package com.github.highcharts4gwt.generator.object.field;
 
 import javax.annotation.CheckForNull;
 
-import com.github.highcharts4gwt.generator.OutputTypeVisitor;
+import com.github.highcharts4gwt.generator.common.OutputTypeVisitor;
 import com.github.highcharts4gwt.generator.option.field.AbstractFieldWriter;
 import com.github.highcharts4gwt.generator.option.field.InterfaceFieldHelper;
 import com.github.highcharts4gwt.generator.option.field.JsoFieldHelper;
@@ -11,7 +11,7 @@ import com.sun.codemodel.JDefinedClass;
 
 public class FieldStringWriter extends AbstractFieldWriter implements OutputTypeVisitor<Void, Void>
 {
-    public FieldStringWriter(JDefinedClass jClass, com.github.highcharts4gwt.generator.object.Object option, boolean pipe, String fieldName)
+    public FieldStringWriter(JDefinedClass jClass, boolean pipe, String fieldName)
     {
         super(jClass, pipe, fieldName);
     }

@@ -9,9 +9,9 @@ import javax.annotation.CheckForNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.github.highcharts4gwt.generator.ClassRegistry;
-import com.github.highcharts4gwt.generator.NativeContentHack;
-import com.github.highcharts4gwt.generator.OutputType;
+import com.github.highcharts4gwt.generator.common.ClassRegistry;
+import com.github.highcharts4gwt.generator.common.NativeContentHack;
+import com.github.highcharts4gwt.generator.common.OutputType;
 import com.github.highcharts4gwt.generator.option.Option;
 import com.google.common.base.Strings;
 import com.google.gwt.dom.client.NativeEvent;

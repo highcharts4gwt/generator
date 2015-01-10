@@ -1,6 +1,6 @@
 package com.github.highcharts4gwt.generator.option.klass;
 
-import com.github.highcharts4gwt.generator.OutputType;
+import com.github.highcharts4gwt.generator.common.OutputType;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.sun.codemodel.JClassAlreadyExistsException;
 import com.sun.codemodel.JDefinedClass;

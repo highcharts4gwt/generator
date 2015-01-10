@@ -2,9 +2,9 @@ package com.github.highcharts4gwt.generator.option.field;
 
 import javax.annotation.CheckForNull;
 
-import com.github.highcharts4gwt.generator.ClassRegistry;
-import com.github.highcharts4gwt.generator.OutputType;
-import com.github.highcharts4gwt.generator.OutputTypeVisitor;
+import com.github.highcharts4gwt.generator.common.ClassRegistry;
+import com.github.highcharts4gwt.generator.common.OutputType;
+import com.github.highcharts4gwt.generator.common.OutputTypeVisitor;
 import com.github.highcharts4gwt.generator.option.Option;
 import com.sun.codemodel.JClass;
 import com.sun.codemodel.JDefinedClass;

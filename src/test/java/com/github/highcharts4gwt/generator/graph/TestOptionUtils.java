@@ -4,7 +4,7 @@ import static org.fest.assertions.api.Assertions.assertThat;
 
 import org.junit.Test;
 
-import com.github.highcharts4gwt.generator.HasFullnameUtils;
+import com.github.highcharts4gwt.generator.common.HasFullnameUtils;
 import com.github.highcharts4gwt.generator.option.Option;
 import com.github.highcharts4gwt.generator.option.OptionUtils;
 

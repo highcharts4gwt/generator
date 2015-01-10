@@ -5,9 +5,9 @@ import java.io.IOException;
 
 import javax.annotation.CheckForNull;
 
-import com.github.highcharts4gwt.generator.ClassRegistry;
-import com.github.highcharts4gwt.generator.HasFullnameUtils;
-import com.github.highcharts4gwt.generator.OutputType;
+import com.github.highcharts4gwt.generator.common.ClassRegistry;
+import com.github.highcharts4gwt.generator.common.HasFullnameUtils;
+import com.github.highcharts4gwt.generator.common.OutputType;
 import com.github.highcharts4gwt.generator.object.Object;
 import com.sun.codemodel.ClassType;
 import com.sun.codemodel.JClassAlreadyExistsException;
