@@ -1,4 +1,4 @@
-package com.github.highcharts4gwt.generator.jsonparser;
+package com.github.highcharts4gwt.generator.option.jsonparser;
 
 import static org.fest.assertions.api.Assertions.assertThat;
 

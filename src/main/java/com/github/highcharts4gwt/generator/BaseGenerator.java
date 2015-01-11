@@ -9,7 +9,7 @@ import java.util.Properties;
 
 import org.slf4j.Logger;
 
-import com.github.highcharts4gwt.generator.common.HasFullnameUtils;
+import com.github.highcharts4gwt.generator.common.ObjectOrOptionUtils;
 import com.github.highcharts4gwt.generator.common.OutputType;
 import com.github.highcharts4gwt.generator.model.highsoft.ConfigurationType;
 import com.github.highcharts4gwt.generator.model.highsoft.Product;
@@ -173,7 +173,7 @@ public abstract class BaseGenerator implements Generator
                     children.add(root);
                 }
                 topOptionTree.addParentChildren(option, children);
-                classWriter.setPackageName(HasFullnameUtils.computePackageName(option, outputType, optionPackageName)).setOption(option).setTree(topOptionTree);
+                classWriter.setPackageName(ObjectOrOptionUtils.computePackageName(option, outputType, optionPackageName)).setOption(option).setTree(topOptionTree);
                 classWriter.write();
             }
         }
@@ -194,7 +194,7 @@ public abstract class BaseGenerator implements Generator
                 children.add(options.findTreeWithRootFullName("lang").getRoot());
 
                 topOptionTree.addParentChildren(option, children);
-                builder.setPackageName(HasFullnameUtils.computePackageName(option, outputType, optionPackageName)).setOption(option).setTree(topOptionTree);
+                builder.setPackageName(ObjectOrOptionUtils.computePackageName(option, outputType, optionPackageName)).setOption(option).setTree(topOptionTree);
                 builder.write();
             }
         }
@@ -229,7 +229,7 @@ public abstract class BaseGenerator implements Generator
     {
         if (writer != null)
         {
-            String pkg = HasFullnameUtils.computePackageName(option, outputType, optionPackageName);
+            String pkg = ObjectOrOptionUtils.computePackageName(option, outputType, optionPackageName);
             writer.setPackageName(pkg).setOption(option);
             writer.setTree(tree);
             writer.write();

@@ -1,14 +1,14 @@
 package com.github.highcharts4gwt.generator.common;
 
-public class HasFullnameUtils
+public class ObjectOrOptionUtils
 {
-    private HasFullnameUtils()
+    private ObjectOrOptionUtils()
     {
     }
 
-    public static String extractRootFullName(ObjectOrOption hasFullname)
+    public static String extractRootFullName(ObjectOrOption objectOrOption)
     {
-        String fullname = hasFullname.getFullname();
+        String fullname = objectOrOption.getFullname();
         return extractRootFullName(fullname);
     }
 
@@ -17,27 +17,27 @@ public class HasFullnameUtils
         return fullname.split("\\.")[0];
     }
 
-    public static String getShortClassName(ObjectOrOption hasFullName)
+    public static String getShortClassName(ObjectOrOption objectOrOption)
     {
-        String fullName = hasFullName.getFullname();
+        String fullName = objectOrOption.getFullname();
         int index = fullName.lastIndexOf(".");
         String scn = fullName.substring(index + 1, index + 2).toUpperCase() + fullName.substring(index + 2);
         return scn;
     }
 
-    public static String getPackageName(ObjectOrOption hasFullName)
+    public static String getPackageName(ObjectOrOption objectOrOption)
     {
-        String fullName = hasFullName.getFullname();
+        String fullName = objectOrOption.getFullname();
         int index = fullName.lastIndexOf(".");
         if (index != -1)
             return fullName.substring(0, index).toLowerCase();
         return "";
     }
 
-    public static String computePackageName(ObjectOrOption hasFullname, OutputType outputType, String objectOrOptionPackage)
+    public static String computePackageName(ObjectOrOption objectOrOption, OutputType outputType, String objectOrOptionPackage)
     {
         String pckg = objectOrOptionPackage + "." + outputType.getPackageName();
-        String packageName = HasFullnameUtils.getPackageName(hasFullname);
+        String packageName = ObjectOrOptionUtils.getPackageName(objectOrOption);
         if (!packageName.equalsIgnoreCase(""))
         {
             pckg += "." + packageName;
@@ -45,8 +45,8 @@ public class HasFullnameUtils
         return pckg;
     }
 
-    public static boolean isRoot(ObjectOrOption hasFullname)
+    public static boolean isRoot(ObjectOrOption objectOrOption)
     {
-        return hasFullname.getFullname().equals(extractRootFullName(hasFullname));
+        return objectOrOption.getFullname().equals(extractRootFullName(objectOrOption));
     }
 }

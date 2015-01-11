@@ -7,15 +7,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.github.highcharts4gwt.generator.common.ClassRegistry;
-import com.github.highcharts4gwt.generator.common.HasFullnameUtils;
+import com.github.highcharts4gwt.generator.common.ObjectOrOptionUtils;
 import com.github.highcharts4gwt.generator.common.OutputType;
 import com.github.highcharts4gwt.generator.common.field.FieldType;
 import com.github.highcharts4gwt.generator.common.field.FieldTypeHelper;
 import com.github.highcharts4gwt.generator.model.highsoft.Product;
 import com.github.highcharts4gwt.generator.object.Object;
-import com.github.highcharts4gwt.generator.object.ObjectFieldType;
-import com.github.highcharts4gwt.generator.object.ObjectUtils;
 import com.github.highcharts4gwt.generator.object.field.FieldWriterVisitor;
+import com.github.highcharts4gwt.generator.object.field.ObjectFieldType;
 import com.github.highcharts4gwt.generator.object.jsonparser.ObjectParser;
 import com.github.highcharts4gwt.generator.object.klass.ObjectClassWriter;
 import com.github.highcharts4gwt.generator.object.klass.ObjectClassWritterVisitor;
@@ -49,8 +48,7 @@ public class ObjectsGenerator
     public void createEmptyObjectClasses() throws IOException, JClassAlreadyExistsException
     {
         objects = readObjects();
-        List<Object> list = ObjectUtils.sortListBasedOnDependencies(objects);
-        createObjectClasses(list);
+        createObjectClasses(objects);
 
         logger.info("Objects classes (empty) created;");
     }
@@ -59,7 +57,7 @@ public class ObjectsGenerator
     {
         for (Object object : objects)
         {
-            if (HasFullnameUtils.isRoot(object))
+            if (ObjectOrOptionUtils.isRoot(object))
                 continue;
 
             if (!object.getType().equals(ObjectFieldType.Property.toString().toLowerCase()))
@@ -72,7 +70,7 @@ public class ObjectsGenerator
 
             for (OutputType outputType : OutputType.values())
             {
-                String rootFullName = HasFullnameUtils.extractRootFullName(object);
+                String rootFullName = ObjectOrOptionUtils.extractRootFullName(object);
                 Object fakeRoot = new Object(rootFullName, rootFullName, rootFullName);
                 ClassRegistry.RegistryKey key = new ClassRegistry.RegistryKey(fakeRoot, outputType);
                 JDefinedClass jClass = (JDefinedClass) ClassRegistry.INSTANCE.getRegistry().get(key);
@@ -107,7 +105,7 @@ public class ObjectsGenerator
         // objects
         for (Object object : objects)
         {
-            if (HasFullnameUtils.isRoot(object))
+            if (ObjectOrOptionUtils.isRoot(object))
                 createObjectEmptyClass(object);
         }
     }
@@ -135,7 +133,7 @@ public class ObjectsGenerator
     {
         if (writer != null)
         {
-            writer.setPackageName(HasFullnameUtils.computePackageName(object, outputType, objectPackageName)).setOject(object);
+            writer.setPackageName(ObjectOrOptionUtils.computePackageName(object, outputType, objectPackageName)).setOject(object);
             writer.createClass();
         }
     }

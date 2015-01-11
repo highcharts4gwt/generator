@@ -26,11 +26,13 @@ public class Object extends ObjectOrOption implements HasReturnType
         return name;
     }
 
+    @Override
     public String getTitle()
     {
         return title;
     }
 
+    @Override
     public boolean isParent()
     {
         return isParent;
@@ -92,7 +94,7 @@ public class Object extends ObjectOrOption implements HasReturnType
     @CheckForNull
     public String getParams()
     {
-        return type;
+        return params;
     }
 
     public Object setParams(@CheckForNull String params)
@@ -104,7 +106,7 @@ public class Object extends ObjectOrOption implements HasReturnType
     @CheckForNull
     public String getParamsDescription()
     {
-        return type;
+        return paramsDescription;
     }
 
     public Object setParamsDescription(@CheckForNull String paramsDescription)
@@ -125,6 +127,7 @@ public class Object extends ObjectOrOption implements HasReturnType
         return this;
     }
 
+    @Override
     @CheckForNull
     public String getReturnType()
     {

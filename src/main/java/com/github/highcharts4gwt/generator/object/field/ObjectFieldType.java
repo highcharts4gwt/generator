@@ -1,4 +1,4 @@
-package com.github.highcharts4gwt.generator.object;
+package com.github.highcharts4gwt.generator.object.field;
 
 import javax.annotation.CheckForNull;
 

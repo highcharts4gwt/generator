@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.annotation.CheckForNull;
 
-import com.github.highcharts4gwt.generator.common.HasFullnameUtils;
+import com.github.highcharts4gwt.generator.common.ObjectOrOptionUtils;
 import com.google.common.annotations.VisibleForTesting;
 
 /**
@@ -43,7 +43,7 @@ public class OptionsData
     @CheckForNull
     public OptionTree findTree(Option option)
     {
-        String optionRootFullName = HasFullnameUtils.extractRootFullName(option);
+        String optionRootFullName = ObjectOrOptionUtils.extractRootFullName(option);
         return findTreeWithRootFullName(optionRootFullName);
     }
 
@@ -81,7 +81,7 @@ public class OptionsData
      */
     private OptionTree createEmptyTree(Option option, List<Option> options)
     {
-        Option root = OptionUtils.find(HasFullnameUtils.extractRootFullName(option), options);
+        Option root = OptionUtils.find(ObjectOrOptionUtils.extractRootFullName(option), options);
 
         if (root == null)
             throw new RuntimeException("Could not find root option");

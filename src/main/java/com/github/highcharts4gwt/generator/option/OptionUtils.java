@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.annotation.CheckForNull;
 
-import com.github.highcharts4gwt.generator.common.HasFullnameUtils;
+import com.github.highcharts4gwt.generator.common.ObjectOrOptionUtils;
 import com.github.highcharts4gwt.generator.common.field.FieldType;
 import com.github.highcharts4gwt.generator.common.field.FieldTypeHelper;
 import com.google.common.collect.Lists;
@@ -35,13 +35,6 @@ public class OptionUtils
         return parentFullName;
     }
 
-    public static String transformExtendsNameToFullname(String nameWithDash)
-    {
-        String out = nameWithDash.replace("--", ".");
-        out = nameWithDash.replace("-", ".");
-        return out;
-    }
-
     @CheckForNull
     public static Option find(String optionFullName, List<Option> options)
     {
@@ -67,7 +60,7 @@ public class OptionUtils
 
     public static String getShortClassName(Option option)
     {
-        String className = HasFullnameUtils.getShortClassName(option);
+        String className = ObjectOrOptionUtils.getShortClassName(option);
 
         FieldType fieldType = FieldTypeHelper.findTypes(option).get(0);
         if (option.isParent() && fieldType.isArray() && !className.equals("Series") && className.endsWith("s"))
@@ -91,8 +84,6 @@ public class OptionUtils
         {
             out.add(optionTree);
         }
-
-        assert (out.size() == optionData.getTrees().size());
 
         return out;
     }

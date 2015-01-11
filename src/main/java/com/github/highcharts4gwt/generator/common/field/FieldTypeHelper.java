@@ -18,13 +18,13 @@ public class FieldTypeHelper
     {
     }
 
-    public static List<FieldType> findTypes(ObjectOrOption option)
+    public static List<FieldType> findTypes(ObjectOrOption o)
     {
-        String returnType = option.getReturnType();
+        String returnType = o.getReturnType();
 
         ReturnTypeCategory category = getCategory(returnType);
 
-        return category.accept(new FieldTypesExtractorVisitor(category.getMatcher()), option);
+        return category.accept(new FieldTypesExtractorVisitor(category.getMatcher()), o);
     }
 
     private static ReturnTypeCategory getCategory(String returnType)
