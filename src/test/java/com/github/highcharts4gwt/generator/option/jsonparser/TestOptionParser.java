@@ -13,7 +13,6 @@ import org.junit.Test;
 import com.github.highcharts4gwt.generator.option.Option;
 import com.github.highcharts4gwt.generator.option.OptionTree;
 import com.github.highcharts4gwt.generator.option.OptionsData;
-import com.github.highcharts4gwt.generator.option.jsonparser.OptionParser;
 
 public class TestOptionParser
 {
@@ -21,6 +20,7 @@ public class TestOptionParser
     private static final String Option1 = "option1.json";
     private static final String Option2 = "option2.json";
     private static final String Option3 = "option3.json";
+    private static final String Option4 = "option4.json";
 
     private static final String DUMP_JSON = "dump.json";
 
@@ -39,8 +39,6 @@ public class TestOptionParser
         assertThat(option.getTitle()).isEqualTo("activeAxisLabelStyle");
         assertThat(option.getDefaults()).isNull();
         assertThat(option.getValues().size()).isEqualTo(0);
-        assertThat(option.getExtending()).isNull();
-        assertThat(option.getExcluding().size()).isEqualTo(0);
         assertThat(option.isParent()).isTrue();
         assertThat(option.getSince()).isNull();
         assertThat(option.getDemo()).isNull();
@@ -49,6 +47,7 @@ public class TestOptionParser
         assertThat(option.getParent()).isNull();
         assertThat(option.getReturnType()).isNull();
         assertThat(option.getDescription()).isNull();
+        assertThat(option.getContext()).isNull();
     }
 
     @Test
@@ -64,8 +63,6 @@ public class TestOptionParser
         assertThat(option.getTitle()).isEqualTo("VMLRadialGradientURL");
         assertThat(option.getDefaults()).isEmpty();
         assertThat(option.getValues().size()).isEqualTo(0);
-        assertThat(option.getExtending()).isEmpty();
-        assertThat(option.getExcluding().size()).isEqualTo(0);
         assertThat(option.isParent()).isFalse();
         assertThat(option.getSince()).isEmpty();
         assertThat(option.getDemo()).isEmpty();
@@ -74,6 +71,7 @@ public class TestOptionParser
         assertThat(option.getParent()).isNull(); // never empty in options
         assertThat(option.getReturnType()).isEmpty();
         assertThat(option.getDescription()).isEmpty();
+        assertThat(option.getContext()).isNull();
     }
 
     @Test
@@ -89,8 +87,6 @@ public class TestOptionParser
         assertThat(option.getTitle()).isEqualTo("align");
         assertThat(option.getDefaults()).isEqualTo("center");
         assertThat(option.getValues().size()).isEqualTo(3);
-        assertThat(option.getExtending()).isEqualTo("plotOptions-area");
-        assertThat(option.getExcluding().size()).isEqualTo(3);
         assertThat(option.isParent()).isFalse();
         assertThat(option.getSince()).isEqualTo("2.3.0");
         assertThat(option.getDemo())
@@ -103,6 +99,31 @@ public class TestOptionParser
         assertThat(option.getDescription())
                 .isEqualTo(
                         "The horizontal alignment of the legend box within the chart area. Valid values are <code>\"left\"</code>, <code>\"center\"</code> and <code>\"right\"</code>.");
+        assertThat(option.getContext()).isNull();
+    }
+
+    @Test
+    public void testOption4() throws Exception
+    {
+        String optionAsString = readFileAsString(Option4);
+        JSONObject optionAsJson = new JSONObject(optionAsString);
+
+        Option option = OptionParser.parseOption(optionAsJson);
+
+        assertThat(option.getFullname()).isEqualTo("chart.events.addSeries");
+        assertThat(option.getName()).isEqualTo("chart-events--addSeries");
+        assertThat(option.getTitle()).isEqualTo("addSeries");
+        assertThat(option.getDefaults()).isNull();
+        assertThat(option.getValues().size()).isEqualTo(0);
+        assertThat(option.isParent()).isFalse();
+        assertThat(option.getSince()).isEqualTo("1.2.0");
+        assertThat(option.getDemo()).isEqualTo("demo");
+        assertThat(option.isDeprecated()).isFalse();
+        assertThat(option.getSeeAlso()).isNull();
+        assertThat(option.getParent()).isEqualTo("chart-events");
+        assertThat(option.getReturnType()).isEqualTo("Function");
+        assertThat(option.getDescription()).isEqualTo("desc");
+        assertThat(option.getContext()).isEqualTo("Chart");
     }
 
     @Test

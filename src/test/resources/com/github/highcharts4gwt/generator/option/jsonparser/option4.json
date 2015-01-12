@@ -1,0 +1,13 @@
+{
+	"name": "chart-events--addSeries",
+	"fullname": "chart.events.addSeries",
+	"title": "addSeries",
+	"parent": "chart-events",
+	"isParent": false,
+	"returnType": "Function",
+	"context": "Chart",
+	"since": "1.2.0",
+	"description": "desc",
+	"demo": "demo",
+	"deprecated": false
+}

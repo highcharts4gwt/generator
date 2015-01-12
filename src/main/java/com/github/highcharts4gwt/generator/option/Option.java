@@ -18,7 +18,6 @@ public class Option extends ObjectOrOption implements HasReturnType
         this.name = name;
         this.title = title;
         this.values = new ArrayList<String>();
-        this.excluding = new ArrayList<String>();
     }
 
     @Override
@@ -32,6 +31,7 @@ public class Option extends ObjectOrOption implements HasReturnType
         return name;
     }
 
+    @Override
     public String getTitle()
     {
         return title;
@@ -48,17 +48,6 @@ public class Option extends ObjectOrOption implements HasReturnType
         return this;
     }
 
-    public List<String> getExcluding()
-    {
-        return excluding;
-    }
-
-    public Option setExcluding(List<String> excluding)
-    {
-        this.excluding = excluding;
-        return this;
-    }
-
     @CheckForNull
     public String getDefaults()
     {
@@ -71,18 +60,7 @@ public class Option extends ObjectOrOption implements HasReturnType
         return this;
     }
 
-    @CheckForNull
-    public String getExtending()
-    {
-        return extending;
-    }
-
-    public Option setExtending(@CheckForNull String extending)
-    {
-        this.extending = extending;
-        return this;
-    }
-
+    @Override
     public boolean isParent()
     {
         return isParent;
@@ -178,6 +156,17 @@ public class Option extends ObjectOrOption implements HasReturnType
         return this;
     }
 
+    public String getContext()
+    {
+        return context;
+    }
+
+    public Option setContext(String context)
+    {
+        this.context = context;
+        return this;
+    }
+
     private final String fullname;
 
     private final String name;
@@ -186,18 +175,16 @@ public class Option extends ObjectOrOption implements HasReturnType
 
     private List<String> values;
 
-    private List<String> excluding;
-
     @CheckForNull
     private String defaults;
-
-    @CheckForNull
-    private String extending;
 
     private boolean isParent;
 
     @CheckForNull
     private String since;
+
+    @CheckForNull
+    private String context;
 
     @CheckForNull
     private String demo;

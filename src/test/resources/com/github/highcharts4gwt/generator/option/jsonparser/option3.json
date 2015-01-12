@@ -3,8 +3,6 @@
     "fullname": "legend.align",
     "defaults": "center",
     "title": "align",
-    "extending": "plotOptions-area",
-    "excluding": "marker,threshold,connectEnds",
     "isParent": false,
     "since": "2.3.0",
     "demo": "<a href=\"http://jsfiddle.net/gh/get/jquery/1.7.2/highslide-software/highcharts.com/tree/master/samples/highcharts/drilldown/labels/\" target=\"_blank\">Label styles</a>",

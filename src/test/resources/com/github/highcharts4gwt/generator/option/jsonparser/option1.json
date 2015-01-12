@@ -3,8 +3,6 @@
     "fullname": "drilldown.activeAxisLabelStyle",
     "defaults": null,
     "title": "activeAxisLabelStyle",
-    "extending": null,
-    "excluding": null,
     "isParent": true,
     "since": null,
     "demo": null,

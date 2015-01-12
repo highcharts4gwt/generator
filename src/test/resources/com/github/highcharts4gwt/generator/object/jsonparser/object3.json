@@ -1,3 +1,14 @@
-{"name":"Axis--getExtremes","fullname":"Axis.getExtremes","type":"method","returnType":"Object","description":"Get the current extremes for the axis.","title":"getExtremes","isParent":false,"parent":"Axis","params":"()",
+{
+"name":"Axis--getExtremes",
+"fullname":"Axis.getExtremes",
+"type":"method",
+"returnType":"Object",
+"description":"Get the current extremes for the axis.",
+"title":"getExtremes",
+"isParent":false,
+"parent":"Axis",
+"params":"()",
 "paramsDescription":"params description"
-,"demo":"<a href=\"http://jsfiddle.net/gh/get/jquery/1.7.2/highslide-software/highcharts.com/tree/master/samples/highcharts/members/axis-getextremes/\" target=\"_blank\">Report extremes by click on a button</a>","since":"1.2.0","deprecated":false}
+,"demo":"demo",
+"since":"1.2.0",
+"deprecated":false}
