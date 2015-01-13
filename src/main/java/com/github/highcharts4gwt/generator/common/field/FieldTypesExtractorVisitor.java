@@ -6,7 +6,9 @@ import java.util.regex.Matcher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.github.highcharts4gwt.generator.common.ClassRegistry;
 import com.github.highcharts4gwt.generator.common.ObjectOrOption;
+import com.github.highcharts4gwt.generator.common.OutputType;
 import com.google.common.collect.Lists;
 
 public class FieldTypesExtractorVisitor implements ReturnTypeCategoryVisitor<ObjectOrOption, List<FieldType>>
@@ -92,6 +94,12 @@ public class FieldTypesExtractorVisitor implements ReturnTypeCategoryVisitor<Obj
         }
         else if (returnType.equalsIgnoreCase(ELEMENT))
             out.add(FieldType.Element);
+        else if (ClassRegistry.INSTANCE.getRegistry().get(
+                new ClassRegistry.RegistryKey(new com.github.highcharts4gwt.generator.object.Object(returnType, returnType, returnType), OutputType.Interface)) != null)
+        {
+            logger.info("Object found in class registry;" + in.getReturnType() + ";OptionOrObject;" + in);
+            out.add(FieldType.Object);
+        }
         else
         {
             logger.warn("field type not supported yet;" + in.getReturnType() + ";OptionOrObject;" + in);

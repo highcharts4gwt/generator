@@ -52,16 +52,22 @@ public class MockFieldHelper
 
     public static void addGetterSetterDeclaration(Names names, JClass type, JDefinedClass jDefinedClass)
     {
-        JFieldVar field = jDefinedClass.field(JMod.PRIVATE, type, names.getMockFieldName());
-
-        JMethod getter = jDefinedClass.method(JMod.PUBLIC, type, names.getGetterName());
-        JBlock block = getter.body();
-        block._return(field);
+        JFieldVar field = addGetterDeclaration(names, type, jDefinedClass);
 
         JMethod setter = jDefinedClass.method(JMod.PUBLIC, jDefinedClass, names.getSetterName());
         JVar setterParam = setter.param(type, names.getParamName());
 
         setter.body().assign(JExpr._this().ref(field), setterParam)._return(JExpr._this());
+    }
+
+    public static JFieldVar addGetterDeclaration(Names names, JClass type, JDefinedClass jDefinedClass)
+    {
+        JFieldVar field = jDefinedClass.field(JMod.PRIVATE, type, names.getMockFieldName());
+
+        JMethod getter = jDefinedClass.method(JMod.PUBLIC, type, names.getGetterName());
+        JBlock block = getter.body();
+        block._return(field);
+        return field;
     }
 
     public static void addEventHandlerRegistrationMethods(Option option, JDefinedClass jClass)

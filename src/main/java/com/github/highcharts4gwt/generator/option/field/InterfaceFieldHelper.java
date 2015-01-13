@@ -44,9 +44,14 @@ public class InterfaceFieldHelper
 
     public static void addGetterSetterDeclaration(Names names, JClass type, JDefinedClass jDefinedClass)
     {
-        jDefinedClass.method(JMod.NONE, type, names.getGetterName());
+        addGetterDeclaration(names, type, jDefinedClass);
 
         jDefinedClass.method(JMod.NONE, jDefinedClass, names.getSetterName()).param(type, names.getParamName());
+    }
+
+    public static void addGetterDeclaration(Names names, JClass type, JDefinedClass jDefinedClass)
+    {
+        jDefinedClass.method(JMod.NONE, type, names.getGetterName());
     }
 
     public static void createEventInterface(Option option, String packageName, String rootDirectoryPathName)

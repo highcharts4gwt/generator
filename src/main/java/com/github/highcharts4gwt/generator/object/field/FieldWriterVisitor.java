@@ -58,8 +58,7 @@ public class FieldWriterVisitor implements FieldTypeVisitor<OutputType, Void>
     @Override
     public Void visitObject(OutputType in)
     {
-        // TODO Auto-generated method stub
-        return null;
+        return in.accept(new FieldObjectWriter(jClass, pipe, fieldName, object), null);
     }
 
     @Override
