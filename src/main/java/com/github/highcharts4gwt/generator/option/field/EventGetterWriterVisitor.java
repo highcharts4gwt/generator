@@ -21,21 +21,28 @@ public class EventGetterWriterVisitor implements EventTypeVisitor<OutputType, Vo
     @Override
     public Void visitSeries(OutputType in)
     {
-        in.accept(new EventSeriesGetterWriterVisitor(option, jClass, jCodeModel), null);
+        in.accept(new EventContextGetterWriterVisitor(option, jClass, jCodeModel), null);
         return null;
     }
 
     @Override
     public Void visitChart(OutputType in)
     {
-        // TODO Add chart events
+        in.accept(new EventContextGetterWriterVisitor(option, jClass, jCodeModel), null);
         return null;
     }
 
     @Override
     public Void visitPoint(OutputType in)
     {
-        // TODO Add point events
+        in.accept(new EventContextGetterWriterVisitor(option, jClass, jCodeModel), null);
+        return null;
+    }
+
+    @Override
+    public Void visitAxis(OutputType in)
+    {
+        in.accept(new EventContextGetterWriterVisitor(option, jClass, jCodeModel), null);
         return null;
     }
 

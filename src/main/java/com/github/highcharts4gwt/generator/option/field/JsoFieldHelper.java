@@ -234,7 +234,8 @@ public class JsoFieldHelper
             jClass.constructor(JMod.PROTECTED);
 
             // write getter for Series / Point or Chart inside event
-            EventHelper.getType(option).accept(new EventGetterWriterVisitor(option, jClass, model), OutputType.Jso);
+            if (option.getContext() != null)
+                EventHelper.getType(option).accept(new EventGetterWriterVisitor(option, jClass, model), OutputType.Jso);
 
             ClassRegistry.INSTANCE.put(option, OutputType.Jso, jClass);
 

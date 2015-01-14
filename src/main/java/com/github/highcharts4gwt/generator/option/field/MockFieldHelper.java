@@ -100,7 +100,8 @@ public class MockFieldHelper
             jClass._implements(eventClass);
 
             // write getter for Series / Point or Chart inside event
-            EventHelper.getType(option).accept(new EventGetterWriterVisitor(option, jClass, model), OutputType.Mock);
+            if (option.getContext() != null)
+                EventHelper.getType(option).accept(new EventGetterWriterVisitor(option, jClass, model), OutputType.Mock);
 
             ClassRegistry.INSTANCE.put(option, OutputType.Mock, jClass);
 

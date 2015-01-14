@@ -63,8 +63,12 @@ public class InterfaceFieldHelper
             JDefinedClass jClass = model._class(packageName + "." + EventHelper.getEventNamePrefix(option) + EventHelper.EVENT_SUFFIX, ClassType.INTERFACE);
             // jClass._extends(NativeEvent.class);
 
-            // write getter for Series / Point or Chart inside event
-            EventHelper.getType(option).accept(new EventGetterWriterVisitor(option, jClass, model), OutputType.Interface);
+            // TODO this logic should not be in an helper, pb it is duplicated
+            // inside all helper, should have a common algo
+            // write getter for Series / Point / Chart / Axis (context) inside
+            // event
+            if (option.getContext() != null)
+                EventHelper.getType(option).accept(new EventGetterWriterVisitor(option, jClass, model), OutputType.Interface);
 
             ClassRegistry.INSTANCE.put(option, OutputType.Interface, jClass);
 

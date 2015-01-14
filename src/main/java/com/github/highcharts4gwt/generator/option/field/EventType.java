@@ -31,6 +31,25 @@ public enum EventType
             return visitor.visitChart(in);
         }
     },
+    Axis
+    {
+        @Override
+        @CheckForNull
+        public <IN, OUT> OUT accept(EventTypeVisitor<IN, OUT> visitor, IN in)
+        {
+            return visitor.visitAxis(in);
+        }
+    },
+    PlotLineOrBand
+    {
+        @Override
+        @CheckForNull
+        public <IN, OUT> OUT accept(EventTypeVisitor<IN, OUT> visitor, IN in)
+        {
+            // TODO what to do with that case ?
+            return null;
+        }
+    },
     DoNotTreat
     {
         @Override
