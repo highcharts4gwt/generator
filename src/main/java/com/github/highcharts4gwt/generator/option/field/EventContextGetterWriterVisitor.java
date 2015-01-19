@@ -11,11 +11,9 @@ import com.sun.codemodel.JBlock;
 import com.sun.codemodel.JClass;
 import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JDefinedClass;
-import com.sun.codemodel.JExpr;
 import com.sun.codemodel.JFieldVar;
 import com.sun.codemodel.JMethod;
 import com.sun.codemodel.JMod;
-import com.sun.codemodel.JVar;
 
 public class EventContextGetterWriterVisitor implements OutputTypeVisitor<Void, Void>
 {
@@ -24,6 +22,7 @@ public class EventContextGetterWriterVisitor implements OutputTypeVisitor<Void, 
     private final JCodeModel jCodeModel;
     private final com.github.highcharts4gwt.generator.object.Object contextObjectKey;
     private final String context;
+    private final String getterName;
 
     public EventContextGetterWriterVisitor(Option option, JDefinedClass jClass, JCodeModel jCodeModel)
     {
@@ -31,6 +30,7 @@ public class EventContextGetterWriterVisitor implements OutputTypeVisitor<Void, 
         this.jClass = jClass;
         this.jCodeModel = jCodeModel;
         this.context = option.getContext();
+        this.getterName = context.substring(0, 1).toLowerCase() + context.substring(1);
         contextObjectKey = new com.github.highcharts4gwt.generator.object.Object(context, "", "");
     }
 
@@ -39,7 +39,7 @@ public class EventContextGetterWriterVisitor implements OutputTypeVisitor<Void, 
     public Void visitInterface(Void in)
     {
         JClass series = ClassRegistry.INSTANCE.getRegistry().get(new ClassRegistry.RegistryKey(contextObjectKey, OutputType.Interface));
-        jClass.method(JMod.NONE, series, EventHelper.GET_SERIES_METHOD_NAME);
+        jClass.method(JMod.NONE, series, getterName);
         return null;
     }
 
@@ -47,10 +47,10 @@ public class EventContextGetterWriterVisitor implements OutputTypeVisitor<Void, 
     @CheckForNull
     public Void visitJso(Void in)
     {
-        NativeContentHack getterContentHack = new NativeContentHack(JsoFieldHelper.getJsniSeriesEventGetter());
+        NativeContentHack getterContentHack = new NativeContentHack(JsoFieldHelper.getContextObject());
         JClass series = ClassRegistry.INSTANCE.getRegistry().get(new ClassRegistry.RegistryKey(contextObjectKey, OutputType.Interface));
 
-        jClass.method(JMod.NATIVE + JMod.FINAL + JMod.PUBLIC, series, EventHelper.GET_SERIES_METHOD_NAME)._throws(getterContentHack);
+        jClass.method(JMod.NATIVE + JMod.FINAL + JMod.PUBLIC, series, getterName)._throws(getterContentHack);
         return null;
     }
 
@@ -63,14 +63,9 @@ public class EventContextGetterWriterVisitor implements OutputTypeVisitor<Void, 
 
         JFieldVar field = jClass.field(JMod.PRIVATE, series, context);
 
-        JMethod getter = jClass.method(JMod.PUBLIC, series, "get" + context.substring(0, 1).toUpperCase() + context.substring(1));
+        JMethod getter = jClass.method(JMod.PUBLIC, series, getterName);
         JBlock block = getter.body();
         block._return(field);
-
-        JMethod setter = jClass.method(JMod.PUBLIC, jClass, context);
-        JVar setterParam = setter.param(series, context);
-
-        setter.body().assign(JExpr._this().ref(field), setterParam)._return(JExpr._this());
 
         return null;
     }

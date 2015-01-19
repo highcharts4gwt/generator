@@ -15,7 +15,7 @@ public class FieldObjectWriter extends AbstractFieldWriter implements OutputType
     private final String defaultValue;
     private final Option option;
     private final JClass interfaceJClass;
-    private String fullName;
+    private final String fullName;
 
     public FieldObjectWriter(JDefinedClass jClass, Option option, boolean pipe, String fieldName)
     {
@@ -32,6 +32,9 @@ public class FieldObjectWriter extends AbstractFieldWriter implements OutputType
     {
         if (fullName.endsWith("events"))
         {
+            // We are trying to write an event field inside a class.
+            // We do not write the field (and getter and setters) but we can add
+            // the event handler on the class.
             InterfaceFieldHelper.addEventHandlerRegistrationMethods(option, getJclass());
         }
         else

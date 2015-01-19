@@ -43,6 +43,7 @@ public class FieldTypesExtractorVisitor implements ReturnTypeCategoryVisitor<Obj
         List<FieldType> out = Lists.newArrayList();
         if (returnType == null && in.getFullname().equals("data.googleSpreadsheetWorksheet"))
         {
+            // TODO remove this special case should be ok now
             logger.warn("Wrong documentation for this field bug opened;not treated;option;" + in);
             out.add(FieldType.DoNotTreat);
         }
@@ -215,6 +216,12 @@ public class FieldTypesExtractorVisitor implements ReturnTypeCategoryVisitor<Obj
             {
                 out.add(FieldType.ArrayObject);
             }
+        }
+        else if (ClassRegistry.INSTANCE.getRegistry().get(
+                new ClassRegistry.RegistryKey(new com.github.highcharts4gwt.generator.object.Object(arrayType, arrayType, arrayType), OutputType.Interface)) != null)
+        {
+            logger.info("Object found in class registry;" + in.getReturnType() + ";OptionOrObject;" + in);
+            out.add(FieldType.ArrayObject);
         }
         else
         {

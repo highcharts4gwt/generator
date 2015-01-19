@@ -71,22 +71,19 @@ public class FieldWriterVisitor implements FieldTypeVisitor<OutputType, Void>
     @Override
     public Void visitArrayString(OutputType in)
     {
-        // TODO Auto-generated method stub
-        return null;
+        return in.accept(new FieldArrayStringWriter(jClass, pipe, fieldName), null);
     }
 
     @Override
     public Void visitArrayNumber(OutputType in)
     {
-        // TODO Auto-generated method stub
-        return null;
+        return in.accept(new FieldArrayNumberWriter(jClass, pipe, fieldName), null);
     }
 
     @Override
     public Void visitArrayObject(OutputType in)
     {
-        // TODO Auto-generated method stub
-        return null;
+        return in.accept(new FieldArrayObjectWriter(jClass, pipe, fieldName, object), null);
     }
 
     @Override

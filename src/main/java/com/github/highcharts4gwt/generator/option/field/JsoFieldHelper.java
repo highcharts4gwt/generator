@@ -206,11 +206,16 @@ public class JsoFieldHelper
         return "/*-{\n        return this.source.chart.options.series[this.source.index];\n    }-*/";
     }
 
+    public static String getContextObject()
+    {
+        return "/*-{\n        return this.source;\n    }-*/";
+    }
+
     private static String getJsniEventHandler(String eventName, String handlerMethodName, String handlerClassFqn, String eventTypeFqn)
     {
         String paramName = "this";
 
-        return "\n        " + "/*-{" + "\n            " + "return $wnd.jQuery.extend(true, " + paramName + ", " + "\n            " + "{" + "\n                "
+        return "\n        " + "/*-{" + "\n            " + "$wnd.jQuery.extend(true, " + paramName + ", " + "\n            " + "{" + "\n                "
                 + "events: {" + "\n                    " + eventName + ": function(event) {" + "\n                        " + "handler.@" + handlerClassFqn
                 + "::" + handlerMethodName + "(L" + eventTypeFqn + ";)(" + "\n                            " + "$wnd.jQuery.extend(true, event, {source:this})"
                 + "\n                         " + ");" + "\n                     " + "}" + "\n                 " + "}" + "\n             " + "});"

@@ -1,7 +1,7 @@
 package com.github.highcharts4gwt.generator.option.field;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.github.highcharts4gwt.generator.option.Option;
 
@@ -10,10 +10,9 @@ public class EventHelper
     public static final String HANDLER_SUFFIX = "Handler";
     public static final String EVENT_SUFFIX = "Event";
     public static final String ON_PREFIX = "on";
-    public static final String GET_SERIES_METHOD_NAME = "getSeries";
     public static final String ADD_HANDLER_METHOD_PREFIX = "add";
 
-    public static final Pattern SERIES_EVENTS_PATTERN = Pattern.compile(".*plotOptions\\.\\w+\\.events.*");
+    private static final Logger logger = LoggerFactory.getLogger(EventHelper.class);
 
     private EventHelper()
     {
@@ -21,12 +20,11 @@ public class EventHelper
 
     public static EventType getType(Option option)
     {
-        Matcher matcher = SERIES_EVENTS_PATTERN.matcher(option.getFullname());
-        if (matcher.matches())
-        {
-            return EventType.Series;
-        }
-
+        String context = option.getContext();
+        if (context == null)
+            logger.error("Event with null context ?!; option;" + option);
+        else
+            return EventType.valueOf(context);
         return EventType.DoNotTreat;
     }
 
