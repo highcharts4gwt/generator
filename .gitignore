@@ -1,4 +1,5 @@
 /target
 /.settings
+/generator.log
 /src/main/java/com/usesoft/highcharts4gwt/model/highcharts
 /src/main/java/com/github/highcharts4gwt/model/highcharts

@@ -160,7 +160,7 @@ public abstract class BaseGenerator implements Generator
             OptionClassWriter classWriter = outputType.accept(new OptionClassWritterVisitor(), getRootDirectory());
             if (classWriter != null)
             {
-                Option option = new Option(CHART_OPTIONS_FULLNAME, CHART_OPTIONS_FULLNAME, CHART_OPTIONS_FULLNAME);
+                Option option = new Option(CHART_OPTIONS_FULLNAME, CHART_OPTIONS_FULLNAME, CHART_OPTIONS_FULLNAME).setIsParent(true);
                 OptionTree topOptionTree = new OptionTree(option);
                 List<Option> children = new ArrayList<Option>();
                 for (OptionTree tree : options.getTrees())
@@ -189,7 +189,7 @@ public abstract class BaseGenerator implements Generator
             OptionClassWriter builder = outputType.accept(new OptionClassWritterVisitor(), getRootDirectory());
             if (builder != null)
             {
-                Option option = new Option(GLOBAL_OPTIONS_FULLNAME, GLOBAL_OPTIONS_FULLNAME, GLOBAL_OPTIONS_FULLNAME);
+                Option option = new Option(GLOBAL_OPTIONS_FULLNAME, GLOBAL_OPTIONS_FULLNAME, GLOBAL_OPTIONS_FULLNAME).setIsParent(true);
                 OptionTree topOptionTree = new OptionTree(option);
                 List<Option> children = new ArrayList<Option>();
 
