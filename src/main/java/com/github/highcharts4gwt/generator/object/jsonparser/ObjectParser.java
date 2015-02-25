@@ -31,6 +31,10 @@ public class ObjectParser
     private static final String FIELD_OBJECT_PARAMS = "params";
     private static final String FIELD_OBJECT_PARAMSDESCRIPTION = "paramsDescription";
 
+    private ObjectParser()
+    {
+    }
+
     public static List<Object> parse(String objectsAsString)
     {
         JSONArray jsonArray = new JSONArray(objectsAsString);

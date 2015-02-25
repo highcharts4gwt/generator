@@ -194,4 +194,10 @@ public class Object extends ObjectOrOption implements HasReturnType
             return false;
         return super.equals(obj);
     }
+
+    @Override
+    public int hashCode()
+    {
+        return super.hashCode();
+    }
 }

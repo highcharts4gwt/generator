@@ -2,7 +2,6 @@ package com.github.highcharts4gwt.generator;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 import javax.annotation.CheckForNull;
@@ -40,7 +39,7 @@ public class OnlineGenerator extends BaseGenerator
         return FetchFileFromUrl(getPropertyValue(OBJECTS_FILE_PROPERTY));
     }
 
-    private String FetchFileFromUrl(String url) throws IOException, MalformedURLException
+    private String FetchFileFromUrl(String url) throws IOException
     {
         InputStream inputStream = null;
         String streamAsString;

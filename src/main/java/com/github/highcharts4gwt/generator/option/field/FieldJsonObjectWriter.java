@@ -41,11 +41,7 @@ public class FieldJsonObjectWriter extends AbstractFieldWriter implements Output
     public Void visitJso(Void in)
     {
         //TODO need to handle the weird case of the plotbands & plotline cases
-        if (fullName.endsWith("events"))
-        {
-
-        }
-        else
+        if (!fullName.endsWith("events"))
         {
             JsoFieldHelper.writeGetterNativeCodeStringWithStringify(getNames(), String.class, getJclass(), defaultValue);
             JsoFieldHelper.writeSetterNativeCodeWithParse(getNames(), String.class, getJclass());
@@ -57,11 +53,7 @@ public class FieldJsonObjectWriter extends AbstractFieldWriter implements Output
     @CheckForNull
     public Void visitMock(Void in)
     {
-        if (fullName.endsWith("events"))
-        {
-
-        }
-        else
+        if (!fullName.endsWith("events"))
         {
             MockFieldHelper.addGetterSetterDeclaration(getNames(), String.class, getJclass());
         }

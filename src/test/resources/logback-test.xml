@@ -2,13 +2,13 @@
 
 <configuration>
 	
- <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+<!--  <appender name="FILE" class="ch.qos.logback.core.FileAppender">
     <file>C:\GitHub\highcharts4gwtorg\highcharts4gwt\generator.log</file>
 
     <encoder>
       <pattern>%d{HH:mm:ss.SSS} %-5level %logger{10} - %msg%n</pattern>
     </encoder>
-  </appender>
+  </appender> -->
   
   <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
     <!-- encoders are assigned the type

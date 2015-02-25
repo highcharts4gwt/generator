@@ -24,8 +24,8 @@ import com.sun.codemodel.JClassAlreadyExistsException;
 
 public abstract class BaseGenerator implements Generator
 {
-    private final static String CHART_OPTIONS_FULLNAME = "chartOptions";
-    private final static String GLOBAL_OPTIONS_FULLNAME = "globalOptions";
+    private static final String CHART_OPTIONS_FULLNAME = "chartOptions";
+    private static final String GLOBAL_OPTIONS_FULLNAME = "globalOptions";
 
     public BaseGenerator(Product product, ConfigurationType configurationType) throws IOException
     {
@@ -48,10 +48,12 @@ public abstract class BaseGenerator implements Generator
 
         objectGenerator.cleanObjectDirectory();
 
+        //Need to create object classes first to be used in option callbacks
         objectGenerator.createEmptyObjectClasses();
 
         generateOptions();
 
+        //Then enrich object with option fields
         objectGenerator.enrichObjectClassesWithFields();
         objectGenerator.writeObjectClassesToDisk();
     }
@@ -173,7 +175,8 @@ public abstract class BaseGenerator implements Generator
                     children.add(root);
                 }
                 topOptionTree.addParentChildren(option, children);
-                classWriter.setPackageName(ObjectOrOptionUtils.computePackageName(option, outputType, optionPackageName)).setOption(option).setTree(topOptionTree);
+                classWriter.setPackageName(ObjectOrOptionUtils.computePackageName(option, outputType, optionPackageName)).setOption(option)
+                                .setTree(topOptionTree);
                 classWriter.write();
             }
         }
@@ -211,18 +214,6 @@ public abstract class BaseGenerator implements Generator
             writeOptionClass(option, tree, builder, outputType);
         }
     }
-
-    //
-    // private void writeObjectClass(Object object, ObjectClassWriter writer,
-    // OutputType outputType) throws IOException, JClassAlreadyExistsException
-    // {
-    // if (writer != null)
-    // {
-    // writer.setPackageName(computePackageName(object, outputType,
-    // objectPackageName)).setOject(object);
-    // writer.write();
-    // }
-    // }
 
     private void writeOptionClass(Option option, OptionTree tree, OptionClassWriter writer, OutputType outputType) throws IOException,
             JClassAlreadyExistsException

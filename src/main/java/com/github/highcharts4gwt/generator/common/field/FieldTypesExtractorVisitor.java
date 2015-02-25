@@ -41,10 +41,9 @@ public class FieldTypesExtractorVisitor implements ReturnTypeCategoryVisitor<Obj
     {
         String returnType = in.getReturnType();
         List<FieldType> out = Lists.newArrayList();
-        if (returnType == null && in.getFullname().equals("data.googleSpreadsheetWorksheet"))
+        if (returnType == null && !in.isParent())
         {
-            // TODO remove this special case should be ok now
-            logger.warn("Wrong documentation for this field bug opened;not treated;option;" + in);
+            logger.warn("Cannot treat leaf with no return type;" + in.getReturnType() + ";OptionOrObject;" + in);
             out.add(FieldType.DoNotTreat);
         }
         else if (returnType == null)
@@ -96,7 +95,8 @@ public class FieldTypesExtractorVisitor implements ReturnTypeCategoryVisitor<Obj
         else if (returnType.equalsIgnoreCase(ELEMENT))
             out.add(FieldType.Element);
         else if (ClassRegistry.INSTANCE.getRegistry().get(
-                new ClassRegistry.RegistryKey(new com.github.highcharts4gwt.generator.object.Object(returnType, returnType, returnType), OutputType.Interface)) != null)
+                        new ClassRegistry.RegistryKey(new com.github.highcharts4gwt.generator.object.Object(returnType, returnType, returnType),
+                                        OutputType.Interface)) != null)
         {
             logger.info("Object found in class registry;" + in.getReturnType() + ";OptionOrObject;" + in);
             out.add(FieldType.Object);
@@ -218,7 +218,8 @@ public class FieldTypesExtractorVisitor implements ReturnTypeCategoryVisitor<Obj
             }
         }
         else if (ClassRegistry.INSTANCE.getRegistry().get(
-                new ClassRegistry.RegistryKey(new com.github.highcharts4gwt.generator.object.Object(arrayType, arrayType, arrayType), OutputType.Interface)) != null)
+                        new ClassRegistry.RegistryKey(new com.github.highcharts4gwt.generator.object.Object(arrayType, arrayType, arrayType),
+                                        OutputType.Interface)) != null)
         {
             logger.info("Object found in class registry;" + in.getReturnType() + ";OptionOrObject;" + in);
             out.add(FieldType.ArrayObject);

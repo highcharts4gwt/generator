@@ -1,5 +1,6 @@
 package com.github.highcharts4gwt.generator.option.field;
 
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,6 +24,16 @@ public class EventHelper
         String context = option.getContext();
         if (context == null)
             logger.error("Event with null context ?!; option;" + option);
+        else if (context.contains("|"))
+        {
+            logger.warn("Do not support event with 2 context type; option;" + option);
+            return EventType.DoNotTreat;
+        }
+        else if (context.equals(""))
+        {
+            logger.warn("Do not support context object empty;option;" + option);
+            return EventType.DoNotTreat;
+        }
         else
             return EventType.valueOf(context);
         return EventType.DoNotTreat;

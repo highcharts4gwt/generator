@@ -10,7 +10,7 @@ import com.google.common.annotations.VisibleForTesting;
 
 /**
  * Contains all the OptionTrees.
- * 
+ *
  * @author rquillevere
  */
 public class OptionsData
@@ -35,7 +35,7 @@ public class OptionsData
 
     /**
      * Find the {@link OptionTree} in which this option belongs.
-     * 
+     *
      * @param option
      *            an {@link Option}.
      * @return the OptionTree found or null.
@@ -49,7 +49,7 @@ public class OptionsData
 
     /**
      * Find the {@link OptionTree} whose root has the given rootFullName.
-     * 
+     *
      * @param option
      *            an {@link Option}.
      * @return the OptionTree found or null.
@@ -70,7 +70,7 @@ public class OptionsData
     /**
      * Create an {@link OptionTree} with the root initialized. Add it to the
      * tree list.
-     * 
+     *
      * @param option
      *            An {@link Option} that should belong to that tree. From its
      *            fullname we will discover the root fullname.
