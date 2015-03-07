@@ -121,4 +121,23 @@ public class MockFieldHelper
         }
 
     }
+
+    public static void addGenericJsonObjectGetterSetterDeclaration(JDefinedClass in)
+    {
+       
+        //TODO create a map of generic fields -> mock support only one geenric field right now
+        JFieldVar field = in.field(JMod.PRIVATE, String.class, "genericField");
+
+        JMethod getter = in.method(JMod.PUBLIC, String.class, "getFieldAsJsonObject");
+        getter.param(String.class, "fieldName");
+        JBlock block = getter.body();
+        block._return(field);
+        
+        
+        JMethod setter = in.method(JMod.PUBLIC, in, "setFieldAsJsonObject");
+        JVar setterParam = setter.param(String.class, "fieldName");
+        JVar setterParam2 = setter.param(String.class, "fieldValueAsJsonObject");
+
+        setter.body().assign(JExpr._this().ref(field), setterParam2)._return(JExpr._this());   
+    }
 }

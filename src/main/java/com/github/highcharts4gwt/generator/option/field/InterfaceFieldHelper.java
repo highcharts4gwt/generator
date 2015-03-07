@@ -15,6 +15,7 @@ import com.sun.codemodel.JClass;
 import com.sun.codemodel.JClassAlreadyExistsException;
 import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JDefinedClass;
+import com.sun.codemodel.JMethod;
 import com.sun.codemodel.JMod;
 
 public class InterfaceFieldHelper
@@ -24,7 +25,19 @@ public class InterfaceFieldHelper
     private InterfaceFieldHelper()
     {
     }
+    
+    public static void addGenericJsonObjectGetterSetterDeclaration(JDefinedClass jDefinedClass)
+    {
+        //getFieldAsJsonObject(String fieldName);
+        jDefinedClass.method(JMod.NONE, String.class, "getFieldAsJsonObject").param(String.class, "fieldName");
+        
+        //setFieldAsJsonObject(String fieldName, String fieldValueAsJonObject);
+        JMethod setter = jDefinedClass.method(JMod.NONE, jDefinedClass, "setFieldAsJsonObject");
+        setter.param(String.class, "fieldName");
+        setter.param(String.class, "fieldValueAsJonObject");
+    }
 
+    
     public static void addGetterSetterDeclaration(Names names, Class<?> type, JDefinedClass jDefinedClass)
     {
         addGetterDeclaration(names, type, jDefinedClass);

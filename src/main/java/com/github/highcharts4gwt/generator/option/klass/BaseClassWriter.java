@@ -15,6 +15,7 @@ import com.github.highcharts4gwt.generator.option.Option;
 import com.github.highcharts4gwt.generator.option.OptionTree;
 import com.github.highcharts4gwt.generator.option.OptionUtils;
 import com.github.highcharts4gwt.generator.option.field.BaseFieldWriter;
+import com.github.highcharts4gwt.generator.option.field.GenericFieldWriter;
 import com.sun.codemodel.ClassType;
 import com.sun.codemodel.JClass;
 import com.sun.codemodel.JClassAlreadyExistsException;
@@ -46,10 +47,13 @@ public abstract class BaseClassWriter implements OptionClassWriter
 
     private final BaseFieldWriter fieldWriter;
 
+    private GenericFieldWriter genericFieldWritter;
+
     public BaseClassWriter(String rootDirectory) throws JClassAlreadyExistsException
     {
         this.rootDirectory = rootDirectory;
         fieldWriter = new BaseFieldWriter();
+        genericFieldWritter = new GenericFieldWriter();
     }
 
     @Override
@@ -71,9 +75,16 @@ public abstract class BaseClassWriter implements OptionClassWriter
 
         addFieldsToJClass();
 
+        addGenericSetterGetters();
+        
         writeJClassToFileSystem();
 
         ClassRegistry.INSTANCE.put(option, getOutputType(), jClass);
+    }
+
+    private void addGenericSetterGetters()
+    {
+        genericFieldWritter.writeGenericJsonObject(jClass, getOutputType());
     }
 
     private void writeJClassToFileSystem() throws IOException

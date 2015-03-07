@@ -175,8 +175,9 @@ public abstract class BaseGenerator implements Generator
                     children.add(root);
                 }
                 topOptionTree.addParentChildren(option, children);
-                classWriter.setPackageName(ObjectOrOptionUtils.computePackageName(option, outputType, optionPackageName)).setOption(option)
-                                .setTree(topOptionTree);
+                classWriter.setPackageName(ObjectOrOptionUtils.computePackageName(option, outputType, optionPackageName))
+                    .setOption(option)
+                    .setTree(topOptionTree);
                 classWriter.write();
             }
         }
