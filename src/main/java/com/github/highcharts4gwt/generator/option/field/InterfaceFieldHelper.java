@@ -15,6 +15,7 @@ import com.sun.codemodel.JClass;
 import com.sun.codemodel.JClassAlreadyExistsException;
 import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JDefinedClass;
+import com.sun.codemodel.JDocComment;
 import com.sun.codemodel.JMethod;
 import com.sun.codemodel.JMod;
 
@@ -45,26 +46,37 @@ public class InterfaceFieldHelper
         addSetterDeclaration(names, type, jDefinedClass);
     }
 
-    public static void addSetterDeclaration(Names names, Class<?> type, JDefinedClass jDefinedClass)
+    private static void addSetterDeclaration(Names names, Class<?> type, JDefinedClass jDefinedClass)
     {
-        jDefinedClass.method(JMod.NONE, jDefinedClass, names.getSetterName()).param(type, names.getParamName());
+        JMethod method = jDefinedClass.method(JMod.NONE, jDefinedClass, names.getSetterName());
+        method.param(type, names.getParamName());
+        JDocComment javadoc = method.javadoc();
+        javadoc.append(names.getJavadoc());
     }
 
     public static void addGetterDeclaration(Names names, Class<?> type, JDefinedClass jDefinedClass)
     {
-        jDefinedClass.method(JMod.NONE, type, names.getGetterName());
+        JMethod method = jDefinedClass.method(JMod.NONE, type, names.getGetterName());
+        JDocComment javadoc = method.javadoc();
+        javadoc.append(names.getJavadoc());
     }
 
     public static void addGetterSetterDeclaration(Names names, JClass type, JDefinedClass jDefinedClass)
     {
         addGetterDeclaration(names, type, jDefinedClass);
 
-        jDefinedClass.method(JMod.NONE, jDefinedClass, names.getSetterName()).param(type, names.getParamName());
+        JMethod method = jDefinedClass.method(JMod.NONE, jDefinedClass, names.getSetterName());
+        method.param(type, names.getParamName());
+        
+        JDocComment javadoc = method.javadoc();
+        javadoc.append(names.getJavadoc());
     }
 
     public static void addGetterDeclaration(Names names, JClass type, JDefinedClass jDefinedClass)
     {
-        jDefinedClass.method(JMod.NONE, type, names.getGetterName());
+        JMethod method = jDefinedClass.method(JMod.NONE, type, names.getGetterName());
+        JDocComment javadoc = method.javadoc();
+        javadoc.append(names.getJavadoc());
     }
 
     public static void createEventInterface(Option option, String packageName, String rootDirectoryPathName)

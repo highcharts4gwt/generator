@@ -14,7 +14,7 @@ public class FieldEventWriter extends AbstractFieldWriter implements OutputTypeV
 
     public FieldEventWriter(JDefinedClass jClass, Option option, boolean pipe, String fieldName, String rootDirectoryPath)
     {
-        super(jClass, pipe, fieldName);
+        super(jClass, pipe, fieldName, option.getDescription());
         this.option = option;
         this.rootDirectoryPath = rootDirectoryPath;
         this.defaultValue = option.getDefaults();

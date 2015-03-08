@@ -13,7 +13,7 @@ public class FieldStringWriter extends AbstractFieldWriter implements OutputType
 
     public FieldStringWriter(JDefinedClass jClass, Option option, boolean pipe, String fieldName)
     {
-        super(jClass, pipe, fieldName);
+        super(jClass, pipe, fieldName, option.getDescription());
         this.defaultValue = option.getDefaults();
     }
 

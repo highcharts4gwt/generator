@@ -13,6 +13,7 @@ import com.sun.codemodel.ClassType;
 import com.sun.codemodel.JClassAlreadyExistsException;
 import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JDefinedClass;
+import com.sun.codemodel.JDocComment;
 
 public abstract class BaseObjectClassWriter implements ObjectClassWriter
 {
@@ -60,7 +61,10 @@ public abstract class BaseObjectClassWriter implements ObjectClassWriter
     {
         codeModel = new JCodeModel();
         JDefinedClass jClass = declareType(packageName, shortClassName);
-
+        
+        JDocComment javadoc = jClass.javadoc();
+        javadoc.append(object.getDescription());
+        
         ClassRegistry.INSTANCE.put(object, getOutputType(), jClass);
     }
 

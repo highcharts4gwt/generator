@@ -13,7 +13,7 @@ public class FieldBooleanWriter extends AbstractFieldWriter implements OutputTyp
 
     public FieldBooleanWriter(JDefinedClass jClass, Option option, boolean pipe, String fieldName)
     {
-        super(jClass, pipe, fieldName);
+        super(jClass, pipe, fieldName, option.getDescription());
         this.defaultValue = Boolean.parseBoolean(option.getDefaults());
     }
 

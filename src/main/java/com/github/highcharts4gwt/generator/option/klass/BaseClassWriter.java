@@ -21,6 +21,7 @@ import com.sun.codemodel.JClass;
 import com.sun.codemodel.JClassAlreadyExistsException;
 import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JDefinedClass;
+import com.sun.codemodel.JDocComment;
 
 public abstract class BaseClassWriter implements OptionClassWriter
 {
@@ -72,7 +73,10 @@ public abstract class BaseClassWriter implements OptionClassWriter
 
         if (tree == null)
             throw new RuntimeException("Need to set the tree to build a class");
-
+        
+        JDocComment javadoc = jClass.javadoc();
+        javadoc.append(option.getDescription());
+        
         addFieldsToJClass();
 
         addGenericSetterGetters();

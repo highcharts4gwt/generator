@@ -23,7 +23,7 @@ public class FieldArrayObjectWriter extends AbstractFieldWriter implements Outpu
 
     public FieldArrayObjectWriter(JDefinedClass jClass, Option option, boolean pipe, String fieldName)
     {
-        super(jClass, pipe, fieldName);
+        super(jClass, pipe, fieldName, option.getDescription());
         this.option = option;
         this.defaultValue = option.getDefaults();
     }

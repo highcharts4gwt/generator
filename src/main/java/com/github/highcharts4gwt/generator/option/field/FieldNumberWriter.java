@@ -12,7 +12,7 @@ public class FieldNumberWriter extends AbstractFieldWriter implements OutputType
 
     public FieldNumberWriter(JDefinedClass jClass, Option option, boolean pipe, String fieldName)
     {
-        super(jClass, pipe, fieldName);
+        super(jClass, pipe, fieldName, option.getDescription());
         this.defaultValue = option.getDefaults();
     }
 

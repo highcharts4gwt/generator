@@ -11,14 +11,16 @@ public class Names
     private final String getterName;
     private final String setterName;
     private final String mockFieldName;
+    private final String javadoc;
 
-    private Names(String originalFieldName, String mockFieldName, String paramName, String getterName, String setterName)
+    private Names(String originalFieldName, String mockFieldName, String paramName, String getterName, String setterName, String javadoc)
     {
         this.originalFieldName = originalFieldName;
         this.mockFieldName = mockFieldName;
         this.paramName = paramName;
         this.getterName = getterName;
         this.setterName = setterName;
+        this.javadoc = javadoc;
     }
 
     public String getOriginalFieldName()
@@ -59,7 +61,7 @@ public class Names
     // fieldName);
     // }
 
-    public static Names create(String originalFieldName, String extension, boolean pipe, boolean specialParamName)
+    public static Names create(String originalFieldName, String extension, boolean pipe, boolean specialParamName, String javadoc)
     {
         String getterName = originalFieldName;
         String setterName = originalFieldName;
@@ -78,6 +80,11 @@ public class Names
             paramName = originalFieldName + extension;
         }
 
-        return new Names(originalFieldName, mockfieldName, paramName, getterName, setterName);
+        return new Names(originalFieldName, mockfieldName, paramName, getterName, setterName, javadoc);
+    }
+
+    public String getJavadoc()
+    {
+        return javadoc;
     }
 }

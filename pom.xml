@@ -6,7 +6,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.highcharts4gwt</groupId>
 	<artifactId>generator</artifactId>
-	<version>0.0.3-SNAPSHOT</version>
+	<version>0.0.4-SNAPSHOT</version>
 	<name>highcharts4gwt</name>
 	<packaging>jar</packaging>
 

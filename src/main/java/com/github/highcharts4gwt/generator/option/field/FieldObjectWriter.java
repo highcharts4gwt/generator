@@ -19,7 +19,7 @@ public class FieldObjectWriter extends AbstractFieldWriter implements OutputType
 
     public FieldObjectWriter(JDefinedClass jClass, Option option, boolean pipe, String fieldName)
     {
-        super(jClass, pipe, fieldName);
+        super(jClass, pipe, fieldName, option.getDescription());
         this.option = option;
         fullName = option.getFullname();
         this.defaultValue = option.getDefaults();

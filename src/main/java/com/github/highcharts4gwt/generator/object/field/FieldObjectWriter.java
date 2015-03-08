@@ -22,7 +22,7 @@ public class FieldObjectWriter extends AbstractFieldWriter implements OutputType
 
     public FieldObjectWriter(JDefinedClass jClass, boolean pipe, String fieldName, Object object)
     {
-        super(jClass, pipe, fieldName);
+        super(jClass, pipe, fieldName, object.getDescription());
         this.object = object;
         className = object.getReturnType().substring(0, 1).toUpperCase() + object.getReturnType().substring(1);
         interfaceJClass = ClassRegistry.INSTANCE.getRegistry().get(

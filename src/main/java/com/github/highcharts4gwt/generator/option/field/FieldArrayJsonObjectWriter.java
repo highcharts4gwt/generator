@@ -15,7 +15,7 @@ public class FieldArrayJsonObjectWriter extends AbstractFieldWriter implements O
 
     public FieldArrayJsonObjectWriter(JDefinedClass jClass, Option option, boolean pipe, String fieldName)
     {
-        super(jClass, pipe, fieldName);
+        super(jClass, pipe, fieldName, option.getDescription());
         this.option = option;
         this.defaultValue = option.getDefaults();
     }

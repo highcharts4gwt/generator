@@ -25,7 +25,7 @@ public class FieldArrayObjectWriter extends AbstractFieldWriter implements Outpu
 
     public FieldArrayObjectWriter(JDefinedClass jClass, boolean pipe, String fieldName, Object object)
     {
-        super(jClass, pipe, fieldName);
+        super(jClass, pipe, fieldName, object.getDescription());
         this.object = object;
     }
 

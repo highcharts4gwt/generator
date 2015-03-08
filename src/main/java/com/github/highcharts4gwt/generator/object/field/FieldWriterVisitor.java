@@ -33,19 +33,19 @@ public class FieldWriterVisitor implements FieldTypeVisitor<OutputType, Void>
     @Override
     public Void visitString(OutputType in)
     {
-        return in.accept(new FieldStringWriter(jClass, pipe, fieldName), null);
+        return in.accept(new FieldStringWriter(jClass, pipe, fieldName, object), null);
     }
 
     @Override
     public Void visitNumber(OutputType in)
     {
-        return in.accept(new FieldNumberWriter(jClass, pipe, fieldName), null);
+        return in.accept(new FieldNumberWriter(jClass, pipe, fieldName, object), null);
     }
 
     @Override
     public Void visitBoolean(OutputType in)
     {
-        return in.accept(new FieldBooleanWriter(jClass, pipe, fieldName), null);
+        return in.accept(new FieldBooleanWriter(jClass, pipe, fieldName, object), null);
     }
 
     @Override
@@ -71,13 +71,13 @@ public class FieldWriterVisitor implements FieldTypeVisitor<OutputType, Void>
     @Override
     public Void visitArrayString(OutputType in)
     {
-        return in.accept(new FieldArrayStringWriter(jClass, pipe, fieldName), null);
+        return in.accept(new FieldArrayStringWriter(jClass, pipe, fieldName, object), null);
     }
 
     @Override
     public Void visitArrayNumber(OutputType in)
     {
-        return in.accept(new FieldArrayNumberWriter(jClass, pipe, fieldName), null);
+        return in.accept(new FieldArrayNumberWriter(jClass, pipe, fieldName, object), null);
     }
 
     @Override

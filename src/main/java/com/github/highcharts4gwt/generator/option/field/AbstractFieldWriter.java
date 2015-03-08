@@ -4,11 +4,11 @@ import com.sun.codemodel.JDefinedClass;
 
 public abstract class AbstractFieldWriter
 {
-    public AbstractFieldWriter(JDefinedClass jClass, boolean pipe, String fieldName)
+    public AbstractFieldWriter(JDefinedClass jClass, boolean pipe, String fieldName, String javadoc)
     {
         this.jClass = jClass;
         this.pipe = pipe;
-        this.names = Names.create(fieldName, getNameExtension(), pipe, isParamNameSpecial());
+        this.names = Names.create(fieldName, getNameExtension(), pipe, isParamNameSpecial(), javadoc);
     }
 
     protected boolean isParamNameSpecial()
