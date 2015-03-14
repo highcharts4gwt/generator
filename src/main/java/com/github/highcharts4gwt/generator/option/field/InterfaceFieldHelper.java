@@ -27,18 +27,6 @@ public class InterfaceFieldHelper
     {
     }
     
-    public static void addGenericJsonObjectGetterSetterDeclaration(JDefinedClass jDefinedClass)
-    {
-        //getFieldAsJsonObject(String fieldName);
-        jDefinedClass.method(JMod.NONE, String.class, "getFieldAsJsonObject").param(String.class, "fieldName");
-        
-        //setFieldAsJsonObject(String fieldName, String fieldValueAsJonObject);
-        JMethod setter = jDefinedClass.method(JMod.NONE, jDefinedClass, "setFieldAsJsonObject");
-        setter.param(String.class, "fieldName");
-        setter.param(String.class, "fieldValueAsJonObject");
-    }
-
-    
     public static void addGetterSetterDeclaration(Names names, Class<?> type, JDefinedClass jDefinedClass)
     {
         addGetterDeclaration(names, type, jDefinedClass);
@@ -167,5 +155,27 @@ public class InterfaceFieldHelper
             }
         }
 
+    }
+
+    public static void addJsonObjectGetterSetterDeclaration(JDefinedClass jDefinedClass)
+    {
+        //getFieldAsJsonObject(String fieldName);
+        jDefinedClass.method(JMod.NONE, String.class, "getFieldAsJsonObject").param(String.class, "fieldName");
+        
+        //setFieldAsJsonObject(String fieldName, String fieldValueAsJonObject);
+        JMethod setter = jDefinedClass.method(JMod.NONE, jDefinedClass, "setFieldAsJsonObject");
+        setter.param(String.class, "fieldName");
+        setter.param(String.class, "fieldValueAsJonObject");
+    }
+
+    public static void addFunctionGetterSetterDeclaration(JDefinedClass jDefinedClass)
+    {
+        //getFieldAsJsonObject(String fieldName);
+        jDefinedClass.method(JMod.NONE, String.class, "getFunctionAsString").param(String.class, "fieldName");
+        
+        //setFieldAsJsonObject(String fieldName, String fieldValueAsJonObject);
+        JMethod setter = jDefinedClass.method(JMod.NONE, jDefinedClass, "setFunctionAsString");
+        setter.param(String.class, "fieldName");
+        setter.param(String.class, "functionAsString");
     }
 }

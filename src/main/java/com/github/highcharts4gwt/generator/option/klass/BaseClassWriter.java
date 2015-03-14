@@ -88,7 +88,7 @@ public abstract class BaseClassWriter implements OptionClassWriter
 
     private void addGenericSetterGetters()
     {
-        genericFieldWritter.writeGenericJsonObject(jClass, getOutputType());
+        genericFieldWritter.writeGenericGettersSetters(jClass, getOutputType());
     }
 
     private void writeJClassToFileSystem() throws IOException

@@ -343,4 +343,25 @@ public class JsoFieldHelper
         setterMethod.param(String.class, "fieldValueAsJsonObject");
         
     }
+
+    public static void addFunctionGetterSetterDeclaration(JDefinedClass in)
+    {
+        String getterCode = "/*-{\n" + "        this[fieldName] = (this[fieldName] || {});\n"
+        + "        return JSON.stringify(this[fieldName]);\n" + "    }-*/";
+        
+        NativeContentHack getterContentHack = new NativeContentHack(getterCode);
+        JMethod getterMethod = in.method(JMod.NATIVE + JMod.FINAL + JMod.PUBLIC, String.class, "getFunctionAsString");
+        getterMethod.param(String.class, "fieldName");
+        getterMethod._throws(getterContentHack);
+
+        
+        String setterCode = "/*-{\n" + "        this[fieldName] = eval('(' + valueToBeEvaluated + ')');\n" + "        return this;\n" + "    }-*/";
+        
+        NativeContentHack setterContentHack = new NativeContentHack(setterCode);
+        JMethod setterMethod = in.method(JMod.NATIVE + JMod.FINAL + JMod.PUBLIC, in, "setFunctionAsString");
+        setterMethod._throws(setterContentHack);
+        setterMethod.param(String.class, "fieldName");
+        setterMethod.param(String.class, "functionAsString");
+        
+    }
 }

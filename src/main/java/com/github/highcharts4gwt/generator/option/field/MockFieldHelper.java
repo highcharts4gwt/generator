@@ -140,4 +140,23 @@ public class MockFieldHelper
 
         setter.body().assign(JExpr._this().ref(field), setterParam2)._return(JExpr._this());   
     }
+
+    public static void addFunctionGetterSetterDeclaration(JDefinedClass in)
+    {
+        //TODO create a map of generic fields -> mock support only one geenric field right now
+        JFieldVar field = in.field(JMod.PRIVATE, String.class, "functionAsString");
+
+        JMethod getter = in.method(JMod.PUBLIC, String.class, "getFunctionAsString");
+        getter.param(String.class, "fieldName");
+        JBlock block = getter.body();
+        block._return(field);
+        
+        
+        JMethod setter = in.method(JMod.PUBLIC, in, "setFunctionAsString");
+        JVar setterParam = setter.param(String.class, "fieldName");
+        JVar setterParam2 = setter.param(String.class, "functionAsString");
+
+        setter.body().assign(JExpr._this().ref(field), setterParam2)._return(JExpr._this());  
+        
+    }
 }

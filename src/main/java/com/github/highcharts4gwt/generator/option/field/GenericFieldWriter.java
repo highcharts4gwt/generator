@@ -9,7 +9,7 @@ import com.sun.codemodel.JDefinedClass;
 public class GenericFieldWriter implements OutputTypeVisitor<JDefinedClass, Void>
 {
 
-    public void writeGenericJsonObject(JDefinedClass jClass, OutputType outputType)
+    public void writeGenericGettersSetters(JDefinedClass jClass, OutputType outputType)
     {
         outputType.accept(this, jClass);
     }
@@ -18,7 +18,8 @@ public class GenericFieldWriter implements OutputTypeVisitor<JDefinedClass, Void
     @CheckForNull
     public Void visitInterface(JDefinedClass in)
     {
-        InterfaceFieldHelper.addGenericJsonObjectGetterSetterDeclaration(in);
+        InterfaceFieldHelper.addJsonObjectGetterSetterDeclaration(in);
+        InterfaceFieldHelper.addFunctionGetterSetterDeclaration(in);
         return null;
     }
 
@@ -27,6 +28,7 @@ public class GenericFieldWriter implements OutputTypeVisitor<JDefinedClass, Void
     public Void visitJso(JDefinedClass in)
     {
         JsoFieldHelper.addGenericJsonObjectGetterSetterDeclaration(in);
+        JsoFieldHelper.addFunctionGetterSetterDeclaration(in);
         return null;
     }
 
@@ -35,6 +37,7 @@ public class GenericFieldWriter implements OutputTypeVisitor<JDefinedClass, Void
     public Void visitMock(JDefinedClass in)
     {
         MockFieldHelper.addGenericJsonObjectGetterSetterDeclaration(in);
+        MockFieldHelper.addFunctionGetterSetterDeclaration(in);
         return null;
     }
 
