@@ -29,7 +29,7 @@ public class OptionsData
         if (tree == null)
             tree = createEmptyTree(option, allOptions);
 
-        tree.computeAndAddRelation(option, allOptions);
+        tree.computeAndAddRelations(option, allOptions);
 
     }
 

@@ -31,7 +31,10 @@ public class OptionUtils
         if (lastIndexOf == -1)
             return null;
 
-        String parentFullName = fullname.substring(0, lastIndexOf);
+        String parentFullName = fullname.substring(0, lastIndexOf); //to support series<xxx>.child
+        
+        if (parentFullName.matches("\\w+<\\w+>\\.\\w+"))
+            parentFullName.replaceAll("<\\w+", "");
         return parentFullName;
     }
 

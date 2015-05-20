@@ -46,9 +46,26 @@ public class OptionParser
         List<Option> options = readOptions(jsonArray);
 
         OptionsData optionsData = new OptionsData();
-
+        
         for (Option option : options)
         {
+            //TODO remove when dump fixed, 
+            if (option.getFullname().equals("series"))
+                option.setIsParent(false);
+            if (option.getFullname().equals("series.data") ||
+                    option.getFullname().equals("series.dataParser") ||
+                    option.getFullname().equals("series.dataURL") ||
+                    option.getFullname().equals("series.id") ||
+                    option.getFullname().equals("series.index") ||
+                    option.getFullname().equals("series.legendIndex") ||
+                    option.getFullname().equals("series.name") ||
+                    option.getFullname().equals("series.stack") ||
+                    option.getFullname().equals("series.type") ||
+                    option.getFullname().equals("series.xAxis") ||
+                    option.getFullname().equals("series.yAxis") ||
+                    option.getFullname().equals("series.zIndex"))
+                continue;
+            
             optionsData.add(option, options);
         }
 

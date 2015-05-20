@@ -346,22 +346,27 @@ public class JsoFieldHelper
 
     public static void addFunctionGetterSetterDeclaration(JDefinedClass in)
     {
-        String getterCode = "/*-{\n" + "        this[fieldName] = (this[fieldName] || {});\n"
-        + "        return JSON.stringify(this[fieldName]);\n" + "    }-*/";
+        String fieldNameParam = "fieldName";
+        String functionAsStringParam = "functionAsString";
+        String getFunctionAsStringMethodName = "getFunctionAsString";
+        String setFunctionAsStringMethodName = "setFunctionAsString";
+
+        String getterCode = "/*-{\n" + "        this["+fieldNameParam+"] = (this["+fieldNameParam+"] || {});\n"
+        + "        return JSON.stringify(this["+fieldNameParam+"]);\n" + "    }-*/";
         
         NativeContentHack getterContentHack = new NativeContentHack(getterCode);
-        JMethod getterMethod = in.method(JMod.NATIVE + JMod.FINAL + JMod.PUBLIC, String.class, "getFunctionAsString");
-        getterMethod.param(String.class, "fieldName");
+        JMethod getterMethod = in.method(JMod.NATIVE + JMod.FINAL + JMod.PUBLIC, String.class, getFunctionAsStringMethodName);
+        getterMethod.param(String.class, fieldNameParam);
         getterMethod._throws(getterContentHack);
 
         
-        String setterCode = "/*-{\n" + "        this[fieldName] = eval('(' + valueToBeEvaluated + ')');\n" + "        return this;\n" + "    }-*/";
+        String setterCode = "/*-{\n" + "        this["+fieldNameParam+"] = eval('(' + "+functionAsStringParam+" + ')');\n" + "        return this;\n" + "    }-*/";
         
         NativeContentHack setterContentHack = new NativeContentHack(setterCode);
-        JMethod setterMethod = in.method(JMod.NATIVE + JMod.FINAL + JMod.PUBLIC, in, "setFunctionAsString");
+        JMethod setterMethod = in.method(JMod.NATIVE + JMod.FINAL + JMod.PUBLIC, in, setFunctionAsStringMethodName);
         setterMethod._throws(setterContentHack);
-        setterMethod.param(String.class, "fieldName");
-        setterMethod.param(String.class, "functionAsString");
+        setterMethod.param(String.class, fieldNameParam);
+        setterMethod.param(String.class, functionAsStringParam);
         
     }
 }

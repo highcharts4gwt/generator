@@ -56,22 +56,27 @@ public class OptionTree
         parentToChildrenRelations.put(option, children);
     }
 
-    public void computeAndAddRelation(Option option, List<Option> options)
+    public void computeAndAddRelations(Option option, List<Option> options)
     {
         all.add(option);
 
-        setLeavesInfo(option);
+        fillLeavesMap(option);
 
         if (ObjectOrOptionUtils.isRoot(option))
             return;
 
+        fillParentChildMaps(option, options);
+
+    }
+
+    private void fillParentChildMaps(Option option, List<Option> options)
+    {
         Option parent = OptionUtils.findParent(option, options);
 
         if (parent == null)
             return;
 
-        setParentChildrenInfo(option, parent);
-
+        setParentChildrenRelations(option, parent);
     }
 
     public ArrayList<Option> getLeaves()
@@ -112,13 +117,13 @@ public class OptionTree
         return parentToChildrenRelations;
     }
 
-    private void setLeavesInfo(Option option)
+    private void fillLeavesMap(Option option)
     {
         if (!option.isParent())
             leaves.add(option);
     }
 
-    private void setParentChildrenInfo(Option option, Option parent)
+    private void setParentChildrenRelations(Option option, Option parent)
     {
         childToParentRelations.put(option, parent);
 
