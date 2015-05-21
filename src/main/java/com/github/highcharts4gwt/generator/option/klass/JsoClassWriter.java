@@ -18,8 +18,7 @@ public class JsoClassWriter extends ConcreteClassWriter
     @Override
     protected JDefinedClass createJClass() throws JClassAlreadyExistsException
     {
-        String fullyqualifiedName = getPackageName() + "." + getPrefix() + getShortClassName();
-        JDefinedClass jClass = getCodeModel()._class(fullyqualifiedName, getClassType())._implements(getInterface())._extends(JavaScriptObject.class);
+        JDefinedClass jClass = getCodeModel()._class(getFullyQualifiedName(), getClassType())._implements(getInterface())._extends(JavaScriptObject.class);
         jClass.constructor(JMod.PROTECTED);
         return jClass;
     }

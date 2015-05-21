@@ -64,7 +64,25 @@ public class EventHelper
 
         // GaugeClickEvent
         String eventName = v2 + option.getTitle().substring(0, 1).toUpperCase() + option.getTitle().substring(1);
+        eventName = removeLt(eventName);
+        eventName = removeGt(eventName);
         return eventName;
+    }
+    
+    public static String removeLt(String name)
+    {
+        int lt = name.indexOf("<");
+        if (lt > -1)
+            name = name.substring(0,lt) + name.substring(lt+1,lt+2).toUpperCase() + name.substring(lt+2, name.length());
+        return name;
+    }
+
+    public static String removeGt(String name)
+    {
+        int lt = name.indexOf(">");
+        if (lt > -1)
+            name = name.substring(0,lt) + name.substring(lt+1, name.length());
+        return name;
     }
 
     public static String paramName(String eventName)

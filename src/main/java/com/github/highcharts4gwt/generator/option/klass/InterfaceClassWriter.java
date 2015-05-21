@@ -23,9 +23,12 @@ public class InterfaceClassWriter extends BaseClassWriter
     @Override
     protected JDefinedClass createJClass() throws JClassAlreadyExistsException
     {
-        String fullyqualifiedName = getPackageName() + "." + getPrefix() + getShortClassName();
+        String fullyqualifiedName = getFullyQualifiedName();
+        
         return getCodeModel()._class(fullyqualifiedName, getClassType());
     }
+
+    
 
     @Override
     protected ClassType getClassType()

@@ -15,6 +15,7 @@ import com.github.highcharts4gwt.generator.option.Option;
 import com.github.highcharts4gwt.generator.option.OptionTree;
 import com.github.highcharts4gwt.generator.option.OptionUtils;
 import com.github.highcharts4gwt.generator.option.field.BaseFieldWriter;
+import com.github.highcharts4gwt.generator.option.field.EventHelper;
 import com.github.highcharts4gwt.generator.option.field.GenericFieldWriter;
 import com.sun.codemodel.ClassType;
 import com.sun.codemodel.JClass;
@@ -56,7 +57,7 @@ public abstract class BaseClassWriter implements OptionClassWriter
         fieldWriter = new BaseFieldWriter();
         genericFieldWritter = new GenericFieldWriter();
     }
-
+    
     @Override
     public void write() throws IOException, JClassAlreadyExistsException
     {
@@ -139,6 +140,15 @@ public abstract class BaseClassWriter implements OptionClassWriter
     {
         this.tree = tree;
         return this;
+    }
+    
+    protected String getFullyQualifiedName()
+    {
+        String fullyqualifiedName = getPackageName() + "." + getPrefix() + getShortClassName();
+        
+        fullyqualifiedName = EventHelper.removeLt(fullyqualifiedName);
+        fullyqualifiedName = EventHelper.removeGt(fullyqualifiedName);
+        return fullyqualifiedName;
     }
 
     protected abstract String getPrefix();

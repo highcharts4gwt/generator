@@ -17,8 +17,7 @@ public abstract class ConcreteClassWriter extends BaseClassWriter
     @Override
     protected JDefinedClass createJClass() throws JClassAlreadyExistsException
     {
-        String fullyqualifiedName = getPackageName() + "." + getPrefix() + getShortClassName();
-        return getCodeModel()._class(fullyqualifiedName, getClassType())._implements(getInterface());
+        return getCodeModel()._class(getFullyQualifiedName(), getClassType())._implements(getInterface());
     }
 
     protected JClass getInterface()
