@@ -103,4 +103,10 @@ public class FieldWriterVisitor implements FieldTypeVisitor<OutputType, Void>
     {
         throw new RuntimeException("Element type is not supported by options");
     }
+
+    @Override
+    public Void visitSeries(OutputType in)
+    {
+        return in.accept(new FieldSeriesWriter(jClass, option, pipe, fieldName), null);
+    }
 }

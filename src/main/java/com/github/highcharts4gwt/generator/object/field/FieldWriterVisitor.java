@@ -106,4 +106,11 @@ public class FieldWriterVisitor implements FieldTypeVisitor<OutputType, Void>
         // TODO Auto-generated method stub
         return null;
     }
+
+    @Override
+    public Void visitSeries(OutputType in)
+    {
+        // TODO Auto-generated method stub
+        return null;
+    }
 }

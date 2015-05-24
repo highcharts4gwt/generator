@@ -57,7 +57,7 @@ public abstract class BaseClassWriter implements OptionClassWriter
         fieldWriter = new BaseFieldWriter();
         genericFieldWritter = new GenericFieldWriter();
     }
-    
+
     @Override
     public void write() throws IOException, JClassAlreadyExistsException
     {
@@ -74,14 +74,14 @@ public abstract class BaseClassWriter implements OptionClassWriter
 
         if (tree == null)
             throw new RuntimeException("Need to set the tree to build a class");
-        
+
         JDocComment javadoc = jClass.javadoc();
         javadoc.append(option.getDescription());
-        
+
         addFieldsToJClass();
 
         addGenericSetterGetters();
-        
+
         writeJClassToFileSystem();
 
         ClassRegistry.INSTANCE.put(option, getOutputType(), jClass);
@@ -106,10 +106,15 @@ public abstract class BaseClassWriter implements OptionClassWriter
             throw new RuntimeException("tree/option should not be null");
 
         List<Option> fieldToAdd = tree.getChildren(option);
-
-        for (Option option : fieldToAdd)
+        
+        if (fieldToAdd != null) //series case
         {
-            fieldWriter.writeField(option, getOutputType(), rootDirectory);
+            for (Option option : fieldToAdd)
+            {
+                if (option.getFullname().matches("series<\\w+>")) // do not write the series<area> etc. inside the chartOption class
+                    continue;
+                fieldWriter.writeField(option, getOutputType(), rootDirectory);
+            }
         }
     }
 
@@ -141,13 +146,17 @@ public abstract class BaseClassWriter implements OptionClassWriter
         this.tree = tree;
         return this;
     }
-    
+
     protected String getFullyQualifiedName()
     {
-        String fullyqualifiedName = getPackageName() + "." + getPrefix() + getShortClassName();
-        
-        fullyqualifiedName = EventHelper.removeLt(fullyqualifiedName);
-        fullyqualifiedName = EventHelper.removeGt(fullyqualifiedName);
+        String p = getPackageName();
+        p = EventHelper.removeLtGt(p, false);
+
+        String s = getShortClassName();
+        s = EventHelper.removeLtGt(s, true);
+
+        String fullyqualifiedName = p + "." + getPrefix() + s;
+
         return fullyqualifiedName;
     }
 

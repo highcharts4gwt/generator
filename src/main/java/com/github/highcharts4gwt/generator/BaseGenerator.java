@@ -128,14 +128,16 @@ public abstract class BaseGenerator implements Generator
         OptionTree tree = optionsData.findTree(option);
 
         List<Option> children = tree.getChildren(option);
-        if (children == null)
+        if (children == null && !option.getFullname().equals("series"))
             throw new RuntimeException("No children whereas isParent" + ";" + option);
 
-        for (Option child : children)
+        if (children != null) //series case
         {
-            exploreChild(child, optionsData);
+            for (Option child : children)
+            {
+                exploreChild(child, optionsData);
+            }
         }
-
         writeOptionClasses(option, tree);
     }
 

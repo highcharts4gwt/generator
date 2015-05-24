@@ -1,7 +1,10 @@
 package com.github.highcharts4gwt.generator.option.klass;
 
+import com.github.highcharts4gwt.generator.common.ClassRegistry;
 import com.github.highcharts4gwt.generator.common.OutputType;
+import com.github.highcharts4gwt.generator.option.Option;
 import com.sun.codemodel.ClassType;
+import com.sun.codemodel.JClass;
 import com.sun.codemodel.JClassAlreadyExistsException;
 import com.sun.codemodel.JDefinedClass;
 
@@ -25,7 +28,14 @@ public class InterfaceClassWriter extends BaseClassWriter
     {
         String fullyqualifiedName = getFullyQualifiedName();
         
-        return getCodeModel()._class(fullyqualifiedName, getClassType());
+        JDefinedClass _class = getCodeModel()._class(fullyqualifiedName, getClassType());
+        if (getOption().getFullname().matches("series<\\w+>"))
+        {
+            ClassRegistry.RegistryKey interfaceKey = new ClassRegistry.RegistryKey(new Option("series", "", ""), OutputType.Interface);
+             JClass seriesInterface = ClassRegistry.INSTANCE.getRegistry().get(interfaceKey);
+            _class._implements(seriesInterface);
+        }
+        return _class;
     }
 
     

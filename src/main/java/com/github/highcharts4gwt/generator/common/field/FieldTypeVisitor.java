@@ -25,4 +25,7 @@ public interface FieldTypeVisitor<IN, OUT>
     OUT visitEvent(IN in);
 
     OUT visitElement(IN in);
+
+    OUT visitSeries(IN in);
+    
 }

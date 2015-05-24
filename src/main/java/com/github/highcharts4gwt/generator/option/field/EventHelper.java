@@ -1,6 +1,5 @@
 package com.github.highcharts4gwt.generator.option.field;
 
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -64,24 +63,36 @@ public class EventHelper
 
         // GaugeClickEvent
         String eventName = v2 + option.getTitle().substring(0, 1).toUpperCase() + option.getTitle().substring(1);
-        eventName = removeLt(eventName);
-        eventName = removeGt(eventName);
+        eventName = removeLtGt(eventName, true);
         return eventName;
     }
-    
-    public static String removeLt(String name)
+
+    public static String removeLtGt(String name, boolean camelCase)
+    {
+        String out = removeLt(name, camelCase);
+        out = removeGt(out);
+        return out;
+    };
+
+    private static String removeLt(String name, boolean camelCase)
     {
         int lt = name.indexOf("<");
         if (lt > -1)
-            name = name.substring(0,lt) + name.substring(lt+1,lt+2).toUpperCase() + name.substring(lt+2, name.length());
+        {
+            String typeFirstLetter = name.substring(lt + 1, lt + 2);
+            if (camelCase)
+                typeFirstLetter = typeFirstLetter.toUpperCase();
+
+            name = name.substring(0, lt) + typeFirstLetter + name.substring(lt + 2, name.length());
+        }
         return name;
     }
 
-    public static String removeGt(String name)
+    private static String removeGt(String name)
     {
         int lt = name.indexOf(">");
         if (lt > -1)
-            name = name.substring(0,lt) + name.substring(lt+1, name.length());
+            name = name.substring(0, lt) + name.substring(lt + 1, name.length());
         return name;
     }
 

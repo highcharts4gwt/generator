@@ -50,8 +50,8 @@ public class OptionParser
         for (Option option : options)
         {
             //TODO remove when dump fixed, 
-            if (option.getFullname().equals("series"))
-                option.setIsParent(false);
+//            if (option.getFullname().equals("series"))
+//                option.setIsParent(false);
             if (option.getFullname().equals("series.data") ||
                     option.getFullname().equals("series.dataParser") ||
                     option.getFullname().equals("series.dataURL") ||

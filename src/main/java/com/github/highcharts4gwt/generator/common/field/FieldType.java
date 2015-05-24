@@ -202,6 +202,20 @@ public enum FieldType
         {
             return false;
         }
+    }, Series {
+
+        @Override
+        @CheckForNull
+        public <IN, OUT> OUT accept(FieldTypeVisitor<IN, OUT> visitor, IN in)
+        {
+            return visitor.visitSeries(in);
+        }
+
+        @Override
+        public boolean isArray()
+        {
+            return true;
+        }
     };
 
     @CheckForNull
