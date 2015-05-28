@@ -65,7 +65,7 @@ public class FieldArrayObjectWriter extends AbstractFieldWriter implements Outpu
         return null;
     }
 
-    private JClass getNarrowedArrayClass()
+    protected JClass getNarrowedArrayClass()
     {
         // use interface type
         JClass jClass = ClassRegistry.INSTANCE.getRegistry().get(new ClassRegistry.RegistryKey(option, OutputType.Interface));

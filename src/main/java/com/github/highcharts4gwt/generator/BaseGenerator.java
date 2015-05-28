@@ -162,8 +162,8 @@ public abstract class BaseGenerator implements Generator
             OptionClassWriter classWriter = outputType.accept(new OptionClassWritterVisitor(), getRootDirectory());
             if (classWriter != null)
             {
-                Option option = new Option(CHART_OPTIONS_FULLNAME, CHART_OPTIONS_FULLNAME, CHART_OPTIONS_FULLNAME).setIsParent(true);
-                OptionTree topOptionTree = new OptionTree(option);
+                Option chartOptionRoot = new Option(CHART_OPTIONS_FULLNAME, CHART_OPTIONS_FULLNAME, CHART_OPTIONS_FULLNAME).setIsParent(true);
+                OptionTree topOptionTree = new OptionTree(chartOptionRoot);
                 List<Option> children = new ArrayList<Option>();
                 for (OptionTree tree : options.getTrees())
                 {
@@ -176,9 +176,9 @@ public abstract class BaseGenerator implements Generator
 
                     children.add(root);
                 }
-                topOptionTree.addParentChildren(option, children);
-                classWriter.setPackageName(ObjectOrOptionUtils.computePackageName(option, outputType, optionPackageName))
-                    .setOption(option)
+                topOptionTree.addParentChildren(chartOptionRoot, children);
+                classWriter.setPackageName(ObjectOrOptionUtils.computePackageName(chartOptionRoot, outputType, optionPackageName))
+                    .setOption(chartOptionRoot)
                     .setTree(topOptionTree);
                 classWriter.write();
             }
@@ -223,6 +223,13 @@ public abstract class BaseGenerator implements Generator
     {
         if (writer != null)
         {
+            //TODO #series hack : do not write  Series, JsoSeries or MockSeries. Series field will be an array of Object
+            if (option.getFullname().equals("series") 
+                    //&& (outputType == OutputType.Jso || outputType == OutputType.Mock) create the Series interface
+                    ) 
+            {
+                    return;
+            }
             String pkg = ObjectOrOptionUtils.computePackageName(option, outputType, optionPackageName);
             writer.setPackageName(pkg).setOption(option);
             writer.setTree(tree);

@@ -189,6 +189,7 @@ public class FieldTypesExtractorVisitor implements ReturnTypeCategoryVisitor<Obj
         List<FieldType> out = Lists.newArrayList();
         if (in.getFullname().equals("series"))
         {
+            //TODO #series hack
             out.add(FieldType.Series);
         }
         else if (matching.equals(ARRAY))

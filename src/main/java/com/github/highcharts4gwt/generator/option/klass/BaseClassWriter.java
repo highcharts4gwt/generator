@@ -107,10 +107,12 @@ public abstract class BaseClassWriter implements OptionClassWriter
 
         List<Option> fieldToAdd = tree.getChildren(option);
         
+        //TODO #series hack
         if (fieldToAdd != null) //series case
         {
             for (Option option : fieldToAdd)
             {
+                //TODO #series hack
                 if (option.getFullname().matches("series<\\w+>")) // do not write the series<area> etc. inside the chartOption class
                     continue;
                 fieldWriter.writeField(option, getOutputType(), rootDirectory);

@@ -202,8 +202,10 @@ public enum FieldType
         {
             return false;
         }
-    }, Series {
-
+    },
+    Series
+    {
+        // TODO #series hack
         @Override
         @CheckForNull
         public <IN, OUT> OUT accept(FieldTypeVisitor<IN, OUT> visitor, IN in)

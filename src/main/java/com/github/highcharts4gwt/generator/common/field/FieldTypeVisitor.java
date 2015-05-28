@@ -26,6 +26,7 @@ public interface FieldTypeVisitor<IN, OUT>
 
     OUT visitElement(IN in);
 
+    //TODO #series hack
     OUT visitSeries(IN in);
     
 }
