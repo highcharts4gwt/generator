@@ -215,11 +215,19 @@ public class JsoFieldHelper
     {
         String paramName = "this";
 
-        return "\n        " + "/*-{" + "\n            " + "$wnd.jQuery.extend(true, " + paramName + ", " + "\n            " + "{" + "\n                "
-                + "events: {" + "\n                    " + eventName + ": function(event) {" + "\n                        " + "handler.@" + handlerClassFqn
-                + "::" + handlerMethodName + "(L" + eventTypeFqn + ";)(" + "\n                            " + "$wnd.jQuery.extend(true, event, {source:this})"
-                + "\n                         " + ");" + "\n                     " + "}" + "\n                 " + "}" + "\n             " + "});"
-                + "\n        " + "}-*/;";
+        return "\n        " 
+        + "/*-{" + "\n" 
+        +"            "+ "$wnd.jQuery.extend(true, " + paramName + ", " + "\n"  
+        + "            "+ "{" + "\n"
+        +"                "+ "events: {" + "\n" 
+        +"                    " + eventName + ": function(event) {" + "\n" 
+        +"                        "+ "handler.@" + handlerClassFqn+ "::" + handlerMethodName + "(L" + eventTypeFqn + ";)(" + "\n" 
+        +"                            "+ "$wnd.jQuery.extend(true, event, {source:this})"
+        + "\n"+"                         " + ");" 
+        + "\n"+"                     " + "}" 
+        + "\n"+"                 " + "}" 
+        + "\n"+"             " + "});"
+        + "\n"+"        " + "}-*/;";
     }
 
     public static void createEventJso(Option option, String packageName, String rootDirectoryPathName)
@@ -287,9 +295,9 @@ public class JsoFieldHelper
     {
         JMethod method = ((JDefinedClass) handlerClass).methods().iterator().next();
         String eventName = method.name().substring(2);
-        eventName = eventName.substring(0, 1).toLowerCase() + eventName.substring(1);
-        int iCap = firstIndexOfUcl(eventName);
-        eventName = eventName.substring(iCap);
+//        eventName = eventName.substring(0, 1).toLowerCase() + eventName.substring(1);
+//        int iCap = firstIndexOfUcl(eventName);
+//        eventName = iCap > -1 ? eventName.substring(iCap) : eventName;
         eventName = eventName.substring(0, 1).toLowerCase() + eventName.substring(1);
         return eventName;
     }

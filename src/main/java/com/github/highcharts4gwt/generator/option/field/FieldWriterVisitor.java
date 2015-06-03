@@ -88,8 +88,7 @@ public class FieldWriterVisitor implements FieldTypeVisitor<OutputType, Void>
     @Override
     public Void visitFunction(OutputType in)
     {
-        // TODO support function
-        return null;
+        return in.accept(new FieldFunctionWriter(jClass, option, pipe, fieldName), null);
     }
 
     @Override

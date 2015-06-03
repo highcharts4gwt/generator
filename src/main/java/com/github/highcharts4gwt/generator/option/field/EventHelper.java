@@ -41,29 +41,31 @@ public class EventHelper
     public static String getEventNamePrefix(Option option)
     {
         // plotOptions.gauge.events.afterAnimate
-        String fullname = option.getFullname();
-
-        int i = fullname.indexOf(".events");
-
-        // plotOptions.gauge
-        String v1 = fullname.substring(0, i);
-
-        // gauge
-        int i2 = v1.lastIndexOf(".");
-        String v2 = "";
-        if (i2 != -1)
-        {
-            v2 = v1.substring(i2 + 1, v1.length());
-            v2 = v2.substring(0, 1).toUpperCase() + v2.substring(1);
-        }
-        else
-        {
-            v2 = v1.substring(0, 1).toUpperCase() + v1.substring(1);
-        }
-
-        // GaugeClickEvent
-        String eventName = v2 + option.getTitle().substring(0, 1).toUpperCase() + option.getTitle().substring(1);
-        eventName = removeLtGt(eventName, true);
+        String eventName = option.getTitle();
+        eventName =  eventName.substring(0, 1).toUpperCase() + eventName.substring(1);
+//        String fullname = option.getFullname();
+//
+//        int i = fullname.indexOf(".events");
+//
+//        // plotOptions.gauge
+//        String v1 = fullname.substring(0, i);
+//
+//        // gauge
+//        int i2 = v1.lastIndexOf(".");
+//        String v2 = "";
+//        if (i2 != -1)
+//        {
+//            v2 = v1.substring(i2 + 1, v1.length());
+//            v2 = v2.substring(0, 1).toUpperCase() + v2.substring(1);
+//        }
+//        else
+//        {
+//            v2 = v1.substring(0, 1).toUpperCase() + v1.substring(1);
+//        }
+//
+//        // GaugeClickEvent
+//        String eventName = v2 + option.getTitle().substring(0, 1).toUpperCase() + option.getTitle().substring(1);
+//        eventName = removeLtGt(eventName, true);
         return eventName;
     }
 
