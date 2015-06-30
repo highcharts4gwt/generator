@@ -20,8 +20,8 @@ public class HighsoftApiGenerator implements ProductVisitor<Void, Void>
         try
         {
             logger.info("Highcharts API generation");
-            generator = new OnlineGenerator(Product.Highcharts);
-            // generator = new OfflineGenerator(Product.Highcharts);
+            //generator = new OnlineGenerator(Product.Highcharts);
+             generator = new OfflineGenerator(Product.Highcharts);
             generator.generateClasses();
         }
         catch (Exception e)

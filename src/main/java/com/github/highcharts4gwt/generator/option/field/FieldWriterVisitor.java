@@ -88,7 +88,7 @@ public class FieldWriterVisitor implements FieldTypeVisitor<OutputType, Void>
     @Override
     public Void visitFunction(OutputType in)
     {
-        return in.accept(new FieldFunctionWriter(jClass, option, pipe, fieldName), null);
+        return in.accept(new FieldFunctionWriter(jClass, option, pipe, fieldName, rootDirectoryPath), null);
     }
 
     @Override

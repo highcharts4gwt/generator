@@ -32,12 +32,30 @@ public class MockFieldHelper
         addSetterDeclaration(names, type, jDefinedClass, field);
     }
 
-    private static void addSetterDeclaration(Names names, Class<?> type, JDefinedClass jDefinedClass, JFieldVar field)
+    private static void addSetterDeclaration(Names names, Class<?> paramType, JDefinedClass setterReturnType, JFieldVar field)
     {
-        JMethod setter = jDefinedClass.method(JMod.PUBLIC, jDefinedClass, names.getSetterName());
-        JVar setterParam = setter.param(type, names.getParamName());
-
-        setter.body().assign(JExpr._this().ref(field), setterParam)._return(JExpr._this());
+        JMethod setter = setterReturnType.method(JMod.PUBLIC, setterReturnType, names.getSetterName());
+        JVar setterParam = setter.param(paramType, names.getParamName());
+        
+        JBlock body = setter.body();
+        if (field != null)
+        {
+            body.assign(JExpr._this().ref(field), setterParam);
+        }
+        body._return(JExpr._this());
+    }
+    
+    public static void addSetterDeclaration(Names names, JClass paramType, JDefinedClass setterReturnType, JFieldVar field)
+    {
+        JMethod setter = setterReturnType.method(JMod.PUBLIC, setterReturnType, names.getSetterName());
+        JVar setterParam = setter.param(paramType, names.getParamName());
+        
+        JBlock body = setter.body();
+        if (field != null)
+        {
+            body.assign(JExpr._this().ref(field), setterParam);
+        };
+        body._return(JExpr._this());
     }
 
     public static JFieldVar addGetterDeclaration(Names names, Class<?> type, JDefinedClass jDefinedClass)

@@ -34,10 +34,18 @@ public class InterfaceFieldHelper
         addSetterDeclaration(names, type, jDefinedClass);
     }
 
-    private static void addSetterDeclaration(Names names, Class<?> type, JDefinedClass jDefinedClass)
+    private static void addSetterDeclaration(Names names, Class<?> paramType, JDefinedClass setterReturnType)
     {
-        JMethod method = jDefinedClass.method(JMod.NONE, jDefinedClass, names.getSetterName());
-        method.param(type, names.getParamName());
+        JMethod method = setterReturnType.method(JMod.NONE, setterReturnType, names.getSetterName());
+        method.param(paramType, names.getParamName());
+        JDocComment javadoc = method.javadoc();
+        javadoc.append(names.getJavadoc());
+    }
+   
+    private static void addSetterDeclaration(Names names, JDefinedClass paramType, JDefinedClass setterReturnType)
+    {
+        JMethod method = setterReturnType.method(JMod.NONE, setterReturnType, names.getSetterName());
+        method.param(paramType, names.getParamName());
         JDocComment javadoc = method.javadoc();
         javadoc.append(names.getJavadoc());
     }
@@ -168,14 +176,60 @@ public class InterfaceFieldHelper
         setter.param(String.class, "fieldValueAsJonObject");
     }
 
-    public static void addFunctionGetterSetterDeclaration(JDefinedClass jDefinedClass)
+    public static void addFunctionAsStringGetterSetterDeclaration(JDefinedClass jDefinedClass)
     {
-        //getFieldAsJsonObject(String fieldName);
         jDefinedClass.method(JMod.NONE, String.class, "getFunctionAsString").param(String.class, "fieldName");
         
-        //setFieldAsJsonObject(String fieldName, String fieldValueAsJonObject);
         JMethod setter = jDefinedClass.method(JMod.NONE, jDefinedClass, "setFunctionAsString");
         setter.param(String.class, "fieldName");
         setter.param(String.class, "functionAsString");
+    }
+    
+    public static void addFunctionSetterDeclaration(JDefinedClass jClass, JDefinedClass callbackClass, Names names)
+    {
+        addSetterDeclaration(names, callbackClass, jClass);
+    }
+
+    public static JDefinedClass createFunctionCallbackInterface(Option option, String packageName, String rootDirectoryPathName)
+    {
+        JCodeModel model = new JCodeModel();
+
+        JDefinedClass jClass = null;
+
+        try
+        {
+            String fqn = FunctionHelper.getFunctionCallbackFqn(option, packageName);
+            
+            JClass contextObject = FunctionHelper.getContextObject(option, OutputType.Interface);
+            
+            jClass = model._class(fqn, ClassType.INTERFACE);
+
+            
+            JMethod method = jClass.method(JMod.NONE, Object.class, EventHelper.ON_PREFIX + "Callback");
+            
+            if (contextObject != null)
+                method.param(contextObject, option.getContext().substring(0, 1).toLowerCase() + option.getContext().substring(1));
+            
+            ClassRegistry.INSTANCE.getRegistry().put(new ClassRegistry.RegistryKey(option, OutputType.Interface), jClass);
+            
+            logger.info("Function callback created;" + option.getTitle());
+
+        }
+        catch (JClassAlreadyExistsException e)
+        {
+            throw new RuntimeException(e);
+        }
+
+        try
+        {
+            model.build(new File(rootDirectoryPathName));
+        }
+        catch (IOException e)
+        {
+            throw new RuntimeException(e);
+        }
+
+        return jClass;
+
     }
 }

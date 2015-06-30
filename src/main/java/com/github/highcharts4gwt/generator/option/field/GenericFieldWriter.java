@@ -19,7 +19,7 @@ public class GenericFieldWriter implements OutputTypeVisitor<JDefinedClass, Void
     public Void visitInterface(JDefinedClass in)
     {
         InterfaceFieldHelper.addJsonObjectGetterSetterDeclaration(in);
-        InterfaceFieldHelper.addFunctionGetterSetterDeclaration(in);
+        InterfaceFieldHelper.addFunctionAsStringGetterSetterDeclaration(in);
         return null;
     }
 

@@ -5,6 +5,9 @@ import com.github.highcharts4gwt.generator.option.Option;
 import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JDefinedClass;
 
+
+//TODO delete this class completely useless
+
 public class EventGetterWriterVisitor implements EventTypeVisitor<OutputType, Void>
 {
     private final Option option;
@@ -21,28 +24,28 @@ public class EventGetterWriterVisitor implements EventTypeVisitor<OutputType, Vo
     @Override
     public Void visitSeries(OutputType in)
     {
-        in.accept(new EventContextGetterWriterVisitor(option, jClass, jCodeModel), null);
+        in.accept(new EventContextGetterWriterVisitor(option, jClass), null);
         return null;
     }
 
     @Override
     public Void visitChart(OutputType in)
     {
-        in.accept(new EventContextGetterWriterVisitor(option, jClass, jCodeModel), null);
+        in.accept(new EventContextGetterWriterVisitor(option, jClass), null);
         return null;
     }
 
     @Override
     public Void visitPoint(OutputType in)
     {
-        in.accept(new EventContextGetterWriterVisitor(option, jClass, jCodeModel), null);
+        in.accept(new EventContextGetterWriterVisitor(option, jClass), null);
         return null;
     }
 
     @Override
     public Void visitAxis(OutputType in)
     {
-        in.accept(new EventContextGetterWriterVisitor(option, jClass, jCodeModel), null);
+        in.accept(new EventContextGetterWriterVisitor(option, jClass), null);
         return null;
     }
 

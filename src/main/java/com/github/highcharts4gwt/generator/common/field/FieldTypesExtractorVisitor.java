@@ -133,9 +133,7 @@ public class FieldTypesExtractorVisitor implements ReturnTypeCategoryVisitor<Obj
         }
         else
         {
-            // TODO support function case
-            logger.warn("field type not supported yet;" + in.getReturnType() + ";option;" + in);
-            out.add(FieldType.DoNotTreat);
+            out.add(FieldType.Function);
         }
     }
 

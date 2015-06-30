@@ -2,6 +2,7 @@ package com.github.highcharts4gwt.generator.option.field;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.CheckForNull;
@@ -179,13 +180,13 @@ public class JsoFieldHelper
         writeGetterNativeCode(names, type, jDefinedClass, getterCode);
     }
 
-    public static void writeSetterNativeCode(Names names, Class<?> type, JDefinedClass jDefinedClass)
+    public static void writeSetterNativeCode(Names names, Class<?> paramType, JDefinedClass jDefinedClass)
     {
         NativeContentHack setterContentHack = new NativeContentHack(JsoFieldHelper.getJsniSetterCode(names.getOriginalFieldName(), names.getParamName()));
         jDefinedClass.method(JMod.NATIVE + JMod.FINAL + JMod.PUBLIC, jDefinedClass, names.getSetterName())._throws(setterContentHack)
-                .param(type, names.getParamName());
+                .param(paramType, names.getParamName());
     }
-
+    
     public static void writeSetterNativeCodeWithParse(Names names, Class<?> type, JDefinedClass jDefinedClass)
     {
         NativeContentHack setterContentHack = new NativeContentHack(JsoFieldHelper.getJsniSetterCodeWithParse(names.getOriginalFieldName(),
@@ -211,18 +212,21 @@ public class JsoFieldHelper
         return "/*-{\n        return this.source;\n    }-*/";
     }
 
-    private static String getJsniEventHandler(String eventName, String handlerMethodName, String handlerClassFqn, String eventTypeFqn)
+    private static String getJsniEventHandler(String eventName, String callbackMethod, String callbackTypeFqn, String paramTypeFqn)
     {
         String paramName = "this";
 
+        String callbackParamName = "event";
+        String callbackParamTypeLetter = "L";
+        
         return "\n        " 
         + "/*-{" + "\n" 
         +"            "+ "$wnd.jQuery.extend(true, " + paramName + ", " + "\n"  
-        + "            "+ "{" + "\n"
+        +"            "+ "{" + "\n"
         +"                "+ "events: {" + "\n" 
-        +"                    " + eventName + ": function(event) {" + "\n" 
-        +"                        "+ "handler.@" + handlerClassFqn+ "::" + handlerMethodName + "(L" + eventTypeFqn + ";)(" + "\n" 
-        +"                            "+ "$wnd.jQuery.extend(true, event, {source:this})"
+        +"                    " + eventName + ": function("+callbackParamName+") {" + "\n" 
+        +"                        "+ "handler.@" + callbackTypeFqn+ "::" + callbackMethod + "("+ callbackParamTypeLetter + paramTypeFqn + ";)(" + "\n" 
+        +"                            "+ "$wnd.jQuery.extend(true, "+callbackParamName+", {source:this})"
         + "\n"+"                         " + ");" 
         + "\n"+"                     " + "}" 
         + "\n"+"                 " + "}" 
@@ -230,6 +234,34 @@ public class JsoFieldHelper
         + "\n"+"        " + "}-*/;";
     }
 
+    private static String getJsniCallbackHandler(String fieldName, String callbackMethod, String callbackTypeFqn, String paramTypeFqn)
+    {
+        String contextObject = "this";
+        String paramName = contextObject;
+        String callbackParamTypeLetter = "L";
+        String gwtend = ";";
+        
+        if (paramTypeFqn == null)
+        {
+            paramTypeFqn = "";
+            callbackParamTypeLetter = "";
+            contextObject = "";
+            gwtend = "";
+        }
+        
+        return "\n        " 
+        +"    " + "/*-{" + "\n" 
+        +"            " + "$wnd.jQuery.extend(true, " + paramName + ", " + "\n"
+        +"            " + "{" + "\n"
+        +"                " + fieldName + ": function() {" + "\n" 
+        +"                    " + "return " + fieldName + ".@" + callbackTypeFqn+ "::" + callbackMethod + "("+ callbackParamTypeLetter + paramTypeFqn + gwtend+")(" + "\n" 
+        +"                        " + contextObject + "\n" 
+        +"                     " + ");" + "\n"
+        +"                 " + "}" + "\n"
+        +"             " + "});"+ "\n"
+        +"    " + "}-*/;";
+    }
+    
     public static void createEventJso(Option option, String packageName, String rootDirectoryPathName)
     {
         JCodeModel model = new JCodeModel();
@@ -278,7 +310,7 @@ public class JsoFieldHelper
             {
                 String eventName = computeEventName(handlerClass);
                 String handlerMethodName = computeHandlerMethodName(handlerClass);
-                String eventFqn = computeEventFqn(handlerClass);
+                String eventFqn = computeMethodParamFqn(handlerClass);
                 String handlerClassName = handlerClass.name();
                 String paramName = "handler";
 
@@ -302,10 +334,13 @@ public class JsoFieldHelper
         return eventName;
     }
 
-    private static String computeEventFqn(JClass handlerClass)
+    private static String computeMethodParamFqn(JClass handlerClass)
     {
         JMethod method = ((JDefinedClass) handlerClass).methods().iterator().next();
-        JVar param = method.params().iterator().next();
+        Iterator<JVar> iterator = method.params().iterator();       
+        if (!iterator.hasNext())
+            return null;
+        JVar param = iterator.next();
         String fullName = param.type().fullName();
         fullName = fullName.replace(".", "/");
         return fullName;
@@ -376,5 +411,19 @@ public class JsoFieldHelper
         setterMethod.param(String.class, fieldNameParam);
         setterMethod.param(String.class, functionAsStringParam);
         
+    }
+
+    public static void addFunctionSetterDeclaration(JDefinedClass jclass, JClass callbackType, Names names)
+    {
+        
+        String callbackMethod = computeHandlerMethodName(callbackType);
+        String callbackTypeFqn = callbackType.fullName();
+        String callbackParamFqn = computeMethodParamFqn(callbackType);
+        
+        String jsniEventHandlerContent = getJsniCallbackHandler(names.getOriginalFieldName(), callbackMethod, callbackTypeFqn, callbackParamFqn);
+        NativeContentHack addHandlerMethodContent = new NativeContentHack(jsniEventHandlerContent);
+
+        jclass.method(JMod.NATIVE + JMod.FINAL + JMod.PUBLIC, jclass, names.getSetterName())
+                ._throws(addHandlerMethodContent).param(callbackType, names.getParamName());
     }
 }
